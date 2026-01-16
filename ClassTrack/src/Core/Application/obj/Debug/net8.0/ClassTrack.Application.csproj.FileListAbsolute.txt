@@ -1,0 +1,16 @@
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\bin\Debug\net8.0\ClassTrack.Application.deps.json
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\bin\Debug\net8.0\ClassTrack.Application.dll
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\bin\Debug\net8.0\ClassTrack.Application.pdb
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\bin\Debug\net8.0\ClassTrack.Domain.dll
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\bin\Debug\net8.0\ClassTrack.Domain.pdb
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.csproj.AssemblyReference.cache
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.AssemblyInfoInputs.cache
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.AssemblyInfo.cs
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.csproj.CoreCompileInputs.cache
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.sourcelink.json
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTra.49306A61.Up2Date
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.dll
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\refint\ClassTrack.Application.dll
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ClassTrack.Application.pdb
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\src\Core\Application\obj\Debug\net8.0\ref\ClassTrack.Application.dll

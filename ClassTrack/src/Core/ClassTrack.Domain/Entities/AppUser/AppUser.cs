@@ -9,7 +9,7 @@ namespace ClassTrack.Domain.Entities
         public string Surname { get; set; }
         public byte Age { get; set; }
         public DateOnly BirthDate { get; set; }
-        public UserRole UserRole { get; set; }
+        public UserRole UserRole { get; set; }   
 
     }
 }

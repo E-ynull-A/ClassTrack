@@ -5,7 +5,7 @@ namespace ClassTrack.Domain.Entities
 {
     public class TeacherClass
     {
-        public long TeacherId { get; set; }
+        public string TeacherId { get; set; }
         public long ClassId { get; set; }
 
         public Teacher Teacher { get; set; }

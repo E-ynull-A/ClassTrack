@@ -11,7 +11,6 @@ namespace ClassTrack.Domain.Entities
 
         //Relations
         public ICollection<StudentQuiz> StudentQuizes { get; set; }
-        public ICollection<QuizAnswer> StudentAnswers { get; set; }
 
         public long ClassId { get; set; }
         public Class Class { get; set; }

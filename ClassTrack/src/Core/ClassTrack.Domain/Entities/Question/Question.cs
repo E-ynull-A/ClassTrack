@@ -5,7 +5,7 @@ namespace ClassTrack.Domain.Entities
     public abstract class Question:BaseAccountableEntity
     {
         public string Title { get; set; }
-        public decimal? Point { get; set; }
+        public decimal Point { get; set; }
 
         //Relations
         public long QuizId { get; set; }

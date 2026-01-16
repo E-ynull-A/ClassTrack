@@ -4,11 +4,11 @@
 
 namespace ClassTrack.Domain.Entities
 {
-    public class StudentAttendance
-    {
-        public long Id { get; set; }
-        public long StudentId { get; set; }
-        public bool IsAbsent { get; set; }
+    public class StudentAttendance:BaseEntity
+    {      
+        public string StudentId { get; set; }
+        public Attendance Attendance { get; set; }
         public DateOnly LessonDate { get; set; }
+        public bool IsActive { get; set; }
     }
 }

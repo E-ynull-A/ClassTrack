@@ -2,10 +2,9 @@
 
 namespace ClassTrack.Domain.Entities
 {
-    public class StudentQuiz
+    public class StudentQuiz:BaseEntity
     {
-        public long Id { get; set; }
-        public long StudentId { get; set; }
+        public string StudentId { get; set; }
         public long QuizId { get; set; }
 
         public Student Student { get; set; }
