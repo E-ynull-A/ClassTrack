@@ -1,0 +1,98 @@
+﻿using ClassTrack.Application.Interfaces.Repositories;
+using ClassTrack.Domain.Entities;
+using ClassTrack.Persistance.DAL;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+
+
+namespace ClassTrack.Persistance.Implementations.Repositories
+{
+    internal class Repository<T> : IRepository<T> where T : BaseEntity
+    {
+        private readonly AppDbContext _context;
+        private readonly DbSet<T> _dbset;
+
+        public Repository(AppDbContext context)
+        {
+            _context = context;
+            _dbset = context.Set<T>();
+        }
+
+        public void Add(T entity)
+        {
+            _dbset.Add(entity);
+        }
+
+        public void Delete(T removed)
+        {
+            _dbset.Remove(removed);
+        }
+
+        public IQueryable<T> GetAllAsync(Expression<Func<T,
+                                          bool>>? function,
+                                          Expression<Func<T,
+                                              object>>? sort,
+                                          int page = 0,
+                                          int take = 0,
+                                          bool isIgnore = false,
+                                          params string[] includes)
+        {
+            IQueryable<T> query = _dbset;
+
+            if (function is not null)
+                query = query.Where(function);
+
+
+            if (sort is not null)
+                query = query.OrderBy(sort);
+
+
+            if (isIgnore is not false)
+                query.IgnoreQueryFilters();
+
+            if (includes is not null)
+                query = _addIncludes(query, includes);
+
+            if (take > 0 && page > 0)
+            {
+                query = query
+                            .Skip((page - 1) * take)
+                            .Take(take);
+            }
+
+            return query;
+
+        }
+
+        public async Task<T> GetByIdAsync(long id, bool isIgnore = false, params string[] includes)
+        {
+            IQueryable<T>? query = _dbset;
+
+            if (isIgnore is true)
+                query.IgnoreQueryFilters();
+            if (includes is not null)
+                _addIncludes(query, includes);
+
+            return await query.FirstOrDefaultAsync(q => q.Id == id);
+        }
+
+        public async Task SaveChangeAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public void Update(T entity)
+        {
+            _dbset.Update(entity);
+        }       
+
+        protected IQueryable<T> _addIncludes(IQueryable<T> query, params string[] includes)
+        {
+            Array.ForEach(includes, i => query.Include(i));
+            return query;
+        }
+    }
+}

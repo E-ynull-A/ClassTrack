@@ -386,7 +386,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.ToTable("StudentQuizes");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTask", b =>
+            modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTaskWork", b =>
                 {
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
@@ -400,14 +400,17 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<string>("StudentAnswer")
                         .HasColumnType("NVARCHAR(MAX)");
 
+                    b.Property<long>("TaskWorkId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("StudentId", "TaskId");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("TaskWorkId");
 
-                    b.ToTable("StudentTask");
+                    b.ToTable("StudentTaskWorks");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.Task", b =>
+            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -449,7 +452,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("TaskWorks");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.TeacherClass", b =>
@@ -704,29 +707,29 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTask", b =>
+            modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTaskWork", b =>
                 {
                     b.HasOne("ClassTrack.Domain.Entities.Student", "Student")
-                        .WithMany("StudentTasks")
+                        .WithMany("StudentTaskWorks")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClassTrack.Domain.Entities.Task", "Task")
-                        .WithMany("StudentTasks")
-                        .HasForeignKey("TaskId")
+                    b.HasOne("ClassTrack.Domain.Entities.TaskWork", "TaskWork")
+                        .WithMany("StudentTaskWorks")
+                        .HasForeignKey("TaskWorkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Student");
 
-                    b.Navigation("Task");
+                    b.Navigation("TaskWork");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.Task", b =>
+            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
                 {
                     b.HasOne("ClassTrack.Domain.Entities.Class", "Class")
-                        .WithMany("Tasks")
+                        .WithMany("TaskWorks")
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -832,7 +835,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.Navigation("StudentClasses");
 
-                    b.Navigation("Tasks");
+                    b.Navigation("TaskWorks");
 
                     b.Navigation("TeacherClasses");
                 });
@@ -846,9 +849,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("StudentQuizes");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.Task", b =>
+            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
                 {
-                    b.Navigation("StudentTasks");
+                    b.Navigation("StudentTaskWorks");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
@@ -857,7 +860,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.Navigation("StudentQuizes");
 
-                    b.Navigation("StudentTasks");
+                    b.Navigation("StudentTaskWorks");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>

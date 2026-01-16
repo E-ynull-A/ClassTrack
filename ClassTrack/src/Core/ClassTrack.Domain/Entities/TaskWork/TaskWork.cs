@@ -2,7 +2,7 @@
 
 namespace ClassTrack.Domain.Entities
 {
-    public class Task:BaseAccountableEntity
+    public class TaskWork:BaseAccountableEntity
     {
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
@@ -10,7 +10,7 @@ namespace ClassTrack.Domain.Entities
         public string MainPart { get; set; }
 
         //Relations
-        public ICollection<StudentTask> StudentTasks { get; set; }
+        public ICollection<StudentTaskWork> StudentTaskWorks { get; set; }
         public long ClassId { get; set; }
         public Class Class { get; set; }
     }

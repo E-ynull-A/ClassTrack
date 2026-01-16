@@ -12,7 +12,7 @@ namespace ClassTrack.Domain.Entities
 
         public ICollection<StudentClass> StudentClasses { get; set; }
         public ICollection<TeacherClass> TeacherClasses { get; set; }
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<TaskWork> TaskWorks { get; set; }
         public ICollection<Quiz> Quizes { get; set; }
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Configuration
 {
-    internal class StudentTaskConfiguration : IEntityTypeConfiguration<StudentTask>
+    internal class StudentTaskConfiguration : IEntityTypeConfiguration<StudentTaskWork>
     {
-        public void Configure(EntityTypeBuilder<StudentTask> builder)
+        public void Configure(EntityTypeBuilder<StudentTaskWork> builder)
         {
             builder.HasKey(st => new { st.StudentId, st.TaskId });
 

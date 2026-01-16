@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ClassTrack.Persistance.Configuration
 {
-    internal class TaskConfiguration : IEntityTypeConfiguration<Domain.Entities.Task>
+    internal class TaskWorkConfiguration : IEntityTypeConfiguration<TaskWork>
     {
-        public void Configure(EntityTypeBuilder<Domain.Entities.Task> builder)
+        public void Configure(EntityTypeBuilder<TaskWork> builder)
         {
             builder.Property(t => t.Title)
                 .IsRequired()

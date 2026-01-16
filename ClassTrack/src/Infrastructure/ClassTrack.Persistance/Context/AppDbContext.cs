@@ -24,8 +24,8 @@ namespace ClassTrack.Persistance.DAL
         public DbSet<StudentAttendance> StudentAttendances { get; set; }
         public DbSet<StudentClass> StudentClasses { get; set; }
         public DbSet<StudentQuiz> StudentQuizes { get; set; }
-        public DbSet<StudentTask> StudentTask { get; set; }
-        public DbSet<Domain.Entities.Task> Tasks { get; set; }
+        public DbSet<StudentTaskWork> StudentTaskWorks { get; set; }
+        public DbSet<TaskWork> TaskWorks { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherClass> TeacherClasses { get; set; }
 

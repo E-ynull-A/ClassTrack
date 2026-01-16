@@ -1,4 +1,4 @@
-﻿using ClassTrack.Domain.Entities;
+﻿using D = ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 
 namespace ClassTrack.Application.Interfaces.Repositories
 {
-    public interface IRepository<T> where T:BaseEntity
+    public interface IRepository<T> where T:D.BaseEntity
     {
-        IEnumerable<T> GetAllAsync(
+        IQueryable<T> GetAllAsync(
             Expression<Func<T, bool>>? function,
             Expression<Func<T, object>>? sort,
             int page = 0,
@@ -16,13 +16,13 @@ namespace ClassTrack.Application.Interfaces.Repositories
             bool isIgnore = false,
             params string[] includes
             );
-        T GetById(
+        Task<T> GetByIdAsync(
             long id,
             bool isIgnore = false,
             params string[] includes);
-        void Add(long id);
+        void Add(T entity);
         void Update(T entity);
-        void Delete(long id);
-        System.Threading.Tasks.Task SaveChangeAsync();
+        void Delete(T removed);
+        Task SaveChangeAsync();
     }
 }
