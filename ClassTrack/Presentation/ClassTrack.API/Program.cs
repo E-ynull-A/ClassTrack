@@ -1,4 +1,5 @@
 using ClassTrack.Persistance;
+using ClassTrack.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddServicePersistance(builder.Configuration);
+builder.Services.AddServiceApplication();
 
 var app = builder.Build();
 

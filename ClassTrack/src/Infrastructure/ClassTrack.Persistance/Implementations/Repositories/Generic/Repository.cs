@@ -31,14 +31,12 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             _dbset.Remove(removed);
         }
 
-        public IQueryable<T> GetAllAsync(Expression<Func<T,
-                                          bool>>? function,
-                                          Expression<Func<T,
-                                              object>>? sort,
-                                          int page = 0,
-                                          int take = 0,
-                                          bool isIgnore = false,
-                                          params string[] includes)
+        public IQueryable<T> GetAll(Expression<Func<T,
+                                    bool>>? function = null,
+                                    Expression<Func<T, object>>? sort = null,
+                                    int page = 0, int take = 0,
+                                    bool isIgnore = false,
+                                    params string[]? includes)
         {
             IQueryable<T> query = _dbset;
 
@@ -64,8 +62,9 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             }
 
             return query;
-
         }
+
+     
 
         public async Task<T> GetByIdAsync(long id, bool isIgnore = false, params string[] includes)
         {

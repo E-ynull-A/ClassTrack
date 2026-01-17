@@ -8,13 +8,13 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface IRepository<T> where T:D.BaseEntity
     {
-        IQueryable<T> GetAllAsync(
-            Expression<Func<T, bool>>? function,
-            Expression<Func<T, object>>? sort,
+        IQueryable<T> GetAll(
+            Expression<Func<T, bool>>? function = null,
+            Expression<Func<T, object>>? sort = null,
             int page = 0,
             int take = 0,
             bool isIgnore = false,
-            params string[] includes
+            params string[]? includes
             );
         Task<T> GetByIdAsync(
             long id,

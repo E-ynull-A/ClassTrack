@@ -14,7 +14,11 @@ namespace ClassTrack.Persistance.Configuration
         public void Configure(EntityTypeBuilder<ChoiceQuestion> builder)
         {
             builder.Property(cq => cq.IsMultiple)
-                 .HasDefaultValue(false);           
+                 .HasDefaultValue(false);
+
+            builder.HasIndex(cq => cq.Title)
+                .IsUnique();
+                
         }
     }
 }
