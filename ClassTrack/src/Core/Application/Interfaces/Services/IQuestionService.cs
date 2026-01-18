@@ -12,5 +12,7 @@ namespace ClassTrack.Application.Interfaces.Services
         Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page, int take, params string[] includes);
 
         Task<GetQuestionDTO> GetByIdAsync(long id);
+
+        Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice);
     }
 }

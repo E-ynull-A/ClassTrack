@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 
 namespace ClassTrack.Persistance.Implementations.Repositories
@@ -92,6 +93,11 @@ namespace ClassTrack.Persistance.Implementations.Repositories
         {
             Array.ForEach(includes, i => query.Include(i));
             return query;
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T,bool>> expression)
+        {
+            return await _dbset.AnyAsync(expression);          
         }
     }
 }

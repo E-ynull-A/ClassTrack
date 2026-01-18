@@ -12,11 +12,7 @@ namespace ClassTrack.Persistance.Configuration
 
             builder.HasDiscriminator<string>("QuestionType")
                 .HasValue("ChoiceQuestion")
-                .HasValue("OpenQuestion");
-
-            builder.Property(q => q.Title)
-                .IsRequired()
-                .HasColumnType("NVARCHAR(MAX)");
+                .HasValue("OpenQuestion");       
 
             builder.Property(q => q.Point)
                 .IsRequired()

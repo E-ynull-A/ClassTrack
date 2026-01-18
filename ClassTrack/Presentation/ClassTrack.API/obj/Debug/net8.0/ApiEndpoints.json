@@ -22,6 +22,42 @@
   },
   {
     "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
+    "Method": "Post",
+    "RelativePath": "Questions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Point",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMultiple",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "QuizId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Options",
+        "Type": "System.Collections.Generic.ICollection\u00601[[ClassTrack.Application.DTOs.PostOptionInChoiceQuestionDTO, ClassTrack.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
     "Method": "Get",
     "RelativePath": "Questions/{id}",
     "HttpMethod": "GET",

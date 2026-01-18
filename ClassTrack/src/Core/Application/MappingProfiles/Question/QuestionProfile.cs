@@ -15,7 +15,7 @@ namespace ClassTrack.Application.MappingProfiles
         {
             CreateMap<Question, GetQuestionItemDTO>()
                 .ForCtorParam(nameof(GetQuestionItemDTO.Type)
-                            , opt => opt.MapFrom(t => t.GetType().Name));
+                            ,opt => opt.MapFrom(t => t.GetType().Name));
 
             CreateMap<ChoiceQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
             CreateMap<OpenQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
@@ -44,7 +44,8 @@ namespace ClassTrack.Application.MappingProfiles
 
 
 
-            CreateMap< PostChoiceQuestionDTO, ChoiceQuestion>();
+            CreateMap<PostChoiceQuestionDTO, ChoiceQuestion>()
+                .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options)); ;
             CreateMap<PostOpenQuestionDTO, OpenQuestion>();
 
         }

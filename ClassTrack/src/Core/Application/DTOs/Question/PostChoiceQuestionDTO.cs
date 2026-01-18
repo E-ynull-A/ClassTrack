@@ -2,15 +2,18 @@
 
 
 
+using ClassTrack.Application.Validators;
+using Microsoft.AspNetCore.Mvc;
+
 namespace ClassTrack.Application.DTOs
 {
    public record PostChoiceQuestionDTO(
        
        string Title,
-       decimal Point,
-       ICollection<PostOptionInChoiceQuestionDTO> Options,
+       decimal Point,      
        bool IsMultiple,
+       long QuizId,
 
-       long QuizId);
+       ICollection<PostOptionInChoiceQuestionDTO>? Options = null);
    
 }

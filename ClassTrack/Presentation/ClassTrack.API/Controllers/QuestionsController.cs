@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.Interfaces.Services;
+﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -31,6 +32,15 @@ namespace ClassTrack.API.Controllers
             return Ok(await _service.GetByIdAsync(id));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromForm]PostChoiceQuestionDTO postChoice)
+        {
+            if(postChoice.Options is null)
+            { return BadRequest(); }
 
+            await _service.CreateChoiceQuestionAsync(postChoice);
+
+            return Created();
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace ClassTrack.Application.Interfaces.Repositories
         void Add(T entity);
         void Update(T entity);
         void Delete(T removed);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
     }
 }

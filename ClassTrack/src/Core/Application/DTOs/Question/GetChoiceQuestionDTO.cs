@@ -16,13 +16,11 @@ namespace ClassTrack.Application.DTOs
 
         long ClassId,
         string ClassName,
-
-        string Title,
+          string Title,
         decimal Point,
         string Type,
 
-        ICollection<GetOptionItemInChoiceQuestionDTO> Options
-        ): 
+        ICollection<GetOptionItemInChoiceQuestionDTO> Options = null): 
         
         GetQuestionDTO(Id,QuizId,QuizName,ClassId
                        ,ClassName,Title,Point,Type);

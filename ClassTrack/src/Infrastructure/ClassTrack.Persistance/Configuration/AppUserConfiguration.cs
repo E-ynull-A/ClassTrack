@@ -24,7 +24,7 @@ namespace ClassTrack.Persistance.Configuration
                 .HasColumnType("NVARCHAR(60)")
                 .IsRequired();
 
-            builder.Property(p => p.Name)
+            builder.Property(p => p.Surname)
                 .HasColumnType("NVARCHAR(60)")         
                 .IsRequired();
 

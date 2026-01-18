@@ -10,21 +10,29 @@ namespace ClassTrack.Persistance.Implementations.Services
     internal class QuestionService:IQuestionService
     {
         private readonly IQuestionRepository _questionRepository;
+        private readonly IQuizRepository _quizRepository;
         private readonly IMapper _mapper;
+        private readonly IOptionRepository _optionRepository;
 
-        public QuestionService(IQuestionRepository questionRepository,IMapper mapper)
+        public QuestionService(IQuestionRepository questionRepository
+                                ,IQuizRepository quizRepository
+                                    ,IMapper mapper,
+                                IOptionRepository optionRepository)
         {
             _questionRepository = questionRepository;
+            _quizRepository = quizRepository;
             _mapper = mapper;
+            _optionRepository = optionRepository;
         }
 
         public async Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page,int take,params string[] includes)
         {
-            return _mapper.Map<ICollection<GetQuestionItemDTO>>
-                (await _questionRepository.GetAll(page: page,                                                    
+            ICollection<Question> questions = await _questionRepository.GetAll(page: page,
                                             take: take,
-                                            sort: x => x.Title,
-                                            includes: [nameof(ChoiceQuestion.Options),"Quiz"]).ToListAsync());
+                                            sort: x => x.CreatedAt,
+                                            includes: ["Options","Quiz"]).ToListAsync();
+
+            return _mapper.Map<ICollection<GetQuestionItemDTO>>(questions);
         }
        
         
@@ -37,6 +45,27 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("Question Not Found");
 
             return _mapper.Map<GetQuestionDTO>(question);       
+        }
+
+        public async Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice)
+        {
+            if(!await _quizRepository.AnyAsync(q=>q.Id == postChoice.QuizId))
+            {
+                throw new Exception("The Quiz doesn't exist!");
+            }
+
+            Quiz quiz = await _quizRepository.GetByIdAsync(postChoice.QuizId);
+
+            if (quiz.StartTime <= DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration) > DateTime.UtcNow)
+                throw new Exception("Couldn't Add New Question during an Quiz Interval!");
+
+            _optionRepository.Add(_mapper.Map<Option>(postChoice.Options));
+
+            ChoiceQuestion questionDTO = _mapper.Map<ChoiceQuestion>(postChoice);
+
+            _questionRepository.Add(questionDTO);
+
+            await _questionRepository.SaveChangeAsync();
         }
 
 

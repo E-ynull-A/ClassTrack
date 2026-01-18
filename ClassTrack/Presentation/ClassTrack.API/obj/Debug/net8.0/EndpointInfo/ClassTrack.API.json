@@ -33,6 +33,64 @@
             "description": "OK"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Point": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "IsMultiple": {
+                    "type": "boolean"
+                  },
+                  "QuizId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Options": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PostOptionInChoiceQuestionDTO"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Title": {
+                  "style": "form"
+                },
+                "Point": {
+                  "style": "form"
+                },
+                "IsMultiple": {
+                  "style": "form"
+                },
+                "QuizId": {
+                  "style": "form"
+                },
+                "Options": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/Questions/{id}": {
@@ -59,5 +117,21 @@
       }
     }
   },
-  "components": { }
+  "components": {
+    "schemas": {
+      "PostOptionInChoiceQuestionDTO": {
+        "type": "object",
+        "properties": {
+          "variant": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCorrect": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
 }
