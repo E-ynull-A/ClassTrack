@@ -159,9 +159,6 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("ChoiceQuestionId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -177,6 +174,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<long>("QuestionId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -186,7 +186,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChoiceQuestionId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Options");
                 });
@@ -212,10 +212,8 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<decimal>("Point")
                         .HasColumnType("DECIMAL(5,2)");
 
-                    b.Property<string>("QuestionType")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
+                    b.Property<int>("QuestionType")
+                        .HasColumnType("int");
 
                     b.Property<long>("QuizId")
                         .HasColumnType("bigint");
@@ -231,7 +229,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.ToTable("Questions");
 
-                    b.HasDiscriminator<string>("QuestionType").HasValue("OpenQuestion");
+                    b.HasDiscriminator<int>("QuestionType");
 
                     b.UseTphMappingStrategy();
                 });
@@ -623,7 +621,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.HasDiscriminator().HasValue("ChoiceQuestion");
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.OpenQuestion", b =>
@@ -635,18 +633,18 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.HasDiscriminator().HasValue("OpenQuestion");
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Option", b =>
                 {
-                    b.HasOne("ClassTrack.Domain.Entities.ChoiceQuestion", "ChoiceQuestion")
+                    b.HasOne("ClassTrack.Domain.Entities.Question", "Question")
                         .WithMany("Options")
-                        .HasForeignKey("ChoiceQuestionId")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ChoiceQuestion");
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Quiz", b =>
@@ -831,6 +829,11 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("TeacherClasses");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.Question", b =>
+                {
+                    b.Navigation("Options");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.Quiz", b =>
                 {
                     b.Navigation("ChoiceQuestions");
@@ -857,11 +860,6 @@ namespace ClassTrack.Persistance.Context.Migrations
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
                 {
                     b.Navigation("TeacherClasses");
-                });
-
-            modelBuilder.Entity("ClassTrack.Domain.Entities.ChoiceQuestion", b =>
-                {
-                    b.Navigation("Options");
                 });
 #pragma warning restore 612, 618
         }

@@ -27,9 +27,11 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page,int take,params string[] includes)
         {
+
             ICollection<Question> questions = await _questionRepository.GetAll(page: page,
                                             take: take,
                                             sort: x => x.CreatedAt,
+                                            isIgnore:true,
                                             includes: ["Options","Quiz"]).ToListAsync();
 
             return _mapper.Map<ICollection<GetQuestionItemDTO>>(questions);

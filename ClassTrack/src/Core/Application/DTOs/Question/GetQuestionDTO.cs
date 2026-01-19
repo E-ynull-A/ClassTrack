@@ -17,7 +17,8 @@ namespace ClassTrack.Application.DTOs
 
         string Title,
         decimal Point,
-        string Type      
+
+        string Type
         );
     
 }

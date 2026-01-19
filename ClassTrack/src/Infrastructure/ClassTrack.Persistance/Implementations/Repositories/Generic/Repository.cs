@@ -76,6 +76,9 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             if (includes is not null)
                 _addIncludes(query, includes);
 
+            var sql = query.Where(q => q.Id == id).ToQueryString();
+            Console.WriteLine(sql);
+
             return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
 

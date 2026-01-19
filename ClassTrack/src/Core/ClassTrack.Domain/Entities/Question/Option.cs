@@ -8,7 +8,7 @@ namespace ClassTrack.Domain.Entities
         public bool IsCorrect { get; set; }
 
         //Relations
-        public long ChoiceQuestionId { get; set; }
-        public ChoiceQuestion ChoiceQuestion { get; set; }
+        public long QuestionId { get; set; }
+        public Question Question { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ClassTrack.Domain.Entities;
+using ClassTrack.Persistance.Context;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -12,6 +13,7 @@ namespace ClassTrack.Persistance.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyAllQueryFilters();
             base.OnModelCreating(builder);   
         }
 

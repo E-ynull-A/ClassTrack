@@ -18,22 +18,22 @@ namespace ClassTrack.Persistance
 
 
             services.AddScoped<IClassRepository, ClassRepository>();
-            services.AddScoped<IOptionRepository, OptionRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ITaskWorkRepository, TaskWorkRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IOptionRepository, OptionRepository>();
 
             services.AddScoped<IClassService, ClassService>();
-            services.AddScoped<IOptionService, OptionService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuizService, QuizService>();
             services.AddScoped<IStudentAttendanceService, StudentAttendanceService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ITaskWorkService, TaskWorkService>();
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             return services;
         }
