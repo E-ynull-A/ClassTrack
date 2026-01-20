@@ -162,3 +162,4 @@ C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTra
 C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.API\bin\Debug\net8.0\FluentValidation.dll
 C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.API\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.API\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

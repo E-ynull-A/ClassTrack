@@ -1,5 +1,6 @@
 using ClassTrack.Persistance;
 using ClassTrack.Application;
+using ClassTrack.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddServicePersistance(builder.Configuration);
 builder.Services.AddServiceApplication();
+builder.Services.InfrastructureRegistration(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -24,7 +27,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

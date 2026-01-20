@@ -4,11 +4,6 @@ using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -58,8 +53,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if(user is null)
             {
                 throw new Exception("User Couldn't Find!");
-            }
-                
+            }       
         }
     }
 }
