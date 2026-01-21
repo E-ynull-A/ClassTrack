@@ -17,6 +17,7 @@ namespace ClassTrack.Application.Validators
 
             RuleFor(q => q.Options)
                 .NotEmpty()
+                .NotNull()
                 .Must(o => o.Count >= 2)
                 .WithMessage("There must be at least 2 Option!")
 

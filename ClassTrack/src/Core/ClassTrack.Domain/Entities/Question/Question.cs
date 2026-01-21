@@ -10,7 +10,8 @@ namespace ClassTrack.Domain.Entities
         //Relations
         public long QuizId { get; set; }
         public Quiz Quiz { get; set; }
-        public ICollection<Option> Options { get; set; } = new List<Option>();
+        
+        public int QuestionType { get; set; }
 
     }
 }

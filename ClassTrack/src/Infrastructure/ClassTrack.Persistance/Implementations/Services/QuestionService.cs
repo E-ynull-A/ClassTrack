@@ -41,12 +41,15 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<GetQuestionDTO> GetByIdAsync(long id)
         {
             Question question = await _questionRepository
-                                        .GetByIdAsync(id, includes: ["Quiz.Class", "Options"]);
+                                        .GetByIdAsync(id, includes: ["Quiz.Class", "Options"]);            
 
+            
             if(question is null)
                 throw new Exception("Question Not Found");
 
-            return _mapper.Map<GetQuestionDTO>(question);       
+            GetQuestionDTO questionDTO = _mapper.Map<GetQuestionDTO>(question);
+
+            return questionDTO;       
         }
 
         public async Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice)
@@ -61,13 +64,21 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (quiz.StartTime <= DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration) > DateTime.UtcNow)
                 throw new Exception("Couldn't Add New Question during an Quiz Interval!");
 
-            _optionRepository.Add(_mapper.Map<Option>(postChoice.Options));
+            
 
-            ChoiceQuestion questionDTO = _mapper.Map<ChoiceQuestion>(postChoice);
+            ChoiceQuestion question = _mapper.Map<ChoiceQuestion>(postChoice);
 
-            _questionRepository.Add(questionDTO);
+            question.Options = _mapper.Map<ICollection<Option>>(postChoice.Options);
+
+            _questionRepository.Add(question);
+
 
             await _questionRepository.SaveChangeAsync();
+
+            
+
+            //await _optionRepository.SaveChangeAsync();
+
         }
 
 

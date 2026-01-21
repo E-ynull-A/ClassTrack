@@ -20,9 +20,13 @@ namespace ClassTrack.Application.DTOs
         decimal Point,
         string Type,
 
-        ICollection<GetOptionItemInChoiceQuestionDTO> Options = null): 
-        
-        GetQuestionDTO(Id,QuizId,QuizName,ClassId
-                       ,ClassName,Title,Point,Type);
-   
+        ICollection<GetOptionItemInChoiceQuestionDTO>? Options = null) :
+
+        GetQuestionDTO(Id, QuizId, QuizName, ClassId
+                       , ClassName, Title, Point, Type)
+    {
+        public GetChoiceQuestionDTO() : this(0, false, 0, "", 0, "", "", 0, "", new List<GetOptionItemInChoiceQuestionDTO>()) { }
+
+    };
+
 }

@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "ClassTrack.API",
-    "version": "1.0"
+    "title": "MyAPI",
+    "version": "v1"
   },
   "paths": {
     "/Questions": {
@@ -40,48 +40,19 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "Title": {
-                    "type": "string"
-                  },
-                  "Point": {
-                    "type": "number",
-                    "format": "double"
-                  },
-                  "IsMultiple": {
-                    "type": "boolean"
-                  },
-                  "QuizId": {
-                    "type": "integer",
-                    "format": "int64"
-                  },
-                  "Options": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/PostOptionInChoiceQuestionDTO"
-                    }
-                  }
-                }
-              },
-              "encoding": {
-                "Title": {
-                  "style": "form"
-                },
-                "Point": {
-                  "style": "form"
-                },
-                "IsMultiple": {
-                  "style": "form"
-                },
-                "QuizId": {
-                  "style": "form"
-                },
-                "Options": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/PostChoiceQuestionDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostChoiceQuestionDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostChoiceQuestionDTO"
               }
             }
           }
@@ -119,6 +90,34 @@
   },
   "components": {
     "schemas": {
+      "PostChoiceQuestionDTO": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "point": {
+            "type": "number",
+            "format": "double"
+          },
+          "isMultiple": {
+            "type": "boolean"
+          },
+          "quizId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostOptionInChoiceQuestionDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PostOptionInChoiceQuestionDTO": {
         "type": "object",
         "properties": {
@@ -132,6 +131,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Please enter token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

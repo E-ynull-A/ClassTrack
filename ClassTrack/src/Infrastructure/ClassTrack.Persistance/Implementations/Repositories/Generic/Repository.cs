@@ -27,6 +27,15 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             _dbset.Add(entity);
         }
 
+        public void AddRange(ICollection<T> entities)
+        {
+            foreach (T entity in entities)
+            {
+                Add(entity);
+            }
+        }
+
+
         public void Delete(T removed)
         {
             _dbset.Remove(removed);
@@ -50,7 +59,7 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 
 
             if (isIgnore is not false)
-                query.IgnoreQueryFilters();
+                query = query.IgnoreQueryFilters();
 
             if (includes is not null)
                 query = _addIncludes(query, includes);
@@ -61,7 +70,7 @@ namespace ClassTrack.Persistance.Implementations.Repositories
                             .Skip((page - 1) * take)
                             .Take(take);
             }
-
+           
             return query;
         }
 
@@ -69,15 +78,12 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 
         public async Task<T> GetByIdAsync(long id, bool isIgnore = false, params string[] includes)
         {
-            IQueryable<T>? query = _dbset;
+            IQueryable<T>? query = _dbset.AsNoTracking();
 
             if (isIgnore is true)
-                query.IgnoreQueryFilters();
-            if (includes is not null)
-                _addIncludes(query, includes);
-
-            var sql = query.Where(q => q.Id == id).ToQueryString();
-            Console.WriteLine(sql);
+                query = query.IgnoreQueryFilters();
+            if (includes.Length>0)
+                query = _addIncludes(query, includes);
 
             return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
@@ -94,7 +100,11 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 
         protected IQueryable<T> _addIncludes(IQueryable<T> query, params string[] includes)
         {
-            Array.ForEach(includes, i => query.Include(i));
+
+            foreach(string include in includes)
+            {
+                query = query.Include(include);                
+            }         
             return query;
         }
 

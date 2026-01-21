@@ -14,6 +14,10 @@ namespace ClassTrack.Application.DTOs
        bool IsMultiple,
        long QuizId,
 
-       ICollection<PostOptionInChoiceQuestionDTO>? Options = null);
+       ICollection<PostOptionInChoiceQuestionDTO>? Options = null
+       )
+    {
+        public PostChoiceQuestionDTO() : this(default!, default, default, default, null) { }
+    };
    
 }

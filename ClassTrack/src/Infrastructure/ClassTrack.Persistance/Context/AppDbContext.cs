@@ -30,6 +30,8 @@ namespace ClassTrack.Persistance.DAL
         public DbSet<TaskWork> TaskWorks { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherClass> TeacherClasses { get; set; }
+        public DbSet<Class> Classes { get; set; }
+
 
 
 

@@ -148,7 +148,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Class");
+                    b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Option", b =>
@@ -158,6 +158,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ChoiceQuestionId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -174,9 +177,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<long>("QuestionId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -186,7 +186,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionId");
+                    b.HasIndex("ChoiceQuestionId");
 
                     b.ToTable("Options");
                 });
@@ -638,13 +638,13 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Option", b =>
                 {
-                    b.HasOne("ClassTrack.Domain.Entities.Question", "Question")
+                    b.HasOne("ClassTrack.Domain.Entities.ChoiceQuestion", "ChoiceQuestion")
                         .WithMany("Options")
-                        .HasForeignKey("QuestionId")
+                        .HasForeignKey("ChoiceQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Question");
+                    b.Navigation("ChoiceQuestion");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Quiz", b =>
@@ -829,11 +829,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("TeacherClasses");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.Question", b =>
-                {
-                    b.Navigation("Options");
-                });
-
             modelBuilder.Entity("ClassTrack.Domain.Entities.Quiz", b =>
                 {
                     b.Navigation("ChoiceQuestions");
@@ -860,6 +855,11 @@ namespace ClassTrack.Persistance.Context.Migrations
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
                 {
                     b.Navigation("TeacherClasses");
+                });
+
+            modelBuilder.Entity("ClassTrack.Domain.Entities.ChoiceQuestion", b =>
+                {
+                    b.Navigation("Options");
                 });
 #pragma warning restore 612, 618
         }

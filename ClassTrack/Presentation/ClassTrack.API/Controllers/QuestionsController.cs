@@ -33,7 +33,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm]PostChoiceQuestionDTO postChoice)
+        public async Task<IActionResult> Post([FromBody]PostChoiceQuestionDTO postChoice)
         {
             if(postChoice.Options is null)
             { return BadRequest(); }

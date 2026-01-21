@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClassTrack.Application.DTOs;
+using ClassTrack.Domain;
 using ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace ClassTrack.Application.MappingProfiles
 
             CreateMap<Question,GetQuestionDTO>()
                 .ForCtorParam(nameof(GetQuestionDTO.Type),
-                             opt => opt.MapFrom(t => t.GetType().Name))
+                             opt => opt.MapFrom(t => ((QuestionType)t.QuestionType).ToString()))
                 .ForCtorParam(nameof(GetQuestionDTO.QuizId),
                                 opt => opt.MapFrom(q => q.QuizId))
                 .ForCtorParam(nameof(GetQuestionDTO.ClassId),
@@ -38,6 +39,7 @@ namespace ClassTrack.Application.MappingProfiles
 
             CreateMap<ChoiceQuestion, GetChoiceQuestionDTO>()
                 .IncludeBase<Question, GetQuestionDTO>();
+                
 
             CreateMap<OpenQuestion, GetOpenQuestionDTO>()
                .IncludeBase<Question, GetQuestionDTO>();

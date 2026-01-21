@@ -26,7 +26,7 @@ namespace ClassTrack.Persistance.Context
         private static void _applyQueryFilters<T>( this ModelBuilder builder)
             where T : BaseEntity
         {
-            builder.Entity<T>().HasQueryFilter(x => x.IsDeleted);
+            builder.Entity<T>().HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }
