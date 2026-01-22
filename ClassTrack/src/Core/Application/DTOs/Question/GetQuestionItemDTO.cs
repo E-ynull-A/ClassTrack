@@ -1,12 +1,13 @@
 ﻿namespace ClassTrack.Application.DTOs
 {
     public record GetQuestionItemDTO(
-        string Type,
+        long Id,
+        string QuestionType,
         string Title,
         decimal Point,        
         ICollection<GetOptionItemInQuestionDTO>? Options=null)
     {
-        public GetQuestionItemDTO() : this(string.Empty,string.Empty, 0, new List<GetOptionItemInQuestionDTO>()) { }
+        public GetQuestionItemDTO() : this(0,string.Empty,string.Empty, 0, new List<GetOptionItemInQuestionDTO>()) { }
     };
 
 

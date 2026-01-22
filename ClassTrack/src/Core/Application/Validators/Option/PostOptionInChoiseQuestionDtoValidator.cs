@@ -10,10 +10,16 @@ namespace ClassTrack.Application.Validators
 {
     public class PostOptionInChoiseQuestionDtoValidator:AbstractValidator<PostOptionInChoiceQuestionDTO>
     {
+        private const int MAX_LENGTH = 256;
         public PostOptionInChoiseQuestionDtoValidator()
         {
-           
-                
+
+            RuleFor(o => o.Variant)
+                .NotEmpty()
+                .MaximumLength(MAX_LENGTH);
+
+            RuleFor(o => o.IsCorrect)
+                .NotEmpty();                       
         }
     }
 }

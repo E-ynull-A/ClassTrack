@@ -11,7 +11,7 @@ namespace ClassTrack.Domain.Entities
 
         //Relations
         public ICollection<StudentTaskWork> StudentTaskWorks { get; set; }
-        public long ClassId { get; set; }
-        public Class Class { get; set; }
+        public long ClassRoomId { get; set; }
+        public ClassRoom ClassRoom { get; set; }
     }
 }

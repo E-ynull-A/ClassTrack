@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Configuration
 {
-    internal class StudentClassConfiguration : IEntityTypeConfiguration<StudentClass>
+    internal class StudentClassRoomConfiguration : IEntityTypeConfiguration<StudentClassRoom>
     {
-        public void Configure(EntityTypeBuilder<StudentClass> builder)
+        public void Configure(EntityTypeBuilder<StudentClassRoom> builder)
         {
             builder.Property(sc => sc.AvgPoint)
                 .IsRequired()
                 .HasColumnType("DECIMAL(5,2)");
 
-            builder.HasKey(sc => new { sc.StudentId, sc.ClassId });
+            builder.HasKey(sc => new { sc.StudentId, sc.ClassRoomId });
         }
     }
 }

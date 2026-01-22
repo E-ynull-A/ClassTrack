@@ -13,9 +13,13 @@ namespace ClassTrack.Application.MappingProfiles
     {
         public OptionProfile()
         {
+            CreateMap<Option, GetOptionItemInQuestionDTO>();
+
             CreateMap<Option, GetOptionItemInChoiceQuestionDTO>();
 
             CreateMap<PostOptionInChoiceQuestionDTO, Option>();
+
+            CreateMap<PutChoiceQuestionDTO, Option>();
            
         }
     }

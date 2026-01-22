@@ -13,15 +13,14 @@ namespace ClassTrack.Application.Validators
 
             RuleFor(q => q.Point)
                 .NotNull()
-                .Must(p => p >= 0 && p <= 100);
+                .InclusiveBetween(0,100);
 
             RuleFor(q => q.Options)
-                .NotEmpty()
-                .NotNull()
-                .Must(o => o.Count >= 2)
+                .NotEmpty()              
+                .Must(o => o.Count >= 2 && o.Count < 6)
                 .WithMessage("There must be at least 2 Option!")
-
-                .Must(o => o.Select(o => o.Variant.Trim()).Distinct().Count() == o.Count);
+                .Must(o => o.Select(o => o.Variant.Trim()).Distinct().Count() == o.Count)
+                .WithMessage("The Variants must be different!");
 
             RuleFor(q => q)
                 .Must(q =>
@@ -40,14 +39,8 @@ namespace ClassTrack.Application.Validators
 
                 })
                 .WithMessage(q => q.IsMultiple
-                ? "You must choose only one correct Variant!"
-                : "You must choose at Least one correct Variant!");
-               
-
-
-
-                
-          
+                ? "You must choose at least one correct Variant!"
+                : "You must choose only one correct Variant!");
         }
     }
 }

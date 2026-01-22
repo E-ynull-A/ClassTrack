@@ -2,6 +2,7 @@
 
 
 
+using ClassTrack.Application.Interfaces;
 using ClassTrack.Application.Validators;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace ClassTrack.Application.DTOs
        long QuizId,
 
        ICollection<PostOptionInChoiceQuestionDTO>? Options = null
-       )
+       ): IBasePostQuestion
     {
         public PostChoiceQuestionDTO() : this(default!, default, default, default, null) { }
     };

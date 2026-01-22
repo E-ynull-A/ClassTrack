@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ClassTrack.Persistance.Configuration
 {
-    internal class ClassConfiguration : IEntityTypeConfiguration<Class>
+    internal class ClassRoomConfiguration : IEntityTypeConfiguration<ClassRoom>
     {
-        public void Configure(EntityTypeBuilder<Class> builder)
+        public void Configure(EntityTypeBuilder<ClassRoom> builder)
         {
             builder.Property(c => c.AvgPoint)
                 .IsRequired()

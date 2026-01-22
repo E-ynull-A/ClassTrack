@@ -9,5 +9,7 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface IQuizRepository:IRepository<Quiz>
     {
+        void GetAllowCreateOrUpdateQuestion(Quiz quiz);
+
     }
 }

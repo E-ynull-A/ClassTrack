@@ -13,7 +13,7 @@ namespace ClassTrack.Persistance.Context
 
         public static void ApplyAllQueryFilters(this ModelBuilder builder)
         {
-            builder._applyQueryFilters<Class>();
+            builder._applyQueryFilters<ClassRoom>();
             builder._applyQueryFilters<Question>();          
             builder._applyQueryFilters<Option>();
             builder._applyQueryFilters<Quiz>();

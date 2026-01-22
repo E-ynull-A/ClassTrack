@@ -11,7 +11,7 @@ namespace ClassTrack.Domain.Entities
         public long QuizId { get; set; }
         public Quiz Quiz { get; set; }
         
-        public int QuestionType { get; set; }
+        public string QuestionType { get; set; }
 
     }
 }

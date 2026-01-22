@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Configuration
 {
-    internal class TeacherClassConfiguration : IEntityTypeConfiguration<TeacherClass>
+    internal class TeacherClassRoomConfiguration : IEntityTypeConfiguration<TeacherClassRoom>
     {
-        public void Configure(EntityTypeBuilder<TeacherClass> builder)
+        public void Configure(EntityTypeBuilder<TeacherClassRoom> builder)
         {
-            builder.HasKey(tc => new { tc.TeacherId, tc.ClassId });
+            builder.HasKey(tc => new { tc.TeacherId, tc.ClassRoomId });
         }
     }
 }

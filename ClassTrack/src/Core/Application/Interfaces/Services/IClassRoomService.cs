@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.Interfaces.Services
 {
-    public interface IClassService
+    public interface IClassRoomService
     {
     }
 }

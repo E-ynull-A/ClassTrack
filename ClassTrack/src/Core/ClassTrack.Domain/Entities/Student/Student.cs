@@ -8,6 +8,6 @@ namespace ClassTrack.Domain.Entities
         //Relation
         public ICollection<StudentQuiz> StudentQuizes { get; set; }
         public ICollection<StudentTaskWork> StudentTaskWorks { get; set; }
-        public ICollection<StudentClass> StudentClasses { get; set; }
+        public ICollection<StudentClassRoom> StudentClasses { get; set; }
     }
 }

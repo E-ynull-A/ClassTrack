@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.Interfaces.Repositories
 {
-    public interface IClassRepository:IRepository<Class>
+    public interface IClassRoomRepository:IRepository<ClassRoom>
     {
     }
 }

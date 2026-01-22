@@ -1,7 +1,7 @@
 ﻿using ClassTrack.Application.Interfaces.Services;
 namespace ClassTrack.Persistance.Implementations.Services
 {
-    internal class ClassService:IClassService
+    internal class ClassRoomService:IClassRoomService
     {
     }
 }

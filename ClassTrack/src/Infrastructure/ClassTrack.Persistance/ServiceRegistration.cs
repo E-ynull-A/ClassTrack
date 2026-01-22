@@ -37,7 +37,7 @@ namespace ClassTrack.Persistance
                 .AddEntityFrameworkStores<AppDbContext>();
 
 
-            services.AddScoped<IClassRepository, ClassRepository>();
+            services.AddScoped<IClassRoomRepository, ClassRoomRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
@@ -46,7 +46,7 @@ namespace ClassTrack.Persistance
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IOptionRepository, OptionRepository>();
 
-            services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IClassRoomService, ClassRoomService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuizService, QuizService>();
             services.AddScoped<IStudentAttendanceService, StudentAttendanceService>();

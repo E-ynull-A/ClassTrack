@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassTrack.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,13 @@ namespace ClassTrack.Application.DTOs
         long QuizId,
         string QuizName,
 
-        long ClassId,
-        string ClassName,
+        long ClassRoomId,
+        string ClassRoomName,
 
         string Title,
         decimal Point,
 
-        string Type
+        string QuestionType
         );
     
 }

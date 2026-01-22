@@ -24,13 +24,13 @@ namespace ClassTrack.Persistance.DAL
         public DbSet<QuizAnswer> QuizAnswers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentAttendance> StudentAttendances { get; set; }
-        public DbSet<StudentClass> StudentClasses { get; set; }
+        public DbSet<StudentClassRoom> StudentClasses { get; set; }
         public DbSet<StudentQuiz> StudentQuizes { get; set; }
         public DbSet<StudentTaskWork> StudentTaskWorks { get; set; }
         public DbSet<TaskWork> TaskWorks { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<TeacherClass> TeacherClasses { get; set; }
-        public DbSet<Class> Classes { get; set; }
+        public DbSet<TeacherClassRoom> TeacherClasses { get; set; }
+        public DbSet<ClassRoom> ClassRooms { get; set; }
 
 
 

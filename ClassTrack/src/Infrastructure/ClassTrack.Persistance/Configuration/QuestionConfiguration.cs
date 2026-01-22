@@ -12,9 +12,10 @@ namespace ClassTrack.Persistance.Configuration
         public void Configure(EntityTypeBuilder<Question> builder)
         {
 
-            builder.HasDiscriminator<int>("QuestionType")
-                .HasValue<ChoiceQuestion>((int)QuestionType.SingleChoice)
-                .HasValue<OpenQuestion>((int)QuestionType.OpenResponce);       
+            builder.HasDiscriminator<string>(nameof(Question.QuestionType))
+                .HasValue<ChoiceQuestion>(QuestionType.SingleChoice.ToString())
+                .HasValue<OpenQuestion>(QuestionType.OpenResponce.ToString()); 
+           
 
             builder.Property(q => q.Point)
                 .IsRequired()

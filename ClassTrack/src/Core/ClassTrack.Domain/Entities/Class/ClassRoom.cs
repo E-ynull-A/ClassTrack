@@ -2,7 +2,7 @@
 
 namespace ClassTrack.Domain.Entities
 {
-    public class Class:BaseNamebleEntity
+    public class ClassRoom:BaseNamebleEntity
     {
         public decimal AvgPoint { get; set; }
         public string PrivateKey { get; set; }
@@ -10,8 +10,8 @@ namespace ClassTrack.Domain.Entities
 
         //Relations
 
-        public ICollection<StudentClass> StudentClasses { get; set; }
-        public ICollection<TeacherClass> TeacherClasses { get; set; }
+        public ICollection<StudentClassRoom> StudentClasses { get; set; }
+        public ICollection<TeacherClassRoom> TeacherClasses { get; set; }
         public ICollection<TaskWork> TaskWorks { get; set; }
         public ICollection<Quiz> Quizes { get; set; }
     }

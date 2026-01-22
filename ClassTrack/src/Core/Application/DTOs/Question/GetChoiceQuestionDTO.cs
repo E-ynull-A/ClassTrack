@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassTrack.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +15,17 @@ namespace ClassTrack.Application.DTOs
         long QuizId,
         string QuizName,
 
-        long ClassId,
-        string ClassName,
-          string Title,
+        long ClassRoomId,
+        string ClassRoomName,
+        string Title,
         decimal Point,
-        string Type,
-
+        string QuestionType,
         ICollection<GetOptionItemInChoiceQuestionDTO>? Options = null) :
 
-        GetQuestionDTO(Id, QuizId, QuizName, ClassId
-                       , ClassName, Title, Point, Type)
+        GetQuestionDTO(Id, QuizId, QuizName, ClassRoomId
+                       , ClassRoomName, Title, Point, QuestionType)
     {
-        public GetChoiceQuestionDTO() : this(0, false, 0, "", 0, "", "", 0, "", new List<GetOptionItemInChoiceQuestionDTO>()) { }
+        public GetChoiceQuestionDTO() : this(0, false, 0, string.Empty, 0, string.Empty, string.Empty, 0, string.Empty, new List<GetOptionItemInChoiceQuestionDTO>()) { }
 
     };
 

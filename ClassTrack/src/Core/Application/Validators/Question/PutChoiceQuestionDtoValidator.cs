@@ -1,0 +1,47 @@
+﻿using ClassTrack.Application.DTOs;
+using FluentValidation;
+
+namespace ClassTrack.Application.Validators
+{
+    internal class PutChoiceQuestionDtoValidator:AbstractValidator<PutChoiceQuestionDTO>
+    {
+        public PutChoiceQuestionDtoValidator()
+        {
+            RuleFor(q => q.Title)
+               .NotEmpty()
+               .MinimumLength(2);
+
+            RuleFor(q => q.Point)
+                .NotNull()
+                .InclusiveBetween(0,100);
+
+            RuleFor(q => q.Options)
+                .NotEmpty()
+                .Must(o => o.Count >= 2 && o.Count < 6)
+                .WithMessage("There must be at least 2 Option!")
+                .Must(o => o.Select(o => o.Variant.Trim()).Distinct().Count() == o.Count)
+                .WithMessage("The Variants must be different!");
+
+            RuleFor(q => q)
+                .Must(q =>
+                {
+                    if (q.Options is null)
+                        return true;
+
+                    else if (q.IsMultiple)
+                    {
+                        return q.Options.Count(o => o.IsCorrect) > 0;
+                    }
+                    else
+                    {
+                        return q.Options.Count(o => o.IsCorrect) == 1;
+                    }
+
+                })
+                .WithMessage(q => q.IsMultiple
+                ? "You must choose at least one correct Variant!"
+                : "You must choose only one correct Variant!");
+
+        }
+    }
+}

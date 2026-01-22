@@ -78,12 +78,13 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 
         public async Task<T> GetByIdAsync(long id, bool isIgnore = false, params string[] includes)
         {
-            IQueryable<T>? query = _dbset.AsNoTracking();
+            IQueryable<T> query = _dbset.AsNoTracking();
 
             if (isIgnore is true)
                 query = query.IgnoreQueryFilters();
             if (includes.Length>0)
-                query = _addIncludes(query, includes);
+                query = _addIncludes(query, includes);           
+                
 
             return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
@@ -105,6 +106,7 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             {
                 query = query.Include(include);                
             }         
+           
             return query;
         }
 

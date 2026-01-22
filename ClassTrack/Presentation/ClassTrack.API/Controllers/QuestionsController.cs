@@ -32,15 +32,34 @@ namespace ClassTrack.API.Controllers
             return Ok(await _service.GetByIdAsync(id));
         }
 
-        [HttpPost]
+        [HttpPost("/ChoiceQuestion")]
         public async Task<IActionResult> Post([FromBody]PostChoiceQuestionDTO postChoice)
         {
             if(postChoice.Options is null)
             { return BadRequest(); }
 
             await _service.CreateChoiceQuestionAsync(postChoice);
-
             return Created();
+        }
+
+        [HttpPost("/OpenQuestion")]
+        public async Task<IActionResult> Post([FromBody]PostOpenQuestionDTO postOpen)
+        {
+            if(postOpen is null)
+                return BadRequest();
+
+            await _service.CreateOpenQuestionAsync(postOpen);
+            return Created();
+        }
+
+        [HttpPut("/ChoiceQuestion")]
+        public async Task<IActionResult> Put(long id,PutChoiceQuestionDTO putChoice)
+        {
+            if(id < 1)
+                return BadRequest();
+
+            await _service.UpdateChoiceQuestionAsync(id,putChoice);
+            return NoContent();
         }
     }
 }

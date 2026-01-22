@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassTrack.Application.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace ClassTrack.Application.DTOs
 
        string Title,
        decimal Point,
-       long QuizId);
+       long QuizId):IBasePostQuestion;
    
 }

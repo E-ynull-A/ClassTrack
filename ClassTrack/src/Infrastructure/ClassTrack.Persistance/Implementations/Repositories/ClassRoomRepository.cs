@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Repositories
 {
-    internal class ClassRepository:Repository<Class>,IClassRepository
+    internal class ClassRoomRepository:Repository<ClassRoom>,IClassRoomRepository
     {
-        public ClassRepository(AppDbContext context):base(context) { }
+        public ClassRoomRepository(AppDbContext context):base(context) { }
        
     }
 }

@@ -2,13 +2,13 @@
 
 namespace ClassTrack.Domain.Entities
 {
-    public class StudentClass
+    public class StudentClassRoom
     {
         public string StudentId { get; set; }
-        public long ClassId { get; set; }
+        public long ClassRoomId { get; set; }
 
         public Student Student { get; set; }
-        public Class Class { get; set; }
+        public ClassRoom ClassRoom { get; set; }
 
         public decimal AvgPoint { get; set; }
     }

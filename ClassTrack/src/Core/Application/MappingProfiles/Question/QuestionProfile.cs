@@ -2,6 +2,7 @@
 using ClassTrack.Application.DTOs;
 using ClassTrack.Domain;
 using ClassTrack.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,42 +15,36 @@ namespace ClassTrack.Application.MappingProfiles
     {
         public QuestionProfile()
         {
-            CreateMap<Question, GetQuestionItemDTO>()
-                .ForCtorParam(nameof(GetQuestionItemDTO.Type)
-                            ,opt => opt.MapFrom(t => t.GetType().Name));
+            CreateMap<Question, GetQuestionItemDTO>();     
 
             CreateMap<ChoiceQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
             CreateMap<OpenQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
 
 
             CreateMap<Question,GetQuestionDTO>()
-                .ForCtorParam(nameof(GetQuestionDTO.Type),
-                             opt => opt.MapFrom(t => ((QuestionType)t.QuestionType).ToString()))
-                .ForCtorParam(nameof(GetQuestionDTO.QuizId),
-                                opt => opt.MapFrom(q => q.QuizId))
-                .ForCtorParam(nameof(GetQuestionDTO.ClassId),
-                                opt => opt.MapFrom(q => q.Quiz.ClassId))
-                .ForCtorParam(nameof(GetQuestionDTO.QuizName),
-                                opt => opt.MapFrom(q => q.Quiz.Name))
-                .ForCtorParam(nameof(GetQuestionDTO.ClassName),
-                                opt => opt.MapFrom(q => q.Quiz.Class.Name))
-
-                .Include<ChoiceQuestion, GetChoiceQuestionDTO>()
-                .Include<OpenQuestion, GetOpenQuestionDTO>();
+                .IncludeAllDerived();             
 
             CreateMap<ChoiceQuestion, GetChoiceQuestionDTO>()
+                .ForCtorParam(nameof(GetQuestionDTO.ClassRoomId),
+                                opt => opt.MapFrom(q => q.Quiz.ClassRoomId))
+                .ForCtorParam(nameof(GetQuestionDTO.ClassRoomName),
+                                opt => opt.MapFrom(q => q.Quiz.ClassRoom.Name))
                 .IncludeBase<Question, GetQuestionDTO>();
                 
-
             CreateMap<OpenQuestion, GetOpenQuestionDTO>()
-               .IncludeBase<Question, GetQuestionDTO>();
+                .ForCtorParam(nameof(GetQuestionDTO.ClassRoomId),
+                                opt => opt.MapFrom(q => q.Quiz.ClassRoomId))
+                .ForCtorParam(nameof(GetQuestionDTO.ClassRoomName),
+                                opt => opt.MapFrom(q => q.Quiz.ClassRoom.Name))
+                .IncludeBase<Question, GetQuestionDTO>();
 
 
 
-            CreateMap<PostChoiceQuestionDTO, ChoiceQuestion>()
-                .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options)); ;
+            CreateMap<PostChoiceQuestionDTO, ChoiceQuestion>();     
             CreateMap<PostOpenQuestionDTO, OpenQuestion>();
 
+            CreateMap<PutChoiceQuestionDTO, ChoiceQuestion>();
+            CreateMap<PutOpenQuestionDTO, OpenQuestion>();               
         }
     }
 }

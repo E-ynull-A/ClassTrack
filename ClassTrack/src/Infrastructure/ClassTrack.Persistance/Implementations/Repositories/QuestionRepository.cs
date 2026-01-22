@@ -12,6 +12,7 @@ namespace ClassTrack.Persistance.Implementations.Repositories
     internal class QuestionRepository:Repository<Question>,IQuestionRepository
     {
         public QuestionRepository(AppDbContext context):base(context) { }
-      
+
+        
     }
 }

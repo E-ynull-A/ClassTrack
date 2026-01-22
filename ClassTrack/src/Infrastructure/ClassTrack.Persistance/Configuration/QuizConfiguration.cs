@@ -13,6 +13,8 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<Quiz> builder)
         {
+
+
             builder.Property(q => q.Name)
                 .IsRequired()
                 .HasColumnType("NVARCHAR(90)");
