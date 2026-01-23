@@ -34,7 +34,6 @@ namespace ClassTrack.Persistance.Implementations.Services
             ICollection<Question> questions = await _questionRepository.GetAll(page: page,
                                             take: take,
                                             sort: x => x.CreatedAt,
-                                            isIgnore: true,
                                             includes: ["Options", "Quiz"]).ToListAsync();
 
             return _mapper.Map<ICollection<GetQuestionItemDTO>>(questions);
@@ -66,7 +65,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             await _questionRepository.SaveChangeAsync();
         }
-
         public async Task CreateOpenQuestionAsync(PostOpenQuestionDTO postOpen)
         {
             await _basePostChecksAsync(postOpen);
@@ -74,23 +72,20 @@ namespace ClassTrack.Persistance.Implementations.Services
             _questionRepository.Add(_mapper.Map<OpenQuestion>(postOpen));
             await _questionRepository.SaveChangeAsync();
         }
-
-
-
         public async Task UpdateChoiceQuestionAsync(long id, PutChoiceQuestionDTO putChoice)
         {
-            ChoiceQuestion oldQuestion = await _basePutCheckAsync<PutChoiceQuestionDTO,ChoiceQuestion>(id, putChoice);
+            ChoiceQuestion oldQuestion = await _basePutCheckAsync<PutChoiceQuestionDTO, ChoiceQuestion>(id, putChoice);
 
             if (oldQuestion is ChoiceQuestion)
             {
 
-                ChoiceQuestion choiceQuestion = _mapper.Map(putChoice,oldQuestion);
+                _findDifferencesOption(oldQuestion, putChoice);
 
-                //choiceQuestion.Options = _mapper.Map(putChoice.Options,oldQuestion.Options);
+                oldQuestion = _mapper.Map(putChoice, oldQuestion);
 
-                choiceQuestion.Options = choiceQuestion.Options.TrimAll();
+                oldQuestion.Options = oldQuestion.Options.TrimAll();
 
-                _questionRepository.Update(choiceQuestion);
+                _questionRepository.Update(oldQuestion);
             }
             else
             {
@@ -100,8 +95,97 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             await _questionRepository.SaveChangeAsync();
         }
+        public async Task UpdateOpenQuestionAsync(long id,PutOpenQuestionDTO putOpen)
+        {
+            OpenQuestion oldQuestion = await _basePutCheckAsync<PutOpenQuestionDTO, OpenQuestion>(id,putOpen);
 
-        private async Task<E> _basePutCheckAsync<T,E>(long id, T questionDTO) where T : IBasePutQuestion where E : Question, new() 
+            if(oldQuestion is OpenQuestion)
+            {
+                oldQuestion = _mapper.Map(putOpen, oldQuestion);
+
+                _questionRepository.Update(oldQuestion);
+                await _questionRepository.SaveChangeAsync();
+            }
+            else
+            {
+                throw new Exception("Bad Type Request!");
+            }
+        }
+        public async Task DeleteChoiceQuestionAsync(long id)
+        {
+            try {
+                ChoiceQuestion deletedChoice = (ChoiceQuestion)await _questionRepository
+                                            .GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Options)]);
+
+                _optionRepository.DeleteRange(deletedChoice.Options);
+                _questionRepository.Delete(deletedChoice);
+
+                await _questionRepository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw new Exception("An error occurred while deleting the Choice question.");
+            }   
+        }
+
+        public async Task DeleteOpenQuestionAsync(long id)
+        {
+            try
+            {
+                OpenQuestion deletedOpen = (OpenQuestion)await _questionRepository.GetByIdAsync(id);
+
+                _questionRepository.Delete(deletedOpen);
+                await _questionRepository.SaveChangeAsync();
+            }
+
+            catch (Exception)
+            {
+                throw new Exception("An error occurred while deleting the Open question.");
+            }
+        }
+
+     
+        private void _findDifferencesOption(ChoiceQuestion oldQuest, PutChoiceQuestionDTO newQuestDto)
+        {
+            ICollection<Option> oldOptions = oldQuest.Options;
+            ICollection<PutOptionInChoiceQuestionDTO>? newOptions = newQuestDto.Options;
+
+            oldOptions.Where(o => !newOptions.Select(no => no.Variant)
+                                                    .Contains(o.Variant))
+                                                        .ToList()
+                                                    .ForEach(dlo =>
+            {
+                _optionRepository.Delete(dlo);
+                oldQuest.Options.Remove(dlo);
+            });
+
+
+            for (int i = 0; i < newOptions.Count; i++)
+            {
+                PutOptionInChoiceQuestionDTO pq = newOptions.ElementAt(i);
+
+                Option? dublictate = oldOptions
+                                        .FirstOrDefault(oq => oq.Variant == pq.Variant);
+
+                if (dublictate is not null)
+                {
+                    dublictate.UpdatedAt = DateTime.UtcNow;
+                    dublictate.IsCorrect = pq.IsCorrect;
+                }
+
+                else
+                {
+                    oldQuest.Options.Add(new Option
+                    {
+                        IsCorrect = pq.IsCorrect,
+                        Variant = pq.Variant,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+                }
+            }
+
+        }
+        private async Task<E> _basePutCheckAsync<T, E>(long id, T questionDTO) where T : IBasePutQuestion where E : Question, new()
         {
             E? oldQuestion = null;
 

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="DTOs\Register\" />
+    <Folder Include="Validators\Quiz\" />
   </ItemGroup>
 
 </Project>

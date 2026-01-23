@@ -9,7 +9,9 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IQuestionService
     {
-        Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page, int take, params string[] includes);
+        Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page,
+                                                          int take,
+                                                          params string[] includes);
         Task<GetQuestionDTO> GetByIdAsync(long id);
 
 
@@ -17,7 +19,8 @@ namespace ClassTrack.Application.Interfaces.Services
         Task CreateOpenQuestionAsync(PostOpenQuestionDTO postOpen);
 
         Task UpdateChoiceQuestionAsync(long id, PutChoiceQuestionDTO putChoice);
-
-
+        Task UpdateOpenQuestionAsync(long id, PutOpenQuestionDTO putOpen);
+        Task DeleteChoiceQuestionAsync(long id);
+        Task DeleteOpenQuestionAsync(long id);
     }
 }

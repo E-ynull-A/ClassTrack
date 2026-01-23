@@ -18,7 +18,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int page,int take)
+        public async Task<IActionResult> Get(int page = 0,int take = 0)
         {
            return Ok(await _service.GetAllAsync(page:page,take:take));
         }
@@ -61,5 +61,37 @@ namespace ClassTrack.API.Controllers
             await _service.UpdateChoiceQuestionAsync(id,putChoice);
             return NoContent();
         }
+
+        [HttpPut("/OpenQuestion")]
+        public async Task<IActionResult> Put(long id,PutOpenQuestionDTO putOpen)
+        {
+            if(id<1)
+                return BadRequest();
+
+            await _service.UpdateOpenQuestionAsync(id,putOpen);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/ChoiceQuestion")]
+        public async Task<IActionResult> DeleteChoice(long id)
+        {
+            if(id<1)
+                return BadRequest();
+
+            await _service.DeleteChoiceQuestionAsync(id);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/OpenQuestion")]
+
+        public async Task<IActionResult> DeleteOpen(long id)
+        {
+            if (id < 1)
+                return BadRequest();
+
+            await _service.DeleteOpenQuestionAsync(id);
+            return NoContent();
+        }
+
     }
 }

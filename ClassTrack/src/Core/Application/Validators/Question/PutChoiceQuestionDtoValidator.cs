@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ClassTrack.Application.Validators
 {
-    internal class PutChoiceQuestionDtoValidator:AbstractValidator<PutChoiceQuestionDTO>
+    public class PutChoiceQuestionDtoValidator:AbstractValidator<PutChoiceQuestionDTO>
     {
         public PutChoiceQuestionDtoValidator()
         {

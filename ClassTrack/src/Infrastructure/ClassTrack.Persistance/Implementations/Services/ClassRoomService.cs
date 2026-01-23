@@ -3,5 +3,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class ClassRoomService:IClassRoomService
     {
+        
     }
 }

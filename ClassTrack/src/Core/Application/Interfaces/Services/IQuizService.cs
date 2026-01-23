@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassTrack.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IQuizService
     {
+        Task<ICollection<GetQuizItemDTO>> GetAllAsync(int page, int take, params string[] includes);
+        Task<GetQuizDTO> GetByIdAsync(long id);
     }
 }

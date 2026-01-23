@@ -24,6 +24,7 @@ namespace ClassTrack.Application.Interfaces.Repositories
         void AddRange(ICollection<T> entities);
         void Update(T entity);
         void Delete(T removed);
+        void DeleteRange(ICollection<T> removeds);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
     }

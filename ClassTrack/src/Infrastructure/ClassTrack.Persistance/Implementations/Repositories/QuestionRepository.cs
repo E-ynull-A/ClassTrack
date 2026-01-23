@@ -13,6 +13,5 @@ namespace ClassTrack.Persistance.Implementations.Repositories
     {
         public QuestionRepository(AppDbContext context):base(context) { }
 
-        
     }
 }

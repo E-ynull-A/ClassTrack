@@ -43,8 +43,14 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<PostChoiceQuestionDTO, ChoiceQuestion>();     
             CreateMap<PostOpenQuestionDTO, OpenQuestion>();
 
-            CreateMap<PutChoiceQuestionDTO, ChoiceQuestion>();
-            CreateMap<PutOpenQuestionDTO, OpenQuestion>();               
+            CreateMap<PutChoiceQuestionDTO, ChoiceQuestion>()
+                .ForMember(opt=>opt.Options,o=>o.Ignore());
+            CreateMap<PutOpenQuestionDTO, OpenQuestion>();
+
+
+
+            CreateMap<ChoiceQuestion, GetChoiceQuestionInQuizDTO>();
+            CreateMap<OpenQuestion, GetOpenQuestionInQuizDTO>();
         }
     }
 }
