@@ -4,7 +4,7 @@ namespace ClassTrack.Domain.Enums
 {
     public enum UserRole
     {
-        Student = 1,
-        Teacher = 2
+       Admin = 1,
+       User = 2
     }
 }

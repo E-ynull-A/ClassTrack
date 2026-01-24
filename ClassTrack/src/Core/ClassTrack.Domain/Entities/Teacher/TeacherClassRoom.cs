@@ -10,5 +10,7 @@ namespace ClassTrack.Domain.Entities
 
         public Teacher Teacher { get; set; }
         public ClassRoom ClassRoom { get; set; }
+
+
     }
 }

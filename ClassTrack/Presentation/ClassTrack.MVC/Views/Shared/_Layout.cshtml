@@ -1,0 +1,63 @@
+﻿<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ClassRoom</title>
+
+    <link rel="stylesheet" href="~/css/base.css" />
+</head>
+<body>
+
+    <header class="site-header">
+        <!-- container wrapper: header-in kənara yapışmasını düzəldir -->
+        <div class="container header-shell">
+            <div class="header-inner">
+                <a class="btn primary" href="~/Class">Class</a>
+                <a class="brand" href="~/">
+                    <div class="logo"></div>
+                    <div>
+                        <div class="title">ClassRoom</div>
+                        <div class="subtitle">Class • Quiz • Task • Attendance</div>
+                    </div>                    
+                </a>
+
+                <div class="header-actions">
+                    <button class="icon-btn mobile-toggle" data-mobile-toggle title="Menu">
+                        <span class="icon" style="--mask:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22black%22><path d=%22M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z%22/></svg>');"></span>
+                    </button>
+                    <a class="btn" href="~/Account/Login">Login</a>
+                </div>
+            </div>
+
+            <div class="mobile-panel" data-mobile-panel>
+                <nav class="menu">
+                    <a class="btn primary" href="~/Class">Class</a>
+                    <a class="btn" href="~/Account/Login">Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- main container qalsın -->
+    <main class="container main-shell">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-shell">
+            <div class="footer-inner">
+                <div class="smallprint">© <span id="y"></span> ClassRoom • MVC + API</div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>
+
+    <script src="~/js/base.js"></script>
+    <script>
+        const y = document.getElementById("y");
+        if (y) y.textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

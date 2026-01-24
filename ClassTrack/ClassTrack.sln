@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassTrack.Infrastructure",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassTrack.API", "Presentation\ClassTrack.API\ClassTrack.API.csproj", "{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassTrack.MVC", "Presentation\ClassTrack.MVC\ClassTrack.MVC.csproj", "{66DC2026-17B2-410B-B112-FDD0FCF44B24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66DC2026-17B2-410B-B112-FDD0FCF44B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66DC2026-17B2-410B-B112-FDD0FCF44B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66DC2026-17B2-410B-B112-FDD0FCF44B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66DC2026-17B2-410B-B112-FDD0FCF44B24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{9CBA776A-E271-47E7-A6B7-0DDB4D782408} = {3BA25C40-A224-4267-8AF3-36C63AC70491}
 		{38C2DF8F-35CA-4634-991F-0F93C3AC0898} = {3BA25C40-A224-4267-8AF3-36C63AC70491}
 		{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7} = {EE49AB1E-255A-41F1-B3CC-470478E81747}
+		{66DC2026-17B2-410B-B112-FDD0FCF44B24} = {EE49AB1E-255A-41F1-B3CC-470478E81747}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D6A0B72-35EB-41B4-B828-6FAFE2FAE185}

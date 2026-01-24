@@ -1,0 +1,153 @@
+.col2 {
+    flex: 2;
+    min-width: 320px
+}
+
+.col1 {
+    flex: 1;
+    min-width: 260px
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.tab {
+    width: 100%;
+    text-align: left;
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(36,48,74,.85);
+    background: rgba(255,255,255,.03);
+    color: var(--text);
+    cursor: pointer;
+}
+
+    .tab.active {
+        border-color: rgba(110,168,255,.55);
+        background: rgba(110,168,255,.12)
+    }
+
+.tabpane {
+    display: none
+}
+
+    .tabpane.show {
+        display: block
+    }
+
+.quiz-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.quiz-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(36,48,74,.75);
+    background: rgba(255,255,255,.03);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.qtitle {
+    font-weight: 700
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.col2 {
+    flex: 2;
+    min-width: 320px
+}
+
+.col1 {
+    flex: 1;
+    min-width: 260px
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.tab {
+    width: 100%;
+    text-align: left;
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(36,48,74,.85);
+    background: rgba(255,255,255,.03);
+    color: var(--text);
+    cursor: pointer;
+}
+
+    .tab.active {
+        border-color: rgba(110,168,255,.55);
+        background: rgba(110,168,255,.12)
+    }
+
+.tabpane {
+    display: none
+}
+
+    .tabpane.show {
+        display: block
+    }
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(36,48,74,.75);
+    background: rgba(255,255,255,.03);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+    .item .title {
+        font-weight: 800
+    }
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.class-switch {
+    border: 1px solid rgba(36,48,74,.65);
+    background: rgba(255,255,255,.03);
+    border-radius: 14px;
+    padding: 12px;
+    max-width: 520px;
+}
+
+.switch-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+    .switch-row .input {
+        min-width: 260px;
+        flex: 1;
+    }

@@ -1,0 +1,18 @@
+.field{flex:1; min-width:280px}
+.head{justify-content:space-between; align-items:center}
+#questions{display:flex; flex-direction:column; gap:12px}
+.qcard{
+  border:1px solid rgba(36,48,74,.75);
+  background:rgba(255,255,255,.03);
+  border-radius:14px;
+  padding:12px;
+}
+.qtop{align-items:flex-end}
+.grow{flex:1; min-width:260px}
+.mini{width:180px}
+.choices{margin-top:10px}
+.choice-list{display:flex; flex-direction:column; gap:8px; margin-bottom:10px}
+.choice{display:flex; gap:10px; align-items:center}
+.chk{display:flex; align-items:center; gap:6px; color:var(--muted); font-size:13px}
+.btn.sm{padding:6px 10px; border-radius:10px}
+.qactions{justify-content:flex-end; margin-top:10px}

@@ -39,6 +39,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                             .GetByIdAsync(id, includes: ["ChoiceQuestions.Options","OpenQuestions"]);
 
            return _mapper.Map<GetQuizDTO>(quiz);
-        }
+        } 
+
+        
     }
 }

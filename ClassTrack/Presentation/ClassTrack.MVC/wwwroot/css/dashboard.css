@@ -1,0 +1,16 @@
+.col{flex:1; min-width:280px}
+.hint{margin-top:10px; font-size:12px}
+.classes{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.class-card{
+  display:block;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(36,48,74,.75);
+  background:rgba(255,255,255,.03);
+  transition:.15s ease;
+}
+.class-card:hover{transform:translateY(-1px); background:rgba(255,255,255,.05)}
+.class-card .title{font-weight:700}
+.class-card .meta{display:flex; justify-content:space-between; align-items:center; margin-top:8px}
+@media (max-width:920px){.classes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.classes{grid-template-columns:1fr}}

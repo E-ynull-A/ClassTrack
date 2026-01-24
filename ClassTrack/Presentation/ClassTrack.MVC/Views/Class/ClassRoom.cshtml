@@ -1,0 +1,126 @@
+﻿
+
+<link rel="stylesheet" href="~/css/class.css">
+<div class="topbar">
+    <div>
+        <div class="h1" id="classTitle">Network 101</div>
+
+        <div class="muted">
+            Role: <span class="badge teacher" id="roleBadge">Teacher</span>
+        </div>
+
+        <!-- NEW: Teacher class switcher -->
+        <div class="class-switch" id="classSwitchBox" style="margin-top:10px; display:none;">
+            <div class="label">Select class</div>
+            <div class="switch-row">
+                <select class="input" id="classSelect">
+                    <option value="1" selected>Network 101</option>
+                    <option value="2">Operating Systems</option>
+                    <option value="3">Database Systems</option>
+                </select>
+                <a class="btn" href="dashboard.html">All classes</a>
+            </div>
+            <div class="muted" style="margin-top:6px">
+                Teacher bir neçə sinif idarə edə bilər. Buradan sinif dəyişirsən.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <button class="btn" id="btnCopyCode">Copy Code</button>
+        <a class="btn primary" href="quiz-editor.html" id="btnCreateQuiz">+ Create Quiz</a>
+        <a class="btn ok" href="task-teacher.html" id="btnCreateTask">+ Create Task</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="card col2">
+        <div class="h2">Class Info</div>
+        <div class="kv">
+            <div class="k">Class Code</div>
+            <div class="v"><span id="classCode">A7K2Q9</span> <span class="muted">(Teacher-only)</span></div>
+
+            <div class="k">Members</div>
+            <div class="v"><span id="memberCount">24</span></div>
+
+            <div class="k">Today</div>
+            <div class="v"><span class="muted">Attendance tabından bax</span></div>
+        </div>
+    </div>
+
+    <div class="card col1">
+        <div class="h2">Tabs</div>
+        <div class="tabs">
+            <button class="tab active" data-tab="quizzes">Quizzes</button>
+            <button class="tab" data-tab="tasks">Tasks</button>
+            <button class="tab" data-tab="attendance">Attendance</button>
+            <button class="tab" data-tab="members">Members</button>
+        </div>
+        <div class="muted" style="margin-top:10px">
+            Members/Attendance teacher üçün açılır.
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+    <!-- QUIZZES -->
+    <div class="tabpane show" id="tab-quizzes">
+        <div class="h2">Quizzes</div>
+        <div class="line"></div>
+
+        <div class="list">
+            <div class="item">
+                <div>
+                    <div class="title">Quiz 1: TCP Basics</div>
+                    <div class="muted">5 questions • Ends: 2026-02-01</div>
+                </div>
+                <div class="actions">
+                    <a class="btn ok" href="quiz-take.html">Take</a>
+                    <a class="btn primary" href="quiz-editor.html">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="tabpane" id="tab-tasks">
+        <div class="h2">Tasks</div>
+        <div class="line"></div>
+
+        <div class="list">
+            <div class="item">
+                <div>
+                    <div class="title">Task 1: TCP summary (PDF)</div>
+                    <div class="muted">Deadline: 2026-01-30 • Status: <span class="badge student">Open</span></div>
+                </div>
+                <div class="actions">
+                    <a class="btn" href="task-detail.html">Open</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATTENDANCE -->
+    <div class="tabpane" id="tab-attendance">
+        <div class="h2">Attendance</div>
+        <div class="line"></div>
+
+        <div class="muted">Teacher bu tabda günün attendance-ını işarələyir. Student sadəcə baxır.</div>
+        <div style="margin-top:12px">
+            <a class="btn" href="attendance.html">Open Attendance Page</a>
+        </div>
+    </div>
+
+    <!-- MEMBERS -->
+    <div class="tabpane" id="tab-members">
+        <div class="h2">Members</div>
+        <div class="line"></div>
+
+        <div class="muted">Teacher manage: kick / promote / demote.</div>
+        <div style="margin-top:12px">
+            <a class="btn" href="members.html">Open Members Page</a>
+        </div>
+    </div>
+    
+</div>
+<script defer src="~/js/class.js"></script>

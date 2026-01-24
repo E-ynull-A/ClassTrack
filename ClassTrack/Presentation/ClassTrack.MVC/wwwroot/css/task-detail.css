@@ -1,0 +1,26 @@
+/* task-detail.css */
+.field{flex:1; min-width:280px}
+
+.list{display:flex; flex-direction:column; gap:10px}
+.item{
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  border:1px solid rgba(36,48,74,.75);
+  background:rgba(255,255,255,.03);
+  border-radius:14px;
+  padding:12px;
+}
+.item .title{font-weight:900}
+.actions{display:flex; gap:8px; flex-wrap:wrap}
+
+/* key/value table */
+.kv{
+  display:grid;
+  grid-template-columns: 160px 1fr;
+  gap:10px 12px;
+  align-items:center;
+}
+.k{color:var(--muted); font-size:12px}
+.v{color:var(--text)}
+@media (max-width:780px){
+  .kv{grid-template-columns:1fr}
+}

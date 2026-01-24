@@ -1,0 +1,50 @@
+.col2{flex:2; min-width:320px}
+.col1{flex:1; min-width:300px}
+
+.field{flex:1; min-width:260px}
+
+.attach{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+.kv{
+  display:grid;
+  grid-template-columns: 140px 1fr;
+  gap:10px 12px;
+  align-items:center;
+}
+.k{color:var(--muted); font-size:12px}
+.v{color:var(--text); font-weight:800}
+
+.filters{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px}
+.filters .input{flex:1; min-width:180px}
+
+.list{display:flex; flex-direction:column; gap:10px}
+
+.item{
+  width:100%;
+  text-align:left;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  border:1px solid rgba(36,48,74,.75);
+  background:rgba(255,255,255,.03);
+  border-radius:14px;
+  padding:12px;
+  cursor:pointer;
+  color:inherit;
+}
+.item:hover{border-color:rgba(110,168,255,.45); background:rgba(255,255,255,.05)}
+.item .title{font-weight:900}
+
+.review-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.card.inner{
+  border:1px solid rgba(36,48,74,.55);
+  background:rgba(255,255,255,.02);
+  box-shadow:none;
+}
+
+@media (max-width:900px){
+  .filters{flex-direction:column}
+}
