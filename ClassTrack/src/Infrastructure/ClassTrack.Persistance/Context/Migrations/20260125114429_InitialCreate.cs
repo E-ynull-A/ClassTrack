@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ClassTrack.Persistance.Context.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,11 +31,12 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "NVARCHAR(60)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "NVARCHAR(60)", nullable: false),
                     Age = table.Column<byte>(type: "TINYINT", nullable: false),
                     BirthDate = table.Column<DateOnly>(type: "DATE", nullable: false),
                     UserRole = table.Column<int>(type: "int", nullable: false),
-                    UserType = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    StudentId = table.Column<long>(type: "bigint", nullable: false),
+                    TeacherId = table.Column<long>(type: "bigint", nullable: false),
                     UserName = table.Column<string>(type: "NVARCHAR(80)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -57,7 +58,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Class",
+                name: "ClassRooms",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -72,7 +73,25 @@ namespace ClassTrack.Persistance.Context.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Class", x => x.Id);
+                    table.PrimaryKey("PK_ClassRooms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuizAnswers",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EarnedPoint = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false),
+                    StudentQuizId = table.Column<long>(type: "bigint", nullable: false),
+                    AnswerId = table.Column<long>(type: "bigint", nullable: true),
+                    QuestionId = table.Column<long>(type: "bigint", nullable: false),
+                    AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuizAnswers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,7 +100,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentId = table.Column<long>(type: "bigint", nullable: false),
                     Attendance = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     LessonDate = table.Column<DateOnly>(type: "DATE", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -199,6 +218,44 @@ namespace ClassTrack.Persistance.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teachers",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teachers_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Quizes",
                 columns: table => new
                 {
@@ -206,7 +263,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Duration = table.Column<TimeSpan>(type: "TIME", nullable: false),
                     StartTime = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: false),
+                    ClassRoomId = table.Column<long>(type: "bigint", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -217,40 +274,15 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     table.PrimaryKey("PK_Quizes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quizes_Class_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Class",
+                        name: "FK_Quizes_ClassRooms_ClassRoomId",
+                        column: x => x.ClassRoomId,
+                        principalTable: "ClassRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentClasses",
-                columns: table => new
-                {
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: false),
-                    AvgPoint = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudentClasses", x => new { x.StudentId, x.ClassId });
-                    table.ForeignKey(
-                        name: "FK_StudentClasses_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StudentClasses_Class_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Class",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "TaskWorks",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -259,7 +291,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     StartDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     MainPart = table.Column<string>(type: "NVARCHAR(MAX)", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: false),
+                    ClassRoomId = table.Column<long>(type: "bigint", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -267,11 +299,36 @@ namespace ClassTrack.Persistance.Context.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.PrimaryKey("PK_TaskWorks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_Class_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Class",
+                        name: "FK_TaskWorks_ClassRooms_ClassRoomId",
+                        column: x => x.ClassRoomId,
+                        principalTable: "ClassRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentClasses",
+                columns: table => new
+                {
+                    StudentId = table.Column<long>(type: "bigint", nullable: false),
+                    ClassRoomId = table.Column<long>(type: "bigint", nullable: false),
+                    AvgPoint = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentClasses", x => new { x.StudentId, x.ClassRoomId });
+                    table.ForeignKey(
+                        name: "FK_StudentClasses_ClassRooms_ClassRoomId",
+                        column: x => x.ClassRoomId,
+                        principalTable: "ClassRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentClasses_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -280,22 +337,22 @@ namespace ClassTrack.Persistance.Context.Migrations
                 name: "TeacherClasses",
                 columns: table => new
                 {
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClassId = table.Column<long>(type: "bigint", nullable: false)
+                    TeacherId = table.Column<long>(type: "bigint", nullable: false),
+                    ClassRoomId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeacherClasses", x => new { x.TeacherId, x.ClassId });
+                    table.PrimaryKey("PK_TeacherClasses", x => new { x.TeacherId, x.ClassRoomId });
                     table.ForeignKey(
-                        name: "FK_TeacherClasses_AspNetUsers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_TeacherClasses_ClassRooms_ClassRoomId",
+                        column: x => x.ClassRoomId,
+                        principalTable: "ClassRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherClasses_Class_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Class",
+                        name: "FK_TeacherClasses_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -306,10 +363,10 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "NVARCHAR(MAX)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Point = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false),
                     QuizId = table.Column<long>(type: "bigint", nullable: false),
-                    QuestionType = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    QuestionType = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     IsMultiple = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
                     Answer = table.Column<string>(type: "NVARCHAR(MAX)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -329,34 +386,10 @@ namespace ClassTrack.Persistance.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuizAnswers",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EarnedPoint = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false),
-                    StudentQuizId = table.Column<long>(type: "bigint", nullable: false),
-                    AnswerId = table.Column<long>(type: "bigint", nullable: true),
-                    QuestionId = table.Column<long>(type: "bigint", nullable: false),
-                    AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    QuizId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QuizAnswers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_QuizAnswers_Quizes_QuizId",
-                        column: x => x.QuizId,
-                        principalTable: "Quizes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "StudentQuizes",
                 columns: table => new
                 {
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<long>(type: "bigint", nullable: false),
                     QuizId = table.Column<long>(type: "bigint", nullable: false),
                     TotalPoint = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false),
                     Id = table.Column<long>(type: "bigint", nullable: false),
@@ -366,41 +399,42 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     table.PrimaryKey("PK_StudentQuizes", x => new { x.QuizId, x.StudentId });
                     table.ForeignKey(
-                        name: "FK_StudentQuizes_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_StudentQuizes_Quizes_QuizId",
                         column: x => x.QuizId,
                         principalTable: "Quizes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentQuizes_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentTask",
+                name: "StudentTaskWorks",
                 columns: table => new
                 {
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<long>(type: "bigint", nullable: false),
                     TaskId = table.Column<long>(type: "bigint", nullable: false),
+                    TaskWorkId = table.Column<long>(type: "bigint", nullable: false),
                     Point = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: true),
                     StudentAnswer = table.Column<string>(type: "NVARCHAR(MAX)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentTask", x => new { x.StudentId, x.TaskId });
+                    table.PrimaryKey("PK_StudentTaskWorks", x => new { x.StudentId, x.TaskId });
                     table.ForeignKey(
-                        name: "FK_StudentTask_AspNetUsers_StudentId",
+                        name: "FK_StudentTaskWorks_Students_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentTask_Tasks_TaskId",
-                        column: x => x.TaskId,
-                        principalTable: "Tasks",
+                        name: "FK_StudentTaskWorks_TaskWorks_TaskWorkId",
+                        column: x => x.TaskWorkId,
+                        principalTable: "TaskWorks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -413,8 +447,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Variant = table.Column<string>(type: "NVARCHAR(500)", nullable: false),
                     IsCorrect = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    QuestionId = table.Column<long>(type: "bigint", nullable: false),
-                    ChoiceQuestionId = table.Column<long>(type: "bigint", nullable: true),
+                    ChoiceQuestionId = table.Column<long>(type: "bigint", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -426,11 +459,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     table.ForeignKey(
                         name: "FK_Options_Questions_ChoiceQuestionId",
                         column: x => x.ChoiceQuestionId,
-                        principalTable: "Questions",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Options_Questions_QuestionId",
-                        column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -481,29 +509,19 @@ namespace ClassTrack.Persistance.Context.Migrations
                 column: "ChoiceQuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Options_QuestionId",
-                table: "Options",
-                column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Questions_QuizId",
                 table: "Questions",
                 column: "QuizId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuizAnswers_QuizId",
-                table: "QuizAnswers",
-                column: "QuizId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Quizes_ClassId",
+                name: "IX_Quizes_ClassRoomId",
                 table: "Quizes",
-                column: "ClassId");
+                column: "ClassRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentClasses_ClassId",
+                name: "IX_StudentClasses_ClassRoomId",
                 table: "StudentClasses",
-                column: "ClassId");
+                column: "ClassRoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentQuizes_StudentId",
@@ -511,19 +529,31 @@ namespace ClassTrack.Persistance.Context.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentTask_TaskId",
-                table: "StudentTask",
-                column: "TaskId");
+                name: "IX_Students_AppUserId",
+                table: "Students",
+                column: "AppUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ClassId",
-                table: "Tasks",
-                column: "ClassId");
+                name: "IX_StudentTaskWorks_TaskWorkId",
+                table: "StudentTaskWorks",
+                column: "TaskWorkId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherClasses_ClassId",
+                name: "IX_TaskWorks_ClassRoomId",
+                table: "TaskWorks",
+                column: "ClassRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherClasses_ClassRoomId",
                 table: "TeacherClasses",
-                column: "ClassId");
+                column: "ClassRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teachers_AppUserId",
+                table: "Teachers",
+                column: "AppUserId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -560,7 +590,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                 name: "StudentQuizes");
 
             migrationBuilder.DropTable(
-                name: "StudentTask");
+                name: "StudentTaskWorks");
 
             migrationBuilder.DropTable(
                 name: "TeacherClasses");
@@ -572,16 +602,22 @@ namespace ClassTrack.Persistance.Context.Migrations
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "Students");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "TaskWorks");
+
+            migrationBuilder.DropTable(
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "Quizes");
 
             migrationBuilder.DropTable(
-                name: "Class");
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ClassRooms");
         }
     }
 }

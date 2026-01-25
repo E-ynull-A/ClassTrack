@@ -11,6 +11,6 @@ namespace ClassTrack.Application.DTOs
 
        string Title,
        decimal Point,
-       long QuizId):IBasePostQuestion;
+       long? QuizId):IBasePostQuestion;
    
 }

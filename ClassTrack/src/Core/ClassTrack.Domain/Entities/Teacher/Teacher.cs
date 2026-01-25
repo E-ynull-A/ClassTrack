@@ -2,9 +2,8 @@
 
 namespace ClassTrack.Domain.Entities
 {
-    public class Teacher
+    public class Teacher:BaseEntity
     {
-        public long Id { get; set; }
 
         //Relations
 

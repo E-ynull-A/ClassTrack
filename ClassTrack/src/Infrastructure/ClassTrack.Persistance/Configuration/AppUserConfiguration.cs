@@ -15,11 +15,6 @@ namespace ClassTrack.Persistance.Configuration
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
 
-            builder.HasDiscriminator<string>("UserType")
-                .HasValue("Stduent")
-                .HasValue("Teacher");
-
-
             builder.Property(p => p.Name)
                 .HasColumnType("NVARCHAR(60)")
                 .IsRequired();
@@ -35,13 +30,23 @@ namespace ClassTrack.Persistance.Configuration
             builder.Property(p => p.BirthDate)
                 .HasColumnType("DATE")
                 .IsRequired();
-
+                
             builder.Property(p => p.PhoneNumber)
                 .HasColumnType("NVARCHAR(25)");
 
             builder.Property(p => p.UserName)
                 .HasColumnType("NVARCHAR(80)")
                 .IsRequired();
+
+            builder
+                .HasOne(p => p.Student)
+                .WithOne(s => s.AppUser)
+                .HasForeignKey<Student>(s => s.AppUserId);
+
+            builder
+                .HasOne(p => p.Teacher)
+                .WithOne(t => t.AppUser)
+                .HasForeignKey<Teacher>(t => t.AppUserId);
         }
     }
 }

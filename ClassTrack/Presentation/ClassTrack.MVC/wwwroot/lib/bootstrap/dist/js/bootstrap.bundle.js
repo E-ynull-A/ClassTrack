@@ -633,7 +633,7 @@
 
       if (!instanceMap.has(key) && instanceMap.size !== 0) {
         // eslint-disable-next-line no-console
-        console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
+        console.error(`Bootstrap isn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
         return;
       }
 
@@ -749,7 +749,7 @@
       }
 
       const target = getElementFromSelector(this) || this.closest(`.${name}`);
-      const instance = component.getOrCreateInstance(target); // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
+      const instance = component.getOrCreateInstance(target); // Method argument is left, for Alert and only, as it isn't implement the 'hide' method
 
       instance[method]();
     });
@@ -2002,7 +2002,7 @@
 
       if (!isHTMLElement(element) || !getNodeName(element)) {
         return;
-      } // Flow doesn't support to extend this property, but it's the most
+      } // Flow isn't support to extend this property, but it's the most
       // effective way to apply styles to an HTMLElement
       // $FlowFixMe[cannot-write]
 
@@ -2106,7 +2106,7 @@
     };
   }
 
-  // means it doesn't take into account transforms.
+  // means it isn't take into account transforms.
 
   function getLayoutRect(element) {
     var clientRect = getBoundingClientRect(element); // Use the clientRect sizes if it's not been transformed.
@@ -2307,7 +2307,7 @@
     var startDiff = popperOffsets[axis] - state.rects.reference[axis];
     var arrowOffsetParent = getOffsetParent(arrowElement);
     var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
-    var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
+    var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow isn't overflow the popper if the center point is
     // outside of the popper bounds
 
     var min = paddingObject[minProp];
@@ -2413,7 +2413,7 @@
           heightProp = 'scrollHeight';
           widthProp = 'scrollWidth';
         }
-      } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
+      } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow isn't detect it
 
 
       offsetParent = offsetParent;
@@ -2581,7 +2581,7 @@
     // Popper 1 is broken in this case and never had a bug report so let's assume
     // it's not an issue. I don't think anyone ever specifies width on <html>
     // anyway.
-    // Browsers where the left scrollbar doesn't cause an issue report `0` for
+    // Browsers where the left scrollbar isn't cause an issue report `0` for
     // this (e.g. Edge 2019, IE11, Safari)
     return getBoundingClientRect(getDocumentElement(element)).left + getWindowScroll(element).scrollLeft;
   }
@@ -3254,7 +3254,7 @@
       var max$1 = popperOffsets[mainAxis] - overflow[altSide];
       var additive = tether ? -popperRect[len] / 2 : 0;
       var minLen = variation === start ? referenceRect[len] : popperRect[len];
-      var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
+      var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow isn't go
       // outside the reference bounds
 
       var arrowElement = state.elements.arrow;
@@ -3552,7 +3552,7 @@
           state.reset = false;
           state.placement = state.options.placement; // On each update cycle, the `modifiersData` property for each modifier
           // is filled with the initial data specified by the modifier. This means
-          // it doesn't persist and is fresh on each update.
+          // it isn't persist and is fresh on each update.
           // To ensure persistent data, use `${name}#persistent`
 
           state.orderedModifiers.forEach(function (modifier) {

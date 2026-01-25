@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ClassTrack.Application.Validators
 {
-    internal class PostOpenQuestionDtoValidator:AbstractValidator<PostOpenQuestionDTO>
+    internal class PostOpenQuestionDtoValidator : AbstractValidator<PostOpenQuestionDTO>
     {
         public PostOpenQuestionDtoValidator()
         {
@@ -13,7 +13,12 @@ namespace ClassTrack.Application.Validators
 
             RuleFor(q => q.Point)
                 .NotNull()
-                .InclusiveBetween(0,100);
+                .InclusiveBetween(0, 100);
+
+            RuleFor(q => q.QuizId)
+                .NotEmpty()
+                .GreaterThan(0);
+
         }
     }
 }

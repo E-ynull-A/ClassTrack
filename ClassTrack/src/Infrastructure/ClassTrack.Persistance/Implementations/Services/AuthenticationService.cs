@@ -11,32 +11,35 @@ namespace ClassTrack.Persistance.Implementations.Services
     {
         private readonly UserManager<AppUser> _manager;
         private readonly IMapper _mapper;
+        private readonly ITokenService _tokenService;
 
         public AuthenticationService(UserManager<AppUser> manager,
-                                        IMapper mapper)
+                                        IMapper mapper,
+                                        ITokenService tokenService)
         {
             _manager = manager;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
         public async Task RegisterAsync(RegisterDTO registerDTO)
         {
             IdentityResult result = await _manager.CreateAsync(_mapper
                                                      .Map<AppUser>(registerDTO)
-                                                         , registerDTO.Password);
+                                                         ,registerDTO.Password);
 
             if (!result.Succeeded)
             {
                 string errors = string.Empty;
                 foreach (var error in result.Errors)
                 {
-                    errors += error;
+                    errors += error.Description;
                 }
                 throw new Exception(errors);
             }
         }
 
 
-        public async Task LoginAsync(LoginDTO loginDTO)
+        public async Task<TokenDTO> LoginAsync(LoginDTO loginDTO)
         {
             AppUser? user = null;
 
@@ -54,6 +57,8 @@ namespace ClassTrack.Persistance.Implementations.Services
             {
                 throw new Exception("User Couldn't Find!");
             }       
+
+             return _tokenService.CreateAccessToken(user);
         }
     }
 }

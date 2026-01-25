@@ -13,7 +13,7 @@ namespace ClassTrack.Application.DTOs
        string Title,
        decimal Point,      
        bool IsMultiple,
-       long QuizId,
+       long? QuizId,
 
        ICollection<PostOptionInChoiceQuestionDTO>? Options = null
        ): IBasePostQuestion

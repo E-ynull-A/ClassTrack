@@ -117,7 +117,6 @@ namespace ClassTrack.Persistance.Implementations.Services
                 ChoiceQuestion deletedChoice = (ChoiceQuestion)await _questionRepository
                                             .GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Options)]);
 
-                _optionRepository.DeleteRange(deletedChoice.Options);
                 _questionRepository.Delete(deletedChoice);
 
                 await _questionRepository.SaveChangeAsync();
@@ -198,9 +197,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(Question.Quiz)]) as E;
             }
 
-            if (oldQuestion == null) throw new Exception("The Question doesn't Found!");
-
-            _quizRepository.GetAllowCreateOrUpdateQuestion(oldQuestion.Quiz);
+            if (oldQuestion == null) throw new Exception("The Question isn't Found!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim() && q.Id != id))
                 throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
@@ -209,13 +206,6 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         private async Task _basePostChecksAsync<T>(T questionDTO) where T : IBasePostQuestion
         {
-            Quiz quiz = await _quizRepository.GetByIdAsync(questionDTO.QuizId);
-
-            if (quiz is null)
-                throw new Exception("The Quiz doesn't Found");
-
-            _quizRepository.GetAllowCreateOrUpdateQuestion(quiz);
-
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim()))
                 throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
         }

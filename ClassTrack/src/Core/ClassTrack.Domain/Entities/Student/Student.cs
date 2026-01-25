@@ -3,10 +3,9 @@ using ClassTrack.Domain.Enums;
 
 namespace ClassTrack.Domain.Entities
 {
-    public class Student
+    public class Student:BaseEntity
     {
-        public long Id { get; set; }
-
+       
         //Relation
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }

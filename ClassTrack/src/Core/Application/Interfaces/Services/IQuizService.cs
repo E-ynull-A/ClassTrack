@@ -11,5 +11,9 @@ namespace ClassTrack.Application.Interfaces.Services
     {
         Task<ICollection<GetQuizItemDTO>> GetAllAsync(int page, int take, params string[] includes);
         Task<GetQuizDTO> GetByIdAsync(long id);
+
+        Task CreateQuizAsync(PostQuizDTO postQuiz);
+        Task UpdateQuizAsync(long id, PutQuizDTO putQuiz);
+        Task DeleteQuizAsync(long id);
     }
 }

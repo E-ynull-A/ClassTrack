@@ -27,6 +27,7 @@ namespace ClassTrack.Persistance
 
                         opt.Password.RequiredUniqueChars = 2;
                         opt.Password.RequiredLength = 8;
+                        opt.Password.RequireNonAlphanumeric = false;
 
                         opt.Lockout.MaxFailedAccessAttempts = 5;
                         opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);                                                       

@@ -42,7 +42,12 @@ namespace ClassTrack.Application.Validators
                 .MaximumLength(200);
 
             RuleFor(q => q)
-                .Must(q => q.Password == q.ConfirmPassword);
+                .Must(q => q.Password == q.ConfirmPassword)
+                .Must(q=>DateOnly.FromDateTime(DateTime.UtcNow) >= q.BirthDate.AddYears(q.Age) &&
+                        DateOnly.FromDateTime(DateTime.UtcNow) < q.BirthDate.AddYears(q.Age + 1))
+                .WithMessage("Enter correctly your Birthday or Age");
+
+
 
 
         }

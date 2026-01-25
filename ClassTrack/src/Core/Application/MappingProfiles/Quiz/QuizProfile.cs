@@ -10,6 +10,11 @@ namespace ClassTrack.Application.MappingProfiles
         {
             CreateMap<Quiz, GetQuizItemDTO>();
             CreateMap<Quiz,GetQuizDTO>();
+
+            CreateMap<PostQuizDTO, Quiz>();
+            CreateMap<PutQuizDTO, Quiz>()
+                .ForMember(q=>q.ChoiceQuestions,opt=>opt.Ignore())
+                .ForMember(q => q.OpenQuestions, opt => opt.Ignore());
         }
     }
 }

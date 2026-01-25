@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record GetOpenQuestionInQuizDTO(
-
+        
         long Id,
-        string QuestionType,
         string Title,
-        decimal Point
-        );
-    
+        decimal Point,
+        string QuestionType);
+   
 }

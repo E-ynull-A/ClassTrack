@@ -41,6 +41,10 @@ namespace ClassTrack.Application.Validators
                 .WithMessage(q => q.IsMultiple
                 ? "You must choose at least one correct Variant!"
                 : "You must choose only one correct Variant!");
+
+            RuleFor(q => q.QuizId)
+                .NotEmpty()
+                .GreaterThan(0);
         }
     }
 }

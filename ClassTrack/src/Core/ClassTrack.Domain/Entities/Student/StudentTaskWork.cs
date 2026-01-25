@@ -4,7 +4,7 @@ namespace ClassTrack.Domain.Entities
 {
     public class StudentTaskWork
     {
-        public string StudentId { get; set; }
+        public long StudentId { get; set; }
         public long TaskId { get; set; }
 
         public Student Student { get; set; }

@@ -10,6 +10,6 @@ namespace ClassTrack.Application.Interfaces
     {
         public string Title { get; }
         public decimal Point { get; }
-        public long QuizId { get; }    
+        public long? QuizId { get; }    
     }
 }

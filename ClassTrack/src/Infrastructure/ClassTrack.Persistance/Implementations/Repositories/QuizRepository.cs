@@ -14,16 +14,7 @@ namespace ClassTrack.Persistance.Implementations.Repositories
     {
         public QuizRepository(AppDbContext context) : base(context) { }
 
-       
-
-        public void GetAllowCreateOrUpdateQuestion(Quiz quiz)
-        {
-            if (quiz.StartTime <= DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration) > DateTime.UtcNow)
-                throw new Exception("Couldn't Add or Modify New Question during a Quiz Interval!");
-
-            if(quiz.StartTime.Add(quiz.Duration) < DateTime.UtcNow)
-                throw new Exception("Couldn't Add or Modify New Question after the Quiz!");
-        }
+      
         
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassTrack.Persistance.Context.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260122123017_SmallChangeInQuestionConfig")]
-    partial class SmallChangeInQuestionConfig
+    [Migration("20260125114429_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,9 +80,15 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("NVARCHAR(60)");
+
+                    b.Property<long>("TeacherId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -95,11 +101,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<int>("UserRole")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -111,10 +112,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("UserType").HasValue("Teacher");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.ClassRoom", b =>
@@ -311,6 +308,26 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.ToTable("QuizAnswers");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Students");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentAttendance", b =>
                 {
                     b.Property<long>("Id")
@@ -333,9 +350,8 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<DateOnly>("LessonDate")
                         .HasColumnType("DATE");
 
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -344,8 +360,8 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentClassRoom", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("ClassRoomId")
                         .HasColumnType("bigint");
@@ -365,8 +381,8 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<long>("QuizId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -386,8 +402,8 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTaskWork", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("TaskId")
                         .HasColumnType("bigint");
@@ -453,10 +469,30 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.ToTable("TaskWorks");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Teachers");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.TeacherClassRoom", b =>
                 {
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("TeacherId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("ClassRoomId")
                         .HasColumnType("bigint");
@@ -601,20 +637,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
-                {
-                    b.HasBaseType("ClassTrack.Domain.Entities.AppUser");
-
-                    b.HasDiscriminator().HasValue("Student");
-                });
-
-            modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
-                {
-                    b.HasBaseType("ClassTrack.Domain.Entities.AppUser");
-
-                    b.HasDiscriminator().HasValue("Teacher");
-                });
-
             modelBuilder.Entity("ClassTrack.Domain.Entities.ChoiceQuestion", b =>
                 {
                     b.HasBaseType("ClassTrack.Domain.Entities.Question");
@@ -661,6 +683,17 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .IsRequired();
 
                     b.Navigation("ClassRoom");
+                });
+
+            modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.AppUser", "AppUser")
+                        .WithOne("Student")
+                        .HasForeignKey("ClassTrack.Domain.Entities.Student", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentClassRoom", b =>
@@ -729,6 +762,17 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .IsRequired();
 
                     b.Navigation("ClassRoom");
+                });
+
+            modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.AppUser", "AppUser")
+                        .WithOne("Teacher")
+                        .HasForeignKey("ClassTrack.Domain.Entities.Teacher", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.TeacherClassRoom", b =>
@@ -823,6 +867,15 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("Quiz");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.AppUser", b =>
+                {
+                    b.Navigation("Student")
+                        .IsRequired();
+
+                    b.Navigation("Teacher")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.ClassRoom", b =>
                 {
                     b.Navigation("Quizes");
@@ -843,17 +896,17 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("StudentQuizes");
                 });
 
-            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
-                {
-                    b.Navigation("StudentTaskWorks");
-                });
-
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
                 {
                     b.Navigation("StudentClasses");
 
                     b.Navigation("StudentQuizes");
 
+                    b.Navigation("StudentTaskWorks");
+                });
+
+            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
+                {
                     b.Navigation("StudentTaskWorks");
                 });
 

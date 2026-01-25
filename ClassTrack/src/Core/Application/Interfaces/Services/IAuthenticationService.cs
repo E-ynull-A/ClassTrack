@@ -1,4 +1,5 @@
 ﻿using ClassTrack.Application.DTOs;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,6 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface IAuthenticationService
     {
         Task RegisterAsync(RegisterDTO registerDTO);
-        Task LoginAsync(LoginDTO loginDTO);
-
-
-
+        Task<TokenDTO> LoginAsync(LoginDTO loginDTO);
     }
 }
