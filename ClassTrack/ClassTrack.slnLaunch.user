@@ -5,10 +5,6 @@
       {
         "Path": "Presentation\\ClassTrack.API\\ClassTrack.API.csproj",
         "Action": "Start"
-      },
-      {
-        "Path": "Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj",
-        "Action": "Start"
       }
     ]
   }

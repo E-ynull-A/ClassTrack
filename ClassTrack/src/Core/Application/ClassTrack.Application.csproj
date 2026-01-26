@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Register\" />
+    <Folder Include="DTOs\Student\" />
   </ItemGroup>
 
 </Project>

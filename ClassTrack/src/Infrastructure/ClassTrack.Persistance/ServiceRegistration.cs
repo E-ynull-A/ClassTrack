@@ -55,6 +55,8 @@ namespace ClassTrack.Persistance
             services.AddScoped<ITaskWorkService, TaskWorkService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IPermissionService, PermissionService>();
+           
 
             return services;
         }

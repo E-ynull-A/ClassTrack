@@ -1,5 +1,6 @@
 ﻿using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Infrastructure.Implementations.Services;
+using ClassTrack.Persistance.Implementations.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,7 @@ namespace ClassTrack.Infrastructure
         public static IServiceCollection InfrastructureRegistration(this IServiceCollection services,IConfiguration config)
         {         
             services.AddScoped<ITokenService, TokenService>();
-
+            
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -34,6 +35,10 @@ namespace ClassTrack.Infrastructure
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config["JWT:securityKey"])),
                 LifetimeValidator = (_, exp, token, _) =>  exp is not null && token is not null ? DateTime.UtcNow > exp : false 
             });
+
+
+            services.AddMemoryCache();
+            services.AddScoped<ICasheService, CacheService>();
 
             return services;
             

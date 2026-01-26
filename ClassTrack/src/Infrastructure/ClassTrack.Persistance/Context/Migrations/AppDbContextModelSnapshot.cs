@@ -317,6 +317,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId")
@@ -338,8 +341,8 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                    b.Property<long>("ClassRoomId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -351,6 +354,10 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassRoomId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentAttendances");
                 });
@@ -477,6 +484,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<string>("AppUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -693,6 +703,25 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.StudentAttendance", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.ClassRoom", "ClassRoom")
+                        .WithMany("StudentAttendance")
+                        .HasForeignKey("ClassRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClassTrack.Domain.Entities.Student", "Student")
+                        .WithMany("StudentAttendances")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassRoom");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentClassRoom", b =>
                 {
                     b.HasOne("ClassTrack.Domain.Entities.ClassRoom", "ClassRoom")
@@ -877,6 +906,8 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     b.Navigation("Quizes");
 
+                    b.Navigation("StudentAttendance");
+
                     b.Navigation("StudentClasses");
 
                     b.Navigation("TaskWorks");
@@ -895,6 +926,8 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
                 {
+                    b.Navigation("StudentAttendances");
+
                     b.Navigation("StudentClasses");
 
                     b.Navigation("StudentQuizes");

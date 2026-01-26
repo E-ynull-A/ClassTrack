@@ -451,6 +451,134 @@
           }
         }
       }
+    },
+    "/StudentAttendances": {
+      "get": {
+        "tags": [
+          "StudentAttendances"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "StudentAttendances"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PostStudentAttendanceDTO"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PostStudentAttendanceDTO"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PostStudentAttendanceDTO"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StudentAttendances"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PutStudentAttendanceDTO"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PutStudentAttendanceDTO"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PutStudentAttendanceDTO"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StudentAttendances"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -566,6 +694,28 @@
         },
         "additionalProperties": false
       },
+      "PostStudentAttendanceDTO": {
+        "type": "object",
+        "properties": {
+          "classRoomId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lessonDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "studentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "attendance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "PutChoiceQuestionDTO": {
         "type": "object",
         "properties": {
@@ -635,6 +785,32 @@
           "classRoomId": {
             "type": "integer",
             "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PutStudentAttendanceDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "classRoomId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lessonDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "studentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "attendance": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
