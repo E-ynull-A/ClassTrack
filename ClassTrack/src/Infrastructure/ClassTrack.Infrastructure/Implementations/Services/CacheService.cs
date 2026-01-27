@@ -24,7 +24,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                 TimeSpan? expiration)
         {
 
-            if (!_cache.TryGetValue(key, out T result)) return result;
+            if (_cache.TryGetValue(key, out T result)) return result;
 
             await _lock.WaitAsync();
 
@@ -32,7 +32,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             {
                 if (_cache.TryGetValue(key, out result)) return result;
 
-                await factory();
+                result = await factory();
 
                 var option = new MemoryCacheEntryOptions
                 {

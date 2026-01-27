@@ -8,6 +8,6 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IPermissionService
     {
-        Task<bool> IsTeacher(string userId, long classRoomId);
+        Task<bool> IsTeacherAsync(long classRoomId);
     }
 }

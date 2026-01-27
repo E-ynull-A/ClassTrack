@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClassTrack.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8fe6b04d0a46b24f1b97690f2affb2e46be7180")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18b174a011e1f7ba7de6cd0788abbb6749ba81cc")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClassTrack.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClassTrack.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

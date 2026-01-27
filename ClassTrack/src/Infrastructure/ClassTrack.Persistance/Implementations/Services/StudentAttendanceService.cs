@@ -75,6 +75,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                                     x.ClassRoomId == attendanceDTOs.First().ClassRoomId)
                                     .ToListAsync();
 
+            if (attendances.Count == 0)
+                throw new Exception("The Attendance List isn't Found!");
+
             
             if(attendances.Count != attendanceDTOs.Where(a=>a.Id != 0)
                                     .DistinctBy(a => a.Id).Count())
@@ -88,20 +91,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                 {
                     attendances.FirstOrDefault(ad=>ad.Id == attendanceDTO.Id).Attendance = (Attendance)attendanceDTO.Attendance;
                 }
-
-                else
-                {
-                    _attendanceRepository.Add( new StudentAttendance
-                    {
-                        StudentId = attendanceDTO.StudentId,
-                        LessonDate = attendanceDTO.LessonDate,
-                        ClassRoomId = attendanceDTO.ClassRoomId,
-                        Attendance = (Attendance)attendanceDTO.Attendance,       
-                    });                    
-                }
-
-                await _attendanceRepository.SaveChangeAsync();
             }
+
+            await _attendanceRepository.SaveChangeAsync();   
         }
 
         public async Task DeleteAttendanceAsync(long id)

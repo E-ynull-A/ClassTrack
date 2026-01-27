@@ -46,10 +46,6 @@ namespace ClassTrack.Application.Validators
                 .Must(q=>DateOnly.FromDateTime(DateTime.UtcNow) >= q.BirthDate.AddYears(q.Age) &&
                         DateOnly.FromDateTime(DateTime.UtcNow) < q.BirthDate.AddYears(q.Age + 1))
                 .WithMessage("Enter correctly your Birthday or Age");
-
-
-
-
         }
 
     }

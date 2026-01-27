@@ -60,7 +60,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
 
         public async Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice)
-        {            
+        {
             await _basePostChecksAsync(postChoice);
 
             ChoiceQuestion question = _mapper.Map<ChoiceQuestion>(postChoice);
@@ -135,7 +135,12 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
             try
             {
-                OpenQuestion deletedOpen = (OpenQuestion)await _questionRepository.GetByIdAsync(id);
+                OpenQuestion deletedOpen = (OpenQuestion)await _questionRepository.GetByIdAsync(id,includes: ["Quiz"],isIgnore:true);
+
+                if (deletedOpen is null)
+                    throw new Exception("The Question isn't Found!");
+
+                await _permissionService.IsTeacherAsync(deletedOpen.Quiz.ClassRoomId);
 
                 _questionRepository.Delete(deletedOpen);
                 await _questionRepository.SaveChangeAsync();
@@ -189,19 +194,18 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         }
         private async Task<E> _basePutCheckAsync<T, E>(long id, T questionDTO) where T : IBasePutQuestion where E : Question, new()
-        {
+        {       
             E? oldQuestion = null;
 
-            if (questionDTO is PutChoiceQuestionDTO)
-            {
+            if (questionDTO is PutChoiceQuestionDTO)            
                 oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Quiz), nameof(ChoiceQuestion.Options)]) as E;
-            }
-            else
-            {
-                oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(Question.Quiz)]) as E;
-            }
-
+            
+            else oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(Question.Quiz)]) as E;
+            
             if (oldQuestion == null) throw new Exception("The Question isn't Found!");
+
+            if (!await _permissionService.IsTeacherAsync(oldQuestion.Quiz.ClassRoomId))
+                throw new Exception("You Are Not a Teacher of This Class!!!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim() && q.Id != id))
                 throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
@@ -210,6 +214,14 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         private async Task _basePostChecksAsync<T>(T questionDTO) where T : IBasePostQuestion
         {
+            Quiz quiz = await _quizRepository.GetByIdAsync(questionDTO.QuizId.Value);
+
+            if(quiz is null) 
+                throw new Exception("The Quiz isn't Found!");
+            
+            if(!await _permissionService.IsTeacherAsync(quiz.ClassRoomId))            
+                throw new Exception("You Are Not a Teacher of This Class!!!");
+            
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim()))
                 throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
         }

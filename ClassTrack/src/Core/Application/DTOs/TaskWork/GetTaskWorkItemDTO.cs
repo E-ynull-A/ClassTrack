@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record GetTaskWorkItemDTO(
-        long Id,
 
+        long Id,
         string Title,
         DateTime EndDate,
-        DateTime StartDate,
-        string MainPart);
+        DateTime StartDate);
     
 }
