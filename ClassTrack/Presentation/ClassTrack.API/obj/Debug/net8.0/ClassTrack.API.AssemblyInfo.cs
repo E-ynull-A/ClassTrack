@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClassTrack.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8fe6b04d0a46b24f1b97690f2affb2e46be7180")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e0dfe64d53b0ee34fc0ad48d42765f1cd29825e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClassTrack.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClassTrack.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

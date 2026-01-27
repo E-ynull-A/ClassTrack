@@ -17,8 +17,4 @@
     <ProjectReference Include="..\ClassTrack.Domain\ClassTrack.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\Student\" />
-  </ItemGroup>
-
 </Project>

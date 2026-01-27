@@ -6,6 +6,8 @@ using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using ClassTrack.Domain.Utilities;
+using System.Security.Claims;
+using System.Net.Http.Headers;
 
 namespace ClassTrack.Persistance.Implementations.Services
 
@@ -16,16 +18,19 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IQuizRepository _quizRepository;
         private readonly IMapper _mapper;
         private readonly IOptionRepository _optionRepository;
+        private readonly IPermissionService _permissionService;
 
         public QuestionService(IQuestionRepository questionRepository
                                 , IQuizRepository quizRepository
                                     , IMapper mapper,
-                                IOptionRepository optionRepository)
+                                IOptionRepository optionRepository,
+                                IPermissionService permissionService)
         {
             _questionRepository = questionRepository;
             _quizRepository = quizRepository;
             _mapper = mapper;
             _optionRepository = optionRepository;
+            _permissionService = permissionService;
         }
 
         public async Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page, int take, params string[] includes)
@@ -55,7 +60,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
 
         public async Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice)
-        {
+        {            
             await _basePostChecksAsync(postChoice);
 
             ChoiceQuestion question = _mapper.Map<ChoiceQuestion>(postChoice);
@@ -126,7 +131,6 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("An error occurred while deleting the Choice question.");
             }   
         }
-
         public async Task DeleteOpenQuestionAsync(long id)
         {
             try

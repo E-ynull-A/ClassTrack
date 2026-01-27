@@ -4,6 +4,7 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Persistance.DAL;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -13,12 +14,15 @@ namespace ClassTrack.Persistance.Implementations.Services
     {
         private readonly IStudentAttendanceRepository _attendanceRepository;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
         public StudentAttendanceService(IStudentAttendanceRepository attendanceRepository,
-                                        IMapper mapper)
+                                        IMapper mapper,
+                                        AppDbContext context)
         {
             _attendanceRepository = attendanceRepository;
             _mapper = mapper;
+            _context = context;
         }
 
 
@@ -33,6 +37,29 @@ namespace ClassTrack.Persistance.Implementations.Services
        
         public async Task CreateAttendanceAsync(ICollection<PostStudentAttendanceDTO> attendanceDTOs)
         {
+            if(await _attendanceRepository.AnyAsync(a => attendanceDTOs.Select(aDto => aDto.LessonDate).Contains(a.LessonDate)))
+            {
+                throw new Exception("Invalid Operation Error");
+            }
+
+            if(attendanceDTOs.DistinctBy(aDto=>aDto.LessonDate).Count() != 1)
+            {
+                throw new Exception("There is an issue about Attendance Date");
+            }
+
+            if(attendanceDTOs.DistinctBy(aDto=>aDto.ClassRoomId).Count() != 1)
+            {
+                throw new Exception("All Student in this Attendance must are in the Same ClassRoom");
+            }
+
+            if(_context.StudentClasses.Select(sc=>sc.ClassRoomId == attendanceDTOs.Select(aDto=>aDto.ClassRoomId).First()).Count()
+                                                                 != attendanceDTOs.DistinctBy(aDto => aDto.StudentId).Count())
+            {
+                throw new Exception("The attendance of All Students must be written And Don't any dublicate Student");
+            }
+
+
+           
 
             ICollection<StudentAttendance> attendances = _mapper.
                                             Map<ICollection<StudentAttendance>>(attendanceDTOs);        
