@@ -10,6 +10,12 @@
         public long? AnswerId { get; set; }
         public long QuestionId { get; set; }
         public string? AnswerText { get; set; }
+        public bool IsEvaluated { get; set; }
+
+        //relation 
+
+        public StudentQuiz StudentQuiz { get; set; }
+        public Question Question { get; set; }
 
     }
 }

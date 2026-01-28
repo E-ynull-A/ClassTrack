@@ -46,6 +46,9 @@ namespace ClassTrack.Persistance
             services.AddScoped<ITaskWorkRepository, TaskWorkRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IOptionRepository, OptionRepository>();
+            services.AddScoped<IQuizAnswerRepository, QuizAnswerRepository>();
+
+
 
             services.AddScoped<IClassRoomService, ClassRoomService>();
             services.AddScoped<IQuestionService, QuestionService>();
@@ -56,7 +59,7 @@ namespace ClassTrack.Persistance
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IPermissionService, PermissionService>();
-           
+            services.AddScoped<IQuizAnswerService, QuizAnswerService>();
 
             return services;
         }

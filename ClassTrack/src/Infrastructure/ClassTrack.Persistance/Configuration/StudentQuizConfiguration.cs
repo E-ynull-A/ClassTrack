@@ -13,8 +13,6 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<StudentQuiz> builder)
         {
-            builder.HasKey(sq=>new { sq.QuizId,sq.StudentId});
-
             builder.Property(sq=>sq.TotalPoint)
                 .IsRequired()
                 .HasColumnType("DECIMAL(5,2)");

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.DTOs
 {
-    public record GetClassRoomItemDTO();
+    public record GetClassRoomItemDTO(
+        
+        long Id,
+        string Name,
+        decimal AvgPoint);
     
 }

@@ -4,19 +4,16 @@ using ClassTrack.Persistance.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ClassTrack.Persistance.Context.Migrations
+namespace ClassTrack.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260126130545_DeleteIsActivePropFromStudentAttendance")]
-    partial class DeleteIsActivePropFromStudentAttendance
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,7 +134,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("NVARCHAR(150)");
 
                     b.Property<string>("PrivateKey")
                         .IsRequired()
@@ -297,6 +294,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsEvaluated")
+                        .HasColumnType("bit");
+
                     b.Property<long>("QuestionId")
                         .HasColumnType("bigint");
 
@@ -304,6 +304,10 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("StudentQuizId");
 
                     b.ToTable("QuizAnswers");
                 });
@@ -344,6 +348,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<long>("ClassRoomId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -354,6 +361,10 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassRoomId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentAttendances");
                 });
@@ -378,22 +389,27 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentQuiz", b =>
                 {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<long>("QuizId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("TotalPoint")
                         .HasColumnType("DECIMAL(5,2)");
 
-                    b.HasKey("QuizId", "StudentId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
 
                     b.HasIndex("StudentId");
 
@@ -688,6 +704,25 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("ClassRoom");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.QuizAnswer", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClassTrack.Domain.Entities.StudentQuiz", "StudentQuiz")
+                        .WithMany()
+                        .HasForeignKey("StudentQuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("StudentQuiz");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
                 {
                     b.HasOne("ClassTrack.Domain.Entities.AppUser", "AppUser")
@@ -697,6 +732,25 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("ClassTrack.Domain.Entities.StudentAttendance", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.ClassRoom", "ClassRoom")
+                        .WithMany("StudentAttendance")
+                        .HasForeignKey("ClassRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClassTrack.Domain.Entities.Student", "Student")
+                        .WithMany("StudentAttendances")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassRoom");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentClassRoom", b =>
@@ -883,6 +937,8 @@ namespace ClassTrack.Persistance.Context.Migrations
                 {
                     b.Navigation("Quizes");
 
+                    b.Navigation("StudentAttendance");
+
                     b.Navigation("StudentClasses");
 
                     b.Navigation("TaskWorks");
@@ -901,6 +957,8 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
                 {
+                    b.Navigation("StudentAttendances");
+
                     b.Navigation("StudentClasses");
 
                     b.Navigation("StudentQuizes");

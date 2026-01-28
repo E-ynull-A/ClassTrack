@@ -9,6 +9,10 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<ClassRoom> builder)
         {
+            builder.Property(c => c.Name)
+                .IsRequired()
+                .HasColumnType("NVARCHAR(150)");
+
             builder.Property(c => c.AvgPoint)
                 .IsRequired()
                 .HasColumnType("DECIMAL(5,2)");

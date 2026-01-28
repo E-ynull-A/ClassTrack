@@ -22,13 +22,13 @@ namespace ClassTrack.Persistance.Implementations.Services
             _roomRepository = roomRepository;
         }
 
-        public ICollection<GetTaskWorkItemDTO> GetAllAsync(int page, int take)
+        public async Task<ICollection<GetTaskWorkItemDTO>> GetAllAsync(int page, int take)
         {
-            return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(_taskRepository.GetAll(page: page, take: take).ToListAsync());
+            return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(page: page, take: take).ToListAsync());
         }
 
 
-        public async Task<ICollection<GetTaskWorkItemDTO>> GetAllByClassRoomId(int page, int take, int classRoomId)
+        public async Task<ICollection<GetTaskWorkItemDTO>> GetAllByClassRoomIdAsync(int page, int take, long classRoomId)
         {
            return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(page: page,
                                          take: take,
@@ -36,7 +36,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                  .ToListAsync());
         }
 
-        public async Task<GetTaskWorkDTO> GetById(int id)
+        public async Task<GetTaskWorkDTO> GetByIdAsync(long id)
         {
             TaskWork taskWork = await _taskRepository.GetByIdAsync(id);
 
@@ -49,7 +49,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
 
         
-        public async Task CreateTaskWork(PostTaskWorkDTO postTask)
+        public async Task CreateTaskWorkAsync(PostTaskWorkDTO postTask)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == postTask.ClassRoomId))
             {
@@ -60,7 +60,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _taskRepository.SaveChangeAsync();     
         }
 
-        public async Task UpdateTaskWork(long id,PutTaskWorkDTO putTask)
+        public async Task UpdateTaskWorkAsync(long id,PutTaskWorkDTO putTask)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == putTask.ClassRoomId))
                 throw new Exception("The Class isn't Found!");
@@ -73,7 +73,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task DeleteTaskWork(long id)
+        public async Task DeleteTaskWorkAsync(long id)
         {
             TaskWork deleted = await _taskRepository.GetByIdAsync(id);
             if (deleted is null)
