@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClassTrack.Application.DTOs;
+using ClassTrack.Domain;
 using ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<QuizAnswer, GetQuizAnswerItemDTO>()
                 .ForCtorParam(nameof(GetQuizAnswerItemDTO.QuestionTitle), 
                                       opt => opt.MapFrom(qa => qa.Question.Title));
+
+            CreateMap<QuizAnswer, GetQuizAnswerDTO>();
+             
         }
     }
 }

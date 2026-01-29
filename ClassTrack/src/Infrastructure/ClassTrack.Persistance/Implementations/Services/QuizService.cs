@@ -3,8 +3,12 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Enums;
+using ClassTrack.Persistance.DAL;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -15,24 +19,32 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IClassRoomRepository _roomRepository;
         private readonly IQuestionService _questionService;
         private readonly IQuestionRepository _questionRepository;
+        private readonly IHttpContextAccessor _accessor;
+        private readonly IStudentRepository _studentRepository;
+        private readonly AppDbContext _context;
 
         public QuizService(
                            IQuizRepository quizRepository,
                            IMapper mapper,
                            IClassRoomRepository roomRepository,
                            IQuestionService questionService,
-                           IQuestionRepository questionRepository)
+                           IQuestionRepository questionRepository,
+                           IHttpContextAccessor accessor,
+                           IStudentRepository studentRepository,
+                           AppDbContext context)
         {
             _quizRepository = quizRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
             _questionService = questionService;
             _questionRepository = questionRepository;
+            _accessor = accessor;
+            _studentRepository = studentRepository;
+            _context = context;
         }
 
         public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(int page, int take, params string[] includes)
         {
-
             ICollection<Quiz> quizes = await _quizRepository
                                     .GetAll(page: page,
                                             take: take,
@@ -47,10 +59,16 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz quiz = await _quizRepository
                              .GetByIdAsync(id, includes: ["ChoiceQuestions.Options", "OpenQuestions"]);
 
+            if (_accessor.HttpContext.User.FindFirstValue(ClaimTypes.Role) != UserRole.Admin.ToString()
+                && DateTime.UtcNow < quiz.StartTime
+                && DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration))
+            {
+                throw new Exception("You can enter The Quiz only after the Starting Quiz " +
+                                    "and Before the Quiz Ending!!");
+            }
+
             return _mapper.Map<GetQuizDTO>(quiz);
         }
-
-
         public async Task CreateQuizAsync(PostQuizDTO postQuiz)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == postQuiz.ClassRoomId))
@@ -64,12 +82,10 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("Don't Create the Quiz with the same Name in this Class!");
             }
 
-            _quizRepository.Add(_mapper.Map<Quiz>(postQuiz));
+            await _quizRepository.AddAsync(_mapper.Map<Quiz>(postQuiz));
 
             await _quizRepository.SaveChangeAsync();
         }
-
-
         public async Task UpdateQuizAsync(long id, PutQuizDTO putQuiz)
         {
             Quiz edited = await _quizRepository.GetByIdAsync(id);
@@ -80,26 +96,23 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("Don't Update the Quiz to the same Name in this Class!");
             }
 
-            GetAllowQuizModify(edited);
+            _getAllowQuizModify(edited);
 
-            _quizRepository.Update(_mapper.Map(putQuiz, edited));       
+            _quizRepository.Update(_mapper.Map(putQuiz, edited));
 
             await _quizRepository.SaveChangeAsync();
         }
-
         public async Task DeleteQuizAsync(long id)
         {
             Quiz? deleted = await _quizRepository.GetByIdAsync(id);
 
             if (deleted == null)
                 throw new Exception("The Quiz isn't Found!");
-          
+
             _quizRepository.Delete(deleted);
             await _quizRepository.SaveChangeAsync();
         }
-
-
-        private void GetAllowQuizModify(Quiz quiz)
+        private void _getAllowQuizModify(Quiz quiz)
         {
             if (quiz.StartTime <= DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration) > DateTime.UtcNow)
                 throw new Exception("Couldn't Modify The Quiz during Quiz Time!");
@@ -107,6 +120,23 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (quiz.StartTime.Add(quiz.Duration) < DateTime.UtcNow)
                 throw new Exception("Couldn't Modify The Quiz after the Quiz!");
         }
+
+
+        //private void _assignQuizToStudent(long classRoomId) ///// !!!!!!!!!!!!!
+        //{
+        //    ICollection<StudentQuiz> studentQuizs = _studentRepository.GetAll(function: x => x.StudentClasses
+        //                                                  .Any(sc => sc.ClassRoomId == classRoomId))
+        //                                             .Select(s => new StudentQuiz { StudentId = s.Id, QuizId = })
+
+
+            
+
+        //    _context.StudentQuizes.AddRange(new StudentQuiz
+        //    {
+
+        //    });
+        //}
+
 
 
 

@@ -12,5 +12,6 @@ namespace ClassTrack.Domain.Entities
 
 
         public decimal TotalPoint { get; set; }
+        public string QuizStatus { get; set; }
     }
 }

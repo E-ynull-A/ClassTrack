@@ -9,6 +9,5 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface IQuestionRepository:IRepository<Question>
     {
-    
     }
 }

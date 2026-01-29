@@ -15,7 +15,12 @@ namespace ClassTrack.Persistance.Configuration
         {
             builder.Property(qa => qa.EarnedPoint)
                 .IsRequired()
-                .HasColumnType("DECIMAL(5,2)");           
+                .HasColumnType("DECIMAL(5,2)");
+
+            builder.HasOne(x => x.Question)
+                    .WithMany()
+                    .HasForeignKey(x => x.QuestionId)
+                    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

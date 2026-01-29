@@ -13,6 +13,8 @@ namespace ClassTrack.Application.MappingProfiles
 
             CreateMap<PostQuizDTO, Quiz>();
             CreateMap<PutQuizDTO, Quiz>();
+
+
         }
     }
 }

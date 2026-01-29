@@ -51,6 +51,9 @@ namespace ClassTrack.Application.MappingProfiles
 
             CreateMap<ChoiceQuestion, GetChoiceQuestionInQuizDTO>();
             CreateMap<OpenQuestion, GetOpenQuestionInQuizDTO>();
+
+            CreateMap<Question, GetQuestionInQuizAnswerDTO>()
+                .ForCtorParam(nameof(GetQuestionInQuizAnswerDTO.QuestionTitle),opt=>opt.MapFrom(q=>q.Title));
         }
     }
 }

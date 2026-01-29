@@ -1,6 +1,8 @@
 ﻿using ClassTrack.Application.Interfaces.Repositories;
+using ClassTrack.Domain;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Persistance.DAL;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,14 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Repositories
 {
-    internal class QuestionRepository:Repository<Question>,IQuestionRepository
+    internal class QuestionRepository : Repository<Question>, IQuestionRepository
     {
-        public QuestionRepository(AppDbContext context):base(context) { }
+        private readonly AppDbContext _context;
+
+        public QuestionRepository(AppDbContext context) : base(context) { }
+
 
     }
+
+
 }

@@ -16,15 +16,30 @@ namespace ClassTrack.API.Controllers
             _answerService = answerService;
         }
 
-        [HttpGet("{studentId}")]
+        [HttpGet("{studentId}/Student")]
 
         public async Task<IActionResult> Get(long studentId,int page = 0, int take = 0)
         {
-           return Ok(await _answerService
-               .GetAllByStudentIdAsync(page:page,
+            if (studentId < 1)
+                return BadRequest();
+
+            return Ok(await _answerService
+                .GetAllByStudentIdAsync(page:page,
                                        take:take,
                                        studentId:studentId));
         }
+
+        [HttpGet("{id}")]
+
+        public async Task<IActionResult> Get(long id)
+        {
+            if(id < 1)
+                return BadRequest();
+
+            return Ok(await _answerService.GetByIdAsync(id));
+        }
+
+
 
 
 

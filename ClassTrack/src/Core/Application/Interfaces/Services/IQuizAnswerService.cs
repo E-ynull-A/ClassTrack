@@ -10,5 +10,7 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface IQuizAnswerService
     {
         Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take);
+
+        Task<GetQuizAnswerDTO> GetByIdAsync(long id);
     }
 }

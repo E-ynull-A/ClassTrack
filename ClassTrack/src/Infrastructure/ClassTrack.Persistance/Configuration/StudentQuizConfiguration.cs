@@ -17,6 +17,9 @@ namespace ClassTrack.Persistance.Configuration
                 .IsRequired()
                 .HasColumnType("DECIMAL(5,2)");
 
+            builder.Property(sq => sq.QuizStatus)
+                .IsRequired();
+
         }
     }
 }

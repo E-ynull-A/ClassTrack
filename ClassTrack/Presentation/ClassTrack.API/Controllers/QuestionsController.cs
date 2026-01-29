@@ -9,7 +9,6 @@ namespace ClassTrack.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class QuestionsController : ControllerBase
     {
         private readonly IQuestionService _service;

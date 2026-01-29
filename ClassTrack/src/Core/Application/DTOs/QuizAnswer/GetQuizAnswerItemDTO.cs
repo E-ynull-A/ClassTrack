@@ -13,4 +13,5 @@ namespace ClassTrack.Application.DTOs
         long StudentQuizId,
         bool IsEvaluated);
   
+
 }

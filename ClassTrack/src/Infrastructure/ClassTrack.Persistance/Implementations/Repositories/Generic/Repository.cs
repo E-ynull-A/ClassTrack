@@ -27,6 +27,11 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             _dbset.Add(entity);
         }
 
+        public async Task AddAsync(T entity)
+        {
+           await _dbset.AddAsync(entity);
+        }
+
         public void AddRange(ICollection<T> entities)
         {
             foreach (T entity in entities)

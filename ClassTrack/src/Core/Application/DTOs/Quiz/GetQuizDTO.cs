@@ -13,6 +13,5 @@ namespace ClassTrack.Application.DTOs
         ICollection<GetOpenQuestionInQuizDTO> OpenQuestions,
 
         DateTime StartTime,
-        TimeSpan Duration);
-    
+        TimeSpan Duration);   
 }
