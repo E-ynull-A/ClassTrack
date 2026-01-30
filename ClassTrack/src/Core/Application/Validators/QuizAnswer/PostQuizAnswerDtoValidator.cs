@@ -19,7 +19,8 @@ namespace ClassTrack.Application.Validators
 
 
             RuleFor(qa => qa.Answers)
-                .NotNull()
+                .NotEmpty()
+                .Must(a=>a.All(a=>a.QuestionId > 0))
                 .Must(a => a.Select(a => a.QuestionId).Count() > 0)
                 .Must(a => a.Select(a => a.QuestionId).Distinct().Count()
                                   == a.Select(a => a.QuestionId).Count()

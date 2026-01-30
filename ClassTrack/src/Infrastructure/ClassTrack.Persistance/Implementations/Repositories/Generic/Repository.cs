@@ -127,9 +127,11 @@ namespace ClassTrack.Persistance.Implementations.Repositories
         {
             return await _dbset.AnyAsync(expression);          
         }
-        //public bool IsDublicateNameAsync(string NameOrTitle)
-        //{
-        //    _dbset.AnyAsync(x=>x.)
-        //}
+
+        public async Task<int> CountAsync(Expression<Func<T, bool>> expression)
+        {
+           return await _dbset.CountAsync(expression);
+        }
+      
     }
 }

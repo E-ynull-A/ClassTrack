@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.Interfaces.Services;
+﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -37,6 +38,15 @@ namespace ClassTrack.API.Controllers
                 return BadRequest();
 
             return Ok(await _answerService.GetByIdAsync(id));
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Post(PostQuizAnswerDTO answerDTO)
+        {
+            await _answerService.TakeAnExamAsync(answerDTO);
+
+            return Created();
         }
 
 

@@ -288,9 +288,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<string>("AnswerText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("EarnedPoint")
-                        .HasColumnType("DECIMAL(5,2)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 

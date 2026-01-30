@@ -82,7 +82,20 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("Don't Create the Quiz with the same Name in this Class!");
             }
 
-            await _quizRepository.AddAsync(_mapper.Map<Quiz>(postQuiz));
+            Quiz created = _mapper.Map<Quiz>(postQuiz);
+
+            ICollection<Student> students = await _studentRepository
+                                                        .GetAll(function: x => x.StudentClasses
+                                                                    .Select(sc => sc.ClassRoomId)
+                                                                    .Contains(postQuiz.ClassRoomId))
+                                                        .ToListAsync();
+
+            created.StudentQuizes = students
+                                        .Select(s => new StudentQuiz { StudentId = s.Id, QuizId = created.Id, QuizStatus = QuizStatus.Pending.ToString()}) 
+                                        .ToList();
+
+
+            _quizRepository.Add(created);
 
             await _quizRepository.SaveChangeAsync();
         }
@@ -120,25 +133,5 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (quiz.StartTime.Add(quiz.Duration) < DateTime.UtcNow)
                 throw new Exception("Couldn't Modify The Quiz after the Quiz!");
         }
-
-
-        //private void _assignQuizToStudent(long classRoomId) ///// !!!!!!!!!!!!!
-        //{
-        //    ICollection<StudentQuiz> studentQuizs = _studentRepository.GetAll(function: x => x.StudentClasses
-        //                                                  .Any(sc => sc.ClassRoomId == classRoomId))
-        //                                             .Select(s => new StudentQuiz { StudentId = s.Id, QuizId = })
-
-
-            
-
-        //    _context.StudentQuizes.AddRange(new StudentQuiz
-        //    {
-
-        //    });
-        //}
-
-
-
-
     }
 }

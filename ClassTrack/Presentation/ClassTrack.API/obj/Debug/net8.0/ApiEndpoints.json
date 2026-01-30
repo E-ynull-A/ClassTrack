@@ -266,6 +266,22 @@
   },
   {
     "ContainingType": "ClassTrack.API.Controllers.QuizAnswersController",
+    "Method": "Post",
+    "RelativePath": "QuizAnswers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "answerDTO",
+        "Type": "ClassTrack.Application.DTOs.PostQuizAnswerDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.QuizAnswersController",
     "Method": "Get",
     "RelativePath": "QuizAnswers/{id}",
     "HttpMethod": "GET",

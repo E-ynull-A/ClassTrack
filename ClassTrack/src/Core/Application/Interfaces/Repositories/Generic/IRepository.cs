@@ -28,5 +28,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
         void DeleteRange(ICollection<T> removeds);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
+        Task<int> CountAsync(Expression<Func<T, bool>> expression);
     }
 }

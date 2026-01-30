@@ -13,9 +13,6 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<QuizAnswer> builder)
         {
-            builder.Property(qa => qa.EarnedPoint)
-                .IsRequired()
-                .HasColumnType("DECIMAL(5,2)");
 
             builder.HasOne(x => x.Question)
                     .WithMany()

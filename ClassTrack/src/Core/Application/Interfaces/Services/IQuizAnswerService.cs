@@ -12,5 +12,7 @@ namespace ClassTrack.Application.Interfaces.Services
         Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take);
 
         Task<GetQuizAnswerDTO> GetByIdAsync(long id);
+
+        Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO);
     }
 }

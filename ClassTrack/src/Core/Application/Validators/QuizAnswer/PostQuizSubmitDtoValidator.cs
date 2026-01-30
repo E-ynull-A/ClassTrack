@@ -17,6 +17,10 @@ namespace ClassTrack.Application.Validators
 
             RuleFor(qs => qs.QuestionId)
                 .NotEmpty();
+
+            RuleFor(qs => qs)
+                .Must(qs => qs.AnswerText is null || qs.AnswerId is null);
+
         }
     }
 }

@@ -515,6 +515,37 @@
         }
       }
     },
+    "/QuizAnswers": {
+      "post": {
+        "tags": [
+          "QuizAnswers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQuizAnswerDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQuizAnswerDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQuizAnswerDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Quizes": {
       "get": {
         "tags": [
@@ -1057,6 +1088,23 @@
         },
         "additionalProperties": false
       },
+      "PostQuizAnswerDTO": {
+        "type": "object",
+        "properties": {
+          "studentQuizId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostQuizSubmitDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PostQuizDTO": {
         "type": "object",
         "properties": {
@@ -1089,6 +1137,28 @@
               "$ref": "#/components/schemas/PostOpenQuestionDTO"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostQuizSubmitDTO": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "answerId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "answerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEvaluated": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
