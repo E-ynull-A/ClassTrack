@@ -8,7 +8,6 @@ namespace ClassTrack.Application.DTOs
 {
     public record PutQuizAnswerDTO(
         
-        long StudentQuizId,
-        ICollection<PutQuizSubmitDTO> Answers);
+        decimal Point);
    
 }

@@ -132,6 +132,16 @@ namespace ClassTrack.Persistance.Implementations.Repositories
         {
            return await _dbset.CountAsync(expression);
         }
-      
+
+        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> function, 
+                                                      params string[]? includes)
+        {
+            IQueryable<T> query = _dbset.AsNoTracking();
+
+            if(includes.Length > 0)
+                query = _addIncludes(query, includes);
+
+            return await query.FirstOrDefaultAsync(function);
+        }
     }
 }

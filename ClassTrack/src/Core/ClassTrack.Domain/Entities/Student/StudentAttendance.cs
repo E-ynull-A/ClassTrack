@@ -9,7 +9,7 @@ namespace ClassTrack.Domain.Entities
         public Student Student { get; set; }
         public long StudentId { get; set; }
         public Attendance Attendance { get; set; }
-        public DateOnly LessonDate { get; set; }
+        public DateTime LessonDate { get; set; }
 
         public long ClassRoomId { get; set; }
         public ClassRoom ClassRoom { get; set; }

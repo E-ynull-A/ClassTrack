@@ -12,15 +12,10 @@ namespace ClassTrack.Application.Validators
     {
         public PutQuizAnswerDtoValidator()
         {
-            RuleFor(qa => qa.StudentQuizId)
-                .NotEmpty()
-                .GreaterThan(0);
+            RuleFor(qa => qa.Point)
+                 .NotEmpty()
+                 .InclusiveBetween(0,100);
 
-            RuleFor(qa => qa.Answers)
-                .NotEmpty()
-                .Must(a => a.Select(a => a.QuizAnswerId).Distinct().Count()
-                                        ==
-                         a.Select(a => a.QuizAnswerId).Count());
         }
     }
 }

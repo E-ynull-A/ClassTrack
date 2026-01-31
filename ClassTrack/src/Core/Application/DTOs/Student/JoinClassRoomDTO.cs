@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.DTOs
 {
-    public record PutQuizSubmitDTO(
+    public record JoinClassRoomDTO
+        (
+        
+            string ClassKey
 
-        long QuizAnswerId,
-        decimal Point);
-    
+        );
+   
 }

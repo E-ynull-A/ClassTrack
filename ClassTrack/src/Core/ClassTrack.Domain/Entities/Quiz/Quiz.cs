@@ -14,9 +14,5 @@ namespace ClassTrack.Domain.Entities
 
         public long ClassRoomId { get; set; }
         public ClassRoom ClassRoom { get; set; }
-
-
-
-
     }
 }

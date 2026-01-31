@@ -91,7 +91,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                         .ToListAsync();
 
             created.StudentQuizes = students
-                                        .Select(s => new StudentQuiz { StudentId = s.Id, QuizId = created.Id, QuizStatus = QuizStatus.Pending.ToString()}) 
+                                        .Select(s => new StudentQuiz { StudentId = s.Id, QuizId = created.Id,
+                                                                       QuizStatus = QuizStatus.Pending.ToString()}) 
                                         .ToList();
 
 

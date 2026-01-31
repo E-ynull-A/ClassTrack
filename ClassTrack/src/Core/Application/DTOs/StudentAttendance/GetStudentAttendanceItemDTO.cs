@@ -9,7 +9,7 @@ namespace ClassTrack.Application.DTOs
     public record GetStudentAttendanceItemDTO(
 
         long ClassRoomId,
-        DateOnly LessonDate,
+        DateTime LessonDate,
         long StudentId,
         string StudentName,
         string StudentSurname,

@@ -9,9 +9,7 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<OpenQuestion> builder)
         {
-            builder.Property(op => op.Answer)
-                .IsRequired(false)
-                .HasColumnType("NVARCHAR(MAX)");              
+                      
         }
     }
 }

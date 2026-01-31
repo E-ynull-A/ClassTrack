@@ -3,7 +3,10 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Persistance.DAL;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -11,12 +14,21 @@ namespace ClassTrack.Persistance.Implementations.Services
     {
         private readonly IClassRoomRepository _roomRepository;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _accessor;
+        private readonly ITeacherRepository _teacherRepository;
+        private readonly AppDbContext _context;
 
         public ClassRoomService(IClassRoomRepository roomRepository,
-                                IMapper mapper)
+                                IMapper mapper,
+                                IHttpContextAccessor accessor,
+                                ITeacherRepository teacherRepository,
+                                AppDbContext context)
         {
             _roomRepository = roomRepository;
             _mapper = mapper;
+            _accessor = accessor;
+            _teacherRepository = teacherRepository;
+            _context = context;
         }
 
         public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page, int take)
@@ -25,7 +37,6 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                     (await _roomRepository.GetAll(page: page,
                                                                                   take: take).ToListAsync());
         }
-
         public async Task<GetClassRoomDTO> GetByIdAsync(long id)
         {
             ClassRoom classRoom = await _roomRepository.GetByIdAsync(id);
@@ -38,12 +49,25 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task CreateClassRoomAsync(PostClassRoomDTO postClass)
         {
             if (await _roomRepository.AnyAsync(r => r.Name == postClass.Name))
-                throw new Exception("The Name has already used");
+                throw new Exception("The Name has already used");           
+
+           string userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                throw new Exception("User isn't Found!");
+
+            Teacher teacher = new Teacher { AppUserId = userId };
+
+            _teacherRepository.Add(teacher);
 
             _roomRepository.Add(new ClassRoom
             {
                 Name = postClass.Name,
-                PrivateKey = await _generateClassRoomKeyAsync()
+                PrivateKey = await _generateClassRoomKeyAsync(),
+                TeacherClasses = new List<TeacherClassRoom>
+                {
+                    new TeacherClassRoom{Teacher = teacher},                                          
+                }
             });
 
             await _roomRepository.SaveChangeAsync();
@@ -73,7 +97,6 @@ namespace ClassTrack.Persistance.Implementations.Services
             _roomRepository.Delete(deleted);
             await _roomRepository.SaveChangeAsync();
         }
-
         private async Task<string> _generateClassRoomKeyAsync()
         {
             char[] pool = "1234567890ABCDEFGHJKLMNPQRSTUVWXYZ".ToCharArray();

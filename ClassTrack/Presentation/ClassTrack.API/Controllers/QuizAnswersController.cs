@@ -49,6 +49,16 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
+        [HttpPut]
+
+        public async Task<IActionResult> Put(long id,PutQuizAnswerDTO answerDTO)
+        {
+            if(id < 1) return BadRequest();
+
+            await _answerService.EvaluateAnswerAsync(id,answerDTO);
+            return NoContent();
+        }
+
 
 
 

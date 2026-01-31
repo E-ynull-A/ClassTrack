@@ -19,7 +19,6 @@ namespace ClassTrack.Application.MappingProfiles
                                       opt => opt.MapFrom(qa => qa.Question.Title));
 
             CreateMap<QuizAnswer, GetQuizAnswerDTO>();
-
             CreateMap<PostQuizSubmitDTO, QuizAnswer>();
              
         }

@@ -10,7 +10,7 @@ namespace ClassTrack.Application.DTOs
     public record PostStudentAttendanceDTO(
 
         long ClassRoomId,
-        DateOnly LessonDate,
+        DateTime LessonDate,
         long StudentId,
         int Attendance);
   

@@ -37,7 +37,7 @@ namespace ClassTrack.Application.Validators
 
             RuleFor(sa => sa.LessonDate)
                 .NotEmpty()
-                .Must(ld => ld <= DateOnly.FromDateTime(DateTime.UtcNow))
+                .Must(ld => ld <= DateTime.UtcNow)
                 .WithMessage("The Attendance of the Lesson Date created only for present or past!");
         }
     }

@@ -351,7 +351,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateOnly>("LessonDate")
+                    b.Property<DateTime>("LessonDate")
                         .HasColumnType("DATE");
 
                     b.Property<long>("StudentId")
@@ -674,9 +674,6 @@ namespace ClassTrack.Persistance.Context.Migrations
             modelBuilder.Entity("ClassTrack.Domain.Entities.OpenQuestion", b =>
                 {
                     b.HasBaseType("ClassTrack.Domain.Entities.Question");
-
-                    b.Property<string>("Answer")
-                        .HasColumnType("NVARCHAR(MAX)");
 
                     b.HasIndex("QuizId");
 

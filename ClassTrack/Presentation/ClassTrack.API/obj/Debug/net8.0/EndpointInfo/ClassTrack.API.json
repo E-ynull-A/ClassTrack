@@ -544,6 +544,45 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "QuizAnswers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutQuizAnswerDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutQuizAnswerDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutQuizAnswerDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/Quizes": {
@@ -818,6 +857,37 @@
         }
       }
     },
+    "/Students": {
+      "post": {
+        "tags": [
+          "Students"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JoinClassRoomDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JoinClassRoomDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JoinClassRoomDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/TaskWorks": {
       "get": {
         "tags": [
@@ -1003,6 +1073,16 @@
   },
   "components": {
     "schemas": {
+      "JoinClassRoomDTO": {
+        "type": "object",
+        "properties": {
+          "classKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDTO": {
         "type": "object",
         "properties": {
@@ -1172,7 +1252,7 @@
           },
           "lessonDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "studentId": {
             "type": "integer",
@@ -1272,6 +1352,16 @@
         },
         "additionalProperties": false
       },
+      "PutQuizAnswerDTO": {
+        "type": "object",
+        "properties": {
+          "point": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "PutQuizDTO": {
         "type": "object",
         "properties": {
@@ -1307,7 +1397,7 @@
           },
           "lessonDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "studentId": {
             "type": "integer",

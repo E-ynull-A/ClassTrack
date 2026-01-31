@@ -135,30 +135,35 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _quizAnswerRepository.SaveChangeAsync();
         }
 
-        public async Task EvaluateAnswer(PutQuizAnswerDTO answerDTO)
-        {
+        public async Task EvaluateAnswerAsync(long id,PutQuizAnswerDTO answerDTO)
+        {      
 
-            StudentQuiz studentQuiz = await _studentQuizRepository.GetByIdAsync(answerDTO.StudentQuizId, includes: ["Quiz"]);
+            QuizAnswer answer = await _quizAnswerRepository.GetByIdAsync(id, includes: ["Question"]);
+
+            if(answer is null)            
+                throw new Exception("The QuizAnswer isn't Found");
+
+            if (answer.IsEvaluated)
+                throw new Exception("The Question is already Evaulate!");
+
+            StudentQuiz studentQuiz = await _studentQuizRepository.GetByIdAsync(answer.StudentQuizId, includes: ["Quiz"]);
 
             if (studentQuiz is null)
-            {
                 throw new Exception("The Quiz isn't Found in this Class");
-            }
 
             if (DateTime.UtcNow < studentQuiz.Quiz.StartTime)           
                 throw new Exception("The Quiz doesn't begin yet!");
-            
-            
 
-            ICollection<QuizAnswer> answers = await _quizAnswerRepository
-                                              .GetAll(function: x => answerDTO.Answers
-                                              .Select(a => a.QuizAnswerId)
-                                              .Contains(x.Id)).ToListAsync();
+            if (answer.Question.Point < answerDTO.Point)
+                throw new Exception("Pleace, don't exceed the Point Limit of the Question!");
 
-            if (answers.Count != answerDTO.Answers.Count())
-                throw new Exception("There is an issue about Quiz Answer");
+            answer.IsEvaluated = true;
+            _quizAnswerRepository.Update(answer);
 
-             //collectiondan təkə endir DTO-nu
+            studentQuiz.TotalPoint += answerDTO.Point;
+            _studentQuizRepository.Update(studentQuiz);
+
+            await _quizAnswerRepository.SaveChangeAsync();
         }
 
     }
