@@ -29,7 +29,6 @@ namespace ClassTrack.Infrastructure.Implementations.Services
                 new Claim(ClaimTypes.GivenName,user.Name),
                 new Claim(ClaimTypes.Surname,user.Surname),
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.Role,user.UserRole.ToString()),
                 new Claim(ClaimTypes.NameIdentifier,user.Id)
             };
 

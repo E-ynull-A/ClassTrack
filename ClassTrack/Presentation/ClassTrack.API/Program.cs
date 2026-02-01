@@ -46,6 +46,8 @@ builder.Services.InfrastructureRegistration(builder.Configuration);
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -53,10 +55,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+using (var scope = app.Services.CreateScope())
+{
+   await app.UseAppDbContextInitalizer();
+}
+
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 
 app.MapControllers();

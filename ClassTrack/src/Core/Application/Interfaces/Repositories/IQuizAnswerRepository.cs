@@ -9,5 +9,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface IQuizAnswerRepository:IRepository<QuizAnswer>
     {
+      
     }
 }

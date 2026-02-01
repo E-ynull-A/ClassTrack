@@ -10,8 +10,6 @@ namespace ClassTrack.Domain.Entities
         public byte Age { get; set; }
         public DateOnly BirthDate { get; set; }
 
-        public UserRole UserRole { get; set; }
-
         //Relations
 
         public long StudentId { get; set; }

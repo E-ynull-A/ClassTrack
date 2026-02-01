@@ -21,10 +21,10 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IPermissionService _permissionService;
 
         public QuestionService(IQuestionRepository questionRepository
-                                , IQuizRepository quizRepository
-                                    , IMapper mapper,
-                                IOptionRepository optionRepository,
-                                IPermissionService permissionService)
+                                ,IQuizRepository quizRepository
+                                    ,IMapper mapper,
+                               IOptionRepository optionRepository,
+                               IPermissionService permissionService)
         {
             _questionRepository = questionRepository;
             _quizRepository = quizRepository;

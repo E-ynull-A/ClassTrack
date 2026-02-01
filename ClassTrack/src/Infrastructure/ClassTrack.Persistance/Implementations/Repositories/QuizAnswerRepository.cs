@@ -11,7 +11,6 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 {
     internal class QuizAnswerRepository:Repository<QuizAnswer>,IQuizAnswerRepository
     {
-        public QuizAnswerRepository(AppDbContext context) : base(context) { }
-       
+        public QuizAnswerRepository(AppDbContext context) : base(context) { }       
     }
 }

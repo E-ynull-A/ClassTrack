@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.Interfaces.Services;
+﻿using ClassTrack.Application.Interfaces.Repositories;
+using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Persistance.DAL;
 using Microsoft.AspNetCore.Http;
@@ -12,17 +13,17 @@ namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class PermissionService:IPermissionService
     {
-        private readonly AppDbContext _context;
         private readonly ICasheService _casheService;
         private readonly IHttpContextAccessor _accessor;
+        private readonly ITeacherRepository _teacherRepository;
 
-        public PermissionService(AppDbContext context,
-                                 ICasheService casheService,
-                                 IHttpContextAccessor accessor)
+        public PermissionService(ICasheService casheService,
+                                 IHttpContextAccessor accessor,
+                                 ITeacherRepository teacherRepository)
         {
-            _context = context;
             _casheService = casheService;
             _accessor = accessor;
+            _teacherRepository = teacherRepository;
         }
         public async Task<bool> IsTeacherAsync(long classRoomId)
         {
@@ -38,8 +39,9 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             return await _casheService.CheckCasheAsync(cacheKey, async () =>
             {
-                return await _context.TeacherClasses.AnyAsync(tc => tc.Teacher.AppUserId == userId &&
-                                                                tc.ClassRoomId == classRoomId);
+                return await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
+                                                                .Any(tc => tc.ClassRoomId == classRoomId));
+              
             },TimeSpan.FromMinutes(10));
         }
     }

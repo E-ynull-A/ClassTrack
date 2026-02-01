@@ -16,19 +16,16 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _accessor;
         private readonly ITeacherRepository _teacherRepository;
-        private readonly AppDbContext _context;
 
         public ClassRoomService(IClassRoomRepository roomRepository,
                                 IMapper mapper,
                                 IHttpContextAccessor accessor,
-                                ITeacherRepository teacherRepository,
-                                AppDbContext context)
+                                ITeacherRepository teacherRepository)
         {
             _roomRepository = roomRepository;
             _mapper = mapper;
             _accessor = accessor;
             _teacherRepository = teacherRepository;
-            _context = context;
         }
 
         public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page, int take)
@@ -49,30 +46,38 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task CreateClassRoomAsync(PostClassRoomDTO postClass)
         {
             if (await _roomRepository.AnyAsync(r => r.Name == postClass.Name))
-                throw new Exception("The Name has already used");           
+                throw new Exception("The Name has already used");
 
-           string userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("User isn't Found!");
 
-            Teacher teacher = new Teacher { AppUserId = userId };
-
-            _teacherRepository.Add(teacher);
-
-            _roomRepository.Add(new ClassRoom
+            ClassRoom newClass = new ClassRoom
             {
                 Name = postClass.Name,
                 PrivateKey = await _generateClassRoomKeyAsync(),
-                TeacherClasses = new List<TeacherClassRoom>
-                {
-                    new TeacherClassRoom{Teacher = teacher},                                          
-                }
-            });
+                TeacherClasses = new List<TeacherClassRoom>()
+            };
 
+            Teacher? teacher = await _teacherRepository.GetTeacherByUserId(userId);
+
+
+            if (teacher is null)
+            {
+                teacher = new Teacher { AppUserId = userId };
+                newClass.TeacherClasses.Add(new TeacherClassRoom { Teacher = teacher});         
+            }
+            else
+            {
+                newClass.TeacherClasses.Add(new TeacherClassRoom { TeacherId = teacher.Id});
+            }
+
+            _roomRepository.Add(newClass);
+            
             await _roomRepository.SaveChangeAsync();
         }
-        public async Task UpdateClassRoomAsync(long id,PutClassRoomDTO putClass)
+        public async Task UpdateClassRoomAsync(long id, PutClassRoomDTO putClass)
         {
             if (await _roomRepository.AnyAsync(r => r.Name == putClass.Name))
                 throw new Exception("The Name has already used");

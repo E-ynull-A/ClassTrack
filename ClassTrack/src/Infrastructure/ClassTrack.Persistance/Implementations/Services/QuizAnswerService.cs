@@ -21,19 +21,16 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IMapper _mapper;
         private readonly IQuestionRepository _questionRepository;
         private readonly IStudentQuizRepository _studentQuizRepository;
-        private readonly AppDbContext _context;
 
         public QuizAnswerService(IQuizAnswerRepository quizAnswerRepository,
                                   IMapper mapper,
                                   IQuestionRepository questionRepository,
-                                  IStudentQuizRepository studentQuizRepository,
-                                  AppDbContext context)
+                                  IStudentQuizRepository studentQuizRepository)
         {
             _quizAnswerRepository = quizAnswerRepository;
             _mapper = mapper;
             _questionRepository = questionRepository;
             _studentQuizRepository = studentQuizRepository;
-            _context = context;
         }
 
         public async Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take)
@@ -46,10 +43,11 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task<GetQuizAnswerDTO> GetByIdAsync(long id)
         {
-            return _mapper.Map<GetQuizAnswerDTO>(await _context.QuizAnswers
-               .Include(qa => qa.Question)
-                   .ThenInclude(q => (q as ChoiceQuestion).Options)
-               .FirstOrDefaultAsync(qa => qa.Id == id));
+            return _mapper.Map<GetQuizAnswerDTO>(await _quizAnswerRepository
+                .GetQueryable()
+                             .Include(q => q.Question)
+                             .ThenInclude(q => (q as ChoiceQuestion).Options)
+                .FirstOrDefaultAsync(qa => qa.Id == id));
         }
 
         public async Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO)
@@ -135,12 +133,12 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _quizAnswerRepository.SaveChangeAsync();
         }
 
-        public async Task EvaluateAnswerAsync(long id,PutQuizAnswerDTO answerDTO)
-        {      
+        public async Task EvaluateAnswerAsync(long id, PutQuizAnswerDTO answerDTO)
+        {
 
             QuizAnswer answer = await _quizAnswerRepository.GetByIdAsync(id, includes: ["Question"]);
 
-            if(answer is null)            
+            if (answer is null)
                 throw new Exception("The QuizAnswer isn't Found");
 
             if (answer.IsEvaluated)
@@ -151,7 +149,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (studentQuiz is null)
                 throw new Exception("The Quiz isn't Found in this Class");
 
-            if (DateTime.UtcNow < studentQuiz.Quiz.StartTime)           
+            if (DateTime.UtcNow < studentQuiz.Quiz.StartTime)
                 throw new Exception("The Quiz doesn't begin yet!");
 
             if (answer.Question.Point < answerDTO.Point)

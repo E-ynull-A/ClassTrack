@@ -95,9 +95,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("NVARCHAR(80)");
 
-                    b.Property<int>("UserRole")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")

@@ -1,13 +1,16 @@
 ﻿using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Persistance.Context;
 using ClassTrack.Persistance.DAL;
 using ClassTrack.Persistance.Implementations.Repositories;
 using ClassTrack.Persistance.Implementations.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 
 namespace ClassTrack.Persistance
@@ -30,7 +33,7 @@ namespace ClassTrack.Persistance
                         opt.Password.RequireNonAlphanumeric = false;
 
                         opt.Lockout.MaxFailedAccessAttempts = 5;
-                        opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);                                                       
+                        opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
                     }
 
                 )
@@ -62,8 +65,25 @@ namespace ClassTrack.Persistance
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IQuizAnswerService, QuizAnswerService>();
             services.AddScoped<IStudentQuizService, StudentQuizService>();
+            services.AddScoped<IAppDbContextInitalizer,AppDbContextInitalizer>();
 
             return services;
         }
+        
+        public static async Task<IApplicationBuilder> UseAppDbContextInitalizer(this IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.CreateAsyncScope())
+            {
+                var initalizer = scope.ServiceProvider.GetRequiredService<IAppDbContextInitalizer>();
+
+                await initalizer.InitalizeDbContext();
+                await initalizer.CreateRoleInitalizerAsync();
+                await initalizer.CreateAdminInitalizer();
+            };
+
+            return app;
+        }
     }
+
+
 }

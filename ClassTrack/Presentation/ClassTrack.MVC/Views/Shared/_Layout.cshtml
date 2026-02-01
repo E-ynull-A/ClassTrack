@@ -13,7 +13,7 @@
         <!-- container wrapper: header-in kənara yapışmasını düzəldir -->
         <div class="container header-shell">
             <div class="header-inner">
-                <a class="btn primary" href="~/Class">Class</a>
+                <a class="btn primary" asp-controller="Home" asp-action="ClassRoom">Class</a>
                 <a class="brand" href="~/">
                     <div class="logo"></div>
                     <div>
@@ -26,14 +26,14 @@
                     <button class="icon-btn mobile-toggle" data-mobile-toggle title="Menu">
                         <span class="icon" style="--mask:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22black%22><path d=%22M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z%22/></svg>');"></span>
                     </button>
-                    <a class="btn" href="~/Account/Login">Login</a>
+                    <a class="btn" asp-controller="Home" asp-action="Login">Login</a>
                 </div>
             </div>
 
             <div class="mobile-panel" data-mobile-panel>
                 <nav class="menu">
-                    <a class="btn primary" href="~/Class">Class</a>
-                    <a class="btn" href="~/Account/Login">Login</a>
+                    <a class="btn primary" asp-controller="Home" asp-action="ClassRoom">Class</a>
+                    <a class="btn" asp-controller="Home" asp-action="Login">Login</a>
                 </nav>
             </div>
         </div>

@@ -17,30 +17,23 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IQuizRepository _quizRepository;
         private readonly IMapper _mapper;
         private readonly IClassRoomRepository _roomRepository;
-        private readonly IQuestionService _questionService;
-        private readonly IQuestionRepository _questionRepository;
         private readonly IHttpContextAccessor _accessor;
         private readonly IStudentRepository _studentRepository;
-        private readonly AppDbContext _context;
+
 
         public QuizService(
                            IQuizRepository quizRepository,
                            IMapper mapper,
                            IClassRoomRepository roomRepository,
-                           IQuestionService questionService,
-                           IQuestionRepository questionRepository,
                            IHttpContextAccessor accessor,
-                           IStudentRepository studentRepository,
-                           AppDbContext context)
+                           IStudentRepository studentRepository)
+                          
         {
             _quizRepository = quizRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
-            _questionService = questionService;
-            _questionRepository = questionRepository;
             _accessor = accessor;
             _studentRepository = studentRepository;
-            _context = context;
         }
 
         public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(int page, int take, params string[] includes)
@@ -59,8 +52,10 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz quiz = await _quizRepository
                              .GetByIdAsync(id, includes: ["ChoiceQuestions.Options", "OpenQuestions"]);
 
-            if (_accessor.HttpContext.User.FindFirstValue(ClaimTypes.Role) != UserRole.Admin.ToString()
-                && DateTime.UtcNow < quiz.StartTime
+            //_accessor.HttpContext.User.FindFirstValue(ClaimTypes.Role) != UserRole.Admin.ToString()
+            //    &&
+
+            if ( DateTime.UtcNow < quiz.StartTime
                 && DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration))
             {
                 throw new Exception("You can enter The Quiz only after the Starting Quiz " +

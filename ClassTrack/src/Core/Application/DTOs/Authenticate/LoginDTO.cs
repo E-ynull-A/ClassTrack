@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.DTOs
 {
-    public record LoginDTO(string UsernameOrEmail,string Password);
+    public record LoginDTO(
+        string UsernameOrEmail,string Password);
    
 }

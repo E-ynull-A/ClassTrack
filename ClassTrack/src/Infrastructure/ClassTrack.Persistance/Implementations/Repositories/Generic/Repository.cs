@@ -143,5 +143,10 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 
             return await query.FirstOrDefaultAsync(function);
         }
+
+        public IQueryable<T> GetQueryable()
+        {
+            return _dbset.AsQueryable();
+        }
     }
 }

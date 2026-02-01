@@ -9,5 +9,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface ITeacherRepository:IRepository<Teacher>
     {
+        Task<Teacher> GetTeacherByUserId(string userId);
     }
 }

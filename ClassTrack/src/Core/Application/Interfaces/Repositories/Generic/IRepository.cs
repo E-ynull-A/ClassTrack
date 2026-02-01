@@ -1,7 +1,8 @@
-﻿using D = ClassTrack.Domain.Entities;
+﻿using ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using D = ClassTrack.Domain.Entities;
 
 
 namespace ClassTrack.Application.Interfaces.Repositories
@@ -30,5 +31,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
         Task<int> CountAsync(Expression<Func<T, bool>> expression);
+        public IQueryable<T> GetQueryable();
     }
 }

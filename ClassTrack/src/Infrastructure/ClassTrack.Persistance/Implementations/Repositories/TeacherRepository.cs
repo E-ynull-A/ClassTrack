@@ -12,6 +12,11 @@ namespace ClassTrack.Persistance.Implementations.Repositories
     internal class TeacherRepository:Repository<Teacher>, ITeacherRepository
     {
         public TeacherRepository(AppDbContext context):base(context) { }
-      
+
+
+        public async Task<Teacher> GetTeacherByUserId(string userId)
+        {
+            return await FirstOrDefaultAsync(t => t.AppUserId == userId);
+        }
     }
 }
