@@ -19,21 +19,23 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IClassRoomRepository _roomRepository;
         private readonly IHttpContextAccessor _accessor;
         private readonly IStudentRepository _studentRepository;
-
+        private readonly IPermissionService _permissionService;
 
         public QuizService(
                            IQuizRepository quizRepository,
                            IMapper mapper,
                            IClassRoomRepository roomRepository,
                            IHttpContextAccessor accessor,
-                           IStudentRepository studentRepository)
-                          
+                           IStudentRepository studentRepository,
+                           IPermissionService permissionService)
+
         {
             _quizRepository = quizRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
             _accessor = accessor;
             _studentRepository = studentRepository;
+            _permissionService = permissionService;
         }
 
         public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(int page, int take, params string[] includes)
@@ -52,10 +54,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz quiz = await _quizRepository
                              .GetByIdAsync(id, includes: ["ChoiceQuestions.Options", "OpenQuestions"]);
 
-            //_accessor.HttpContext.User.FindFirstValue(ClaimTypes.Role) != UserRole.Admin.ToString()
-            //    &&
-
-            if ( DateTime.UtcNow < quiz.StartTime
+            if (DateTime.UtcNow < quiz.StartTime
                 && DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration))
             {
                 throw new Exception("You can enter The Quiz only after the Starting Quiz " +
@@ -66,13 +65,18 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task CreateQuizAsync(PostQuizDTO postQuiz)
         {
+
+
             if (!await _roomRepository.AnyAsync(r => r.Id == postQuiz.ClassRoomId))
             {
                 throw new Exception("The ClassRoom isn't Found!");
             }
 
+            if (!await _permissionService.IsTeacherAsync(postQuiz.ClassRoomId))
+                throw new Exception("Only Teachers can use it");
+
             if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&
-                                                 q.ClassRoomId != postQuiz.ClassRoomId))
+                                             q.ClassRoomId != postQuiz.ClassRoomId))
             {
                 throw new Exception("Don't Create the Quiz with the same Name in this Class!");
             }
@@ -86,8 +90,12 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                         .ToListAsync();
 
             created.StudentQuizes = students
-                                        .Select(s => new StudentQuiz { StudentId = s.Id, QuizId = created.Id,
-                                                                       QuizStatus = QuizStatus.Pending.ToString()}) 
+                                        .Select(s => new StudentQuiz
+                                        {
+                                            StudentId = s.Id,
+                                            QuizId = created.Id,
+                                            QuizStatus = QuizStatus.Pending.ToString()
+                                        })
                                         .ToList();
 
 
@@ -99,14 +107,21 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
             Quiz edited = await _quizRepository.GetByIdAsync(id);
 
-            if (await _quizRepository.AnyAsync(q => q.Name == edited.Name &&
-                                                 q.ClassRoomId != edited.ClassRoomId))
-            {
-                throw new Exception("Don't Update the Quiz to the same Name in this Class!");
-            }
+            if (edited != null)
+                throw new Exception("The Quiz isn't Found!");
+
+            if (await _roomRepository.AnyAsync(r => r.Id == putQuiz.ClassRoomId))
+                throw new Exception("The ClassRoom isn't Found!");
+
+            if (!await _permissionService.IsTeacherAsync(putQuiz.ClassRoomId))
+                throw new Exception("Only Teachers can use it");
 
             _getAllowQuizModify(edited);
 
+            if (await _quizRepository.AnyAsync(q => q.Name == edited.Name &&
+                                                 q.ClassRoomId != edited.ClassRoomId))          
+                throw new Exception("Don't Update the Quiz to the same Name in this Class!");
+            
             _quizRepository.Update(_mapper.Map(putQuiz, edited));
 
             await _quizRepository.SaveChangeAsync();
@@ -117,6 +132,9 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (deleted == null)
                 throw new Exception("The Quiz isn't Found!");
+
+            if (!await _permissionService.IsTeacherAsync(deleted.ClassRoomId))
+                throw new Exception("Only Teachers can use it");
 
             _quizRepository.Delete(deleted);
             await _quizRepository.SaveChangeAsync();

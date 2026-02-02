@@ -44,6 +44,8 @@ builder.Services.AddServiceApplication();
 builder.Services.InfrastructureRegistration(builder.Configuration);
 
 
+
+
 var app = builder.Build();
 
 

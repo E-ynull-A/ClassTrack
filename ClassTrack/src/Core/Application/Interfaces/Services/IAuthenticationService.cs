@@ -11,6 +11,6 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface IAuthenticationService
     {
         Task RegisterAsync(RegisterDTO registerDTO);
-        Task<TokenDTO> LoginAsync(LoginDTO loginDTO);
+        Task<ResponseTokenDTO> LoginAsync(LoginDTO loginDTO);
     }
 }

@@ -13,11 +13,11 @@ namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class PermissionService:IPermissionService
     {
-        private readonly ICasheService _casheService;
+        private readonly ICacheService _casheService;
         private readonly IHttpContextAccessor _accessor;
         private readonly ITeacherRepository _teacherRepository;
 
-        public PermissionService(ICasheService casheService,
+        public PermissionService(ICacheService casheService,
                                  IHttpContextAccessor accessor,
                                  ITeacherRepository teacherRepository)
         {
@@ -32,17 +32,22 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("The User is not Found!");
 
-            if(string.IsNullOrEmpty(userId) || classRoomId < 1)
+            if (string.IsNullOrEmpty(userId) || classRoomId < 1)
                 return false;
 
             string cacheKey = $"Is_Teacher_{userId}_{classRoomId}";
 
-            return await _casheService.CheckCasheAsync(cacheKey, async () =>
-            {
-                return await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
-                                                                .Any(tc => tc.ClassRoomId == classRoomId));
-              
-            },TimeSpan.FromMinutes(10));
+            var result = await _casheService.GetAsync<bool?>(cacheKey);
+
+            if(result.HasValue)
+                return result.Value;
+
+             bool tResult = await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
+                                                                     .Any(tc => tc.ClassRoomId == classRoomId));
+
+            await _casheService.SetCasheAsync(cacheKey, result, TimeSpan.FromMinutes(10));
+
+            return tResult;
         }
     }
 }

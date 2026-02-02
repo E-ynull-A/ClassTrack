@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.DTOs
 {
-    public record TokenDTO(
-        string UserName,
-        DateTime Expires,
-        string Token
-        );
-    
-    
+    public record RefreshTokenDTO(string RefreshToken);
+   
 }

@@ -1,3 +1,7 @@
+using ClassTrack.MVC.Middlewares;
+using ClassTrack.MVC.Services.Implementations;
+using ClassTrack.MVC.Services.Interfaces;
+
 namespace ClassTrack.MVC
 {
     public class Program
@@ -8,11 +12,20 @@ namespace ClassTrack.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IAuthenticationClientService, AuthenticationClientService>();
+            builder.Services.AddScoped<ICookieService, CookieService>();
+
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddTransient<TokenHandlerMiddleware>();
+
             builder.Services.AddHttpClient("ClassTrackClient", config =>
             {
                 config.BaseAddress = new Uri("https://localhost:7285/");
                 config.DefaultRequestHeaders.Add("accept","application/json");
             });
+        
+            
 
             var app = builder.Build();
 
@@ -31,10 +44,14 @@ namespace ClassTrack.MVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
             app.Run();
         }

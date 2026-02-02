@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.Interfaces.Services
 {
-    public interface ICasheService
+    public interface IEmailService
     {
-        Task<T> CheckCasheAsync<T>(string key, Func<Task<T>> factory, TimeSpan? expiration);
+
+        Task SendEmailAsync();
     }
 }

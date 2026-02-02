@@ -10,6 +10,9 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface ITokenService
     {
-        TokenDTO CreateAccessToken(AppUser user);
+        AccessTokenDTO CreateAccessToken(AppUser user,
+                                         IEnumerable<string> roles,
+                                         int minutes);
+        RefreshTokenDTO GenerateRefreshToken();
     }
 }

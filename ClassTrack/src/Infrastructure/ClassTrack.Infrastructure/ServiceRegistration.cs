@@ -33,12 +33,20 @@ namespace ClassTrack.Infrastructure
                 ValidIssuer = config["JWT:issuer"],
                 ValidAudience = config["JWT:audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config["JWT:securityKey"])),
-                LifetimeValidator = (_, exp, token, _) =>  exp is not null && token is not null ? DateTime.UtcNow > exp : false 
+                LifetimeValidator = (_, exp, token, _) =>  exp is not null && token is not null ? DateTime.UtcNow < exp : false ,
+
+                ClockSkew = TimeSpan.Zero
+            });
+
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.InstanceName = config["RedisCache:Name"];
+                opt.Configuration = config["RedisCache:Configuration"];
             });
 
 
-            services.AddMemoryCache();
-            services.AddScoped<ICasheService, CacheService>();
+            services.AddScoped<ICacheService, CacheService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             return services;
             
