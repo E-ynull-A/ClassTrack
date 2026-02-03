@@ -19,7 +19,6 @@ namespace ClassTrack.API.Controllers
             _roomService = roomService;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Get(int page = 0,int take = 0)
         {

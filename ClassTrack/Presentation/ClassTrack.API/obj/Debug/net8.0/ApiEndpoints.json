@@ -196,6 +196,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ClassTrack.API.Controllers.PermissionsController",
+    "Method": "Get",
+    "RelativePath": "Permissions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classRoomId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
     "Method": "Get",
     "RelativePath": "Questions",
@@ -630,6 +646,22 @@
         "Name": "id",
         "Type": "System.Int64",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.TeachersController",
+    "Method": "GetTeacherClasses",
+    "RelativePath": "Teachers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

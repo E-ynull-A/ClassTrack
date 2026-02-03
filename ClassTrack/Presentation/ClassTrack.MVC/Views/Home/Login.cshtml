@@ -1,27 +1,31 @@
-﻿
+﻿@model LoginVM
+
 
 <link rel="stylesheet" href="~/css/login.css">
-    <div class="container">
+<div class="container">
+    <form method="post">
         <div class="card login-card" style="width:450px;height:400px">
             <div class="h1">Giriş</div>
             <div class="muted">Email və şifrə ilə daxil ol.</div>
 
-            <div class="line"></div>
-
             <div class="label">Email</div>
-            <input class="input" id="email"/>
+            <input class="input" asp-for="UsernameOrEmail" id="email" />
+            <span asp-validation-for="UsernameOrEmail" class="help-block text-danger"></span>
 
             <div class="label">Şifrə</div>
-            <input class="input" id="password" type="password" placeholder="••••••••" />
+            <input class="input" asp-for="Password" id="password" type="password" placeholder="••••••••" />
+            <span asp-validation-for="Password" class="help-block text-danger"></span>
 
             <div class="row" style="margin-top:14px">
                 <button class="btn primary" id="btnLogin">Login</button>
                 <button class="btn" id="btnDemo">Demo doldur</button>
-            </div>      
+            </div>
         </div>
-    </div>
+    </form>
+    
+</div>
 
-    <div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>
-    <script src="~/js/login.js"></script>
+<div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>
+<script src="~/js/login.js"></script>
 
 

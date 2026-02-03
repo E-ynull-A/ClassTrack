@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.Interfaces.Repositories;
+﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface ITeacherService
     {
+        Task<GetTeacherClassItemDTO> GetTeacherClassesAsync(string userId);
     }
 }

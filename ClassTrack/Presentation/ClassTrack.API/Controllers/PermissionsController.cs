@@ -1,0 +1,26 @@
+﻿using ClassTrack.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace ClassTrack.API.Controllers
+{
+    [Route("[controller]")]
+    [ApiController]
+    public class PermissionsController : ControllerBase
+    {
+        private readonly IPermissionService _permissionService;
+
+        public PermissionsController(IPermissionService permissionService)
+        {
+            _permissionService = permissionService;
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Get(long classRoomId)
+        {
+           return Ok(await _permissionService.IsTeacherAsync(classRoomId));
+        }
+    }
+}

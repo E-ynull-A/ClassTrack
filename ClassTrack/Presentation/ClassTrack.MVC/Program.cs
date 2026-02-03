@@ -1,6 +1,9 @@
 using ClassTrack.MVC.Middlewares;
 using ClassTrack.MVC.Services.Implementations;
 using ClassTrack.MVC.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
+using ClassTrack.MVC.Services;
 
 namespace ClassTrack.MVC
 {
@@ -13,18 +16,20 @@ namespace ClassTrack.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<IAuthenticationClientService, AuthenticationClientService>();
-            builder.Services.AddScoped<ICookieService, CookieService>();
-
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddTransient<TokenHandlerMiddleware>();
+            builder.Services.AddService();
 
             builder.Services.AddHttpClient("ClassTrackClient", config =>
             {
                 config.BaseAddress = new Uri("https://localhost:7285/");
                 config.DefaultRequestHeaders.Add("accept","application/json");
-            });
-        
+            }).AddHttpMessageHandler<TokenHandlerMiddleware>();
+
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(opt =>
+                {
+                    opt.LoginPath = "/Home/Login";
+                });
             
 
             var app = builder.Build();

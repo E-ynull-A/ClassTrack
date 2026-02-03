@@ -19,11 +19,9 @@ namespace ClassTrack.MVC.Middlewares
             string? access = _accessor.HttpContext.Request.Cookies["AccessToken"];
 
             if(access is not null)
-                request.Headers.Authorization = new AuthenticationHeaderValue(access);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer",access);
 
             return base.SendAsync(request, cancellationToken);
         }
-
-
     }
 }

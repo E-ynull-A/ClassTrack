@@ -14,7 +14,9 @@ namespace ClassTrack.Application.MappingProfiles
         public ClassRoomProfile()
         {
             CreateMap<ClassRoom, GetClassRoomItemDTO>();
-            CreateMap<ClassRoom, GetClassRoomDTO>();
+            CreateMap<ClassRoom, GetClassRoomDTO>()
+                .ForCtorParam(nameof(GetClassRoomDTO.MemberCount),
+                              opt=>opt.MapFrom(c=>c.StudentClasses.Count));
 
         }
     }

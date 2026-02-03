@@ -1,9 +1,11 @@
-﻿
+﻿@model GetClassRoomWithPermissionVM
+
 
 <link rel="stylesheet" href="~/css/class.css">
+
 <div class="topbar">
     <div>
-        <div class="h1" id="classTitle">Network 101</div>
+        <div class="h1" id="classTitle">@Model.ClassRoom.Name</div>
 
         <div class="muted">
             Role: <span class="badge teacher" id="roleBadge">Teacher</span>
@@ -14,14 +16,12 @@
             <div class="label">Select class</div>
             <div class="switch-row">
                 <select class="input" id="classSelect">
-                    <option value="1" selected>Network 101</option>
-                    <option value="2">Operating Systems</option>
-                    <option value="3">Database Systems</option>
+                    @foreach (GetClassRoomItemVM item in Model.TeacherClassesVM.TeacherClasses)
+                    {
+                        <option value="@item.Id" selected>@item.Name</option>
+                    }
                 </select>
-                <a class="btn" href="dashboard.html">All classes</a>
-            </div>
-            <div class="muted" style="margin-top:6px">
-                Teacher bir neçə sinif idarə edə bilər. Buradan sinif dəyişirsən.
+                <a class="btn" asp-action="dashboard">All classes</a>
             </div>
         </div>
     </div>
@@ -33,18 +33,17 @@
     </div>
 </div>
 
+
 <div class="row">
     <div class="card col2">
         <div class="h2">Class Info</div>
         <div class="kv">
             <div class="k">Class Code</div>
-            <div class="v"><span id="classCode">A7K2Q9</span> <span class="muted">(Teacher-only)</span></div>
+            <div class="v"><span id="classCode">@Model.ClassRoom.PrivateKey</span> <span class="muted">(Teacher-only)</span></div>
 
             <div class="k">Members</div>
-            <div class="v"><span id="memberCount">24</span></div>
+            <div class="v"><span id="memberCount">@Model.ClassRoom.MemberCount</span></div>
 
-            <div class="k">Today</div>
-            <div class="v"><span class="muted">Attendance tabından bax</span></div>
         </div>
     </div>
 
@@ -121,6 +120,6 @@
             <a class="btn" href="members.html">Open Members Page</a>
         </div>
     </div>
-    
 </div>
+
 <script defer src="~/js/class.js"></script>

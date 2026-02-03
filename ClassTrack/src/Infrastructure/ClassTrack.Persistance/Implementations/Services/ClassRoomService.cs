@@ -3,6 +3,7 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Enums;
 using ClassTrack.Persistance.DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -30,13 +31,22 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page, int take)
         {
-            return _mapper.Map<ICollection<GetClassRoomItemDTO>>
-                                                    (await _roomRepository.GetAll(page: page,
-                                                                                  take: take).ToListAsync());
+            string? userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userRole = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+
+            var getClasses = _roomRepository.GetAll(page: page, take: take,sort:x=>x.Name);
+
+            if (userId is not null && userRole != UserRole.Admin.ToString())
+                return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses
+                                                .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId))
+                                                .ToListAsync());
+
+            return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses.ToListAsync());
         }
         public async Task<GetClassRoomDTO> GetByIdAsync(long id)
         {
-            ClassRoom classRoom = await _roomRepository.GetByIdAsync(id);
+            ClassRoom classRoom = await _roomRepository.GetByIdAsync(id,
+                                                                    includes: [nameof(ClassRoom.StudentClasses)]);
 
             if (classRoom is null)
                 throw new Exception("The Class Room isn't Found!");
@@ -60,7 +70,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 TeacherClasses = new List<TeacherClassRoom>()
             };
 
-            Teacher? teacher = await _teacherRepository.GetTeacherByUserId(userId);
+            Teacher? teacher = await _teacherRepository.GetTeacherByUserIdAsync(userId);
 
 
             if (teacher is null)

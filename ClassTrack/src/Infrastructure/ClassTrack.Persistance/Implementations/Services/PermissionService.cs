@@ -27,7 +27,8 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task<bool> IsTeacherAsync(long classRoomId)
         {
-            string userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userId = _accessor.HttpContext.User
+                                        .FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("The User is not Found!");
@@ -42,10 +43,11 @@ namespace ClassTrack.Persistance.Implementations.Services
             if(result.HasValue)
                 return result.Value;
 
-             bool tResult = await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
+            bool tResult = await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
                                                                      .Any(tc => tc.ClassRoomId == classRoomId));
 
-            await _casheService.SetCasheAsync(cacheKey, result, TimeSpan.FromMinutes(10));
+            await _casheService
+                        .SetCasheAsync(cacheKey, tResult, TimeSpan.FromMinutes(10));
 
             return tResult;
         }

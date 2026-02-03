@@ -1,4 +1,6 @@
-﻿
+﻿@model IEnumerable<GetClassRoomItemVM>
+
+
 <link rel="stylesheet" href="~/css/dashboard.css">
 <div class="topbar">
     <div>
@@ -31,26 +33,21 @@
 
 <div class="card" style="margin-top:16px">
     <div class="h2">My Classes</div>
-    <div class="muted">Bunu ViewModel-lə dolduracaqsan.</div>
     <div class="line"></div>
 
     <div class="classes" id="classes">
-        <!-- sample cards (server-side render edəcəksən) -->
-        <a class="class-card" href="class.html">
-            <div class="title">Network 101</div>
-            <div class="meta">
-                <span class="badge teacher">Teacher</span>
-                <span class="muted">3 quizzes</span>
-            </div>
-        </a>
+        @foreach(GetClassRoomItemVM classRoom in Model)
+        {
+            <a class="class-card" asp-action="ClassRoom" asp-route-id="@classRoom.Id">
+                <div class="title">@classRoom.Name</div>
+                <div class="meta">
+                    <span class="badge teacher">Teacher</span>
+                    <span class="muted">3 quizzes</span>
+                </div>
+            </a>
+        }
+        
 
-        <a class="class-card" href="class.html">
-            <div class="title">Algorithms</div>
-            <div class="meta">
-                <span class="badge student">Student</span>
-                <span class="muted">1 quiz</span>
-            </div>
-        </a>
     </div>
 </div>
 

@@ -1,4 +1,5 @@
-﻿using ClassTrack.Domain.Entities;
+﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface ITeacherRepository:IRepository<Teacher>
     {
-        Task<Teacher> GetTeacherByUserId(string userId);
+        Task<Teacher> GetTeacherByUserIdAsync(string userId);    
     }
 }

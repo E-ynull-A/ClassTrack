@@ -19,7 +19,8 @@ namespace ClassTrack.MVC.Middlewares
             }
             catch(Exception e)
             {
-                //context.Response.Redirect();
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync($"Qaqa, xəta budur: {e.Message}\n{e.StackTrace}");
             }
      
     

@@ -14,7 +14,7 @@ namespace ClassTrack.MVC.Services.Implementations
         public AuthenticationClientService(IHttpClientFactory clientFactory,
                                             ICookieService cookieService)
         {
-            _httpClient = clientFactory.CreateClient("ClassTrack");
+            _httpClient = clientFactory.CreateClient("ClassTrackClient");
             _cookieService = cookieService;
         }
 
@@ -22,12 +22,15 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             var message = await _httpClient.PostAsJsonAsync("Accounts/Login", loginVM);
 
+            if (!message.IsSuccessStatusCode)
+            {
+                throw new Exception("User has Problem");
+            }
+
             var tokens = await message.Content.ReadFromJsonAsync<ResponseTokenVM>();
 
             _cookieService.SetTokenCookie("AccessToken",tokens.AccessToken.AccessToken,15);
-            _cookieService.SetTokenCookie("RefreshToken", tokens.RefreshToken.RefreshToken, 60 * 24 * 7);
-
-            
+            _cookieService.SetTokenCookie("RefreshToken", tokens.RefreshToken.RefreshToken, 60 * 24 * 7);         
         }
 
         public Task Register(RegisterVM registerVM)
