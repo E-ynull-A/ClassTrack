@@ -1,54 +1,74 @@
-﻿@model IEnumerable<GetClassRoomItemVM>
+﻿@model DashboardVM
 
 
 <link rel="stylesheet" href="~/css/dashboard.css">
-<div class="topbar">
-    <div>
-        <div class="h1">Dashboard</div>
-        <div class="muted">Sinif yarat, qoşul, quiz-ləri idarə et.</div>
-    </div>
-    <div class="nav">
-        <a class="btn" href="dashboard.html">Dashboard</a>
-        <a class="btn" href="login.html">Logout</a>
-    </div>
-</div>
 
-<div class="row">
-    <div class="card col">
-        <div class="h2">Create Class (Teacher)</div>
-        <div class="label">Class name</div>
-        <input class="input" id="className" placeholder="Məs: Network 101" />
-        <button class="btn primary" id="btnCreate" style="margin-top:12px">Create</button>
-        <div class="muted hint">MVC-də: POST /Classes/Create</div>
-    </div>
+<div class="row" style="display:flex">
+    <form method="post" class="card col">
+        <div>
+            <div class="h2">Create Class</div>
+            <div class="label">Class name</div>
+            <input class="input" asp-for="@Model.PostClass.Name" id="className" placeholder="Məs: Network 101" />
+            <span asp-validation-for="@Model.PostClass.Name"></span>
+            <button type="submit" class="btn primary" id="btnCreate" style="margin-top:12px">Create</button>
+            <div class="mini-panel" id="createPanel" style="display:none; margin-top:12px;">
+                <div class="muted" id="createPanelText">Class hazırdır. İndi create edə bilərsən.</div>
 
-    <div class="card col">
-        <div class="h2">Join Class (Student)</div>
-        <div class="label">Class code</div>
-        <input class="input" id="classCode" placeholder="Məs: A7K2Q9" />
-        <button class="btn ok" id="btnJoin" style="margin-top:12px">Join</button>
-        <div class="muted hint">MVC-də: POST /Classes/Join</div>
-    </div>
+                <div class="row" style="margin-top:10px; gap:10px; align-items:center;">
+                    <span class="badge" id="createdCode" style="display:none;">CODE: A7K2Q9</span>
+                    <button class="btn" id="btnCopyCreated" type="button" style="display:none;">Copy code</button>
+                    <a class="btn primary" id="btnGoClass" href="#" style="display:none;">Go to class</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form class="card col">
+        <div>
+            <div class="h2">Join Class (Student)</div>
+            <div class="label">Class code</div>
+            <input class="input" id="classCode" placeholder="Məs: A7K2Q9" />
+            <button class="btn ok" id="btnJoin" style="margin-top:12px">Join</button>
+            <div class="muted hint">MVC-də: POST /Classes/Join</div>
+        </div>
+    </form>
+ 
 </div>
 
 <div class="card" style="margin-top:16px">
     <div class="h2">My Classes</div>
+
     <div class="line"></div>
 
-    <div class="classes" id="classes">
-        @foreach(GetClassRoomItemVM classRoom in Model)
-        {
-            <a class="class-card" asp-action="ClassRoom" asp-route-id="@classRoom.Id">
-                <div class="title">@classRoom.Name</div>
-                <div class="meta">
-                    <span class="badge teacher">Teacher</span>
-                    <span class="muted">3 quizzes</span>
-                </div>
-            </a>
-        }
-        
-
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            @foreach (GetClassRoomItemVM classRoom in Model.Classes)
+            {
+                <div class="swiper-slide" >
+                    <div class="class-card">
+                        <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
+                            <div class="card-content">
+                                <div class="title">@classRoom.Name</div>
+                                <div class="meta">
+                                    <span class="badge-custom">
+                                        <i class="fas fa-users"></i> @classRoom.MemberCount Member
+                                    </span>
+                                    <span class="point-muted">
+                                        <i class="fas fa-chart-line"></i> @classRoom.AvgPoint %
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>              
+            }
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
+
+    
+
+
 </div>
 
 <div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>

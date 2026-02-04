@@ -1,4 +1,4 @@
-.col2 {
+﻿.col2 {
     flex: 2;
     min-width: 320px
 }
@@ -151,3 +151,35 @@
         min-width: 260px;
         flex: 1;
     }
+
+
+.nav-split {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+    /* Copy Code aşağı düşsün */
+    .nav-split #btnCopyCode {
+        flex-basis: 100%;
+        width: fit-content; /* düymə full olmasın */
+    }
+
+
+/* override edək ki mütləq işləsin */
+.nav-actions {
+    display: grid !important;
+    grid-template-columns: auto auto; /* 2 düymə yan-yana */
+    gap: 10px;
+    justify-content: center;
+    align-items: end;
+}
+
+    /* Copy Code aşağı sətir + sağda */
+    .nav-actions #btnCopyCode {
+        grid-column: 1 / -1; /* bütün sətri tutsun */
+        justify-self: center; /* sağa yapışsın */
+    }
+

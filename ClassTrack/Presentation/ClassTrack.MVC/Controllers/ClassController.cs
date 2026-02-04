@@ -14,17 +14,39 @@ namespace ClassTrack.MVC.Controllers
         {
             _roomService = roomService;
         }
+
+
+        public async Task<IActionResult> Logout()
+        {
+           await _roomService.LogoutAsync();
+
+           return RedirectToAction("Index","Home");
+        }
         public async Task<IActionResult> ClassRoom(long id)
         {          
             return View(await _roomService.GetByIdAsync(id));
         }
 
         public async Task<IActionResult> Dashboard()
-        {
-            IEnumerable<GetClassRoomItemVM> data = await _roomService.GetAllAsync();
-
-            return View(data);
+        {            
+            return View(new DashboardVM(await _roomService.GetAllAsync()));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Dashboard(DashboardVM dashboardVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(new DashboardVM(await _roomService.GetAllAsync(),
+                                                    dashboardVM.PostClass));
+            }
+
+            await _roomService.CreateClassRoomAsync(dashboardVM.PostClass);
+
+            return RedirectToAction("Dashboard");
+        }
+
+        
 
         public IActionResult QuizEditor()
         {

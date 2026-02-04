@@ -20,6 +20,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet]
+     
         public async Task<IActionResult> Get(int page = 0,int take = 0)
         {
             return Ok(await _roomService.GetAllAsync(page:page,take:take));

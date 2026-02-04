@@ -67,6 +67,18 @@
         }
       }
     },
+    "/Accounts/Logout": {
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/ClassRooms": {
       "get": {
         "tags": [
@@ -1082,27 +1094,6 @@
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/Teachers": {
-      "get": {
-        "tags": [
-          "Teachers"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
             }
           }
         ],

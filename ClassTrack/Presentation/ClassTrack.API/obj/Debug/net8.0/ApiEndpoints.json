@@ -17,6 +17,16 @@
   },
   {
     "ContainingType": "ClassTrack.API.Controllers.AccountsController",
+    "Method": "Logout",
+    "RelativePath": "Accounts/Logout",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.AccountsController",
     "Method": "Register",
     "RelativePath": "Accounts/Register",
     "HttpMethod": "POST",
@@ -646,22 +656,6 @@
         "Name": "id",
         "Type": "System.Int64",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ClassTrack.API.Controllers.TeachersController",
-    "Method": "GetTeacherClasses",
-    "RelativePath": "Teachers",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []

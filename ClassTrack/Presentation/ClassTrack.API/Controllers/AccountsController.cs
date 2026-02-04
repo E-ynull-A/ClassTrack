@@ -32,5 +32,12 @@ namespace ClassTrack.API.Controllers
         {
             return Ok(await _authenticationService.LoginAsync(loginDTO));
         }
+
+        [HttpDelete("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+           await _authenticationService.LogoutAsync();
+           return NoContent();
+        }
     }
 }

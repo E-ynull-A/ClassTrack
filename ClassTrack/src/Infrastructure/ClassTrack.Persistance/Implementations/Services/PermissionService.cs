@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.Interfaces.Repositories;
+﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Persistance.DAL;
@@ -25,31 +26,32 @@ namespace ClassTrack.Persistance.Implementations.Services
             _accessor = accessor;
             _teacherRepository = teacherRepository;
         }
-        public async Task<bool> IsTeacherAsync(long classRoomId)
+        public async Task<IsTeacherDTO> IsTeacherAsync(long classRoomId)
         {
-            string? userId = _accessor.HttpContext.User
-                                        .FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+           
 
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("The User is not Found!");
 
             if (string.IsNullOrEmpty(userId) || classRoomId < 1)
-                return false;
+                throw new Exception("User not Found!!");
 
             string cacheKey = $"Is_Teacher_{userId}_{classRoomId}";
 
             var result = await _casheService.GetAsync<bool?>(cacheKey);
 
             if(result.HasValue)
-                return result.Value;
+                return new IsTeacherDTO(result.Value);
 
-            bool tResult = await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
-                                                                     .Any(tc => tc.ClassRoomId == classRoomId));
+            IsTeacherDTO tDTO = new IsTeacherDTO(await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
+                                                                     .Any(tc => tc.ClassRoomId == classRoomId)));
 
             await _casheService
-                        .SetCasheAsync(cacheKey, tResult, TimeSpan.FromMinutes(10));
+                        .SetCasheAsync(cacheKey, tDTO.IsTeacher, TimeSpan.FromMinutes(10));
 
-            return tResult;
+            return tDTO;
         }
     }
 }

@@ -6,6 +6,10 @@
     <title>ClassRoom</title>
 
     <link rel="stylesheet" href="~/css/base.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    
 </head>
 <body>
 
@@ -26,14 +30,28 @@
                     <button class="icon-btn mobile-toggle" data-mobile-toggle title="Menu">
                         <span class="icon" style="--mask:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22black%22><path d=%22M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z%22/></svg>');"></span>
                     </button>
-                    <a class="btn" asp-controller="Home" asp-action="Login">Login</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn" asp-controller="Class" asp-action="Logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a class="btn" asp-controller="Home" asp-action="Login">Login</a>
+                    }
                 </div>
             </div>
 
             <div class="mobile-panel" data-mobile-panel>
                 <nav class="menu">
                     <a class="btn primary" asp-controller="Home" asp-action="ClassRoom">Class</a>
-                    <a class="btn" asp-controller="Home" asp-action="Login">Login</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn" asp-controller="Class" asp-action="Logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a class="btn" asp-controller="Home" asp-action="Login">Login</a>
+                    }
                 </nav>
             </div>
         </div>

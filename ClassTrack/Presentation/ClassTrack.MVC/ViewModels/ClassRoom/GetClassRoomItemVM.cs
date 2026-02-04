@@ -7,6 +7,6 @@ namespace ClassTrack.MVC.ViewModels
         long Id,
         string Name,
         decimal AvgPoint,
-        bool IsTeacher);
+        int MemberCount);
     
 }

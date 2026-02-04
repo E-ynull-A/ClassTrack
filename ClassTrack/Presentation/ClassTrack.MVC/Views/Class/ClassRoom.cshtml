@@ -16,21 +16,23 @@
             <div class="label">Select class</div>
             <div class="switch-row">
                 <select class="input" id="classSelect">
-                    @foreach (GetClassRoomItemVM item in Model.TeacherClassesVM.TeacherClasses)
+                    @foreach (GetClassRoomItemVM item in Model.ClassesVM)
                     {
-                        <option value="@item.Id" selected>@item.Name</option>
+                        <option style="color:black" value="@item.Id" selected>@item.Name</option>
                     }
                 </select>
                 <a class="btn" asp-action="dashboard">All classes</a>
             </div>
         </div>
     </div>
-
-    <div class="nav">
-        <button class="btn" id="btnCopyCode">Copy Code</button>
+    <div class="nav nav-actions" style="margin-top:60px">
         <a class="btn primary" href="quiz-editor.html" id="btnCreateQuiz">+ Create Quiz</a>
         <a class="btn ok" href="task-teacher.html" id="btnCreateTask">+ Create Task</a>
+        <button class="btn" id="btnCopyCode" type="button">Copy Code</button>
     </div>
+
+
+
 </div>
 
 

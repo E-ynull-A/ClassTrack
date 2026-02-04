@@ -10,6 +10,7 @@ namespace ClassTrack.Application.DTOs
         
         long Id,
         string Name,
-        decimal AvgPoint);
+        decimal AvgPoint,
+        int MemberCount);
     
 }

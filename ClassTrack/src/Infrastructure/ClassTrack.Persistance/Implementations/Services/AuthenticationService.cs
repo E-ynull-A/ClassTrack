@@ -3,8 +3,11 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -15,18 +18,24 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ITokenService _tokenService;
         private readonly ICacheService _cacheService;
         private readonly IEmailService _emailService;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly IHttpContextAccessor _accessor;
 
         public AuthenticationService(UserManager<AppUser> manager,
                                         IMapper mapper,
                                         ITokenService tokenService,
                                         ICacheService cacheService,
-                                        IEmailService emailService)
+                                        IEmailService emailService,
+                                        SignInManager<AppUser> signInManager,
+                                        IHttpContextAccessor accessor)
         {
             _manager = manager;
             _mapper = mapper;
             _tokenService = tokenService;
             _cacheService = cacheService;
             _emailService = emailService;
+            _signInManager = signInManager;
+            _accessor = accessor;
         }
         public async Task RegisterAsync(RegisterDTO registerDTO)
         {
@@ -53,22 +62,21 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task<ResponseTokenDTO> LoginAsync(LoginDTO loginDTO)
         {
-            AppUser? user = null;
+            AppUser? user = await _manager.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.UsernameOrEmail 
+                                                                       || u.Email == loginDTO.UsernameOrEmail);
 
-            if (loginDTO.UsernameOrEmail.Contains("@"))
+            if (user == null)
             {
-                user = await _manager.Users.FirstOrDefaultAsync(u => u.Email == loginDTO.UsernameOrEmail);
+                throw new Exception("The Username,Email or Password is invalid!");
             }
 
-            else
+            bool check = await _manager.CheckPasswordAsync(user, loginDTO.Password);
+
+            if (!check)
             {
-                user = await _manager.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.UsernameOrEmail);
+                await _manager.AccessFailedAsync(user);
+                throw new Exception("The Username,Email or Password is invalid!");
             }
-                
-            if(user is null)
-            {
-                throw new Exception("User Couldn't Find!");
-            }       
 
             IEnumerable<string> roles = await _manager.GetRolesAsync(user);
            
@@ -79,11 +87,24 @@ namespace ClassTrack.Persistance.Implementations.Services
             );
 
             await _cacheService.SetCasheAsync(user.Id, response.RefreshToken, TimeSpan.FromDays(7));
-            await _emailService.SendEmailAsync();
-
+            await _emailService.SendEmailAsync();          
 
             return response;
 
+        }
+
+        public async Task LogoutAsync()
+        {
+            string? userId = _accessor.HttpContext
+                                            .User
+                                            .FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                throw new Exception("User not Found!");
+
+           await _cacheService.RemoveAsync(userId);
+
+           await _signInManager.SignOutAsync();
         }
     }
 }

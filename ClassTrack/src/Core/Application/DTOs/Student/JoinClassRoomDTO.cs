@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record JoinClassRoomDTO
-        (
-        
+        (     
             string ClassKey
-
         );
    
 }

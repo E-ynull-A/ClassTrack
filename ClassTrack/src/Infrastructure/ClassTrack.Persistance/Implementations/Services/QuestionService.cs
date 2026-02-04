@@ -140,7 +140,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 if (deletedOpen is null)
                     throw new Exception("The Question isn't Found!");
 
-                if (!await _permissionService.IsTeacherAsync(deletedOpen.Quiz.ClassRoomId))
+                if (!(await _permissionService.IsTeacherAsync(deletedOpen.Quiz.ClassRoomId)).IsTeacher)
                     throw new Exception("The Teacher can use it");
 
                 deletedOpen.IsDeleted = true;
@@ -207,7 +207,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             
             if (oldQuestion == null) throw new Exception("The Question isn't Found!");
 
-            if (!await _permissionService.IsTeacherAsync(oldQuestion.Quiz.ClassRoomId))
+            if (!(await _permissionService.IsTeacherAsync(oldQuestion.Quiz.ClassRoomId)).IsTeacher)
                 throw new Exception("You Are Not a Teacher of This Class!!!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim() && q.Id != id))
@@ -222,7 +222,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if(quiz is null) 
                 throw new Exception("The Quiz isn't Found!");
 
-            if (!await _permissionService.IsTeacherAsync(quiz.ClassRoomId))
+            if (!(await _permissionService.IsTeacherAsync(quiz.ClassRoomId)).IsTeacher)
                 throw new Exception("You Are Not a Teacher of This Class!!!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim()))

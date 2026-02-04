@@ -3,7 +3,7 @@
     public record GetClassRoomWithPermissionVM(
         
         IsTeacherVM IsTeacher,
-        GetClassRoomVM ClassRoom,
-        GetTeacherClassRoomItemVM TeacherClassesVM);
+        GetClassRoomVM? ClassRoom,
+        IEnumerable<GetClassRoomItemVM>? ClassesVM);
    
 }

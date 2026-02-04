@@ -11,6 +11,6 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface ITeacherService
     {
-        Task<GetTeacherClassItemDTO> GetTeacherClassesAsync(string userId);
+        //Task<GetTeacherClassItemDTO> GetTeacherClassesAsync();
     }
 }

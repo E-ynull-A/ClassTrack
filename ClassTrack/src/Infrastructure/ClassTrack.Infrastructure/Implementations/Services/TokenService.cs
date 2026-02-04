@@ -60,7 +60,6 @@ namespace ClassTrack.Infrastructure.Implementations.Services
                                 token.ValidFrom,
                                 handler.WriteToken(token));  
         }
-
         public RefreshTokenDTO GenerateRefreshToken()
         {              
             return new RefreshTokenDTO(new Guid().ToString("N")

@@ -38,7 +38,9 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (userId is not null && userRole != UserRole.Admin.ToString())
                 return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses
-                                                .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId))
+                                                .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId) 
+                                                         || c.TeacherClasses.Any(tc=> tc.Teacher.AppUserId == userId))
+                                                .Include(c=>c.StudentClasses)
                                                 .ToListAsync());
 
             return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses.ToListAsync());

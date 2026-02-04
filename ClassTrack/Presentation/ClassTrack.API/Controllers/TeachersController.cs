@@ -15,14 +15,5 @@ namespace ClassTrack.API.Controllers
         {
             _teacherService = teacherService;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetTeacherClasses(string? userId)
-        {
-            if (string.IsNullOrEmpty(userId))
-                throw new Exception("The User isn't Found!");
-
-            return Ok(await _teacherService.GetTeacherClassesAsync(userId));
-        }
     }
 }

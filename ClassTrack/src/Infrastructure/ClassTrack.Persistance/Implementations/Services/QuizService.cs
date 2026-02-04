@@ -72,7 +72,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("The ClassRoom isn't Found!");
             }
 
-            if (!await _permissionService.IsTeacherAsync(postQuiz.ClassRoomId))
+            if (!(await _permissionService.IsTeacherAsync(postQuiz.ClassRoomId)).IsTeacher)
                 throw new Exception("Only Teachers can use it");
 
             if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&
@@ -113,7 +113,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (await _roomRepository.AnyAsync(r => r.Id == putQuiz.ClassRoomId))
                 throw new Exception("The ClassRoom isn't Found!");
 
-            if (!await _permissionService.IsTeacherAsync(putQuiz.ClassRoomId))
+            if (!(await _permissionService.IsTeacherAsync(putQuiz.ClassRoomId)).IsTeacher)
                 throw new Exception("Only Teachers can use it");
 
             _getAllowQuizModify(edited);
@@ -133,7 +133,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (deleted == null)
                 throw new Exception("The Quiz isn't Found!");
 
-            if (!await _permissionService.IsTeacherAsync(deleted.ClassRoomId))
+            if (!(await _permissionService.IsTeacherAsync(deleted.ClassRoomId)).IsTeacher)
                 throw new Exception("Only Teachers can use it");
 
             _quizRepository.Delete(deleted);

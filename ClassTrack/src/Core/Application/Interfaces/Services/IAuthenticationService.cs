@@ -12,5 +12,6 @@ namespace ClassTrack.Application.Interfaces.Services
     {
         Task RegisterAsync(RegisterDTO registerDTO);
         Task<ResponseTokenDTO> LoginAsync(LoginDTO loginDTO);
+        Task LogoutAsync();
     }
 }
