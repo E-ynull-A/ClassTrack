@@ -5,6 +5,7 @@ namespace ClassTrack.MVC.Services.Interfaces
     public interface IAuthenticationClientService
     {
         Task Register(RegisterVM registerVM);
-        Task LoginAsync(LoginVM loginVM);
+        Task<bool> LoginAsync(LoginVM loginVM);
+        Task LogoutAsync();
     }
 }

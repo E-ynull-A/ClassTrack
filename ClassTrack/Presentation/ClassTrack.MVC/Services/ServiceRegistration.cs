@@ -11,6 +11,7 @@ namespace ClassTrack.MVC.Services
             services.AddScoped<ICookieService, CookieService>();
             services.AddScoped<IAuthenticationClientService, AuthenticationClientService>();
             services.AddScoped<IClassRoomService, ClassRoomService>();
+            services.AddScoped<ITokenClientService, TokenClientService>();
 
 
             services.AddHttpContextAccessor();

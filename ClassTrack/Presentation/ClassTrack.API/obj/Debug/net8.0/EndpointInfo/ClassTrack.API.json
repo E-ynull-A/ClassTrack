@@ -1103,6 +1103,18 @@
           }
         }
       }
+    },
+    "/Tokens/Refresh": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

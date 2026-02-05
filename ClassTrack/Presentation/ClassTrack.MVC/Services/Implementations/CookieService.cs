@@ -18,11 +18,26 @@ namespace ClassTrack.MVC.Services.Implementations
             {
                 HttpOnly = true,
                 SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = DateTime.UtcNow.AddMinutes(expiration)
+                Secure = true, 
+                Expires = DateTime.UtcNow.AddDays(expiration)
             };
 
             _accessor.HttpContext.Response.Cookies.Append(key, value, cookieOpt);         
+        }
+
+        public void RemoveCookie(string key)
+        {
+            _accessor.HttpContext.Response.Cookies.Delete(key);
+        }
+
+        public bool HasCookie(string key)
+        {
+            return _accessor.HttpContext.Request.Cookies.ContainsKey(key);
+        }
+
+        public string GetCookieData(string key)
+        {
+           return _accessor.HttpContext.Request.Cookies.FirstOrDefault(c => c.Key == key).Value;
         }
     }
 }

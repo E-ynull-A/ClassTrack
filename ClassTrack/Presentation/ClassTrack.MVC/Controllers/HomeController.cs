@@ -28,9 +28,12 @@ namespace ClassTrack.MVC.Controllers
         [HttpPost]              
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
-            await _clientService.LoginAsync(loginVM);
+            if(await _clientService.LoginAsync(loginVM))
+            {
+                return RedirectToAction("Dashboard", "Class");
+            }
 
-            return RedirectToAction("Dashboard", "Class");
+            return View(loginVM);
         }
 
     }

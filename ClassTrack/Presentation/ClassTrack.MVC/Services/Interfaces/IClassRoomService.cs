@@ -7,6 +7,6 @@ namespace ClassTrack.MVC.Services.Interfaces
         Task<IEnumerable<GetClassRoomItemVM>> GetAllAsync();
         Task<GetClassRoomWithPermissionVM> GetByIdAsync(long id);
         Task CreateClassRoomAsync(PostClassRoomVM classRoomVM);
-        Task LogoutAsync();
+        Task DeleteClassRoomAsync(long id);
     }
 }

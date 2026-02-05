@@ -2,6 +2,7 @@ wwwroot\css\attendance.css
 wwwroot\css\base.css
 wwwroot\css\class.css
 wwwroot\css\dashboard.css
+wwwroot\css\error.css
 wwwroot\css\index.css
 wwwroot\css\login.css
 wwwroot\css\members.css

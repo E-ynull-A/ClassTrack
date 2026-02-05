@@ -40,7 +40,6 @@
 }
 
 
-/* Kartın ümumi görünüşü */
 .class-card {
     background: #15223f;
     border-radius: 15px;
@@ -108,5 +107,82 @@
     .col-form .card {
         height: 100%;
     }
+
+
+.class-card {
+    position: relative;
+}
+
+
+ .card-delete:active {
+        transform: scale(.98);
+    }
+
+
+.class-card .card-delete {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.class-card:hover .card-delete {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.class-card {
+    position: relative;
+}
+
+
+.card-link {
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+
+.card-delete {
+    all: unset; 
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.20);
+    border: 1px solid rgba(255,255,255,.16);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    transition: transform .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+}
+
+    .card-delete:hover {
+        background: rgba(255,255,255,.06);
+        border-color: rgba(255,255,255,.22);
+        transform: scale(1.04);
+    }
+
+    .card-delete:active {
+        transform: scale(.98);
+    }
+
+.class-card .card-delete {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.class-card:hover .card-delete {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 

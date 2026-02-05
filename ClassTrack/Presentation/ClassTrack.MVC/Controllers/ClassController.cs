@@ -9,16 +9,19 @@ namespace ClassTrack.MVC.Controllers
     public class ClassController : Controller
     {
         private readonly IClassRoomService _roomService;
+        private readonly IAuthenticationClientService _clientService;
 
-        public ClassController(IClassRoomService roomService)
+        public ClassController(IClassRoomService roomService,
+                                IAuthenticationClientService clientService)
         {
             _roomService = roomService;
+            _clientService = clientService;
         }
 
 
         public async Task<IActionResult> Logout()
         {
-           await _roomService.LogoutAsync();
+           await _clientService.LogoutAsync();
 
            return RedirectToAction("Index","Home");
         }
@@ -43,6 +46,14 @@ namespace ClassTrack.MVC.Controllers
 
             await _roomService.CreateClassRoomAsync(dashboardVM.PostClass);
 
+            return RedirectToAction("Dashboard");
+        }
+
+       
+        [HttpPost]
+        public async Task<IActionResult> DeleteClassRoom(long id)
+        {
+            await _roomService.DeleteClassRoomAsync(id);
             return RedirectToAction("Dashboard");
         }
 

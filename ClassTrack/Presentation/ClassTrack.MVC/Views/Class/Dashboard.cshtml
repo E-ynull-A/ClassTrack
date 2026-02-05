@@ -31,7 +31,7 @@
             <div class="muted hint">MVC-də: POST /Classes/Join</div>
         </div>
     </form>
- 
+
 </div>
 
 <div class="card" style="margin-top:16px">
@@ -43,10 +43,16 @@
         <div class="swiper-wrapper">
             @foreach (GetClassRoomItemVM classRoom in Model.Classes)
             {
-                <div class="swiper-slide" >
+                <div class="swiper-slide">
                     <div class="class-card">
+                        <form method="post">
+                            <button asp-controller="Class" asp-action="DeleteClassRoom" asp-route-id="@classRoom.Id" type="submit" class="card-delete" title="Delete">
+                                ×
+                            </button>
+                        </form>
+                    
                         <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
-                            <div class="card-content">
+                            <div class="card-content" style="margin-top:30px">
                                 <div class="title">@classRoom.Name</div>
                                 <div class="meta">
                                     <span class="badge-custom">
@@ -59,14 +65,15 @@
                             </div>
                         </a>
                     </div>
-                </div>              
+
+                </div>
             }
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
 
-    
+
 
 
 </div>

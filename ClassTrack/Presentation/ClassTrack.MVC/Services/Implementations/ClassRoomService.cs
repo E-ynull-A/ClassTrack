@@ -9,15 +9,14 @@ namespace ClassTrack.MVC.Services.Implementations
     public class ClassRoomService:IClassRoomService
     {
         private readonly HttpClient _httpClient;
+        private readonly ICookieService _cookieService;
 
-        public ClassRoomService(IHttpClientFactory httpClient)
+        public ClassRoomService(IHttpClientFactory httpClient,
+                                ICookieService cookieService)
+                                
         {
             _httpClient = httpClient.CreateClient("ClassTrackClient");
-        }
-
-        public async Task LogoutAsync()
-        {
-           await _httpClient.DeleteAsync("Accounts/Logout");
+            _cookieService = cookieService;
         }
 
         public async Task<IEnumerable<GetClassRoomItemVM>> GetAllAsync()
@@ -47,6 +46,12 @@ namespace ClassTrack.MVC.Services.Implementations
                 var errorContent = await message.Content.ReadAsStringAsync();
                 Console.WriteLine(errorContent);
             }
+        }
+
+        public async Task DeleteClassRoomAsync(long id)
+        {
+            HttpResponseMessage message = await _httpClient.DeleteAsync($"ClassRooms/{id}");
+
         }
     }
 }

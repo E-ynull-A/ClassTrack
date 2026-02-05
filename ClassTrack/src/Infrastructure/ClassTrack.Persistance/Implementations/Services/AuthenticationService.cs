@@ -79,14 +79,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
 
             IEnumerable<string> roles = await _manager.GetRolesAsync(user);
-           
-            ResponseTokenDTO response = new ResponseTokenDTO
-            (
-               _tokenService.CreateAccessToken(user, roles, 15),
-               _tokenService.GenerateRefreshToken()
-            );
 
-            await _cacheService.SetCasheAsync(user.Id, response.RefreshToken, TimeSpan.FromDays(7));
+            RefreshTokenDTO rToken = _tokenService.GenerateRefreshToken();
+            AccessTokenDTO aToken = _tokenService.CreateAccessToken(user, roles, 15);
+
+
+            ResponseTokenDTO response = new ResponseTokenDTO(aToken,rToken);
+
+
+            _accessor.HttpContext.Response.Cookies.Delete("RefreshToken");
+            _accessor.HttpContext.Response.Cookies.Delete("AccessToken");
+
+            await _cacheService.SetCasheAsync(response.RefreshToken.RefreshToken, user.Id, TimeSpan.FromDays(7));
             await _emailService.SendEmailAsync();          
 
             return response;

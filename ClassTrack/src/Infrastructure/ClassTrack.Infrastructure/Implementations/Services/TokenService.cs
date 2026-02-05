@@ -1,26 +1,32 @@
 ﻿using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassTrack.Infrastructure.Implementations.Services
 {
     internal class TokenService: ITokenService
     {
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _accessor;
+        private readonly ICacheService _cacheService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public TokenService(IConfiguration configuration)
+        public TokenService(IConfiguration configuration,
+                            IHttpContextAccessor accessor,
+                            ICacheService cacheService,
+                            UserManager<AppUser> userManager)
         {
             _configuration = configuration;
+            _accessor = accessor;
+            _cacheService = cacheService;
+            _userManager = userManager;
         }
         public AccessTokenDTO CreateAccessToken(AppUser user,IEnumerable<string> roles,int minutes)
         {
@@ -62,8 +68,37 @@ namespace ClassTrack.Infrastructure.Implementations.Services
         }
         public RefreshTokenDTO GenerateRefreshToken()
         {              
-            return new RefreshTokenDTO(new Guid().ToString("N")
-                  + new Guid().ToString("N"));
+            return new RefreshTokenDTO(Guid.NewGuid().ToString("N")
+                  + Guid.NewGuid().ToString("N"));
+        }
+        public async Task<ResponseTokenDTO> RefreshAsync()
+        {
+            string? token = _accessor.HttpContext.Request.Cookies["RefreshToken"];
+
+            if (string.IsNullOrEmpty(token))
+                throw new Exception("You have to login!");
+
+            string? userId = await _cacheService.GetAsync<string>(token);
+
+            if (string.IsNullOrEmpty(userId))
+                throw new Exception("You have to login!");
+
+            AppUser user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                throw new Exception("User not Found!");
+
+            ICollection<string>? userRoles = await _userManager.GetRolesAsync(user);           
+
+             await _cacheService.RemoveAsync(token);
+
+            ResponseTokenDTO tokenDTO = new ResponseTokenDTO(CreateAccessToken(user, userRoles, 15),
+                                                             GenerateRefreshToken());    
+
+            await _cacheService.SetCasheAsync(tokenDTO.RefreshToken.RefreshToken,userId,TimeSpan.FromMinutes(60 * 24 * 7));
+                
+
+            return tokenDTO;         
         }
     }
 }

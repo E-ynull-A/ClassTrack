@@ -18,24 +18,39 @@ namespace ClassTrack.MVC.Services.Implementations
             _cookieService = cookieService;
         }
 
-        public async Task LoginAsync(LoginVM loginVM)
+        public async Task<bool> LoginAsync(LoginVM loginVM)
         {
+           
+            if (_cookieService.HasCookie("AccessToken"))
+                return true;
+
+
             var message = await _httpClient.PostAsJsonAsync("Accounts/Login", loginVM);
 
             if (!message.IsSuccessStatusCode)
             {
-                throw new Exception("User has Problem");
+                return false;
             }
 
             var tokens = await message.Content.ReadFromJsonAsync<ResponseTokenVM>();
 
             _cookieService.SetTokenCookie("AccessToken",tokens.AccessToken.AccessToken,15);
-            _cookieService.SetTokenCookie("RefreshToken", tokens.RefreshToken.RefreshToken, 60 * 24 * 7);         
+            _cookieService.SetTokenCookie("RefreshToken", tokens.RefreshToken.RefreshToken, 60 * 24 * 7); 
+            
+            return true;
         }
-
         public Task Register(RegisterVM registerVM)
         {
             throw new NotImplementedException();
         }
+
+        public async Task LogoutAsync()
+        {
+            await _httpClient.DeleteAsync("Accounts/Logout");
+            _cookieService.RemoveCookie("AccessToken");
+            _cookieService.RemoveCookie("RefreshToken");
+        }
+
+
     }
 }

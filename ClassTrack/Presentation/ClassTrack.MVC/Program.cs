@@ -24,6 +24,10 @@ namespace ClassTrack.MVC
                 config.DefaultRequestHeaders.Add("accept","application/json");
             }).AddHttpMessageHandler<TokenHandlerMiddleware>();
 
+            builder.Services.AddHttpClient("RefreshTokenClient", client => {
+                client.BaseAddress = new Uri("https://localhost:7285/");
+            });
+
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(opt =>

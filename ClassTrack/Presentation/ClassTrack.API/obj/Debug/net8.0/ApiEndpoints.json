@@ -659,5 +659,15 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.TokensController",
+    "Method": "Get",
+    "RelativePath": "Tokens/Refresh",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

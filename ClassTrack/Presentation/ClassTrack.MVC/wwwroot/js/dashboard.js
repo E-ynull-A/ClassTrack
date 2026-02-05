@@ -90,5 +90,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const swiper = new Swiper(".mySwiper", swiperOptions);
 });
 
+document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".card-delete");
+    if (!btn) return;
+
+    // Link klikini blokla
+    e.preventDefault();
+    e.stopPropagation();
+
+    const id = btn.dataset.id;
+    if (!id) return;
+
+    const ok = confirm("Bu sinifi silmək istəyirsən?");
+    if (!ok) return;
+
+    // UI-dən silmək (demo)
+    btn.closest(".class-card")?.remove();
+
+    // MVC-yə bağlayanda:
+    // fetch(`/Class/Delete/${id}`, { method: "POST" }) ...
+});
+
+
 
 
