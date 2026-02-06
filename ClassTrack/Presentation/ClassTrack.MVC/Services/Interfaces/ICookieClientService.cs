@@ -1,6 +1,6 @@
 ﻿namespace ClassTrack.MVC.Services.Interfaces
 {
-    public interface ICookieService
+    public interface ICookieClientService
     {
         void SetTokenCookie(string key, string value, int expiration);
         void RemoveCookie(string key);

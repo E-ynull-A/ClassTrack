@@ -7,10 +7,10 @@ namespace ClassTrack.MVC.Services.Implementations
     public class TokenClientService:ITokenClientService
     {
         private readonly HttpClient _httpClient;
-        private readonly ICookieService _cookieService;
+        private readonly ICookieClientService _cookieService;
 
         public TokenClientService(IHttpClientFactory clientFactory,
-                                   ICookieService cookieService)
+                                   ICookieClientService cookieService)
         {
             _httpClient = clientFactory.CreateClient("RefreshTokenClient");
             _cookieService = cookieService;

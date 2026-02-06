@@ -29,14 +29,10 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<IsTeacherDTO> IsTeacherAsync(long classRoomId)
         {
             string? userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-           
-
-            if (string.IsNullOrEmpty(userId))
-                throw new Exception("The User is not Found!");
+ 
 
             if (string.IsNullOrEmpty(userId) || classRoomId < 1)
-                throw new Exception("User not Found!!");
+                throw new Exception("Invalid User and ClassRoom IDs!!");
 
             string cacheKey = $"Is_Teacher_{userId}_{classRoomId}";
 
@@ -52,6 +48,6 @@ namespace ClassTrack.Persistance.Implementations.Services
                         .SetCasheAsync(cacheKey, tDTO.IsTeacher, TimeSpan.FromMinutes(10));
 
             return tDTO;
-        }
+        }      
     }
 }

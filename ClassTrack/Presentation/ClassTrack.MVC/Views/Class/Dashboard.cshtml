@@ -42,14 +42,10 @@
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             @foreach (GetClassRoomItemVM classRoom in Model.Classes)
-            {
+            {               
                 <div class="swiper-slide">
                     <div class="class-card">
-                        <form method="post">
-                            <button asp-controller="Class" asp-action="DeleteClassRoom" asp-route-id="@classRoom.Id" type="submit" class="card-delete" title="Delete">
-                                ×
-                            </button>
-                        </form>
+                      
                     
                         <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
                             <div class="card-content" style="margin-top:30px">

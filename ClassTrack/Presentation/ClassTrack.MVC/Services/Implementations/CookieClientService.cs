@@ -3,11 +3,11 @@ using ClassTrack.MVC.ViewModels;
 
 namespace ClassTrack.MVC.Services.Implementations
 {
-    public class CookieService : ICookieService
+    public class CookieClientService : ICookieClientService
     {
         private readonly IHttpContextAccessor _accessor;
 
-        public CookieService(IHttpContextAccessor accessor)
+        public CookieClientService(IHttpContextAccessor accessor)
         {
             _accessor = accessor;
         }

@@ -18,11 +18,11 @@ namespace ClassTrack.MVC.Middlewares
                 await _next.Invoke(context);
             }
             catch(Exception e)
-            {               
+            {
+                if (e.Message.Contains("401"))
+                    context.Response.Redirect("/Home/Login");
                 context.Response.Redirect($"/Error/index?messageError={e.Message}");
-            }
-     
-    
+            }   
         }
     }
 }

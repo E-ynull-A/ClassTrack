@@ -14,15 +14,18 @@ namespace ClassTrack.Persistance.Implementations.Services
     {
         private readonly IStudentAttendanceRepository _attendanceRepository;
         private readonly IMapper _mapper;
-        private readonly AppDbContext _context;
+        private readonly IClassRoomRepository _roomRepository;
+        private readonly IPermissionService _permissionService;
 
         public StudentAttendanceService(IStudentAttendanceRepository attendanceRepository,
                                         IMapper mapper,
-                                        AppDbContext context)
+                                        IClassRoomRepository roomRepository,
+                                        IPermissionService permissionService)
         {
             _attendanceRepository = attendanceRepository;
             _mapper = mapper;
-            _context = context;
+            _roomRepository = roomRepository;
+            _permissionService = permissionService;
         }
 
 
@@ -37,6 +40,9 @@ namespace ClassTrack.Persistance.Implementations.Services
        
         public async Task CreateAttendanceAsync(ICollection<PostStudentAttendanceDTO> attendanceDTOs)
         {
+            if (!(await _permissionService.IsTeacherAsync(attendanceDTOs.Select(a => a.ClassRoomId).First())).IsTeacher)
+                throw new Exception("Forbiden activity exception!");
+
             if(await _attendanceRepository.AnyAsync(a => attendanceDTOs.Select(aDto => aDto.LessonDate).Contains(a.LessonDate)))
             {
                 throw new Exception("Invalid Operation Error");
@@ -52,15 +58,14 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("All Student in this Attendance must are in the Same ClassRoom");
             }
 
-            if(_context.StudentClasses.Select(sc=>sc.ClassRoomId == attendanceDTOs.Select(aDto=>aDto.ClassRoomId).First()).Count()
-                                                                 != attendanceDTOs.DistinctBy(aDto => aDto.StudentId).Count())
-            {
-                throw new Exception("The attendance of All Students must be written And Don't any dublicate Student");
-            }
+            long roomId = attendanceDTOs.Select(a => a.ClassRoomId).First();
+            int count = attendanceDTOs.DistinctBy(aDto => aDto.StudentId).Count();
 
+            if (!await _roomRepository.AnyAsync(r => r.Id == roomId && r.StudentClasses.Count == count))
+                throw new Exception("The attendance of All Students must be written And Don't any dublicate Student!");
+            
 
-           
-
+          
             ICollection<StudentAttendance> attendances = _mapper.
                                             Map<ICollection<StudentAttendance>>(attendanceDTOs);        
 
@@ -70,6 +75,9 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task UpdateAttendanceAsync(ICollection<PutStudentAttendanceDTO> attendanceDTOs)
         {
+            if (!(await _permissionService.IsTeacherAsync(attendanceDTOs.Select(a => a.ClassRoomId).First())).IsTeacher)
+                throw new Exception("Forbiden activity exception!");
+
             ICollection<StudentAttendance> attendances =await _attendanceRepository
                 .GetAll(function:x=>x.LessonDate == attendanceDTOs.First().LessonDate &&
                                     x.ClassRoomId == attendanceDTOs.First().ClassRoomId)
@@ -97,11 +105,14 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
 
         public async Task DeleteAttendanceAsync(long id)
-        {
-          StudentAttendance attendance = await _attendanceRepository.GetByIdAsync(id);
+        {        
+            StudentAttendance attendance = await _attendanceRepository.GetByIdAsync(id);
 
             if (attendance is null)
                 throw new Exception("The Attendance isn't Found");
+
+            if (!(await _permissionService.IsTeacherAsync(attendance.ClassRoomId)).IsTeacher)
+                throw new Exception("Forbiden activity exception!");
 
             _attendanceRepository.Delete(attendance);
             await _attendanceRepository.SaveChangeAsync();

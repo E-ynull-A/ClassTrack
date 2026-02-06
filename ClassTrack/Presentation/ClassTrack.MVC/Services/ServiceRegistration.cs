@@ -8,10 +8,11 @@ namespace ClassTrack.MVC.Services
     {
         public static IServiceCollection AddService(this IServiceCollection services)
         {
-            services.AddScoped<ICookieService, CookieService>();
+            services.AddScoped<ICookieClientService, CookieClientService>();
             services.AddScoped<IAuthenticationClientService, AuthenticationClientService>();
-            services.AddScoped<IClassRoomService, ClassRoomService>();
+            services.AddScoped<IClassRoomClientService, ClassRoomService>();
             services.AddScoped<ITokenClientService, TokenClientService>();
+            services.AddScoped<IQuizClientService, QuizClientService>();
 
 
             services.AddHttpContextAccessor();

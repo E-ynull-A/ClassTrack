@@ -161,25 +161,89 @@
     align-items: center;
 }
 
-    /* Copy Code aşağı düşsün */
+ 
     .nav-split #btnCopyCode {
         flex-basis: 100%;
-        width: fit-content; /* düymə full olmasın */
+        width: fit-content; 
     }
 
 
-/* override edək ki mütləq işləsin */
+.topbar{
+    display:flex;
+    align-items:center;
+}
+
 .nav-actions {
     display: grid !important;
-    grid-template-columns: auto auto; /* 2 düymə yan-yana */
+    grid-template-columns: auto auto;
     gap: 10px;
     justify-content: center;
     align-items: end;
 }
 
-    /* Copy Code aşağı sətir + sağda */
+ 
     .nav-actions #btnCopyCode {
-        grid-column: 1 / -1; /* bütün sətri tutsun */
-        justify-self: center; /* sağa yapışsın */
+        grid-column: 1 / -1;    }
+
+
+
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.topbar-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.topbar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+
+.nav-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(160px, auto));
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+}
+
+    .nav-actions #btnCopyCode {
+        grid-column: 1 / -1;
+        justify-self: end;
     }
+
+
+.danger-actions {
+    grid-template-columns: repeat(2, minmax(160px, auto));
+}
+
+
+@media (max-width: 860px) {
+    .topbar-right {
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .nav-actions {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+        .nav-actions #btnCopyCode {
+            grid-column: auto;
+            justify-self: stretch;
+        }
+}
 

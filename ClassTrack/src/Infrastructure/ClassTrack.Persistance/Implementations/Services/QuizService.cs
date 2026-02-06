@@ -20,6 +20,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IHttpContextAccessor _accessor;
         private readonly IStudentRepository _studentRepository;
         private readonly IPermissionService _permissionService;
+        private readonly IClassRoomService _roomService;
 
         public QuizService(
                            IQuizRepository quizRepository,
@@ -27,7 +28,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                            IClassRoomRepository roomRepository,
                            IHttpContextAccessor accessor,
                            IStudentRepository studentRepository,
-                           IPermissionService permissionService)
+                           IPermissionService permissionService,
+                           IClassRoomService roomService)
 
         {
             _quizRepository = quizRepository;
@@ -36,14 +38,22 @@ namespace ClassTrack.Persistance.Implementations.Services
             _accessor = accessor;
             _studentRepository = studentRepository;
             _permissionService = permissionService;
+            _roomService = roomService;
         }
 
-        public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(int page, int take, params string[] includes)
+        public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId, int page, int take,params string[] includes)
         {
+            if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
+                throw new Exception("Class Room not Found!");
+
+            if (!await _roomService.IsOwnAsync(classRoomId))
+                throw new Exception("Forbiden action exception!");
+
             ICollection<Quiz> quizes = await _quizRepository
                                     .GetAll(page: page,
                                             take: take,
                                             includes: includes,
+                                            function:x=>x.ClassRoomId == classRoomId,
                                             sort: x => x.CreatedAt)
                                     .ToListAsync();
 
@@ -51,6 +61,9 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task<GetQuizDTO> GetByIdAsync(long id)
         {
+            if (!await IsOwnAsync(id))
+                throw new Exception("Forbiden action exception!");
+
             Quiz quiz = await _quizRepository
                              .GetByIdAsync(id, includes: ["ChoiceQuestions.Options", "OpenQuestions"]);
 
@@ -66,14 +79,13 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task CreateQuizAsync(PostQuizDTO postQuiz)
         {
 
-
             if (!await _roomRepository.AnyAsync(r => r.Id == postQuiz.ClassRoomId))
             {
                 throw new Exception("The ClassRoom isn't Found!");
             }
 
             if (!(await _permissionService.IsTeacherAsync(postQuiz.ClassRoomId)).IsTeacher)
-                throw new Exception("Only Teachers can use it");
+                throw new Exception("Forbiden action exception!");
 
             if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&
                                              q.ClassRoomId != postQuiz.ClassRoomId))
@@ -114,7 +126,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("The ClassRoom isn't Found!");
 
             if (!(await _permissionService.IsTeacherAsync(putQuiz.ClassRoomId)).IsTeacher)
-                throw new Exception("Only Teachers can use it");
+                throw new Exception("Forbiden action exception!");
 
             _getAllowQuizModify(edited);
 
@@ -134,7 +146,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("The Quiz isn't Found!");
 
             if (!(await _permissionService.IsTeacherAsync(deleted.ClassRoomId)).IsTeacher)
-                throw new Exception("Only Teachers can use it");
+                throw new Exception("Forbiden action exception!");
 
             _quizRepository.Delete(deleted);
             await _quizRepository.SaveChangeAsync();
@@ -146,6 +158,19 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (quiz.StartTime.Add(quiz.Duration) < DateTime.UtcNow)
                 throw new Exception("Couldn't Modify The Quiz after the Quiz!");
+        }
+
+        public async Task<bool> IsOwnAsync(long quizId)
+        {
+            string? userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new Exception("User not Found!");
+            }
+
+            return await _quizRepository.AnyAsync(q => q.ClassRoom.StudentClasses.Any(sc => sc.Student.AppUserId == userId) ||
+                                         q.ClassRoom.TeacherClasses.Any(tc => tc.Teacher.AppUserId==userId));
         }
     }
 }

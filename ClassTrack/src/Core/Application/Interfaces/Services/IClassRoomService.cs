@@ -9,5 +9,6 @@ namespace ClassTrack.Application.Interfaces.Services
         Task CreateClassRoomAsync(PostClassRoomDTO postClass);
         Task UpdateClassRoomAsync(long id, PutClassRoomDTO putClass);
         Task DeleteClassRoomAsync(long id);
+        Task<bool> IsOwnAsync(long classRoomId);
     }
 }

@@ -1,0 +1,207 @@
+﻿
+
+<link rel="stylesheet" href="~/css/create-quiz.css">
+<div class="topbar">
+    <div>
+        <div class="h1">Create Quiz</div>
+        <div class="muted">Quiz → suallar → yekunda submit.</div>
+    </div>
+    <div class="nav">
+        <a class="btn" >← Class</a>
+        <button class="btn" id="btnReset" type="button">Reset</button>
+    </div>
+</div>
+
+
+<div class="wizard-tabs">
+    <button class="wtab active" data-step="1">1) Quiz info</button>
+    <button class="wtab" data-step="2" id="tabStep2" disabled>2) Questions</button>
+    <button class="wtab" data-step="3" id="tabStep3" disabled>3) Review</button>
+</div>
+
+
+<section class="card step show" id="step1">
+    <div class="h2">Quiz info</div>
+    <div class="line"></div>
+
+    <div class="grid2">
+        <div class="field">
+            <div class="label">Name</div>
+            <input class="input" id="quizName" placeholder="Məs: TCP Basics" />
+        </div>
+
+        <div class="field">
+            <div class="label">ClassRoomId</div>
+            <input class="input" id="classRoomId" placeholder="Məs: 12" inputmode="numeric" />
+        </div>
+
+        <div class="field">
+            <div class="label">StartTime</div>
+            <input class="input" id="startTime" type="datetime-local" />
+        </div>
+
+        <div class="field">
+            <div class="label">Duration (minutes)</div>
+            <input class="input" id="durationMin" type="number" min="1" value="30" />
+        </div>
+    </div>
+
+    <div class="row-actions">
+        <button class="btn primary" id="btnSaveQuiz" type="button">Save quiz info</button>
+        <span class="muted" id="quizInfoHint">Əvvəl quiz məlumatlarını saxla.</span>
+    </div>
+</section>
+
+
+<section class="card step" id="step2" style="width:700px">
+    <div class="step2-head">
+        <div>
+            <div class="h2">Questions</div>
+            <div class="muted">Hər sualı “Save question” ilə siyahıya əlavə et.</div>
+        </div>
+        <div class="nav">
+            <button class="btn" id="btnToReview" type="button">Review →</button>
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="type-switch">
+        <button class="btn primary" id="btnTypeChoice" type="button">Choice question</button>
+        <button class="btn" id="btnTypeOpen" type="button">Open question</button>
+    </div>
+
+
+    <div class="qbox" id="choiceBox">
+        <div class="h2">Choice Question</div>
+
+        <div class="grid2">
+            <div class="field">
+                <div class="label">Title</div>
+                <input class="input" id="cTitle" placeholder="Sual mətni..." />
+            </div>
+            <div class="field">
+                <div class="label">Point</div>
+                <input class="input" id="cPoint" type="number" step="0.25" min="0" value="1" />
+            </div>
+            <div class="field">
+                <div class="label">IsMultiple</div>
+                <select class="input" id="cIsMultiple">
+                    <option value="false" selected>False (1 doğru)</option>
+                    <option value="true">True (bir neçə doğru)</option>
+                </select>
+            </div>
+            <div class="field">
+                <div class="label">Options count</div>
+                <div class="row-inline">
+                    <button class="btn" id="btnAddOption" type="button">+ Option</button>
+                    <button class="btn danger" id="btnClearOptions" type="button">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="options" id="optionsList"></div>
+
+        <div class="row-actions">
+            <button class="btn ok" id="btnSaveChoice" type="button">Save question</button>
+            <span class="muted" id="choiceHint">Ən az 2 option əlavə et.</span>
+        </div>
+    </div>
+
+
+    <div class="qbox" id="openBox" style="display:none;">
+        <div class="h2">Open Question</div>
+
+        <div class="grid2">
+            <div class="field">
+                <div class="label">Title</div>
+                <input class="input" id="oTitle" placeholder="Sual mətni..." />
+            </div>
+            <div class="field">
+                <div class="label">Point</div>
+                <input class="input" id="oPoint" type="number" step="0.25" min="0" value="1" />
+            </div>
+        </div>
+
+        <div class="row-actions">
+            <button class="btn ok" id="btnSaveOpen" type="button">Save question</button>
+            <span class="muted">Open sual üçün option yoxdur.</span>
+        </div>
+    </div>
+
+
+    <div class="line" style="margin-top:14px"></div>
+    <div class="h2">Added questions</div>
+    <div class="q-list" id="addedList"></div>
+</section>
+
+
+<section class="card step" id="step3">
+    <div class="step2-head">
+        <div>
+            <div class="h2">Review</div>
+            <div class="muted">Yoxla, sonra submit elə.</div>
+        </div>
+        <div class="nav">
+            <button class="btn" id="btnBackToQuestions" type="button">← Questions</button>
+            <button class="btn" id="btnToggleJson" type="button">Show JSON</button>
+            <button class="btn primary" id="btnSubmit" type="button">Submit</button>
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <!-- User friendly preview -->
+    <div class="review-grid">
+        <div class="review-card">
+            <div class="h2">Quiz info</div>
+            <div class="line"></div>
+
+            <div class="kv">
+                <div class="k">Name</div><div class="v" id="rvName">-</div>
+                <div class="k">ClassRoomId</div><div class="v" id="rvClass">-</div>
+                <div class="k">Start</div><div class="v" id="rvStart">-</div>
+                <div class="k">Duration</div><div class="v" id="rvDur">-</div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="h2">Summary</div>
+            <div class="line"></div>
+
+            <div class="summary-row">
+                <span class="badge">Choice</span>
+                <strong id="rvChoiceCount">0</strong>
+            </div>
+            <div class="summary-row">
+                <span class="badge">Open</span>
+                <strong id="rvOpenCount">0</strong>
+            </div>
+            <div class="summary-row">
+                <span class="muted">Total points</span>
+                <strong id="rvTotalPts">0</strong>
+            </div>
+
+            <div class="muted" style="margin-top:10px">
+                Submit edəndə server tərəfə göndəriləcək.
+            </div>
+        </div>
+    </div>
+
+    <div class="review-list">
+        <div class="h2">Questions</div>
+        <div class="line"></div>
+        <div id="rvQuestions"></div>
+    </div>
+
+    <!-- Dev-only JSON (default hidden) -->
+    <div class="json-wrap" id="jsonWrap" style="display:none;">
+        <div class="h2">Raw JSON</div>
+        <div class="muted">Bu hissə user üçün deyil, debug üçündür.</div>
+        <pre class="json" id="jsonOut">{ }</pre>
+    </div>
+
+</section>
+<script src="~/js/create-quiz.js"></script>
+
+

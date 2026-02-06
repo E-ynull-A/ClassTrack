@@ -378,6 +378,11 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "classRoomId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
         "Name": "page",
         "Type": "System.Int32",
         "IsRequired": false

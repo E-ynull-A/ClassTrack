@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Services.Implementations
 {
-    public class ClassRoomService:IClassRoomService
+    public class ClassRoomService:IClassRoomClientService
     {
         private readonly HttpClient _httpClient;
-        private readonly ICookieService _cookieService;
 
-        public ClassRoomService(IHttpClientFactory httpClient,
-                                ICookieService cookieService)
+        public ClassRoomService(IHttpClientFactory httpClient)
                                 
         {
             _httpClient = httpClient.CreateClient("ClassTrackClient");
-            _cookieService = cookieService;
         }
 
         public async Task<IEnumerable<GetClassRoomItemVM>> GetAllAsync()
@@ -32,8 +29,7 @@ namespace ClassTrack.MVC.Services.Implementations
 
             GetClassRoomWithPermissionVM roomWithPermissionVM = new GetClassRoomWithPermissionVM
             (   await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions?classRoomId={id}"),
-                await _httpClient.GetFromJsonAsync<GetClassRoomVM>($"ClassRooms/{id}"),
-                await _httpClient.GetFromJsonAsync<IEnumerable<GetClassRoomItemVM>>($"ClassRooms"));
+                await _httpClient.GetFromJsonAsync<GetClassRoomVM>($"ClassRooms/{id}"));
                 
             return roomWithPermissionVM;
         }
@@ -47,11 +43,9 @@ namespace ClassTrack.MVC.Services.Implementations
                 Console.WriteLine(errorContent);
             }
         }
-
         public async Task DeleteClassRoomAsync(long id)
         {
-            HttpResponseMessage message = await _httpClient.DeleteAsync($"ClassRooms/{id}");
-
+            await _httpClient.DeleteAsync($"ClassRooms?id={id}");
         }
     }
 }

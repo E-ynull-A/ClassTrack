@@ -1,0 +1,97 @@
+﻿.quiz-toolbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.h1{
+    display:inline-block
+}
+
+.field-inline {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+    .field-inline .input {
+        width: 220px;
+    }
+
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+}
+
+.quiz-card {
+    display: block;
+    text-decoration: none;
+    border-radius: 18px;
+    border: 1px solid rgba(36,48,74,.65);
+    background: rgba(255,255,255,.03);
+    padding: 14px;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+    .quiz-card:hover {
+        transform: translateY(-1px);
+        border-color: rgba(120,170,255,.55);
+        background: rgba(255,255,255,.045);
+    }
+
+.qc-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.qc-name {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+.qc-meta {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qc-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+
+
+
+
+.qc-actions {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.empty {
+    padding: 18px;
+    color: var(--muted);
+}
+
+
+
+/* normalda geniş ola bilər, amma 1 item olanda limitlə */
+.quiz-grid.single {
+    justify-items: start;
+}
+
+    .quiz-grid.single .quiz-card {
+        width: 50%;
+    }

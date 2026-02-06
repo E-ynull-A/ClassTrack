@@ -1,0 +1,67 @@
+﻿@model GetClassRoomWithPermissionVM
+
+
+<link rel="stylesheet" href="~/css/class.css">
+
+<div class="topbar">
+    <div class="topbar-left">
+        <div class="h1" id="classTitle">@Model.ClassRoom.Name</div>
+        <div class="muted">
+            Role: <span class="badge teacher" id="roleBadge">Teacher</span>
+        </div>
+    </div>
+
+    <div class="topbar-right">
+        <div class="nav-actions">
+            <a class="btn primary" id="btnCreateQuiz"
+               asp-controller="Quiz" asp-action="Create" asp-route-id="@Model.ClassRoom.Id">
+                + Create Quiz
+            </a>
+
+            <a class="btn ok" id="btnCreateTask"
+               asp-controller="Task" asp-action="Create" asp-route-classRoomId="@Model.ClassRoom.Id">
+                + Create Task
+            </a>
+        </div>   
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="card col2">
+        <div class="h2">Class Info</div>
+        <div class="kv">
+            <div class="k">Class Code</div>
+            <div class="v"><span id="classCode">@Model.ClassRoom.PrivateKey</span></div>
+
+            <div class="k">Members</div>
+            <div class="v"><span id="memberCount">@Model.ClassRoom.MemberCount</span></div>
+        </div>
+    </div>
+
+    <div class="card col1">
+        <div class="h2">Tabs</div>
+        <div class="tabs">
+            <a class="tab active" asp-controller="Quiz" asp-action="Index" asp-route-id="@Model.ClassRoom.Id" data-tab="quizzes">Quizzes</a>
+            <button class="tab" data-tab="tasks">Tasks</button>
+            <button class="tab" data-tab="attendance">Attendance</button>
+            <button class="tab" data-tab="members">Members</button>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:16px;width:fit-content">
+    <div class="nav-actions danger-actions" style="display:flex;justify-content:end">
+        <a class="btn" id="btnCreateTask"
+           asp-controller="ClassRoom" asp-action="Edit" asp-route-id="@Model.ClassRoom.Id">
+            Edit Class
+        </a>
+
+        <a class="btn danger" id="btnCreateTask"
+           asp-action="DeleteClassRoom" asp-route-id="@Context.GetRouteValue("id")" type="button">
+            Delete Class
+        </a>
+    </div>   
+</div>
+
+<script defer src="~/js/class.js"></script>

@@ -1,0 +1,103 @@
+﻿
+
+.account {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.account-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+    .account-btn .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(120,170,255,.9);
+        box-shadow: 0 0 0 4px rgba(120,170,255,.15);
+    }
+
+    .account-btn .chev {
+        opacity: .8;
+    }
+
+.account-menu {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    min-width: 220px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(10,10,10,.92);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    padding: 10px;
+    display: none;
+    z-index: 50;
+}
+
+    .account-menu.show {
+        display: block;
+    }
+
+.account-head {
+    padding: 8px 10px 10px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+    margin-bottom: 8px;
+}
+
+.acc-title {
+    font-weight: 900;
+}
+
+.acc-sub {
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.account-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-item {
+    width: 100%;
+    text-align: left;
+    display: block;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+}
+
+    .menu-item:hover {
+        background: rgba(255,255,255,.06);
+        border-color: rgba(255,255,255,.10);
+    }
+
+    .menu-item.danger {
+        color: rgba(255,120,120,.95);
+    }
+
+.menu-sep {
+    height: 1px;
+    background: rgba(255,255,255,.10);
+    margin: 6px 0;
+}
+
+.badge.student {
+    border: 1px solid rgba(120,255,170,.35);
+    background: rgba(120,255,170,.10);
+    color: rgba(170,255,210,.95);
+}
+
+.student-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

@@ -1,8 +1,6 @@
 ﻿namespace ClassTrack.MVC.ViewModels
 {
     public record GetTeacherClassRoomItemVM
-        (
-          ICollection<GetClassRoomItemVM> TeacherClasses
-        );
+        (ICollection<GetClassRoomItemVM> TeacherClasses);
    
 }

@@ -2,7 +2,7 @@
 
 namespace ClassTrack.MVC.Services.Interfaces
 {
-    public interface IClassRoomService
+    public interface IClassRoomClientService
     {
         Task<IEnumerable<GetClassRoomItemVM>> GetAllAsync();
         Task<GetClassRoomWithPermissionVM> GetByIdAsync(long id);

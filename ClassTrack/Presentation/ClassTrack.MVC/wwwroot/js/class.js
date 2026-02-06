@@ -1,105 +1,34 @@
-(() => {
-    // Helpers (base.js-də varsa bunlar artıq var; yoxdursa fallback)
-    const $ = window.$ || ((s) => document.querySelector(s));
-    const $$ = window.$$ || ((s) => Array.from(document.querySelectorAll(s)));
+(function () {
+  const btn = document.getElementById("btnAccount");
+  const menu = document.getElementById("accountMenu");
 
-    // Role (Teacher/Student) - safe read
-    const roleEl = $("#roleBadge");
-    const role = (roleEl?.textContent || "").trim().toLowerCase(); // "teacher" / "student"
+  if (!btn || !menu) return;
 
-    // -------------------------
-    // Teacher-only header actions
-    // -------------------------
-    const btnCopy = $("#btnCopyCode");
-    const btnCreateQuiz = $("#btnCreateQuiz");
-    const btnCreateTask = $("#btnCreateTask");
-    const classCodeEl = $("#classCode");
+  function closeMenu() {
+    menu.classList.remove("show");
+    menu.setAttribute("aria-hidden", "true");
+  }
 
-    if (role !== "teacher") {
-        if (btnCopy) btnCopy.style.display = "none";
-        if (btnCreateQuiz) btnCreateQuiz.style.display = "none";
-        if (btnCreateTask) btnCreateTask.style.display = "none";
-        if (classCodeEl) classCodeEl.textContent = "•••••• (hidden)";
+  function toggleMenu() {
+    const isOpen = menu.classList.contains("show");
+    if (isOpen) closeMenu();
+    else {
+      menu.classList.add("show");
+      menu.setAttribute("aria-hidden", "false");
     }
+  }
 
-    // -------------------------
-    // Tabs teacher-only: members + attendance
-    // -------------------------
-    if (role !== "teacher") {
-        const tabs = $$(".tab");
-        const membersTab = tabs.find(x => x.dataset.tab === "members");
-        const attendanceTab = tabs.find(x => x.dataset.tab === "attendance");
-        if (membersTab) membersTab.style.display = "none";
-        if (attendanceTab) attendanceTab.style.display = "none";
-    }
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
 
-    // -------------------------
-    // Tabs switch (guard: element yoxdursa error atmasın)
-    // -------------------------
-    $$(".tab").forEach(btn => {
-        btn.addEventListener("click", () => {
-            $$(".tab").forEach(x => x.classList.remove("active"));
-            btn.classList.add("active");
+  document.addEventListener("click", () => closeMenu());
 
-            const t = btn.dataset.tab;
-            $$(".tabpane").forEach(p => p.classList.remove("show"));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
 
-            const pane = $("#tab-" + t);
-            if (pane) pane.classList.add("show");
-        });
-    });
-
-    // -------------------------
-    // Copy Code
-    // -------------------------
-    if (btnCopy) {
-        btnCopy.addEventListener("click", () => {
-            const code = (classCodeEl?.textContent || "").trim();
-            if (window.copyText) window.copyText(code);
-            else navigator.clipboard?.writeText(code);
-        });
-    }
-
-    // -------------------------
-    // Teacher: class switcher (multiple classes)
-    // -------------------------
-    const classSwitchBox = $("#classSwitchBox");
-    const classSelect = $("#classSelect");
-
-    // göstər/gizlə
-    if (classSwitchBox) classSwitchBox.style.display = (role === "teacher") ? "block" : "none";
-
-    // Switcher işlətmirsənsə, burdan sonra çıx
-    if (!classSelect) return;
-
-    // Demo data (MVC-də sonra siləcəksən)
-    const classes = {
-        "1": { title: "Network 101", code: "A7K2Q9", members: 24 },
-        "2": { title: "Operating Systems", code: "K9P4T2", members: 31 },
-        "3": { title: "Database Systems", code: "D3B8S1", members: 18 }
-    };
-
-    const classTitleEl = $("#classTitle");
-    const memberCountEl = $("#memberCount");
-
-    function applySelected(id) {
-        const c = classes[id];
-        if (!c) return;
-
-        if (classTitleEl) classTitleEl.textContent = c.title;
-        if (classCodeEl) classCodeEl.textContent = c.code;
-        if (memberCountEl) memberCountEl.textContent = c.members;
-
-        if (window.toast) window.toast("Class changed", c.title);
-    }
-
-    classSelect.addEventListener("change", (e) => {
-        applySelected(e.target.value);
-
-        // MVC-yə bağlayanda bunu aç:
-        // window.location.href = "/Class/Details/" + e.target.value;
-    });
-
-    // initial
-    applySelected(classSelect.value);
+  menu.addEventListener("click", (e) => e.stopPropagation());
 })();
+

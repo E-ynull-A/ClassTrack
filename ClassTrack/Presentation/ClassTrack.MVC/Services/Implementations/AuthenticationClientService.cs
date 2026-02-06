@@ -9,10 +9,10 @@ namespace ClassTrack.MVC.Services.Implementations
     public class AuthenticationClientService : IAuthenticationClientService
     {
         private readonly HttpClient _httpClient;
-        private readonly ICookieService _cookieService;
+        private readonly ICookieClientService _cookieService;
 
         public AuthenticationClientService(IHttpClientFactory clientFactory,
-                                            ICookieService cookieService)
+                                            ICookieClientService cookieService)
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
             _cookieService = cookieService;
