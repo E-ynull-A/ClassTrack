@@ -10,7 +10,7 @@ namespace ClassTrack.Application.DTOs
 
        string Name,
        DateTime StartTime,
-       TimeSpan Duration,
+       int Duration,
        long ClassRoomId);
     
 }

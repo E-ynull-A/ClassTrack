@@ -30,30 +30,16 @@ namespace ClassTrack.MVC.Controllers
             if(!ModelState.IsValid)
                 return View(loginVM);
 
-            if(loginVM.UsernameOrEmail.Length>256 ||
-                loginVM.UsernameOrEmail.Length < 4)
-            {
-                ModelState.AddModelError(nameof(LoginVM.UsernameOrEmail),
-                                "The Username Or Email Length is Wrong!");
+            ServiceResult serviceResult = await _clientService.LoginAsync(loginVM);
 
+            if (!serviceResult.Ok)
+            {
+                ModelState.AddModelError(serviceResult.ErrorKey,
+                                         serviceResult.ErrorMessage);
                 return View(loginVM);
             }
 
-            if(loginVM.Password.Length > 200 ||
-                loginVM.Password.Length < 8)
-            {
-                ModelState.AddModelError(nameof(LoginVM.UsernameOrEmail),
-                              "The Password Length is Wrong!");
-
-                return View(loginVM);
-            }
-
-            if(await _clientService.LoginAsync(loginVM))
-            {
-                return RedirectToAction("Dashboard", "Class");
-            }
-
-            return View(loginVM);
+            return RedirectToAction("Dashboard", "Class"); 
         }
 
     }

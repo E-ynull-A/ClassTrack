@@ -1251,8 +1251,8 @@
             "format": "date-time"
           },
           "duration": {
-            "type": "string",
-            "format": "date-span"
+            "type": "integer",
+            "format": "int32"
           },
           "classRoomId": {
             "type": "integer",
@@ -1428,8 +1428,8 @@
             "format": "date-time"
           },
           "duration": {
-            "type": "string",
-            "format": "date-span"
+            "type": "integer",
+            "format": "int32"
           },
           "classRoomId": {
             "type": "integer",

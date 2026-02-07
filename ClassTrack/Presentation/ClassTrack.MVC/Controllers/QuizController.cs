@@ -7,15 +7,15 @@ namespace ClassTrack.MVC.Controllers
 {
     public class QuizController : Controller
     {
-        private readonly IQuizClientService _clientService;
+        private readonly IQuizClientService _quizClient;
 
-        public QuizController(IQuizClientService clientService)
+        public QuizController(IQuizClientService quizClient)
         {
-            _clientService = clientService;
+            _quizClient = quizClient;
         }
         public async Task<IActionResult> Index(long id)
         {         
-            return View(await _clientService.GetAllAsync(id));
+            return View(await _quizClient.GetAllAsync(id));
         }
 
         public IActionResult Create()
@@ -23,10 +23,29 @@ namespace ClassTrack.MVC.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Create(PostQuizVM postQuiz)
-        //{
-            
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(PostQuizVM postQuiz)
+        {
+            if(!ModelState.IsValid)
+                return View(postQuiz);
+
+            ServiceResult result = await _quizClient.CreateQuizAsync(postQuiz);
+
+            if (!result.Ok)
+            {
+                ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
+                return View(postQuiz);
+            }
+
+            return RedirectToAction("ClassRoom", "Class",new {id = postQuiz.ClassRoomId });
+        }
+
+        
+        public IActionResult Put(long id)
+        {
+
+        }
+
+        
     }
 }

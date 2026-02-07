@@ -29,6 +29,13 @@
     if (e.key === "Escape") closeMenu();
   });
 
-  menu.addEventListener("click", (e) => e.stopPropagation());
+    menu.addEventListener("click", (e) => e.stopPropagation());
+
+
+    const input = document.querySelector('input[name="Name"]');
+    input.addEventListener("focus", () => {
+        input.classList.add("editing");
+    });
+
 })();
 

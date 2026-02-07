@@ -44,13 +44,12 @@
             return;
         }
 
+        // IMPORTANT: Duration is TimeSpan string "HH:mm:ss"
         quiz = {
             Name: name,
             StartTime: new Date(st).toISOString(),
-            Duration: `00:${String(dur).padStart(2, "0")}:00`, // HH:mm:ss
-            ClassRoomId: cid,
-            ChoiceQuestions: [],
-            OpenQuestions: []
+            Duration: `00:${String(dur).padStart(2, "0")}:00`,
+            ClassRoomId: cid
         };
 
         tab2.disabled = false;
@@ -160,7 +159,6 @@
             Title: title,
             Point: point,
             IsMultiple: isMultiple,
-            QuizId: null,
             Options: options.map(x => ({ Variant: (x.Variant || "").trim(), IsCorrect: !!x.IsCorrect }))
         };
 
@@ -191,7 +189,7 @@
         const point = parseFloat(oPoint?.value || "0");
         if (!title) { toast("Missing", "Open title boş ola bilməz."); return; }
 
-        openQuestions.push({ Title: title, Point: point, QuizId: null });
+        openQuestions.push({ Title: title, Point: point });
 
         if (oTitle) oTitle.value = "";
         if (oPoint) oPoint.value = "1";
@@ -247,8 +245,7 @@
         });
     }
 
-    // ===== REVIEW (user-friendly) + JSON toggle =====
-
+    // ===== REVIEW + JSON toggle =====
     const btnToggleJson = $("#btnToggleJson");
     btnToggleJson?.addEventListener("click", () => {
         const box = $("#jsonWrap");
@@ -266,16 +263,13 @@
 
     function renderReview() {
         if (!quiz) return;
-
         const payload = buildPayload();
 
-        // Fill quiz info
         $("#rvName") && ($("#rvName").textContent = payload.Name || "-");
         $("#rvClass") && ($("#rvClass").textContent = String(payload.ClassRoomId ?? "-"));
         $("#rvStart") && ($("#rvStart").textContent = payload.StartTime ? new Date(payload.StartTime).toLocaleString() : "-");
         $("#rvDur") && ($("#rvDur").textContent = payload.Duration || "-");
 
-        // counts + points
         const choiceCount = payload.ChoiceQuestions.length;
         const openCount = payload.OpenQuestions.length;
         $("#rvChoiceCount") && ($("#rvChoiceCount").textContent = String(choiceCount));
@@ -287,7 +281,6 @@
 
         $("#rvTotalPts") && ($("#rvTotalPts").textContent = String(totalPts));
 
-        // questions list (pretty)
         const wrap = $("#rvQuestions");
         if (wrap) {
             wrap.innerHTML = "";
@@ -320,9 +313,56 @@
             });
         }
 
-        // keep JSON updated for debug
         const jsonOut = $("#jsonOut");
         if (jsonOut) jsonOut.textContent = JSON.stringify(payload, null, 2);
+    }
+
+    // ====== IMPORTANT: Variant B binder (MUST be inside IIFE) ======
+    function syncHiddenFields() {
+        const host = document.getElementById("bindFields");
+        if (!host) { console.log("bindFields tapılmadı"); return; }
+
+        host.innerHTML = "";
+
+        const add = (name, value) => {
+            const inp = document.createElement("input");
+            inp.type = "hidden";
+            inp.name = name;
+            inp.value = value ?? "";
+            host.appendChild(inp);
+        };
+
+        // Quiz info
+        add("Name", quiz?.Name);
+        add("ClassRoomId", quiz?.ClassRoomId);
+        add("StartTime", quiz?.StartTime);
+        add("Duration", quiz?.Duration);
+
+        // ChoiceQuestions
+        choiceQuestions.forEach((q, i) => {
+            add(`ChoiceQuestions[${i}].Title`, q.Title);
+            add(`ChoiceQuestions[${i}].Point`, q.Point);
+            add(`ChoiceQuestions[${i}].IsMultiple`, q.IsMultiple);
+
+            (q.Options || []).forEach((o, j) => {
+                add(`ChoiceQuestions[${i}].Options[${j}].Variant`, o.Variant);
+                add(`ChoiceQuestions[${i}].Options[${j}].IsCorrect`, o.IsCorrect);
+            });
+        });
+
+        // OpenQuestions
+        openQuestions.forEach((q, i) => {
+            add(`OpenQuestions[${i}].Title`, q.Title);
+            add(`OpenQuestions[${i}].Point`, q.Point);
+        });
+
+        // Debug: check keys
+        const form = document.getElementById("quizForm");
+        if (form) {
+            const fd = new FormData(form);
+            console.log("Posted keys:", [...fd.keys()].filter(k =>
+                k.startsWith("ChoiceQuestions") || k.startsWith("OpenQuestions")));
+        }
     }
 
     // Step navigation
@@ -334,18 +374,23 @@
 
     $("#btnBackToQuestions")?.addEventListener("click", () => showStep(2));
 
-    // Submit (preview only)
+    // Submit
     $("#btnSubmit")?.addEventListener("click", () => {
-        if (!quiz) return;
+        if (!quiz) {
+            toast("First", "Əvvəl quiz info saxla.");
+            return;
+        }
 
-        // əgər sual yoxdursa submit etməsin (istədiyin kimi)
         if (choiceQuestions.length + openQuestions.length === 0) {
             toast("Missing", "Ən az 1 sual əlavə elə.");
             return;
         }
 
-        renderReview();
-        toast("Ready", "Review hazırdır. API-ya göndərə bilərsən.");
+        syncHiddenFields();
+        const form = document.getElementById("quizForm")?.submit();
+        if (!form) return;
+
+        form.requestSubmit();
     });
 
     // Reset
@@ -360,14 +405,13 @@
         if (quizName) quizName.value = "";
         if (classRoomId) classRoomId.value = "";
         if (startTime) startTime.value = "";
-        if (durationMin) durationMin.value = "30";
+        if (durationMin) durationMin.value = "0";
 
         tab2.disabled = true;
         tab3.disabled = true;
 
         if (quizInfoHint) quizInfoHint.textContent = "Əvvəl quiz məlumatlarını saxla.";
 
-        // clear review fields if exist
         $("#rvName") && ($("#rvName").textContent = "-");
         $("#rvClass") && ($("#rvClass").textContent = "-");
         $("#rvStart") && ($("#rvStart").textContent = "-");
@@ -378,7 +422,6 @@
         $("#rvQuestions") && ($("#rvQuestions").innerHTML = "");
         $("#jsonOut") && ($("#jsonOut").textContent = "{ }");
 
-        // hide json panel if open
         const jsonWrap = $("#jsonWrap");
         if (jsonWrap) jsonWrap.style.display = "none";
         if (btnToggleJson) btnToggleJson.textContent = "Show JSON";

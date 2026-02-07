@@ -154,9 +154,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("User isn't Found!");
 
             return await _roomRepository
-                .AnyAsync(r =>r.Id == classRoomId && r.StudentClasses
+                .AnyAsync(r =>r.Id == classRoomId && (r.StudentClasses
                         .Any(sc => sc.Student.AppUserId == userId) ||
-                                 r.TeacherClasses.Any(tc => tc.Teacher.AppUserId == userId));
+                                 r.TeacherClasses.Any(tc => tc.Teacher.AppUserId == userId)));
         }
     }
 }

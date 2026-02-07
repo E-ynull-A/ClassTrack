@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="~/css/dashboard.css">
 
 <div class="row" style="display:flex">
-    <form method="post" class="card col">
+    <form method="post" asp-action="CreateClassRoom" class="card col">
         <div>
             <div class="h2">Create Class</div>
             <div class="label">Class name</div>
@@ -22,13 +22,16 @@
             </div>
         </div>
     </form>
-    <form class="card col">
+    <form class="card col" asp-action="JoinClassRoom" method="post">
         <div>
             <div class="h2">Join Class (Student)</div>
             <div class="label">Class code</div>
-            <input class="input" id="classCode" placeholder="Məs: A7K2Q9" />
+            <input class="input" id="classCode" asp-for="@Model.JoinClass.ClassKey" placeholder="Məs: A7K2Q9" />
             <button class="btn ok" id="btnJoin" style="margin-top:12px">Join</button>
-            <div class="muted hint">MVC-də: POST /Classes/Join</div>
+            <br />
+            <div style="margin-top:10px">
+                <span asp-validation-for="@Model.JoinClass.ClassKey"></span>
+            </div>
         </div>
     </form>
 
@@ -42,11 +45,11 @@
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             @foreach (GetClassRoomItemVM classRoom in Model.Classes)
-            {               
+            {
                 <div class="swiper-slide">
                     <div class="class-card">
-                      
-                    
+
+
                         <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
                             <div class="card-content" style="margin-top:30px">
                                 <div class="title">@classRoom.Name</div>

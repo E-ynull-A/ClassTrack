@@ -18,18 +18,31 @@ namespace ClassTrack.MVC.Services.Implementations
             _cookieService = cookieService;
         }
 
-        public async Task<bool> LoginAsync(LoginVM loginVM)
+        public async Task<ServiceResult> LoginAsync(LoginVM loginVM)
         {
            
             if (_cookieService.HasCookie("AccessToken"))
-                return true;
+                return new ServiceResult(true);
 
+            if (loginVM.UsernameOrEmail.Length > 256 ||
+                    loginVM.UsernameOrEmail.Length < 4)
+            {
+                 return new ServiceResult(false,nameof(LoginVM.UsernameOrEmail),
+                                       "The Username Or Email Length is Wrong!");
+            }
+
+            if (loginVM.Password.Length > 200 ||
+                loginVM.Password.Length < 8)
+            {
+                return new ServiceResult(false,nameof(LoginVM.Password),
+                              "The Password Length is Wrong!");
+            }
 
             var message = await _httpClient.PostAsJsonAsync("Accounts/Login", loginVM);
 
             if (!message.IsSuccessStatusCode)
             {
-                return false;
+                return new ServiceResult(false,string.Empty,"Username, Email or Password is Incorrect");
             }
 
             var tokens = await message.Content.ReadFromJsonAsync<ResponseTokenVM>();
@@ -37,7 +50,7 @@ namespace ClassTrack.MVC.Services.Implementations
             _cookieService.SetTokenCookie("AccessToken",tokens.AccessToken.AccessToken,15);
             _cookieService.SetTokenCookie("RefreshToken", tokens.RefreshToken.RefreshToken, 60 * 24 * 7); 
             
-            return true;
+            return new ServiceResult(true);
         }
         public Task Register(RegisterVM registerVM)
         {

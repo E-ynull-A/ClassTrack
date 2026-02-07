@@ -37,34 +37,52 @@ namespace ClassTrack.MVC.Controllers
 
             return View("StudentClassRoom",getClassRoom);
         }
-
         public async Task<IActionResult> Dashboard()
         {            
             return View(new DashboardVM(await _roomService.GetAllAsync()));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Dashboard(DashboardVM dashboardVM)
+        public async Task<IActionResult> CreateClassRoom(DashboardVM dashboardVM)
         {
             if (!ModelState.IsValid)
             {
-                return View(new DashboardVM(await _roomService.GetAllAsync(),
+                return View(nameof(Dashboard),new DashboardVM(await _roomService.GetAllAsync(),
                                                     dashboardVM.PostClass));
             }
+      
+            ServiceResult result = await _roomService.CreateClassRoomAsync(dashboardVM.PostClass);
 
-            if(dashboardVM.PostClass.Name.Length > 150)
+            if (!result.Ok)
             {
-                ModelState.AddModelError(nameof(PostClassRoomVM.Name),
-                                        "The Name Length is too Long!");
-                return View(new DashboardVM(await _roomService.GetAllAsync(),
-                                                  dashboardVM.PostClass));
+                ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
             }
-              
-            await _roomService.CreateClassRoomAsync(dashboardVM.PostClass);
             return RedirectToAction("Dashboard");
         }
 
-       
+        [HttpPost]
+        public async Task<IActionResult> JoinClassRoom(DashboardVM dashboardVM)
+        {
+            ModelState.Remove(nameof(DashboardVM.PostClass));
+
+            if (!ModelState.IsValid)
+            {
+                return View(nameof(Dashboard), new DashboardVM(await _roomService.GetAllAsync(),
+                                                    dashboardVM.PostClass));
+            }
+
+            ServiceResult result = await _roomService.JoinClassRoomAsync(dashboardVM.JoinClass);
+
+            if (!result.Ok)
+            {
+                ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
+                return View(nameof(Dashboard), new DashboardVM(await _roomService.GetAllAsync(),
+                                                   dashboardVM.PostClass));
+            }
+
+            return RedirectToAction("Dashboard");
+        }
+        
        
         public async Task<IActionResult> DeleteClassRoom(long id)
         {

@@ -3,13 +3,15 @@
 
 
 
+
+
 namespace ClassTrack.MVC.ViewModels
 {
     public record PostQuizVM(
 
        string Name,
        DateTime StartTime,
-       TimeSpan Duration,
+       int Duration,
        long ClassRoomId,
 
        ICollection<PostChoiceQuestionVM>? ChoiceQuestions,

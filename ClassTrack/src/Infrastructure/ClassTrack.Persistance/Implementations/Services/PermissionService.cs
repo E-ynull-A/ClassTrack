@@ -39,7 +39,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             var result = await _casheService.GetAsync<bool?>(cacheKey);
 
             if(result.HasValue)
-                return new IsTeacherDTO(result.Value);
+                   return new IsTeacherDTO(result.Value);
 
             IsTeacherDTO tDTO = new IsTeacherDTO(await _teacherRepository.AnyAsync(t => t.AppUserId == userId && t.TeacherClassRooms
                                                                      .Any(tc => tc.ClassRoomId == classRoomId)));

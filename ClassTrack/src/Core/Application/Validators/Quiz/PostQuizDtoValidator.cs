@@ -23,14 +23,8 @@ namespace ClassTrack.Application.Validators
                 .WithMessage("The Start Time of Quiz must be in the future or present");
 
             RuleFor(q => q.Duration)
-                .NotEmpty()
-                .LessThanOrEqualTo(TimeSpan.FromHours(24))
-                .GreaterThan(TimeSpan.FromHours(0));
-
-            RuleFor(q => q)
-                .NotEmpty()
-                .Must(qq => qq.ChoiceQuestions.Count + qq.OpenQuestions.Count <= 200)
-                .WithMessage("The Question Count isn't exceed the limit");
+                .LessThanOrEqualTo(24*60)
+                .GreaterThan(0);
 
             RuleFor(q => q.ClassRoomId)
                 .NotEmpty()

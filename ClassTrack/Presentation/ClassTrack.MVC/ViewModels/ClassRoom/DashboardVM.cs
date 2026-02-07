@@ -6,6 +6,7 @@ namespace ClassTrack.MVC.ViewModels
 
         [ValidateNever]
         IEnumerable<GetClassRoomItemVM> Classes,
-        PostClassRoomVM PostClass = null);
+        PostClassRoomVM PostClass = null,
+        JoinClassRoomVM JoinClass = null);
    
 }

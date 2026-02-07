@@ -22,7 +22,7 @@
                asp-controller="Task" asp-action="Create" asp-route-classRoomId="@Model.ClassRoom.Id">
                 + Create Task
             </a>
-        </div>   
+        </div>
     </div>
 </div>
 
@@ -52,16 +52,58 @@
 
 <div class="card" style="margin-top:16px;width:fit-content">
     <div class="nav-actions danger-actions" style="display:flex;justify-content:end">
-        <a class="btn" id="btnCreateTask"
-           asp-controller="ClassRoom" asp-action="Edit" asp-route-id="@Model.ClassRoom.Id">
-            Edit Class
+        <a class="btn" id="btnToggleRename" type="button">
+            Edit name
         </a>
+
 
         <a class="btn danger" id="btnCreateTask"
            asp-action="DeleteClassRoom" asp-route-id="@Context.GetRouteValue("id")" type="button">
             Delete Class
         </a>
-    </div>   
+    </div>
+   
+
+    <div class="card" id="renameBox"
+         style="margin-top:12px; max-width:520px; display:none;">
+
+        <div class="h2">Quick rename</div>
+        <div class="muted" style="margin-top:4px">
+            Sadəcə adı dəyiş və save elə.
+        </div>
+
+        <div class="line" style="margin:12px 0"></div>
+
+        <form class="row-inline" style="gap:10px; align-items:end;">
+           
+            
+            <div style="flex:1;margin-bottom:10px">
+                <div class="label">Class name</div>
+                <input class="input"
+                       name="Name"
+                       placeholder="Yeni ad..."
+                       required />
+            </div>
+
+            <button class="btn ok" type="submit">Save</button>
+        </form>
+    </div>
 </div>
 
 <script defer src="~/js/class.js"></script>
+<script>
+    const btn = document.getElementById("btnToggleRename");
+    const box = document.getElementById("renameBox");
+    const input = box.querySelector('input[name="Name"]');
+
+    btn.addEventListener("click", () => {
+      const opened = box.style.display === "block";
+
+      box.style.display = opened ? "none" : "block";
+      btn.textContent = opened ? "Edit name" : "Cancel";
+
+      if (!opened) {
+        setTimeout(() => input.focus(), 50);
+      }
+    });
+</script>

@@ -1,5 +1,6 @@
 ﻿using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace ClassTrack.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class StudentsController : ControllerBase
     {
         private readonly IStudentService _studentService;

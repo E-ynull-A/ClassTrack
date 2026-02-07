@@ -1,0 +1,131 @@
+﻿
+@model PutQuizVM
+
+
+
+<link rel="stylesheet" href="~/css/quiz-edit.css" />
+<div class="container">
+
+    <div class="topbar">
+        <div class="left">
+            <div class="title">Edit Quiz</div>
+            <div class="subtitle">Basic info + question list</div>
+        </div>
+
+        <div class="right">
+            <button class="btn ghost" id="btnBack">← Back</button>
+            <button class="btn primary" id="btnSaveQuiz">Save Changes</button>
+        </div>
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-head">
+                <div class="h2">Quiz Basic Data</div>
+            </div>
+
+            <form id="quizForm" class="form" asp-controller="Quiz" asp-action="Put">
+                <div class="field">
+                    <label asp-for="@Model.Name" class="label" for="quizName">Name</label>
+                    <span asp-validation-for="@Model.Name"></span>
+                    <input class="input" id="quizName" name="Name" type="text" placeholder="e.g. Midterm Quiz" />
+                </div>
+
+                <div class="field">
+                    <label class="label" asp-for="@Model.StartTime" for="startTime">Start Time</label>
+                    <span asp-validation-for="@Model.StartTime"></span>
+                    <input class="input" id="startTime" name="StartTime" type="datetime-local" />
+                    <span> </span>
+                </div>
+
+                <div class="row2">
+                    <div class="field">
+                        <label class="label" for="duration">Duration (min)</label>
+                        <input class="input" asp-for="@Model.Duration" id="duration" name="Duration" type="number" min="1" placeholder="e.g. 30" />
+                        <span asp-validation-for="@Model.Duration"></span>
+                    </div>
+
+                    <div class="field">
+                        <input class="input" asp-for="@Model.ClassRoomId" type="hidden" />
+                        <div asp-validation-summary="ModelOnly"></div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn primary" id="btnSaveQuizData">
+                        Save Quiz Data
+                    </button>
+
+                    <button type="button" class="btn ghost" id="btnPreview">
+                        Preview JSON
+                    </button>
+                </div>
+
+
+                <div class="jsonbox" id="jsonBox" aria-live="polite"></div>
+            </form>
+        </div>
+
+
+        <div class="card">
+            <div class="card-head">
+                <div class="h2">Questions</div>
+
+                <div class="tools">
+                    <input class="input search" id="qSearch" placeholder="Search question..." />
+                    <button class="btn ghost" id="btnAddQuestion">+ Add</button>
+                </div>
+            </div>
+
+            <div class="list" id="questionList">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal" aria-hidden="true">
+        <div class="modal-backdrop" data-close="true"></div>
+
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-head">
+                <div>
+                    <div class="h2" id="modalTitle">Edit Question</div>
+                    <div class="muted" id="modalMeta">Question #</div>
+                </div>
+                <button class="icon-btn" id="btnCloseModal" aria-label="Close">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="field">
+                    <label class="label" for="mqText">Question Text</label>
+                    <textarea class="textarea" id="mqText" rows="4" placeholder="Type question text..."></textarea>
+                </div>
+
+                <div class="row2">
+                    <div class="field">
+                        <label class="label" for="mqPoints">Points</label>
+                        <input class="input" id="mqPoints" type="number" min="0" />
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="mqOrder">Order</label>
+                        <input class="input" id="mqOrder" type="number" min="1" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn danger" id="btnDeleteQ">Delete</button>
+                <div class="spacer"></div>
+                <button class="btn ghost" id="btnCancelQ">Cancel</button>
+                <button class="btn primary" id="btnSaveQ">Save Question</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/js/quiz-edit.js"></script>
+

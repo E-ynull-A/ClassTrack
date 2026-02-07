@@ -11,8 +11,10 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<Quiz, GetQuizItemDTO>();
             CreateMap<Quiz,GetQuizDTO>();
 
-            CreateMap<PostQuizDTO, Quiz>();
-            CreateMap<PutQuizDTO, Quiz>();
+            CreateMap<PostQuizDTO, Quiz>()
+                .ForMember(nameof(Quiz.Duration),opt=>opt.MapFrom(q=>TimeSpan.FromMinutes(q.Duration)));
+            CreateMap<PutQuizDTO, Quiz>()
+                .ForMember(nameof(Quiz.Duration), opt => opt.MapFrom(q => TimeSpan.FromMinutes(q.Duration)));
 
 
         }

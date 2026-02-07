@@ -9,6 +9,7 @@ namespace ClassTrack.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     
     public class QuizesController : ControllerBase
     {

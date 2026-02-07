@@ -79,6 +79,8 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task CreateQuizAsync(PostQuizDTO postQuiz)
         {
 
+
+
             if (!await _roomRepository.AnyAsync(r => r.Id == postQuiz.ClassRoomId))
             {
                 throw new Exception("The ClassRoom isn't Found!");
@@ -86,6 +88,17 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (!(await _permissionService.IsTeacherAsync(postQuiz.ClassRoomId)).IsTeacher)
                 throw new Exception("Forbiden action exception!");
+
+            int totalCount = 0;
+            if (postQuiz.ChoiceQuestions is not null)
+                totalCount += postQuiz.ChoiceQuestions.Count;
+            if (postQuiz.OpenQuestions is not null)
+                totalCount += postQuiz.OpenQuestions.Count;
+
+            if (totalCount > 200)
+            {
+                throw new Exception("The Count of Quiz is so high");
+            }
 
             if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&
                                              q.ClassRoomId != postQuiz.ClassRoomId))
