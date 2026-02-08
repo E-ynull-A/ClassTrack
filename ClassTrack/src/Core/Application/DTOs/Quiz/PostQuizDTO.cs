@@ -10,7 +10,7 @@ namespace ClassTrack.Application.DTOs
 
        string Name,
        DateTime StartTime,
-       int Duration,
+       double Duration,
        long ClassRoomId,
 
        ICollection<PostChoiceQuestionDTO>? ChoiceQuestions,

@@ -1,8 +1,10 @@
-﻿using ClassTrack.Application.DTOs;
+﻿using ClassTrack.API.ActionFilter;
+using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Threading.Tasks;
 
 namespace ClassTrack.API.Controllers
@@ -19,13 +21,15 @@ namespace ClassTrack.API.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(int page = 0,int take = 0)
+        [HttpGet("{classRoomId}/{quizId}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> Get(long quizId,int page = 0,int take = 0)
         {
-           return Ok(await _service.GetAllAsync(page:page,take:take));
+           return Ok(await _service.GetAllAsync(quizId,page:page,take:take));
         }
 
         [HttpGet("{id}")]
+
         public async Task<IActionResult> Get(long id)
         {
             if (id < 1)
@@ -34,7 +38,8 @@ namespace ClassTrack.API.Controllers
             return Ok(await _service.GetByIdAsync(id));
         }
 
-        [HttpPost("/ChoiceQuestion")]
+        [HttpPost("{classRoomId}/ChoiceQuestion")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Post([FromBody]PostChoiceQuestionDTO postChoice)
         {
             if(postChoice.Options is null)
@@ -44,7 +49,8 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPost("/OpenQuestion")]
+        [HttpPost("{classRoomId}/OpenQuestion")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Post([FromBody]PostOpenQuestionDTO postOpen)
         {
             if(postOpen is null)
@@ -54,7 +60,8 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPut("/ChoiceQuestion")]
+        [HttpPut("{classRoomId}/ChoiceQuestion")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Put(long id,PutChoiceQuestionDTO putChoice)
         {
             if(id < 1)
@@ -64,7 +71,8 @@ namespace ClassTrack.API.Controllers
             return NoContent();
         }
 
-        [HttpPut("/OpenQuestion")]
+        [HttpPut("{classRoomId}/OpenQuestion")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Put(long id,PutOpenQuestionDTO putOpen)
         {
             if(id<1)
@@ -74,7 +82,8 @@ namespace ClassTrack.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}/ChoiceQuestion")]
+        [HttpDelete("{id}/{classRoomId}/ChoiceQuestion")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> DeleteChoice(long id)
         {
             if(id<1)
@@ -84,7 +93,8 @@ namespace ClassTrack.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}/OpenQuestion")]
+        [HttpDelete("{id}/{classRoomId}/OpenQuestion")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
 
         public async Task<IActionResult> DeleteOpen(long id)
         {

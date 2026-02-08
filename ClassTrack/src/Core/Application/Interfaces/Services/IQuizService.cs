@@ -12,12 +12,12 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface IQuizService
     {
         Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId,int page, int take, params string[] includes);
-        Task<GetQuizDTO> GetByIdAsync(long id);
+        Task<GetQuizDTO> GetByIdDetailAsync(long id);
+        Task<GetQuizItemDTO> GetByIdAsync(long id);
 
         Task CreateQuizAsync(PostQuizDTO postQuiz);
         Task UpdateQuizAsync(long id, PutQuizDTO putQuiz);
         Task DeleteQuizAsync(long id);
-        Task<bool> IsOwnAsync(long quizId);
       
     }
 }

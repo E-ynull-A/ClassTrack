@@ -31,29 +31,33 @@
     <div class="line"></div>
 
     <div class="quiz-grid" id="quizGrid">
-
         @foreach (GetQuizItemVM quiz in Model)
         {
-            <a class="quiz-card" href="quiz-detail.html">
-                <div class="qc-top">
-                    <div class="qc-name">@quiz.Name</div>
-                </div>
-
-                <div class="qc-meta">
-                    <div class="qc-row">
-                        <span class="muted">Start</span>
-                        <strong class="qc-start" data-start="@quiz.StartTime">@quiz.StartTime</strong>
+            <div class="quiz-card">
+                <a href="quiz-detail.html">
+                    <div class="qc-top">
+                        <div class="qc-name">@quiz.Name</div>
                     </div>
-                    <div class="qc-row">
-                        <span class="muted">Duration</span>
-                        <strong class="qc-duration" data-min="@quiz.Duration">@quiz.Duration Min</strong>
-                    </div>
-                </div>
 
+                    <div class="qc-meta">
+                        <div class="qc-row">
+                            <span class="muted">Start</span>
+                            <strong class="qc-start" data-start="@quiz.StartTime">@quiz.StartTime</strong>
+                        </div>
+                        <div class="qc-row">
+                            <span class="muted">Duration</span>
+                            <strong class="qc-duration" data-min="@quiz.Duration">@quiz.Duration Min</strong>
+                        </div>
+                    </div>
+                </a>
                 <div class="qc-actions">
-                    <span class="btn ok">Open</span>
+                    <a class="btn ok" asp-action="Update"
+                                      asp-route-id="@quiz.Id" 
+                                      asp-route-classRoomId="@Context.GetRouteValue("id")">
+                        Edit
+                    </a>
                 </div>
-            </a>
+            </div>
         }
     </div>
 

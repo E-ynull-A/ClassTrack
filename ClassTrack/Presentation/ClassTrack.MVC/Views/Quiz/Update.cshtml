@@ -1,6 +1,4 @@
-﻿
-@model PutQuizVM
-
+﻿@model UpdateQuizVM
 
 
 <link rel="stylesheet" href="~/css/quiz-edit.css" />
@@ -26,29 +24,30 @@
                 <div class="h2">Quiz Basic Data</div>
             </div>
 
-            <form id="quizForm" class="form" asp-controller="Quiz" asp-action="Put">
+            <form id="quizForm" class="form" method="post">
                 <div class="field">
-                    <label asp-for="@Model.Name" class="label" for="quizName">Name</label>
-                    <span asp-validation-for="@Model.Name"></span>
-                    <input class="input" id="quizName" name="Name" type="text" placeholder="e.g. Midterm Quiz" />
+                    <label asp-for="PutQuiz.Name" class="label">Name</label>
+                   
+                    <input class="input" id="quizName" asp-for="PutQuiz.Name" />
+                    <span asp-validation-for="PutQuiz.Name"></span>
                 </div>
 
                 <div class="field">
-                    <label class="label" asp-for="@Model.StartTime" for="startTime">Start Time</label>
-                    <span asp-validation-for="@Model.StartTime"></span>
-                    <input class="input" id="startTime" name="StartTime" type="datetime-local" />
-                    <span> </span>
+                    <label class="label" asp-for="PutQuiz.StartTime" for="startTime">Start Time</label>
+                   
+                    <input class="input" asp-for="PutQuiz.StartTime" id="startTime" type="datetime-local" />
+                    <span asp-validation-for="PutQuiz.StartTime"></span>
                 </div>
 
                 <div class="row2">
                     <div class="field">
                         <label class="label" for="duration">Duration (min)</label>
-                        <input class="input" asp-for="@Model.Duration" id="duration" name="Duration" type="number" min="1" placeholder="e.g. 30" />
-                        <span asp-validation-for="@Model.Duration"></span>
+                        <input class="input" asp-for="PutQuiz.Duration" id="duration" type="number" />
+                        <span asp-validation-for="PutQuiz.Duration"></span>
                     </div>
 
                     <div class="field">
-                        <input class="input" asp-for="@Model.ClassRoomId" type="hidden" />
+                        <input class="input" asp-for="PutQuiz.ClassRoomId" type="hidden" />
                         <div asp-validation-summary="ModelOnly"></div>
                     </div>
                 </div>
@@ -77,9 +76,28 @@
                     <input class="input search" id="qSearch" placeholder="Search question..." />
                     <button class="btn ghost" id="btnAddQuestion">+ Add</button>
                 </div>
-            </div>
-
+            </div>         
             <div class="list" id="questionList">
+                @{int order = 0;}
+               @foreach(GetQuestionItemVM questionItemVM in Model.PutQuestions) {
+                <div class="qitem" data-id="@questionItemVM.Id">
+                    @{order++;}
+                        <div class="qnum" style="margin-top:4px">@order</div>
+
+                        <div class="qcontent" style="margin-top:8px">
+                        <div class="qtitle" >@questionItemVM.Title</div>
+                    </div>
+
+                    <div class="qactions">
+                        <a class="btn ghost"
+                           asp-controller="Question"
+                           asp-action="Edit"
+                           asp-route-id="@questionItemVM.Id">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+                }
             </div>
         </div>
     </div>

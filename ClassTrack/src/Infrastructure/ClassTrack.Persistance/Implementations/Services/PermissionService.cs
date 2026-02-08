@@ -15,21 +15,21 @@ namespace ClassTrack.Persistance.Implementations.Services
     internal class PermissionService:IPermissionService
     {
         private readonly ICacheService _casheService;
-        private readonly IHttpContextAccessor _accessor;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly ICurrentUserService _currentUser;
 
         public PermissionService(ICacheService casheService,
-                                 IHttpContextAccessor accessor,
-                                 ITeacherRepository teacherRepository)
+                                 ITeacherRepository teacherRepository,
+                                 ICurrentUserService currentUser)
         {
             _casheService = casheService;
-            _accessor = accessor;
             _teacherRepository = teacherRepository;
+            _currentUser = currentUser;
         }
         public async Task<IsTeacherDTO> IsTeacherAsync(long classRoomId)
         {
-            string? userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
- 
+            string userId = _currentUser.GetUserId();
+
 
             if (string.IsNullOrEmpty(userId) || classRoomId < 1)
                 throw new Exception("Invalid User and ClassRoom IDs!!");

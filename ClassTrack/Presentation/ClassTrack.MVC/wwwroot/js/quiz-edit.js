@@ -1,28 +1,13 @@
 ﻿
 
 
-let quiz = {
-    Name: "Sample Quiz",
-    StartTime: "2026-02-07T10:30",  
-    Duration: 30,
-    ClassRoomId: 12
-};
 
-let questions = [
-    { id: 101, order: 1, text: "What is TCP Fast Retransmit?", points: 2 },
-    { id: 102, order: 2, text: "Explain VLAN broadcast domains.", points: 3 },
-    { id: 103, order: 3, text: "What is set-associative cache?", points: 2 }
-];
+
 
 
 const $ = (s) => document.querySelector(s);
 
-function renderQuizForm() {
-    $("#quizName").value = quiz.Name ?? "";
-    $("#startTime").value = quiz.StartTime ?? "";
-    $("#duration").value = quiz.Duration ?? "";
-    $("#classRoomId").value = quiz.ClassRoomId ?? "";
-}
+
 
 function renderQuestions(filterText = "") {
     const list = $("#questionList");
@@ -65,24 +50,6 @@ function renderQuestions(filterText = "") {
     });
 }
 
-function escapeHtml(str) {
-    return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-
-function buildPutQuizDtoFromForm() {
-    return {
-        Name: $("#quizName").value.trim(),
-        StartTime: $("#startTime").value,          
-        Duration: Number($("#duration").value || 0),
-        ClassRoomId: Number($("#classRoomId").value || 0),
-    };
-}
 
 function showJson(dto) {
     const box = $("#jsonBox");

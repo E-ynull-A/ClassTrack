@@ -24,21 +24,18 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IQuestionRepository _questionRepository;
         private readonly IStudentQuizRepository _studentQuizRepository;
         private readonly IPermissionService _permissionService;
-        private readonly IHttpContextAccessor _accessor;
 
         public QuizAnswerService(IQuizAnswerRepository quizAnswerRepository,
                                   IMapper mapper,
                                   IQuestionRepository questionRepository,
                                   IStudentQuizRepository studentQuizRepository,
-                                  IPermissionService permissionService,
-                                  IHttpContextAccessor accessor)
+                                  IPermissionService permissionService)
         {
             _quizAnswerRepository = quizAnswerRepository;
             _mapper = mapper;
             _questionRepository = questionRepository;
             _studentQuizRepository = studentQuizRepository;
             _permissionService = permissionService;
-            _accessor = accessor;
         }
 
         public async Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take)
@@ -60,9 +57,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO)
         {
-
-            if (!await _isOwnAsync(answerDTO.StudentQuizId))
-                throw new Exception("Forbidden action exception!!");
 
                 StudentQuiz sqs = await _studentQuizRepository.GetByIdAsync(answerDTO.StudentQuizId, includes: ["Quiz"]);
             if (sqs is null)
@@ -147,22 +141,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task EvaluateAnswerAsync(long id, PutQuizAnswerDTO answerDTO)
         {
-
-            if(_accessor.HttpContext.Request.RouteValues.TryGetValue("id", out var classId)
-                && long.TryParse(classId.ToString(),out long roomId))
-            {
-                if(!(await _permissionService.IsTeacherAsync(roomId)).IsTeacher)
-                {
-                    throw new Exception("Forbiden action exception!");
-                }
-            }
-
-            else
-            {
-                throw new Exception("Bad & Invalid Request!");
-            }
-
-                QuizAnswer answer = await _quizAnswerRepository.GetByIdAsync(id, includes: ["Question"]);
+            QuizAnswer answer = await _quizAnswerRepository.GetByIdAsync(id, includes: ["Question"]);
 
             if (answer is null)
                 throw new Exception("The QuizAnswer isn't Found");
@@ -190,17 +169,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _quizAnswerRepository.SaveChangeAsync();
         }
 
-        private async Task<bool> _isOwnAsync(long studentQuizId)
-        {
-            string? userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new Exception("User not Found!");
-            }
-
-            return await _studentQuizRepository.AnyAsync(sq => sq.Student.AppUserId == userId);
-        }
+    
 
     }
 }

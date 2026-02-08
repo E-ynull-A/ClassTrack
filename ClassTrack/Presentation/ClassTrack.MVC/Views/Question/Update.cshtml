@@ -1,0 +1,133 @@
+﻿
+    <link rel="stylesheet" href="~/css/question-edit.css">
+    <div class="container">
+
+        <div class="topbar">
+            <div class="left">
+                <div class="h1">Edit Question</div>
+                <div class="muted" id="pageMeta">Quiz: #— • Question: #—</div>
+            </div>
+
+            <div class="right">
+                <button class="btn ghost" id="btnBack" type="button">← Back</button>
+                <button class="btn primary" id="btnSave" type="button">Save</button>
+            </div>
+        </div>
+
+        <div class="grid">
+
+            <!-- MAIN FORM -->
+            <div class="card">
+                <div class="card-head">
+                    <div>
+                        <div class="h2">Question Details</div>
+                        <div class="muted">Title, Point, Type</div>
+                    </div>
+
+                    <div class="pill" id="typePill">—</div>
+                </div>
+
+                <!-- MVC-də bunu form eləyib POST/PUT-ə bağlayarsan -->
+                <form id="qForm" class="form">
+
+                    <!-- Hidden (MVC üçün) -->
+                    <input type="hidden" id="quizId" name="QuizId" value="" />
+                    <input type="hidden" id="questionId" name="QuestionId" value="" />
+                    <input type="hidden" id="questionType" name="QuestionType" value="choice" />
+                    <!-- questionType: "choice" | "open" -->
+
+                    <div class="field">
+                        <label class="label" for="qTitle">Title</label>
+                        <input class="input" id="qTitle" name="Title" type="text" placeholder="Sual mətni..." />
+                    </div>
+
+                    <div class="row2">
+                        <div class="field">
+                            <label class="label" for="qPoint">Point</label>
+                            <input class="input" id="qPoint" name="Point" type="number" min="0" step="0.25" placeholder="e.g. 2" />
+                            <div class="hint">decimal dəstək var.</div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Type</label>
+                            <div class="seg" role="tablist" aria-label="Question Type">
+                                <button class="seg-btn active" type="button" id="btnTypeChoice" data-type="choice">Choice</button>
+                                <button class="seg-btn" type="button" id="btnTypeOpen" data-type="open">Open</button>
+                            </div>
+                            <div class="hint">Open seçsən, options bölməsi gizlənir.</div>
+                        </div>
+                    </div>
+
+                    <!-- Choice-only -->
+                    <div class="choice-wrap" id="choiceWrap">
+                        <div class="split">
+                            <div>
+                                <div class="h3">Choice Settings</div>
+                                <div class="muted">IsMultiple + Options</div>
+                            </div>
+
+                            <label class="toggle">
+                                <input type="checkbox" id="isMultiple" name="IsMultiple" />
+                                <span class="toggle-ui"></span>
+                                <span class="toggle-text">IsMultiple</span>
+                            </label>
+                        </div>
+
+                        <div class="options-head">
+                            <div class="h3">Options</div>
+                            <div class="tools">
+                                <button class="btn ghost" id="btnAddOption" type="button">+ Add option</button>
+                                <button class="btn danger" id="btnClearOptions" type="button">Clear</button>
+                            </div>
+                        </div>
+
+                        <div class="options" id="optionsList"></div>
+
+                        <div class="hint">
+                            IsMultiple=false → yalnız 1 correct seçilir. IsMultiple=true → çox correct seçə bilərsən.
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn ok" id="btnPreview" type="button">Preview DTO JSON</button>
+                    </div>
+
+                    <div class="jsonbox" id="jsonBox" aria-live="polite"></div>
+                </form>
+            </div>
+
+            <!-- SIDE CARD (info) -->
+            <div class="card side">
+                <div class="h2">Help</div>
+                <div class="muted" style="margin-top:6px;">
+                    MVC tərəfi səndədir. Bu UI sadəcə DTO-ları yığmaq üçün hazırlanıb.
+                </div>
+
+                <div class="kvs">
+                    <div class="kv">
+                        <div class="k">PostOpenQuestionDTO</div>
+                        <div class="v">Title, Point, QuizId</div>
+                    </div>
+                    <div class="kv">
+                        <div class="k">PostChoiceQuestionDTO</div>
+                        <div class="v">Title, Point, IsMultiple, QuizId</div>
+                    </div>
+                    <div class="kv">
+                        <div class="k">PutOptionInChoiceQuestionDTO</div>
+                        <div class="v">Variant, IsCorrect</div>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <div class="note-title">Qayıtma qaydası</div>
+                    <div class="note-text">
+                        Save edəndə Controller-dən <span class="mono">RedirectToAction("EditQuiz", ...)</span> edərsən.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/js/question-edit.js"></script>

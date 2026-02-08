@@ -5,7 +5,8 @@ namespace ClassTrack.MVC.Services.Interfaces
     public interface IQuizClientService
     {
         public Task<IEnumerable<GetQuizItemVM>> GetAllAsync(long id);
+        Task<GetQuizItemVM> GetByIdAsync(long id, long classRoomId);
         Task<ServiceResult> CreateQuizAsync(PostQuizVM quizVM);
-        Task<ServiceResult> PostQuizAsync(PutQuizVM quizVM, long id);
+        Task<ServiceResult> UpdateQuizAsync(PutQuizVM quizVM, long id);
     }
 }

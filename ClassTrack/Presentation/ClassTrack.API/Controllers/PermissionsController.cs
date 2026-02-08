@@ -18,8 +18,7 @@ namespace ClassTrack.API.Controllers
             _permissionService = permissionService;
         }
 
-        [HttpGet]
-
+        [HttpGet("{classRoomId}")]
         public async Task<IActionResult> Get(long classRoomId)
         {
            return Ok(await _permissionService.IsTeacherAsync(classRoomId));

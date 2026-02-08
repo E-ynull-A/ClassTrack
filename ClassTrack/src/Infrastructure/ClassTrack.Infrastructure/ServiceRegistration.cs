@@ -47,6 +47,8 @@ namespace ClassTrack.Infrastructure
 
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+      
 
             return services;
             

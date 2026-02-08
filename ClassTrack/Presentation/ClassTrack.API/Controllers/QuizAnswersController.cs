@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.DTOs;
+﻿using ClassTrack.API.ActionFilter;
+using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,8 +20,8 @@ namespace ClassTrack.API.Controllers
             _answerService = answerService;
         }
 
-        [HttpGet("{studentId}/Student")]
-
+        [HttpGet("{studentId}/{classRoomId}/Student")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
         public async Task<IActionResult> Get(long studentId,int page = 0, int take = 0)
         {
             if (studentId < 1)
@@ -32,7 +33,8 @@ namespace ClassTrack.API.Controllers
                                        studentId:studentId));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}/{classRoomId}")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
 
         public async Task<IActionResult> Get(long id)
         {
@@ -42,7 +44,8 @@ namespace ClassTrack.API.Controllers
             return Ok(await _answerService.GetByIdAsync(id));
         }
 
-        [HttpPost]
+        [HttpPost("{classRoomId}")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
 
         public async Task<IActionResult> Post(PostQuizAnswerDTO answerDTO)
         {
@@ -51,7 +54,8 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPut]
+        [HttpPut("{classRoomId}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
 
         public async Task<IActionResult> Put(long id,PutQuizAnswerDTO answerDTO)
         {

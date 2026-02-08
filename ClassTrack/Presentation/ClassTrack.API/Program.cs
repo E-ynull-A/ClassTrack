@@ -1,3 +1,4 @@
+using ClassTrack.API.ActionFilter;
 using ClassTrack.Application;
 using ClassTrack.Infrastructure;
 using ClassTrack.Persistance;
@@ -42,6 +43,8 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddServicePersistance(builder.Configuration);
 builder.Services.AddServiceApplication();
 builder.Services.InfrastructureRegistration(builder.Configuration);
+builder.Services.AddScoped<ClassRoomAccessFilter>();
+builder.Services.AddScoped<TeacherAccessFilter>();
 
 
 

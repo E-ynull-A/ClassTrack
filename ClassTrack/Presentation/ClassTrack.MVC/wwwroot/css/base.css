@@ -106,7 +106,7 @@ a{color:inherit; text-decoration:none}
 @media (max-width:720px){
   .kv{grid-template-columns:1fr}
 }
-/* ===== Header / Footer ===== */
+
 .site-header{
   position:sticky; top:0; z-index:50;
   backdrop-filter: blur(10px);
@@ -172,7 +172,7 @@ a{color:inherit; text-decoration:none}
 .mobile-panel{display:none}
 
 .site-footer{
-  margin-top:26px;
+  margin-top:60px;
   border-top:1px solid rgba(36,48,74,.55);
   background:rgba(7,16,34,.55);
 }
@@ -181,11 +181,11 @@ a{color:inherit; text-decoration:none}
 
 .footer-inner{
   max-width:1100px;
-  margin:0 auto;
+  margin:0 auto; 
   padding:14px 24px;
   display:flex;
   align-items:center;
-  justify-content:flex-start;  /* <-- dəyişdi */
+  justify-content:flex-start;  
   gap:16px;
   flex-wrap:wrap;
 }
@@ -194,7 +194,7 @@ a{color:inherit; text-decoration:none}
   display:flex;
   gap:12px;
   flex-wrap:wrap;
-  margin-left:auto;            /* <-- əlavə olundu */
+  margin-left:auto;           
 }
 
 .footer-inner a{color:var(--muted)}

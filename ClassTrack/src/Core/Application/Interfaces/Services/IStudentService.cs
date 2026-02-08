@@ -10,5 +10,6 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface IStudentService
     {
         Task JoinClassAsync(JoinClassRoomDTO classRoomDTO);
+        Task CalculateAvgPoint(long studentId, long classRoomId, decimal point);
     }
 }

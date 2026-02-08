@@ -40,8 +40,6 @@ namespace ClassTrack.Persistance.Implementations.Services
        
         public async Task CreateAttendanceAsync(ICollection<PostStudentAttendanceDTO> attendanceDTOs)
         {
-            if (!(await _permissionService.IsTeacherAsync(attendanceDTOs.Select(a => a.ClassRoomId).First())).IsTeacher)
-                throw new Exception("Forbiden activity exception!");
 
             if(await _attendanceRepository.AnyAsync(a => attendanceDTOs.Select(aDto => aDto.LessonDate).Contains(a.LessonDate)))
             {
@@ -75,8 +73,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task UpdateAttendanceAsync(ICollection<PutStudentAttendanceDTO> attendanceDTOs)
         {
-            if (!(await _permissionService.IsTeacherAsync(attendanceDTOs.Select(a => a.ClassRoomId).First())).IsTeacher)
-                throw new Exception("Forbiden activity exception!");
 
             ICollection<StudentAttendance> attendances =await _attendanceRepository
                 .GetAll(function:x=>x.LessonDate == attendanceDTOs.First().LessonDate &&
@@ -110,9 +106,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (attendance is null)
                 throw new Exception("The Attendance isn't Found");
-
-            if (!(await _permissionService.IsTeacherAsync(attendance.ClassRoomId)).IsTeacher)
-                throw new Exception("Forbiden activity exception!");
 
             _attendanceRepository.Delete(attendance);
             await _attendanceRepository.SaveChangeAsync();

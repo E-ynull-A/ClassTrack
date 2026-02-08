@@ -9,18 +9,18 @@ namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class StudentService : IStudentService
     {
-        private readonly IHttpContextAccessor _accessor;
         private readonly IClassRoomRepository _roomRepository;
         private readonly IStudentRepository _studentRepository;
+        private readonly ICurrentUserService _currentUser;
 
-        public StudentService(IHttpContextAccessor accessor,
-                              IClassRoomRepository roomRepository,
-                              IStudentRepository studentRepository)
+        public StudentService(IClassRoomRepository roomRepository,
+                              IStudentRepository studentRepository,
+                              ICurrentUserService currentUser)
 
         {
-            _accessor = accessor;
             _roomRepository = roomRepository;
             _studentRepository = studentRepository;
+            _currentUser = currentUser;
         }
 
         public async Task JoinClassAsync(JoinClassRoomDTO classRoomDTO)
@@ -30,7 +30,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (room is null)
                 throw new Exception("The Room isn't Found!!");
 
-            string userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userId = _currentUser.GetUserId();
 
             if (userId is null)
                 throw new Exception("There is an issue about Login!");
@@ -55,6 +55,28 @@ namespace ClassTrack.Persistance.Implementations.Services
                 _roomRepository.Update(room);
                 await _roomRepository.SaveChangeAsync();
             }      
+        }
+
+        public async Task CalculateAvgPoint(long studentId,long classRoomId,decimal point)
+        {
+            Student student = await _studentRepository
+                .GetByIdAsync(studentId, includes: [nameof(Student.StudentQuizes),
+                                                   nameof(Student.StudentClasses)]);
+
+            if (student is null)
+                throw new Exception("Student not Found!");
+
+            StudentClassRoom? studentClass = student.StudentClasses.FirstOrDefault(sc => sc.ClassRoomId == classRoomId);
+
+            if (studentClass is null)
+                throw new Exception("You are not the member of this class");
+
+           //Quiz-ə totalPoint əlavə elə
+
+            studentClass.AvgPoint += student.StudentQuizes.Average(sq => sq.TotalPoint);
+
+            _studentRepository.Update(student);
+            await _studentRepository.SaveChangeAsync();
         }
     }
 }

@@ -15,13 +15,10 @@ namespace ClassTrack.Persistance.Implementations.Services
     internal class EmailService:IEmailService
     {
         private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _accessor;
 
-        public EmailService(IConfiguration configuration,
-                            IHttpContextAccessor accessor)
+        public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _accessor = accessor;
         }
         public async Task SendEmailAsync()
         {

@@ -12,9 +12,15 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
         }
-        public async Task<IEnumerable<GetQuizItemVM>> GetAllAsync(long id)
+        public async Task<IEnumerable<GetQuizItemVM>> GetAllAsync(long classRoomId)
         {
-           return await _httpClient.GetFromJsonAsync<IEnumerable<GetQuizItemVM>>("Quizes?classRoomId=1");
+           return await _httpClient.GetFromJsonAsync<IEnumerable<GetQuizItemVM>>($"Quizes/{classRoomId}");
+        }
+
+        public async Task<GetQuizItemVM> GetByIdAsync(long id,long classRoomId)
+        {
+           
+            return await _httpClient.GetFromJsonAsync<GetQuizItemVM>($"Quizes/{classRoomId}/{id}");
         }
 
         public async Task<ServiceResult> CreateQuizAsync(PostQuizVM quizVM)
@@ -47,7 +53,7 @@ namespace ClassTrack.MVC.Services.Implementations
                 return new ServiceResult(false, string.Empty, "The Quiz Duration is too high or too small");              
 
 
-             var message = await _httpClient.PostAsJsonAsync("Quizes", quizVM);
+             var message = await _httpClient.PostAsJsonAsync($"Quizes/{quizVM.ClassRoomId}", quizVM);
             if (!message.IsSuccessStatusCode)
             {
                 var error = await message.Content.ReadAsStringAsync();
@@ -57,7 +63,7 @@ namespace ClassTrack.MVC.Services.Implementations
             return new ServiceResult(true);
         }
 
-        public async Task<ServiceResult> PostQuizAsync(PutQuizVM quizVM, long id)
+        public async Task<ServiceResult> UpdateQuizAsync(PutQuizVM quizVM, long id)
         {
             if (quizVM.ClassRoomId < 1)
                 return new ServiceResult(false, string.Empty, "Invalid Class Room Request!");
@@ -71,7 +77,7 @@ namespace ClassTrack.MVC.Services.Implementations
             if (quizVM.Duration > 1440 || quizVM.Duration < 0)
                 return new ServiceResult(false, nameof(PutQuizVM.Duration), "The Quiz Duration is too high or too small");
 
-            var message = await _httpClient.PutAsJsonAsync($"Quizes?id={id}",quizVM);
+            var message = await _httpClient.PutAsJsonAsync($"Quizes/{quizVM.ClassRoomId}/{id}",quizVM);
             if (!message.IsSuccessStatusCode)
             {
                 var error = await message.Content.ReadAsStringAsync();
@@ -79,7 +85,6 @@ namespace ClassTrack.MVC.Services.Implementations
             }
 
             return new ServiceResult(true);
-
         }
     }
 }

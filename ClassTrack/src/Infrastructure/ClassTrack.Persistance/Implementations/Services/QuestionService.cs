@@ -33,13 +33,17 @@ namespace ClassTrack.Persistance.Implementations.Services
             _permissionService = permissionService;
         }
 
-        public async Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page, int take, params string[] includes)
+        public async Task<ICollection<GetQuestionItemDTO>> GetAllAsync(long quizId,
+                                                                       int page,
+                                                                       int take,
+                                                                       params string[] includes)
         {
 
             ICollection<Question> questions = await _questionRepository.GetAll(page: page,
-                                            take: take,
-                                            sort: x => x.CreatedAt,
-                                            includes: ["Options", "Quiz"]).ToListAsync();
+                                                                               take: take,
+                                                                               sort: x => x.CreatedAt,
+                                                                               function:x=>x.QuizId == quizId)
+                                                                               .ToListAsync();
 
             return _mapper.Map<ICollection<GetQuestionItemDTO>>(questions);
         }
@@ -55,10 +59,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             return questionDTO;
         }
-
-
-
-
         public async Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice)
         {
             await _basePostChecksAsync(postChoice);
@@ -140,9 +140,6 @@ namespace ClassTrack.Persistance.Implementations.Services
                 if (deletedOpen is null)
                     throw new Exception("The Question isn't Found!");
 
-                if (!(await _permissionService.IsTeacherAsync(deletedOpen.Quiz.ClassRoomId)).IsTeacher)
-                    throw new Exception("The Teacher can use it");
-
                 deletedOpen.IsDeleted = true;
 
                 _questionRepository.Update(deletedOpen);
@@ -207,9 +204,6 @@ namespace ClassTrack.Persistance.Implementations.Services
             
             if (oldQuestion == null) throw new Exception("The Question isn't Found!");
 
-            if (!(await _permissionService.IsTeacherAsync(oldQuestion.Quiz.ClassRoomId)).IsTeacher)
-                throw new Exception("You Are Not a Teacher of This Class!!!");
-
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim() && q.Id != id))
                 throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
 
@@ -221,9 +215,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if(quiz is null) 
                 throw new Exception("The Quiz isn't Found!");
-
-            if (!(await _permissionService.IsTeacherAsync(quiz.ClassRoomId)).IsTeacher)
-                throw new Exception("You Are Not a Teacher of This Class!!!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim()))
                 throw new Exception("The Same Question Title couldn't use again in the Same Quiz");

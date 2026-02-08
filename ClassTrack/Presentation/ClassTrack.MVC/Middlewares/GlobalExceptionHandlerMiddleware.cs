@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Middlewares
 {
@@ -19,9 +20,10 @@ namespace ClassTrack.MVC.Middlewares
             }
             catch(Exception e)
             {
-                if (e.Message.Contains("401"))
+                var encodeMessage = WebUtility.UrlEncode(e.Message);
+                if (encodeMessage.Contains("Unauthorize"))
                     context.Response.Redirect("/Home/Login");
-                context.Response.Redirect($"/Error/index?messageError={e.Message}");
+                context.Response.Redirect($"/Error/index?messageError={encodeMessage}");
             }   
         }
     }

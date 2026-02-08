@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.DTOs;
+﻿using ClassTrack.API.ActionFilter;
+using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,7 @@ namespace ClassTrack.API.Controllers
     [Route("[controller]")]
     [ApiController]
     [Authorize]
+    
     public class ClassRoomsController : ControllerBase
     {
         private readonly IClassRoomService _roomService;
@@ -20,21 +22,20 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet]
-     
         public async Task<IActionResult> Get(int page = 0,int take = 0)
         {
             return Ok(await _roomService.GetAllAsync(page:page,take:take));
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(long id)
+        [HttpGet("{classRoomId}")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
+        public async Task<IActionResult> Get(long classRoomId)
         {
-            if (id < 1)
+            if (classRoomId < 1)
                 return BadRequest();
 
-            return Ok(await _roomService.GetByIdAsync(id));
+            return Ok(await _roomService.GetByIdAsync(classRoomId));
         }
-
         [HttpPost]
         public async Task<IActionResult> Post(PostClassRoomDTO roomDTO)
         {
@@ -43,23 +44,25 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(long id,PutClassRoomDTO roomDTO)
+        [HttpPut("{classRoomId}")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
+        public async Task<IActionResult> Put(long classRoomId,PutClassRoomDTO roomDTO)
         {
-            if (id < 1)
+            if (classRoomId < 1)
                 return BadRequest();
 
-            await _roomService.UpdateClassRoomAsync(id, roomDTO);
+            await _roomService.UpdateClassRoomAsync(classRoomId, roomDTO);
             return NoContent();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete("{classRoomId}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> Delete(long classRoomId)
         {
-            if (id < 1)
+            if (classRoomId < 1)
                 return BadRequest();
 
-            await _roomService.DeleteClassRoomAsync(id);
+            await _roomService.DeleteClassRoomAsync(classRoomId);
             return NoContent();
         }
 

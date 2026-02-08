@@ -138,6 +138,29 @@
             "description": "OK"
           }
         }
+      }
+    },
+    "/ClassRooms/{classRoomId}": {
+      "get": {
+        "tags": [
+          "ClassRooms"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
       "put": {
         "tags": [
@@ -145,8 +168,9 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -184,29 +208,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/ClassRooms/{id}": {
-      "get": {
-        "tags": [
-          "ClassRooms"
-        ],
-        "parameters": [
-          {
-            "name": "id",
+            "name": "classRoomId",
             "in": "path",
             "required": true,
             "schema": {
@@ -222,7 +224,7 @@
         }
       }
     },
-    "/Permissions": {
+    "/Permissions/{classRoomId}": {
       "get": {
         "tags": [
           "Permissions"
@@ -230,7 +232,8 @@
         "parameters": [
           {
             "name": "classRoomId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -244,12 +247,21 @@
         }
       }
     },
-    "/Questions": {
+    "/Questions/{classRoomId}/{quizId}": {
       "get": {
         "tags": [
           "Questions"
         ],
         "parameters": [
+          {
+            "name": "quizId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
           {
             "name": "page",
             "in": "query",
@@ -266,6 +278,14 @@
               "type": "integer",
               "format": "int32",
               "default": 0
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -299,10 +319,20 @@
         }
       }
     },
-    "/ChoiceQuestion": {
+    "/Questions/{classRoomId}/ChoiceQuestion": {
       "post": {
         "tags": [
           "Questions"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -341,6 +371,14 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -369,10 +407,20 @@
         }
       }
     },
-    "/OpenQuestion": {
+    "/Questions/{classRoomId}/OpenQuestion": {
       "post": {
         "tags": [
           "Questions"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -411,6 +459,14 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -439,7 +495,7 @@
         }
       }
     },
-    "/Questions/{id}/ChoiceQuestion": {
+    "/Questions/{id}/{classRoomId}/ChoiceQuestion": {
       "delete": {
         "tags": [
           "Questions"
@@ -453,6 +509,14 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -462,7 +526,7 @@
         }
       }
     },
-    "/Questions/{id}/OpenQuestion": {
+    "/Questions/{id}/{classRoomId}/OpenQuestion": {
       "delete": {
         "tags": [
           "Questions"
@@ -476,6 +540,14 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -485,7 +557,7 @@
         }
       }
     },
-    "/QuizAnswers/{studentId}/Student": {
+    "/QuizAnswers/{studentId}/{classRoomId}/Student": {
       "get": {
         "tags": [
           "QuizAnswers"
@@ -517,6 +589,14 @@
               "format": "int32",
               "default": 0
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -526,7 +606,7 @@
         }
       }
     },
-    "/QuizAnswers/{id}": {
+    "/QuizAnswers/{id}/{classRoomId}": {
       "get": {
         "tags": [
           "QuizAnswers"
@@ -540,6 +620,14 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -549,10 +637,20 @@
         }
       }
     },
-    "/QuizAnswers": {
+    "/QuizAnswers/{classRoomId}": {
       "post": {
         "tags": [
           "QuizAnswers"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -591,6 +689,14 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -619,7 +725,7 @@
         }
       }
     },
-    "/Quizes": {
+    "/Quizes/{classRoomId}": {
       "get": {
         "tags": [
           "Quizes"
@@ -627,7 +733,8 @@
         "parameters": [
           {
             "name": "classRoomId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -662,42 +769,13 @@
         "tags": [
           "Quizes"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostQuizDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostQuizDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostQuizDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Quizes"
-        ],
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -705,17 +783,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PutQuizDTO"
+                "$ref": "#/components/schemas/PostQuizDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PutQuizDTO"
+                "$ref": "#/components/schemas/PostQuizDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PutQuizDTO"
+                "$ref": "#/components/schemas/PostQuizDTO"
               }
             }
           }
@@ -727,7 +805,7 @@
         }
       }
     },
-    "/Quizes/{id}": {
+    "/Quizes/{classRoomId}/{id}": {
       "get": {
         "tags": [
           "Quizes"
@@ -741,8 +819,64 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Quizes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutQuizDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutQuizDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutQuizDTO"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -761,6 +895,45 @@
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Quizes/{classRoomId}/{id}/Detail": {
+      "get": {
+        "tags": [
+          "Quizes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1251,8 +1424,8 @@
             "format": "date-time"
           },
           "duration": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "classRoomId": {
             "type": "integer",
@@ -1428,8 +1601,8 @@
             "format": "date-time"
           },
           "duration": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           },
           "classRoomId": {
             "type": "integer",

@@ -11,7 +11,7 @@ namespace ClassTrack.MVC.ViewModels
 
        string Name,
        DateTime StartTime,
-       int Duration,
+       double Duration,
        long ClassRoomId,
 
        ICollection<PostChoiceQuestionVM>? ChoiceQuestions,

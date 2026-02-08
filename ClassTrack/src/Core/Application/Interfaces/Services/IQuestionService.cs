@@ -9,7 +9,8 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IQuestionService
     {
-        Task<ICollection<GetQuestionItemDTO>> GetAllAsync(int page,
+        Task<ICollection<GetQuestionItemDTO>> GetAllAsync(long quizId,
+                                                          int page,
                                                           int take,
                                                           params string[] includes);
         Task<GetQuestionDTO> GetByIdAsync(long id);

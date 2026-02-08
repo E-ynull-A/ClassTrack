@@ -20,7 +20,6 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Post(JoinClassRoomDTO joinClassRoomDTO)
         {
             await _studentService.JoinClassAsync(joinClassRoomDTO);
