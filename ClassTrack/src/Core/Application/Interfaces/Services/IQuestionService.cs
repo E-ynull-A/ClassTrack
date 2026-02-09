@@ -14,13 +14,14 @@ namespace ClassTrack.Application.Interfaces.Services
                                                           int take,
                                                           params string[] includes);
         Task<GetQuestionDTO> GetByIdAsync(long id);
-
+        Task<GetChoiceQuestionForUpdateDTO> GetChoiceForUpdateAsync(long id);
+        Task<GetOpenQuestionForUpdateDTO> GetOpenForUpdateAsync(long id);
 
         Task CreateChoiceQuestionAsync(PostChoiceQuestionDTO postChoice);
         Task CreateOpenQuestionAsync(PostOpenQuestionDTO postOpen);
 
-        Task UpdateChoiceQuestionAsync(long id, PutChoiceQuestionDTO putChoice);
-        Task UpdateOpenQuestionAsync(long id, PutOpenQuestionDTO putOpen);
+        Task UpdateOpenQuestionAsync(long id, PutOpenQuestionDTO putOpen, long quizId);
+        Task UpdateChoiceQuestionAsync(long id, PutChoiceQuestionDTO putChoice, long quizId);
         Task DeleteChoiceQuestionAsync(long id);
         Task DeleteOpenQuestionAsync(long id);
     }

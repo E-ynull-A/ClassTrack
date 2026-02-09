@@ -180,8 +180,70 @@
   },
   {
     "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
+    "Method": "Put",
+    "RelativePath": "Questions/{classRoomId}/{quizId}/{id}/ChoiceQuestion",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "classRoomId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "putChoice",
+        "Type": "ClassTrack.Application.DTOs.PutChoiceQuestionDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "quizId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
+    "Method": "Put",
+    "RelativePath": "Questions/{classRoomId}/{quizId}/{id}/OpenQuestion",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "classRoomId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "putOpen",
+        "Type": "ClassTrack.Application.DTOs.PutOpenQuestionDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "quizId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
     "Method": "Post",
-    "RelativePath": "Questions/{classRoomId}/ChoiceQuestion",
+    "RelativePath": "Questions/{classRoomId}/{quizId}/ChoiceQuestion",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -195,30 +257,9 @@
         "Name": "classRoomId",
         "Type": "",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
-    "Method": "Put",
-    "RelativePath": "Questions/{classRoomId}/ChoiceQuestion",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int64",
-        "IsRequired": false
       },
       {
-        "Name": "putChoice",
-        "Type": "ClassTrack.Application.DTOs.PutChoiceQuestionDTO",
-        "IsRequired": true
-      },
-      {
-        "Name": "classRoomId",
+        "Name": "quizId",
         "Type": "",
         "IsRequired": true
       }
@@ -228,7 +269,7 @@
   {
     "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
     "Method": "Post",
-    "RelativePath": "Questions/{classRoomId}/OpenQuestion",
+    "RelativePath": "Questions/{classRoomId}/{quizId}/OpenQuestion",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -242,30 +283,9 @@
         "Name": "classRoomId",
         "Type": "",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
-    "Method": "Put",
-    "RelativePath": "Questions/{classRoomId}/OpenQuestion",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int64",
-        "IsRequired": false
       },
       {
-        "Name": "putOpen",
-        "Type": "ClassTrack.Application.DTOs.PutOpenQuestionDTO",
-        "IsRequired": true
-      },
-      {
-        "Name": "classRoomId",
+        "Name": "quizId",
         "Type": "",
         "IsRequired": true
       }
@@ -324,6 +344,58 @@
       },
       {
         "Name": "classRoomId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
+    "Method": "GetInUpdateChoice",
+    "RelativePath": "Questions/Choice/{classRoomId}/{quizId}/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "classRoomId",
+        "Type": "",
+        "IsRequired": true
+      },
+      {
+        "Name": "quizId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.QuestionsController",
+    "Method": "GetInUpdateOpen",
+    "RelativePath": "Questions/Open/{classRoomId}/{quizId}/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "classRoomId",
+        "Type": "",
+        "IsRequired": true
+      },
+      {
+        "Name": "quizId",
         "Type": "",
         "IsRequired": true
       }

@@ -19,7 +19,8 @@ namespace ClassTrack.Application.Validators
                 .NotEmpty()
                 .Must(o => o.Count >= 2 && o.Count < 6)
                 .WithMessage("There must be at least 2 Option!")
-                .Must(o => o.Select(o => o.Variant.Trim()).Distinct().Count() == o.Count)
+                .Must(o => o.DistinctBy(o => o.Variant.Trim()).Count() == o.Count 
+                        && o.DistinctBy(o=>o.Id).Count() == o.Count)
                 .WithMessage("The Variants must be different!");
 
             RuleFor(q => q)

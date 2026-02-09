@@ -22,6 +22,8 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<PutOptionInChoiceQuestionDTO, Option>();
 
             CreateMap<Option, GetOptionItemInQuizDTO>();
+
+            CreateMap<Option, GetOptionForUpdateDTO>();
         
         }
     }

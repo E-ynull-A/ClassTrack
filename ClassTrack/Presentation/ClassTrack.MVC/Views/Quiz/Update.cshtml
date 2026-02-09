@@ -91,8 +91,11 @@
                     <div class="qactions">
                         <a class="btn ghost"
                            asp-controller="Question"
-                           asp-action="Edit"
-                           asp-route-id="@questionItemVM.Id">
+                           asp-action="Update"
+                           asp-route-id="@questionItemVM.Id"
+                           asp-route-quizId="@Context.GetRouteValue("id")"
+                           asp-route-classRoomId="@Model.PutQuiz.ClassRoomId"
+                           asp-route-questionType="@questionItemVM.QuestionType">
                             Edit
                         </a>
                     </div>

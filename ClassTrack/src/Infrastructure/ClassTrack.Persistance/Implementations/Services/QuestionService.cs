@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ClassTrack.Domain.Utilities;
 using System.Security.Claims;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ClassTrack.Persistance.Implementations.Services
 
@@ -18,19 +20,16 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IQuizRepository _quizRepository;
         private readonly IMapper _mapper;
         private readonly IOptionRepository _optionRepository;
-        private readonly IPermissionService _permissionService;
 
         public QuestionService(IQuestionRepository questionRepository
                                 ,IQuizRepository quizRepository
                                     ,IMapper mapper,
-                               IOptionRepository optionRepository,
-                               IPermissionService permissionService)
+                               IOptionRepository optionRepository)
         {
             _questionRepository = questionRepository;
             _quizRepository = quizRepository;
             _mapper = mapper;
             _optionRepository = optionRepository;
-            _permissionService = permissionService;
         }
 
         public async Task<ICollection<GetQuestionItemDTO>> GetAllAsync(long quizId,
@@ -46,6 +45,26 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                                                .ToListAsync();
 
             return _mapper.Map<ICollection<GetQuestionItemDTO>>(questions);
+        }
+        public async Task<GetChoiceQuestionForUpdateDTO> GetChoiceForUpdateAsync(long id)
+        {
+            ChoiceQuestion? choiceQuestion = (ChoiceQuestion)await _questionRepository
+                                .GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Options)]);
+
+            if (choiceQuestion is null)
+                throw new Exception("The Question not Found!");
+
+            return _mapper.Map<GetChoiceQuestionForUpdateDTO>(choiceQuestion);                       
+        }
+
+        public async Task<GetOpenQuestionForUpdateDTO>  GetOpenForUpdateAsync(long id)
+        {
+            OpenQuestion? openQuestion = (OpenQuestion)await _questionRepository.GetByIdAsync(id);
+
+            if (openQuestion is null)
+                throw new Exception("The Question not Found!");
+
+            return _mapper.Map<GetOpenQuestionForUpdateDTO>(openQuestion);                      
         }
         public async Task<GetQuestionDTO> GetByIdAsync(long id)
         {
@@ -77,9 +96,9 @@ namespace ClassTrack.Persistance.Implementations.Services
             _questionRepository.Add(_mapper.Map<OpenQuestion>(postOpen));
             await _questionRepository.SaveChangeAsync();
         }
-        public async Task UpdateChoiceQuestionAsync(long id, PutChoiceQuestionDTO putChoice)
+        public async Task UpdateChoiceQuestionAsync(long id, PutChoiceQuestionDTO putChoice, long quizId)
         {
-            ChoiceQuestion oldQuestion = await _basePutCheckAsync<PutChoiceQuestionDTO, ChoiceQuestion>(id, putChoice);
+            ChoiceQuestion oldQuestion = await _basePutCheckAsync<PutChoiceQuestionDTO, ChoiceQuestion>(id, putChoice,quizId);
 
             if (oldQuestion is ChoiceQuestion)
             {
@@ -100,9 +119,9 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             await _questionRepository.SaveChangeAsync();
         }
-        public async Task UpdateOpenQuestionAsync(long id,PutOpenQuestionDTO putOpen)
+        public async Task UpdateOpenQuestionAsync(long id,PutOpenQuestionDTO putOpen,long quizId)
         {
-            OpenQuestion oldQuestion = await _basePutCheckAsync<PutOpenQuestionDTO, OpenQuestion>(id,putOpen);
+            OpenQuestion oldQuestion = await _basePutCheckAsync<PutOpenQuestionDTO, OpenQuestion>(id,putOpen,quizId);           
 
             if(oldQuestion is OpenQuestion)
             {
@@ -153,13 +172,16 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
 
      
-        private void _findDifferencesOption(ChoiceQuestion oldQuest, PutChoiceQuestionDTO newQuestDto)
+        private async Task _findDifferencesOption(ChoiceQuestion oldQuest, PutChoiceQuestionDTO newQuestDto)
         {
             ICollection<Option> oldOptions = oldQuest.Options;
-            ICollection<PutOptionInChoiceQuestionDTO>? newOptions = newQuestDto.Options;
+            ICollection<PutOptionInChoiceQuestionDTO>? newOptions = newQuestDto.Options
+                                                            .Where(o=>!o.IsDeleted)
+                                                            .ToList();
 
-            oldOptions.Where(o => !newOptions.Select(no => no.Variant)
-                                                    .Contains(o.Variant))
+            oldOptions.Where(o => !newOptions.Where(no => no.Id!=null)
+                                                    .Select(no=>no.Id!.Value)
+                                                    .Contains(o.Id))
                                                         .ToList()
                                                     .ForEach(dlo =>
             {
@@ -172,12 +194,19 @@ namespace ClassTrack.Persistance.Implementations.Services
             {
                 PutOptionInChoiceQuestionDTO pq = newOptions.ElementAt(i);
 
+                if (pq.Id.HasValue)
+                {
+                    if (!await _optionRepository.AnyAsync(o => o.Id == pq.Id))
+                        throw new Exception("The Option not Found!");
+                }
+                
                 Option? dublictate = oldOptions
-                                        .FirstOrDefault(oq => oq.Variant == pq.Variant);
+                                        .FirstOrDefault(oq => oq.Id == pq.Id);
 
                 if (dublictate is not null)
                 {
                     dublictate.UpdatedAt = DateTime.UtcNow;
+                    dublictate.Variant = pq.Variant;
                     dublictate.IsCorrect = pq.IsCorrect;
                 }
 
@@ -187,18 +216,25 @@ namespace ClassTrack.Persistance.Implementations.Services
                     {
                         IsCorrect = pq.IsCorrect,
                         Variant = pq.Variant,
-                        UpdatedAt = DateTime.UtcNow
+                        CreatedAt = DateTime.UtcNow
                     });
                 }
             }
 
         }
-        private async Task<E> _basePutCheckAsync<T, E>(long id, T questionDTO) where T : IBasePutQuestion where E : Question, new()
+        private async Task<E> _basePutCheckAsync<T, E>(long id, T questionDTO,long quizId) where T : IBasePutQuestion where E : Question, new()
         {       
             E? oldQuestion = null;
 
+            if (!await _quizRepository.AnyAsync(q =>q.Id == quizId && q.ChoiceQuestions.Any(cq => cq.Id == id)
+                                               || q.OpenQuestions.Any(oq => oq.Id == id)))
+            {
+                throw new Exception("The Question Not found in this Quiz");
+            }
+
             if (questionDTO is PutChoiceQuestionDTO)            
-                oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Quiz), nameof(ChoiceQuestion.Options)]) as E;
+                oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Quiz),
+                                                                                   nameof(ChoiceQuestion.Options)]) as E;
             
             else oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(Question.Quiz)]) as E;
             

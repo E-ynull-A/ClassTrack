@@ -6,6 +6,6 @@ namespace ClassTrack.MVC.ViewModels
        string Title,
        decimal Point,
        bool IsMultiple,
-       ICollection<PutOptionInChoiceQuestionVM> Options);
+       IList<PutOptionInChoiceQuestionVM> Options);
 
 }

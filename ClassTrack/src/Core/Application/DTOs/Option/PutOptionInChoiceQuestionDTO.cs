@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record PutOptionInChoiceQuestionDTO(
+        long? Id,
         string Variant,
-        bool IsCorrect);
+        bool IsCorrect,
+        bool IsDeleted = false);
     
 }

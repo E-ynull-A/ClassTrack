@@ -21,6 +21,8 @@ namespace ClassTrack.API.Controllers
             _service = service;
         }
 
+
+
         [HttpGet("{classRoomId}/{quizId}")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Get(long quizId,int page = 0,int take = 0)
@@ -29,7 +31,6 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet("{id}")]
-
         public async Task<IActionResult> Get(long id)
         {
             if (id < 1)
@@ -38,7 +39,28 @@ namespace ClassTrack.API.Controllers
             return Ok(await _service.GetByIdAsync(id));
         }
 
-        [HttpPost("{classRoomId}/ChoiceQuestion")]
+        [HttpGet("Choice/{classRoomId}/{quizId}/{id}")]
+        public async Task<IActionResult> GetInUpdateChoice(long id)
+        {
+           if(id < 1)
+               return BadRequest();
+
+           return Ok(await _service.GetChoiceForUpdateAsync(id));
+        }
+
+        [HttpGet("Open/{classRoomId}/{quizId}/{id}")]
+
+        public async Task<IActionResult> GetInUpdateOpen(long id)
+        {
+
+            if (id < 1)
+                return BadRequest();
+
+            return Ok(await _service.GetOpenForUpdateAsync(id));
+        }
+        
+
+        [HttpPost("{classRoomId}/{quizId}/ChoiceQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Post([FromBody]PostChoiceQuestionDTO postChoice)
         {
@@ -49,7 +71,7 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPost("{classRoomId}/OpenQuestion")]
+        [HttpPost("{classRoomId}/{quizId}/OpenQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Post([FromBody]PostOpenQuestionDTO postOpen)
         {
@@ -60,25 +82,25 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPut("{classRoomId}/ChoiceQuestion")]
+        [HttpPut("{classRoomId}/{quizId}/{id}/ChoiceQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
-        public async Task<IActionResult> Put(long id,PutChoiceQuestionDTO putChoice)
+        public async Task<IActionResult> Put(long id,long classRoomId,PutChoiceQuestionDTO putChoice, long quizId)
         {
             if(id < 1)
                 return BadRequest();
 
-            await _service.UpdateChoiceQuestionAsync(id,putChoice);
+            await _service.UpdateChoiceQuestionAsync(id,putChoice,quizId);
             return NoContent();
         }
 
-        [HttpPut("{classRoomId}/OpenQuestion")]
+        [HttpPut("{classRoomId}/{quizId}/{id}/OpenQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
-        public async Task<IActionResult> Put(long id,PutOpenQuestionDTO putOpen)
+        public async Task<IActionResult> Put(long id,long classRoomId,PutOpenQuestionDTO putOpen, long quizId)
         {
             if(id<1)
                 return BadRequest();
 
-            await _service.UpdateOpenQuestionAsync(id,putOpen);
+            await _service.UpdateOpenQuestionAsync(id,putOpen, quizId);
             return NoContent();
         }
 

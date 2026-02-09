@@ -1,133 +1,145 @@
-﻿
-    <link rel="stylesheet" href="~/css/question-edit.css">
-    <div class="container">
+﻿@model UpdateQuestionVM
 
-        <div class="topbar">
-            <div class="left">
-                <div class="h1">Edit Question</div>
-                <div class="muted" id="pageMeta">Quiz: #— • Question: #—</div>
-            </div>
+<link rel="stylesheet" href="~/css/question-edit.css" />
+<section class="card">
+    <div class="card-head">
+        <div class="h2">Sual məlumatları</div>
 
-            <div class="right">
-                <button class="btn ghost" id="btnBack" type="button">← Back</button>
-                <button class="btn primary" id="btnSave" type="button">Save</button>
-            </div>
-        </div>
-
-        <div class="grid">
-
-            <!-- MAIN FORM -->
-            <div class="card">
-                <div class="card-head">
-                    <div>
-                        <div class="h2">Question Details</div>
-                        <div class="muted">Title, Point, Type</div>
-                    </div>
-
-                    <div class="pill" id="typePill">—</div>
-                </div>
-
-                <!-- MVC-də bunu form eləyib POST/PUT-ə bağlayarsan -->
-                <form id="qForm" class="form">
-
-                    <!-- Hidden (MVC üçün) -->
-                    <input type="hidden" id="quizId" name="QuizId" value="" />
-                    <input type="hidden" id="questionId" name="QuestionId" value="" />
-                    <input type="hidden" id="questionType" name="QuestionType" value="choice" />
-                    <!-- questionType: "choice" | "open" -->
-
-                    <div class="field">
-                        <label class="label" for="qTitle">Title</label>
-                        <input class="input" id="qTitle" name="Title" type="text" placeholder="Sual mətni..." />
-                    </div>
-
-                    <div class="row2">
-                        <div class="field">
-                            <label class="label" for="qPoint">Point</label>
-                            <input class="input" id="qPoint" name="Point" type="number" min="0" step="0.25" placeholder="e.g. 2" />
-                            <div class="hint">decimal dəstək var.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Type</label>
-                            <div class="seg" role="tablist" aria-label="Question Type">
-                                <button class="seg-btn active" type="button" id="btnTypeChoice" data-type="choice">Choice</button>
-                                <button class="seg-btn" type="button" id="btnTypeOpen" data-type="open">Open</button>
-                            </div>
-                            <div class="hint">Open seçsən, options bölməsi gizlənir.</div>
-                        </div>
-                    </div>
-
-                    <!-- Choice-only -->
-                    <div class="choice-wrap" id="choiceWrap">
-                        <div class="split">
-                            <div>
-                                <div class="h3">Choice Settings</div>
-                                <div class="muted">IsMultiple + Options</div>
-                            </div>
-
-                            <label class="toggle">
-                                <input type="checkbox" id="isMultiple" name="IsMultiple" />
-                                <span class="toggle-ui"></span>
-                                <span class="toggle-text">IsMultiple</span>
-                            </label>
-                        </div>
-
-                        <div class="options-head">
-                            <div class="h3">Options</div>
-                            <div class="tools">
-                                <button class="btn ghost" id="btnAddOption" type="button">+ Add option</button>
-                                <button class="btn danger" id="btnClearOptions" type="button">Clear</button>
-                            </div>
-                        </div>
-
-                        <div class="options" id="optionsList"></div>
-
-                        <div class="hint">
-                            IsMultiple=false → yalnız 1 correct seçilir. IsMultiple=true → çox correct seçə bilərsən.
-                        </div>
-                    </div>
-
-                    <div class="actions">
-                        <button class="btn ok" id="btnPreview" type="button">Preview DTO JSON</button>
-                    </div>
-
-                    <div class="jsonbox" id="jsonBox" aria-live="polite"></div>
-                </form>
-            </div>
-
-            <!-- SIDE CARD (info) -->
-            <div class="card side">
-                <div class="h2">Help</div>
-                <div class="muted" style="margin-top:6px;">
-                    MVC tərəfi səndədir. Bu UI sadəcə DTO-ları yığmaq üçün hazırlanıb.
-                </div>
-
-                <div class="kvs">
-                    <div class="kv">
-                        <div class="k">PostOpenQuestionDTO</div>
-                        <div class="v">Title, Point, QuizId</div>
-                    </div>
-                    <div class="kv">
-                        <div class="k">PostChoiceQuestionDTO</div>
-                        <div class="v">Title, Point, IsMultiple, QuizId</div>
-                    </div>
-                    <div class="kv">
-                        <div class="k">PutOptionInChoiceQuestionDTO</div>
-                        <div class="v">Variant, IsCorrect</div>
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">Qayıtma qaydası</div>
-                    <div class="note-text">
-                        Save edəndə Controller-dən <span class="mono">RedirectToAction("EditQuiz", ...)</span> edərsən.
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+        <!-- Tip badge -->
+        <span class="pill" id="pillType">—</span>
     </div>
 
-    <script src="~/js/question-edit.js"></script>
+ 
+    <form id="editForm" class="form" method="post">
+      
+
+        <div class="grid2">
+            <div class="field">
+                <label for="Title">Title</label>
+                <input class="input" id="Title" asp-for="@Model.PutChoice.Title"
+                       placeholder="Sual mətni..." required />
+                <div class="hint muted">Məs: “TCP-də Fast Retransmit nədir?”</div>
+            </div>
+
+            <div class="field">
+                <label for="Point">Point</label>
+                <input class="input" id="Point" asp-for="@Model.PutChoice.Point"
+                       step="0.25" min="0" placeholder="1" required />
+                <div class="hint muted">decimal uyğundur (məs: 2.5)</div>
+            </div>
+        </div>
+
+        <!-- CHOICE ONLY -->
+        <div id="choiceBlock" class="block">
+            <div class="block-head">
+                <div class="h3">Choice settings</div>
+            </div>
+
+            <div class="grid2">
+                <div class="field">
+                    <label class="row">
+                        <input id="IsMultiple" asp-for="@Model.PutChoice.IsMultiple" type="checkbox" />
+                        <span>Multiple correct (IsMultiple)</span>
+                    </label>
+                    <div class="hint muted">Birdən çox düzgün cavaba icazə ver</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="opts-head">
+                <div class="h3">Options</div>
+                <button class="btn" type="button" id="btnAddOption">+ Option</button>
+               
+            </div>
+
+            <div class="opts" id="optionsWrap">     
+                @for (int i = 0; i < Model.PutChoice.Options.Count; i++)
+                {                    
+                        <div class="opt-row">
+                            <div class="opt-left">
+                                <input type="hidden" asp-for="PutChoice.Options[i].IsDeleted" class="opt-deleted" />
+                             
+                                <input type="hidden" asp-for="PutChoice.Options[i].Id" />
+
+
+                                <input class="input opt-variant" asp-for="PutChoice.Options[i].Variant" placeholder="Variant mətni..."/>
+
+                                <label class="row mini">
+                                    <input class="opt-correct"
+                                       asp-for="PutChoice.Options[i].IsCorrect"/>
+                                    <span>Düzgün</span>
+                                </label>
+                            </div>
+
+                            <button class="icon-btn danger" type="button" data-remove title="Sil">✕</button>
+                        </div>                    
+                }
+                <div class="opts" id="optionsWrap"
+                     data-start-index="@Model.PutChoice.Options.Count">
+                </div>
+                
+            </div>
+            <template id="optRowTpl">
+                <div class="opt-row">
+                    <div class="opt-left">
+     
+                        <input type="hidden" class="opt-id"/>                
+                        <input type="hidden" class="opt-deleted" value="false" />                                      
+                        
+                        <input class="input opt-variant"
+                               type="text"
+                               placeholder="Variant mətni..." />
+
+                        <label class="row mini">
+                            <input class="opt-correct"
+                                   type="checkbox"
+                                   value="true" />
+                            <span>Düzgün</span>
+                        </label>
+                    </div>
+
+                    <button class="icon-btn danger"
+                            type="button"
+                            data-remove
+                            title="Sil">
+                        ✕
+                    </button>
+                </div>
+            </template>
+
+            <div class="muted tiny">
+                Qeyd: Option input-ların `name`-lərini MVC-də kolleksiyaya uyğun edəcəksən
+                (məs: Options[0].Variant, Options[0].IsCorrect və s.)
+            </div>
+        </div>
+
+        <!-- OPEN ONLY -->
+        <div id="openBlock" class="block">
+            <div class="block-head">
+                <div class="h3">Open question</div>
+            </div>
+            <div class="muted">
+                Bu sualda variant yoxdur. Sadəcə Title + Point saxlanır.
+            </div>
+        </div>
+
+        <div class="actions">
+            <a class="btn ghost" asp-action="Update" 
+                                 asp-route-quizId="@Context.GetRouteValue("quizId")"
+                                 asp-route-classRoomId="@Context.GetRouteValue("roomId")"
+                                 asp-route-id="@Context.GetRouteValue("id")"
+                                 asp-route-questionType="@Context.GetRouteValue("questionType")"
+                                 id="btnCancel">Cancel
+            </a>
+            <button class="btn primary" type="submit" id="btnSave">Save</button>
+        </div>
+
+        <!-- Sadə error yeri (ASP ModelState üçün də istifadə edə bilərsən) -->
+        <div class="errorbox" id="errorBox" hidden>
+            <div class="err-title">Xəta</div>
+            <div class="err-msg" id="errMsg">—</div>
+        </div>
+    </form>
+</section>
+<script src="~/js/question-edit.js"></script>

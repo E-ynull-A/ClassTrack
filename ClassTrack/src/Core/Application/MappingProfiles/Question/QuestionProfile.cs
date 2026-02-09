@@ -20,6 +20,9 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<ChoiceQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
             CreateMap<OpenQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
 
+            CreateMap<ChoiceQuestion, GetChoiceQuestionForUpdateDTO>();
+            CreateMap<OpenQuestion, GetOptionForUpdateDTO>();
+
 
             CreateMap<Question,GetQuestionDTO>()
                 .IncludeAllDerived();             
