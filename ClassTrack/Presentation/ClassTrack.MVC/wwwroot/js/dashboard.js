@@ -39,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Panel açılır
+       
         if (createPanel) createPanel.style.display = "block";
         if (createPanelText) createPanelText.textContent = `Class "${name}" hazırdır. MVC-də POST /Classes/Create edəcəksən.`;
 
-        // Demo: sanki backend create edib code qaytardı
+       
         const demoCode = "A7K2Q9";
         if (createdCode) {
             createdCode.style.display = "inline-flex";
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (btnCopyCreated) btnCopyCreated.style.display = "inline-flex";
         if (btnGoClass) {
             btnGoClass.style.display = "inline-flex";
-            btnGoClass.href = "#"; // sonra create response-dan id alıb yönləndirərsən
+            btnGoClass.href = "#"; 
         }
     });
 
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Əvvəlcə slide-ların sayını tapırıq
+    
     const slideCount = document.querySelectorAll(".mySwiper .swiper-slide").length;
 
     const swiperOptions = {
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
             prevEl: ".swiper-button-prev",
         },
         watchOverflow: true,
-        // Əgər 3-dən çoxdursa, slider kimi davranacaq
+       
         breakpoints: {
             320: { slidesPerView: 1 },
             768: { slidesPerView: slideCount < 3 ? slideCount : 2 },
@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // Swiper-i işə salırıq
     const swiper = new Swiper(".mySwiper", swiperOptions);
 });
 
@@ -94,7 +93,7 @@ document.addEventListener("click", (e) => {
     const btn = e.target.closest(".card-delete");
     if (!btn) return;
 
-    // Link klikini blokla
+  
     e.preventDefault();
     e.stopPropagation();
 
@@ -103,12 +102,9 @@ document.addEventListener("click", (e) => {
 
     const ok = confirm("Bu sinifi silmək istəyirsən?");
     if (!ok) return;
-
-    // UI-dən silmək (demo)
+ 
     btn.closest(".class-card")?.remove();
 
-    // MVC-yə bağlayanda:
-    // fetch(`/Class/Delete/${id}`, { method: "POST" }) ...
 });
 
 

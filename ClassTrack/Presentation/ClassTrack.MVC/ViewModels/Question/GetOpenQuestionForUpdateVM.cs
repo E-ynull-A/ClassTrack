@@ -7,7 +7,7 @@
 namespace ClassTrack.MVC.ViewModels
 {
     public record GetOpenQuestionForUpdateVM(
-        long id,
+        long Id,
         string Title,
         decimal Point);
    

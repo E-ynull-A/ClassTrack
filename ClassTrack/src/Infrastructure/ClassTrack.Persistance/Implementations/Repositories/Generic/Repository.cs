@@ -133,6 +133,12 @@ namespace ClassTrack.Persistance.Implementations.Repositories
            return await _dbset.CountAsync(expression);
         }
 
+        public async Task<decimal> AverageAsync(Expression<Func<T,decimal>> predicate,
+                                                Expression<Func<T,bool>> expression)
+        {
+           return await _dbset.Where(expression).AverageAsync(predicate);
+        }
+
         public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> function, 
                                                       params string[]? includes)
         {

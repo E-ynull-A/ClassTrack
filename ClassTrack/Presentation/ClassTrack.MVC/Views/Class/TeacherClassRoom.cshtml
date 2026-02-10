@@ -45,7 +45,7 @@
             <a class="tab active" asp-controller="Quiz" asp-action="Index" asp-route-id="@Model.ClassRoom.Id" data-tab="quizzes">Quizzes</a>
             <button class="tab" data-tab="tasks">Tasks</button>
             <button class="tab" data-tab="attendance">Attendance</button>
-            <button class="tab" data-tab="members">Members</button>
+            <a class="tab active" asp-controller="Member" asp-action="Members" asp-route-classRoomId="@Model.ClassRoom.Id">Members</a>
         </div>
     </div>
 </div>
@@ -74,18 +74,20 @@
 
         <div class="line" style="margin:12px 0"></div>
 
-        <form class="row-inline" style="gap:10px; align-items:end;">
+        <form class="row-inline" asp-action="Update" 
+                                 asp-route-id="@Context.GetRouteValue("id")"                                  
+                                 style="gap:10px; align-items:end;">
            
             
             <div style="flex:1;margin-bottom:10px">
                 <div class="label">Class name</div>
                 <input class="input"
-                       name="Name"
+                       asp-for="PutClassRoom.Name"
                        placeholder="Yeni ad..."
                        required />
             </div>
 
-            <button class="btn ok" type="submit">Save</button>
+            <button class="btn ok" >Save</button>
         </form>
     </div>
 </div>

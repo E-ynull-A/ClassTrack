@@ -251,6 +251,9 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("TIME");
 
+                    b.Property<decimal>("FullPoint")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -373,6 +376,9 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.Property<decimal>("AvgPoint")
                         .HasColumnType("DECIMAL(5,2)");
+
+                    b.Property<DateTime>("JoinedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("StudentId", "ClassRoomId");
 

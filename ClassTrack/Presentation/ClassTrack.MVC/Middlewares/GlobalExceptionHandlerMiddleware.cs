@@ -21,8 +21,6 @@ namespace ClassTrack.MVC.Middlewares
             catch(Exception e)
             {
                 var encodeMessage = WebUtility.UrlEncode(e.Message);
-                if (encodeMessage.Contains("Unauthorize"))
-                    context.Response.Redirect("/Home/Login");
                 context.Response.Redirect($"/Error/index?messageError={encodeMessage}");
             }   
         }

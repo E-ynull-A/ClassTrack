@@ -20,11 +20,17 @@
 
         <input type="hidden"
                name="PutChoice.Options[${optionIndex}].Id"
-               value="0" />
+               value="" />
 
         <input class="input opt-variant"
+               type="text"
                name="PutChoice.Options[${optionIndex}].Variant"
                placeholder="Variant mətni..." />
+
+        <!-- IsCorrect: hidden(false) + checkbox(true) -->
+        <input type="hidden"
+               name="PutChoice.Options[${optionIndex}].IsCorrect"
+               value="false" />
 
         <label class="row mini">
           <input class="opt-correct"
@@ -46,7 +52,6 @@
         optionIndex++;
     });
 
-    // Remove (soft delete)
     optionsWrap.addEventListener("click", (e) => {
         const btn = e.target.closest("[data-remove]");
         if (!btn) return;
@@ -59,12 +64,4 @@
 
         row.style.display = "none";
     });
-
-    // (Opsional) tək düzgün cavab olsun istəyirsənsə:
-    // optionsWrap.addEventListener("change", (e) => {
-    //   if (!e.target.classList.contains("opt-correct")) return;
-    //   optionsWrap.querySelectorAll(".opt-correct").forEach(c => c.checked = false);
-    //   e.target.checked = true;
-    // });
-
 })();

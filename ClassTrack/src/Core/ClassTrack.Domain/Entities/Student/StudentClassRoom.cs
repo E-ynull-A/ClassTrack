@@ -10,5 +10,6 @@ namespace ClassTrack.Domain.Entities
         public Student Student { get; set; }
         public ClassRoom ClassRoom { get; set; }
         public decimal AvgPoint { get; set; }
+        public DateTime JoinedAt { get; set; }
     }
 }

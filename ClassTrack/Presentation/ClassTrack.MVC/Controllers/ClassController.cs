@@ -37,6 +37,24 @@ namespace ClassTrack.MVC.Controllers
 
             return View("StudentClassRoom",getClassRoom);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(long id,GetClassRoomWithPermissionVM classRoomVM)
+        {
+            ModelState.Remove(nameof(GetClassRoomWithPermissionVM.ClassRoom));
+            ModelState.Remove(nameof(GetClassRoomWithPermissionVM.IsTeacher));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (id < 1)
+                return BadRequest();
+
+            await _roomService.UpdateClassRoomAsync(id, new PutClassRoomVM(classRoomVM.PutClassRoom.Name));
+
+            return RedirectToAction("ClassRoom",new {id});
+        }
+
         public async Task<IActionResult> Dashboard()
         {            
             return View(new DashboardVM(await _roomService.GetAllAsync()));
@@ -45,6 +63,8 @@ namespace ClassTrack.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClassRoom(DashboardVM dashboardVM)
         {
+            ModelState.Remove(nameof(DashboardVM.JoinClass));
+
             if (!ModelState.IsValid)
             {
                 return View(nameof(Dashboard),new DashboardVM(await _roomService.GetAllAsync(),
@@ -82,8 +102,7 @@ namespace ClassTrack.MVC.Controllers
 
             return RedirectToAction("Dashboard");
         }
-        
-       
+            
         public async Task<IActionResult> DeleteClassRoom(long id)
         {
             if (id < 1)
@@ -93,7 +112,6 @@ namespace ClassTrack.MVC.Controllers
             return RedirectToAction("Dashboard");
         }
    
-
         public IActionResult QuizEditor()
         {
             return View();
@@ -104,9 +122,6 @@ namespace ClassTrack.MVC.Controllers
             return View();
         }
 
-        public IActionResult Members()
-        {
-            return View();
-        }
+      
     }
 }

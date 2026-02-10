@@ -12,6 +12,8 @@ namespace ClassTrack.Persistance.Implementations.Repositories
     internal class ClassRoomRepository:Repository<ClassRoom>,IClassRoomRepository
     {
         public ClassRoomRepository(AppDbContext context):base(context) { }
+
+        
   
     }
 }

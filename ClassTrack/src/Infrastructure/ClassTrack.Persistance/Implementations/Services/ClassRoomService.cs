@@ -16,19 +16,16 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IClassRoomRepository _roomRepository;
         private readonly IMapper _mapper;
         private readonly ITeacherRepository _teacherRepository;
-        private readonly IPermissionService _permissionService;
         private readonly ICurrentUserService _currentUser;
 
         public ClassRoomService(IClassRoomRepository roomRepository,
                                 IMapper mapper,
                                 ITeacherRepository teacherRepository,
-                                IPermissionService permissionService,
                                 ICurrentUserService currentUser)
         {
             _roomRepository = roomRepository;
             _mapper = mapper;
             _teacherRepository = teacherRepository;
-            _permissionService = permissionService;
             _currentUser = currentUser;
         }
 
@@ -36,7 +33,15 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                                         int take)
         {
             string userId = _currentUser.GetUserId();
-            string userRole = _currentUser.GetUserRole();
+            string userRole = string.Empty;
+            try
+            {
+                userRole = _currentUser.GetUserRole();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             var getClasses = _roomRepository.GetAll(page: page, take: take,sort:x=>x.Name);
 

@@ -3,6 +3,7 @@
     public record GetClassRoomWithPermissionVM(
         
         IsTeacherVM IsTeacher,
-        GetClassRoomVM? ClassRoom);
+        GetClassRoomVM? ClassRoom,
+        PutClassRoomVM? PutClassRoom);
    
 }

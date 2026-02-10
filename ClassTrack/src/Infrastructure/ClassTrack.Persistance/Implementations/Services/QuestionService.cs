@@ -56,7 +56,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             return _mapper.Map<GetChoiceQuestionForUpdateDTO>(choiceQuestion);                       
         }
-
         public async Task<GetOpenQuestionForUpdateDTO>  GetOpenForUpdateAsync(long id)
         {
             OpenQuestion? openQuestion = (OpenQuestion)await _questionRepository.GetByIdAsync(id);
@@ -103,7 +102,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (oldQuestion is ChoiceQuestion)
             {
 
-                _findDifferencesOption(oldQuestion, putChoice);
+                await _findDifferencesOption(oldQuestion, putChoice);
 
                 oldQuestion = _mapper.Map(putChoice, oldQuestion);
 
@@ -196,8 +195,16 @@ namespace ClassTrack.Persistance.Implementations.Services
 
                 if (pq.Id.HasValue)
                 {
-                    if (!await _optionRepository.AnyAsync(o => o.Id == pq.Id))
-                        throw new Exception("The Option not Found!");
+                    try
+                    {
+                        if (!await _optionRepository.AnyAsync(o => o.Id == pq.Id))
+                            throw new Exception("The Option not Found!");
+                    }
+                    catch(Exception e)
+                    {
+                        throw new Exception(e.ToString());
+                    }
+                   
                 }
                 
                 Option? dublictate = oldOptions

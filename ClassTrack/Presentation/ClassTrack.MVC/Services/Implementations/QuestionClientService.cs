@@ -36,7 +36,6 @@ namespace ClassTrack.MVC.Services.Implementations
                             ($"Questions/Open/{classRoomId}/{quizId}/{id}");
         }
 
-
         public async Task<UpdateQuestionVM> GetUpdateAsync(long id, long quizId, long classRoomId, string questionType)
         {
             if (questionType == "SingleChoice")
@@ -53,7 +52,7 @@ namespace ClassTrack.MVC.Services.Implementations
                                         (question.Title, question.Point, question.IsMultiple, options), null);
             }
 
-            else if (questionType == "OpenQuestion")
+            else if (questionType == "OpenResponce")
             {
                 GetOpenQuestionForUpdateVM? question = await GetOpenForUpdateAsync(classRoomId, quizId, id);
                 if (question is null)
@@ -68,15 +67,17 @@ namespace ClassTrack.MVC.Services.Implementations
         public async Task<ServiceResult> UpdateAsync(long id, UpdateQuestionVM questionVM, long quizId, long classRoomId, string questionType)
         {
 
-            if (string.IsNullOrWhiteSpace(questionVM.PutChoice.Title))
-                return new ServiceResult(false, nameof(PutChoiceQuestionVM.Title), "The Title must be not Empty");
-
-            if (questionVM.PutChoice.Point < 0 || questionVM.PutChoice.Point > 100)
-                return new ServiceResult(false, nameof(PutChoiceQuestionVM.Point), "The Point must be between 0 and 100");
 
             if (questionVM.PutChoice is not null)
             {           
                 ICollection<PutOptionInChoiceQuestionVM> options = questionVM.PutChoice.Options;
+
+
+                if (string.IsNullOrWhiteSpace(questionVM.PutChoice.Title))
+                    return new ServiceResult(false, nameof(PutChoiceQuestionVM.Title), "The Title must be not Empty");
+
+                if (questionVM.PutChoice.Point < 0 || questionVM.PutChoice.Point > 100)
+                    return new ServiceResult(false, nameof(PutChoiceQuestionVM.Point), "The Point must be between 0 and 100");
 
                 if (options.Any(o => o.Id.HasValue && o.Id < 1))
                     return new ServiceResult(false, nameof(PutChoiceQuestionVM.Options), "Bad Option Request");
@@ -90,8 +91,17 @@ namespace ClassTrack.MVC.Services.Implementations
                     return new ServiceResult(false, nameof(PutChoiceQuestionVM.Options), "You can choose only one correct Variant");
 
             }
+            else
+            {
 
-            HttpResponseMessage message = default;
+                if (string.IsNullOrWhiteSpace(questionVM.PutOpen.Title))
+                    return new ServiceResult(false, nameof(PutOpenQuestionVM.Title), "The Title must be not Empty");
+
+                if (questionVM.PutOpen.Point < 0 || questionVM.PutOpen.Point > 100)
+                    return new ServiceResult(false, nameof(PutOpenQuestionVM.Point), "The Point must be between 0 and 100");
+            }
+
+                HttpResponseMessage message = default;
             if (questionType == "SingleChoice")            
                 message = await _httpClient.PutAsJsonAsync($"Questions/{classRoomId}/{quizId}/{id}/ChoiceQuestion", questionVM.PutChoice);
             
@@ -106,8 +116,6 @@ namespace ClassTrack.MVC.Services.Implementations
                 return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
             }
             return new ServiceResult(true);
-
-
            
         }
 

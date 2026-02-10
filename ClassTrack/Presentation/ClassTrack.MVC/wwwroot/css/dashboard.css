@@ -184,11 +184,11 @@
     pointer-events: auto;
 }
 
-/* ===== Topbar düzgün düzülüş ===== */
+
 .topbar {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* title + buttons üst-üstə düz düşür */
+    align-items: flex-start; 
     gap: 16px;
     flex-wrap: wrap;
 }
@@ -199,7 +199,6 @@
     gap: 6px;
 }
 
-/* Sağ blok: 2 sətrli button qrupu */
 .topbar-right {
     display: flex;
     flex-direction: column;

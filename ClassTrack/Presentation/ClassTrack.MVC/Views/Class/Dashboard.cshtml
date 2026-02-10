@@ -48,8 +48,6 @@
             {
                 <div class="swiper-slide">
                     <div class="class-card">
-
-
                         <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
                             <div class="card-content" style="margin-top:30px">
                                 <div class="title">@classRoom.Name</div>
@@ -64,13 +62,13 @@
                             </div>
                         </a>
                     </div>
-
                 </div>
             }
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
+    <div asp-validation-summary="ModelOnly"></div>
 
 
 

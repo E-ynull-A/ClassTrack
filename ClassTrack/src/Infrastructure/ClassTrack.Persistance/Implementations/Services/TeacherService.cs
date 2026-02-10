@@ -3,43 +3,37 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
-using ClassTrack.Persistance.DAL;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-using System.Security.Claims;
-using System.Threading.Tasks;
+
+
+
+
+
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository _teacherRepository;
         private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _accessor;
 
         public TeacherService(ITeacherRepository teacherRepository,
-                              IMapper mapper,
-                              IHttpContextAccessor accessor)
+                              IMapper mapper)
         {
             _teacherRepository = teacherRepository;
             _mapper = mapper;
-            _accessor = accessor;
         }
 
-        //public async Task<GetTeacherClassItemDTO> GetTeacherClassesAsync()
-        //{
-        //    string userId = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        public async Task<ICollection<GetTeacherItemDTO>> GetAllAsync(long classRoomId, int page, int take)
+        {
+            if (!await _teacherRepository.AnyAsync(r => r.TeacherClassRooms.Any(tc=>tc.ClassRoomId==classRoomId)))
+                    throw new Exception("Class Room not Found!");
 
-        //    if (string.IsNullOrEmpty(userId))
-        //        throw new Exception("User not Found!");
+            return _mapper.Map<ICollection<GetTeacherItemDTO>>(_teacherRepository.GetAll(page: page,
+                                                                                         take: take,
+                                                                                         includes: [nameof(Teacher.AppUser)],
+                                                                                         sort: x => x.AppUser.Name));
+        }
 
-        //    Teacher teacher = await _teacherRepository.FirstOrDefaultAsync(t => t.AppUserId == userId,includes ["TeacherClassRooms.ClassRoom"]);
 
-        //    if (teacher is null)
-        //        throw new Exception("The Teacher not Found!");
-
-        //    return _mapper.Map<GetTeacherClassItemDTO>(teacher);
-        //}
 
     }
 }

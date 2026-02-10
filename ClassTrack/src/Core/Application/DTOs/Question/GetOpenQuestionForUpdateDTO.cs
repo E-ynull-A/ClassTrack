@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record GetOpenQuestionForUpdateDTO(
-        long id,
+        long Id,
         string Title,
         decimal Point);
    

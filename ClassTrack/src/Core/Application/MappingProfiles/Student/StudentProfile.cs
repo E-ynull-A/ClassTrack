@@ -13,7 +13,11 @@ namespace ClassTrack.Application.MappingProfiles
     {
         public StudentProfile()
         {
-        
+            CreateMap<Student, GetStudentItemDTO>()
+                .ForCtorParam(nameof(GetStudentItemDTO.Name),opt=>opt.MapFrom(s=>s.AppUser.Name))
+                .ForCtorParam(nameof(GetStudentItemDTO.Surname), opt => opt.MapFrom(s => s.AppUser.Surname))
+                .ForCtorParam(nameof(GetStudentItemDTO.JoinedAt),opt=>opt.MapFrom(s=>s.StudentClasses
+                                                                         .Select(sc=>sc.JoinedAt).FirstOrDefault()));
                 
         }
     }

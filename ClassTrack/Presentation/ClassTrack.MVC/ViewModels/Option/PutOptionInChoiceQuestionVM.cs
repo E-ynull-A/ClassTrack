@@ -4,8 +4,8 @@ namespace ClassTrack.MVC.ViewModels
 {
     public record PutOptionInChoiceQuestionVM(
         long? Id,
-        string Variant,
-        bool IsCorrect,
-        bool IsDeleted);
+        string Variant,        
+        bool IsDeleted,
+        bool IsCorrect);
     
 }

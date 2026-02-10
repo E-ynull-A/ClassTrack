@@ -11,5 +11,8 @@ namespace ClassTrack.Application.Interfaces.Services
     {
         Task JoinClassAsync(JoinClassRoomDTO classRoomDTO);
         Task CalculateAvgPoint(long studentId, long classRoomId, decimal point);
+        Task<ICollection<GetStudentItemDTO>> GetAllAsync(long classRoomId, int page, int take);
+        Task KickAsync(long studentId, long classRoomId);
+        Task PromoteAsync(long studentId, long classRoomId);
     }
 }

@@ -9,137 +9,140 @@
         <span class="pill" id="pillType">—</span>
     </div>
 
- 
-    <form id="editForm" class="form" method="post">
-      
+    @if (Model.PutChoice is not null)
+    {
 
-        <div class="grid2">
-            <div class="field">
-                <label for="Title">Title</label>
-                <input class="input" id="Title" asp-for="@Model.PutChoice.Title"
-                       placeholder="Sual mətni..." required />
-                <div class="hint muted">Məs: “TCP-də Fast Retransmit nədir?”</div>
-            </div>
+        <form id="editForm" class="form" method="post">
 
-            <div class="field">
-                <label for="Point">Point</label>
-                <input class="input" id="Point" asp-for="@Model.PutChoice.Point"
-                       step="0.25" min="0" placeholder="1" required />
-                <div class="hint muted">decimal uyğundur (məs: 2.5)</div>
-            </div>
-        </div>
-
-        <!-- CHOICE ONLY -->
-        <div id="choiceBlock" class="block">
-            <div class="block-head">
-                <div class="h3">Choice settings</div>
-            </div>
 
             <div class="grid2">
                 <div class="field">
-                    <label class="row">
-                        <input id="IsMultiple" asp-for="@Model.PutChoice.IsMultiple" type="checkbox" />
-                        <span>Multiple correct (IsMultiple)</span>
-                    </label>
-                    <div class="hint muted">Birdən çox düzgün cavaba icazə ver</div>
+                    <label for="Title">Title</label>
+                    <input class="input" id="Title" asp-for="@Model.PutChoice.Title"
+                           placeholder="Sual mətni..." required />
+                    <div class="hint muted">Məs: “TCP-də Fast Retransmit nədir?”</div>
+                </div>
+
+                <div class="field">
+                    <label for="Point">Point</label>
+                    <input class="input" id="Point" asp-for="@Model.PutChoice.Point"
+                           step="0.25" min="0" placeholder="1" required />
+                    <div class="hint muted">decimal uyğundur (məs: 2.5)</div>
                 </div>
             </div>
 
-            <div class="divider"></div>
+           
+            <div id="choiceBlock" class="block">
+                <div class="block-head">
+                    <div class="h3">Choice settings</div>
+                </div>
 
-            <div class="opts-head">
-                <div class="h3">Options</div>
-                <button class="btn" type="button" id="btnAddOption">+ Option</button>
-               
-            </div>
+                <div class="grid2">
+                    <div class="field">
+                        <label class="row">
+                            <input id="IsMultiple" asp-for="@Model.PutChoice.IsMultiple" type="checkbox" />
+                            <span>Multiple correct (IsMultiple)</span>
+                        </label>
+                        <div class="hint muted">Birdən çox düzgün cavaba icazə ver</div>
+                    </div>
+                </div>
 
-            <div class="opts" id="optionsWrap">     
-                @for (int i = 0; i < Model.PutChoice.Options.Count; i++)
-                {                    
+                <div class="divider"></div>
+
+                <div class="opts-head">
+                    <div class="h3">Options</div>
+                    <button class="btn" type="button" id="btnAddOption">+ Option</button>
+
+                </div>
+
+                <div class="opts" id="optionsWrap"
+                     data-start-index="@Model.PutChoice.Options.Count">
+                    @for (int i = 0; i < Model.PutChoice.Options.Count; i++)
+                    {
                         <div class="opt-row">
                             <div class="opt-left">
                                 <input type="hidden" asp-for="PutChoice.Options[i].IsDeleted" class="opt-deleted" />
-                             
+                              
                                 <input type="hidden" asp-for="PutChoice.Options[i].Id" />
-
-
-                                <input class="input opt-variant" asp-for="PutChoice.Options[i].Variant" placeholder="Variant mətni..."/>
+                                <input class="input opt-variant" asp-for="PutChoice.Options[i].Variant" placeholder="Variant mətni..." />
 
                                 <label class="row mini">
                                     <input class="opt-correct"
-                                       asp-for="PutChoice.Options[i].IsCorrect"/>
+                                           asp-for="PutChoice.Options[i].IsCorrect" />
                                     <span>Düzgün</span>
                                 </label>
                             </div>
 
                             <button class="icon-btn danger" type="button" data-remove title="Sil">✕</button>
-                        </div>                    
-                }
-                <div class="opts" id="optionsWrap"
-                     data-start-index="@Model.PutChoice.Options.Count">
+                        </div>
+                    }
+                </div>      
+
+            </div>
+
+            <div class="actions">
+                <a class="btn ghost" asp-action="Update"
+                   asp-route-quizId="@Context.GetRouteValue("quizId")"
+                   asp-route-classRoomId="@Context.GetRouteValue("roomId")"
+                   asp-route-id="@Context.GetRouteValue("id")"
+                   asp-route-questionType="@Context.GetRouteValue("questionType")"
+                   id="btnCancel">
+                    Cancel
+                </a>
+                <button class="btn primary" type="submit" id="btnSave">Save</button>
+            </div>
+
+         
+            <div class="errorbox" id="errorBox" hidden>
+                <div class="err-title">Xəta</div>
+                <div class="err-msg" id="errMsg">—</div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <form id="editForm" class="form" method="post">
+            <div id="openBlock" class="block">
+                <div class="block-head">
+                    <div class="h3">Open question</div>
                 </div>
-                
             </div>
-            <template id="optRowTpl">
-                <div class="opt-row">
-                    <div class="opt-left">
-     
-                        <input type="hidden" class="opt-id"/>                
-                        <input type="hidden" class="opt-deleted" value="false" />                                      
-                        
-                        <input class="input opt-variant"
-                               type="text"
-                               placeholder="Variant mətni..." />
 
-                        <label class="row mini">
-                            <input class="opt-correct"
-                                   type="checkbox"
-                                   value="true" />
-                            <span>Düzgün</span>
-                        </label>
-                    </div>
-
-                    <button class="icon-btn danger"
-                            type="button"
-                            data-remove
-                            title="Sil">
-                        ✕
-                    </button>
+            <div class="grid2">
+                <div class="field">
+                    <label for="Title">Title</label>
+                    <input class="input" id="Title" asp-for="@Model.PutOpen.Title"
+                           placeholder="Sual mətni..." required />
+                    <div class="hint muted">Məs: “TCP-də Fast Retransmit nədir?”</div>
                 </div>
-            </template>
 
-            <div class="muted tiny">
-                Qeyd: Option input-ların `name`-lərini MVC-də kolleksiyaya uyğun edəcəksən
-                (məs: Options[0].Variant, Options[0].IsCorrect və s.)
+                <div class="field">
+                    <label for="Point">Point</label>
+                    <input class="input" id="Point" asp-for="@Model.PutOpen.Point"
+                           step="0.25" min="0" placeholder="1" required />
+                    <div class="hint muted">decimal uyğundur (məs: 2.5)</div>
+                </div>
             </div>
-        </div>
 
-        <!-- OPEN ONLY -->
-        <div id="openBlock" class="block">
-            <div class="block-head">
-                <div class="h3">Open question</div>
+
+            <div class="actions">
+                <a class="btn ghost" asp-action="Update"
+                   asp-route-quizId="@Context.GetRouteValue("quizId")"
+                   asp-route-classRoomId="@Context.GetRouteValue("roomId")"
+                   asp-route-id="@Context.GetRouteValue("id")"
+                   asp-route-questionType="@Context.GetRouteValue("questionType")"
+                   id="btnCancel">
+                    Cancel
+                </a>
+                <button class="btn primary" type="submit" id="btnSave">Save</button>
             </div>
-            <div class="muted">
-                Bu sualda variant yoxdur. Sadəcə Title + Point saxlanır.
+
+
+            <div class="errorbox" hidden>
+                <div class="err-title">Xəta</div>
+                <div class="err-msg" asp-validation-summary="ModelOnly" id="errMsg"></div>
             </div>
-        </div>
-
-        <div class="actions">
-            <a class="btn ghost" asp-action="Update" 
-                                 asp-route-quizId="@Context.GetRouteValue("quizId")"
-                                 asp-route-classRoomId="@Context.GetRouteValue("roomId")"
-                                 asp-route-id="@Context.GetRouteValue("id")"
-                                 asp-route-questionType="@Context.GetRouteValue("questionType")"
-                                 id="btnCancel">Cancel
-            </a>
-            <button class="btn primary" type="submit" id="btnSave">Save</button>
-        </div>
-
-        <!-- Sadə error yeri (ASP ModelState üçün də istifadə edə bilərsən) -->
-        <div class="errorbox" id="errorBox" hidden>
-            <div class="err-title">Xəta</div>
-            <div class="err-msg" id="errMsg">—</div>
-        </div>
-    </form>
+        </form>
+    }
 </section>
 <script src="~/js/question-edit.js"></script>

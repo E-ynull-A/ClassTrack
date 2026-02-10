@@ -1,0 +1,58 @@
+﻿@model GetMemberItemVM
+
+<link rel="stylesheet" href="~/css/members.css">
+<div class="topbar">
+    <div>
+        <div class="h1">Members</div>
+        <div class="muted">Teacher only • promote/demote/kick</div>
+    </div>
+    <div class="nav">
+        <button class="btn primary" id="btnInvite">Invite Link (copy code)</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="h2">Teachers</div>
+    <div class="line"></div>
+
+    <div class="m-list">
+       
+        @foreach (GetTeacherItemVM teacherVM in Model.Teachers)
+        {
+            <div class="m-row">
+                <div>
+                    <div class="name">@teacherVM.Name @teacherVM.Surname</div>
+                </div>
+                <div class="actions">
+                    <span class="badge teacher">Teacher</span>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="line"></div>
+
+    <div class="h2">Students</div>
+    <div class="line"></div>
+
+    <div class="m-list">
+        @foreach(GetStudentItemVM studentVM in Model.Students)
+        {
+            <div class="m-row">
+                <div>
+                    <div class="name">@studentVM.Name @studentVM.Surname</div>
+                    <div class="muted">Joined: @studentVM.JoinedAt.ToShortDateString()</div>
+                </div>
+                <div class="actions">
+                    <button class="btn ok">Promote</button>
+                    <button class="btn danger" asp-action="Delete" asp-route-studentId="@studentVM.Id"
+                                               asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Kick</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>
+
+<script src="~/js/members.js"></script>

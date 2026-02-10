@@ -28,10 +28,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Class/Members.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcTWVtYmVycy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Class/QuizEditor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcUXVpekVkaXRvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Member/Members.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXE1lbWJlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Question/Update.cshtml]

@@ -21,7 +21,7 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<OpenQuestion, GetQuestionItemDTO>().IncludeBase<Question, GetQuestionItemDTO>();
 
             CreateMap<ChoiceQuestion, GetChoiceQuestionForUpdateDTO>();
-            CreateMap<OpenQuestion, GetOptionForUpdateDTO>();
+            CreateMap<OpenQuestion, GetOpenQuestionForUpdateDTO>();
 
 
             CreateMap<Question,GetQuestionDTO>()
