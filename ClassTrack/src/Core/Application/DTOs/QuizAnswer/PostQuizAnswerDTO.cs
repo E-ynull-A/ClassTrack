@@ -9,7 +9,8 @@ namespace ClassTrack.Application.DTOs
 {
     public record PostQuizAnswerDTO(
         
-        long StudentQuizId,
+        long StudentId,
+        long QuizId,
         ICollection<PostQuizSubmitDTO> Answers);
    
 }

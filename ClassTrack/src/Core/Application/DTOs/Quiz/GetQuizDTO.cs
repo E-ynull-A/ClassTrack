@@ -9,7 +9,7 @@ namespace ClassTrack.Application.DTOs
     public record GetQuizDTO(      
         long Id,
         string Name,
-        ICollection<GetChoiceQuestionInQuizDTO>  ChoiceQuestions,
+        ICollection<GetChoiceQuestionInQuizDTO> ChoiceQuestions,
         ICollection<GetOpenQuestionInQuizDTO> OpenQuestions,
 
         DateTime StartTime,

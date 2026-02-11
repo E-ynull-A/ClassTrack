@@ -2,7 +2,9 @@ wwwroot\css\attendance.css
 wwwroot\css\base.css
 wwwroot\css\class.css
 wwwroot\css\create-quiz.css
+wwwroot\css\dashboard.css
 wwwroot\css\error.css
+wwwroot\css\exam.css
 wwwroot\css\index.css
 wwwroot\css\login.css
 wwwroot\css\members.css
@@ -19,6 +21,7 @@ wwwroot\js\base.js
 wwwroot\js\class.js
 wwwroot\js\create-quiz.js
 wwwroot\js\dashboard.js
+wwwroot\js\exam.js
 wwwroot\js\index.js
 wwwroot\js\login.js
 wwwroot\js\members.js
@@ -87,4 +90,3 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\css\dashboard.css

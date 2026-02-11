@@ -24,7 +24,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet("{classRoomId}")]
-        [ServiceFilter(typeof(TeacherAccessFilter))]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
         public async Task<IActionResult> Get(long classRoomId, int page = 0, int take = 0)
         {
             return Ok(await _quizService.GetAllAsync(classRoomId, page, take));
@@ -40,7 +40,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet("{classRoomId}/{id}/Detail")]
-        [Authorize(Roles = "Admin")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
         public async Task<IActionResult> GetDetail(long id)
         {
             if (id < 1)

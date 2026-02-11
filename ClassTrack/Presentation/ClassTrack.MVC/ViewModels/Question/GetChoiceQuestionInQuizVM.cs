@@ -7,7 +7,8 @@ namespace ClassTrack.MVC.ViewModels
         long Id,
         string Title,
         decimal Point,
+        bool IsMultiple,
         string QuestionType,
-        ICollection<GetOptionItemInChoiceQuestionVM>? Options = null);
+        IList<GetOptionItemInChoiceQuestionVM>? Options = null);
    
 }

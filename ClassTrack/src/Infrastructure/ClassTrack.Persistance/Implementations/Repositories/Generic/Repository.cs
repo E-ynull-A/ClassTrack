@@ -87,11 +87,9 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             return query;
         }
 
-     
-
         public async Task<T> GetByIdAsync(long id, bool isIgnore = false, params string[] includes)
         {
-            IQueryable<T> query = _dbset.AsNoTracking();
+            IQueryable<T> query = _dbset;
 
             if (isIgnore is true)
                 query = query.IgnoreQueryFilters();

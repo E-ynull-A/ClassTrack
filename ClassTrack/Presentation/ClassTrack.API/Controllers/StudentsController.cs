@@ -50,7 +50,7 @@ namespace ClassTrack.API.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{classRoomId}/{studentId}")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Put(long classRoomId, long studentId)
         {

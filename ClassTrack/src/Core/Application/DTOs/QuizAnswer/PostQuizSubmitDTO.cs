@@ -10,8 +10,8 @@ namespace ClassTrack.Domain.Entities
         
         long QuestionId,
         long? AnswerId,
+        ICollection<long?> AnswerIds,
         string? AnswerText,
-        bool IsEvaluated
-        );
+        bool IsEvaluated);
    
 }

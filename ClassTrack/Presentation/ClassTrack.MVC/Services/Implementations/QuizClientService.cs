@@ -12,17 +12,23 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
         }
-        public async Task<IEnumerable<GetQuizItemVM>> GetAllAsync(long classRoomId)
+        public async Task<GetQuizItemWithPermissionVM> GetAllAsync(long classRoomId)
         {
-           return await _httpClient.GetFromJsonAsync<IEnumerable<GetQuizItemVM>>($"Quizes/{classRoomId}");
+
+            return new GetQuizItemWithPermissionVM(await _httpClient.GetFromJsonAsync<IEnumerable<GetQuizItemVM>>($"Quizes/{classRoomId}"),
+                                                   await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}" ));
+
+
         }
 
         public async Task<GetQuizItemVM> GetByIdAsync(long id,long classRoomId)
-        {
-           
+        {    
             return await _httpClient.GetFromJsonAsync<GetQuizItemVM>($"Quizes/{classRoomId}/{id}");
         }
-
+        public async Task<GetQuizVM?> GetQuizForStudentAsync(long classRoomId,long quizId)
+        {
+            return await _httpClient.GetFromJsonAsync<GetQuizVM>($"Quizes/{classRoomId}/{quizId}/Detail");
+        }
         public async Task<ServiceResult> CreateQuizAsync(PostQuizVM quizVM)
         {
 
@@ -62,7 +68,6 @@ namespace ClassTrack.MVC.Services.Implementations
                
             return new ServiceResult(true);
         }
-
         public async Task<ServiceResult> UpdateQuizAsync(PutQuizVM quizVM, long id)
         {
             if (quizVM.ClassRoomId < 1)

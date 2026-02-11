@@ -44,15 +44,16 @@
                     <div class="muted">Joined: @studentVM.JoinedAt.ToShortDateString()</div>
                 </div>
                 <div class="actions">
-                    <button class="btn ok">Promote</button>
-                    <button class="btn danger" asp-action="Delete" asp-route-studentId="@studentVM.Id"
-                                               asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Kick</button>
+                    <a class="btn ok" asp-action="Put" asp-route-studentId="@studentVM.Id"
+                       asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Promote</a>
+                    <a class="btn danger" asp-action="Delete" asp-route-studentId="@studentVM.Id"
+                       asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Kick</a>
                 </div>
             </div>
         }
     </div>
 </div>
 
-<div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>
+<div class="toast" id="toast"><div class="t" asp-validation-summary="ModelOnly"></div><div class="d"></div></div>
 
 <script src="~/js/members.js"></script>

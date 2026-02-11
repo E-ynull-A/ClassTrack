@@ -5,6 +5,7 @@
         //Relations
         public long StudentQuizId { get; set; }
         public long? AnswerId { get; set; }
+        public ICollection<long?> AnswerIds { get; set; }
         public long QuestionId { get; set; }
         public string? AnswerText { get; set; }
         public bool IsEvaluated { get; set; }

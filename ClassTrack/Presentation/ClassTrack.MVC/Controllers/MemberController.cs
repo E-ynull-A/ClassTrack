@@ -13,6 +13,7 @@ namespace ClassTrack.MVC.Controllers
         {
             _memberClient = memberClient;
         }
+        [HttpGet("{classRoomId}")]
         public async Task<IActionResult> Members(long classRoomId)
         {
             if (classRoomId < 1)
@@ -31,6 +32,21 @@ namespace ClassTrack.MVC.Controllers
             if (!result.Ok)
             {
                 ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);            
+            }
+
+            return RedirectToAction(nameof(Members), new { classRoomId });
+        }
+
+        public async Task<IActionResult> Put(long classRoomId, long studentId)
+        {
+            if (classRoomId < 1 || studentId < 1)
+                return BadRequest();
+
+            ServiceResult result = await _memberClient.PromoteAsync(classRoomId, studentId);
+
+            if (!result.Ok)
+            {
+                ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
             }
 
             return RedirectToAction(nameof(Members), new { classRoomId });

@@ -21,7 +21,7 @@ namespace ClassTrack.Application.Interfaces.Repositories
             long id,
             bool isIgnore = false,
             params string[] includes);
-        Task<T> FirstOrDefaultAsync(Expression<Func<T,bool>> function,params string[]? includes);
+        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> expression, params string[] includes);
         void Add(T entity);
         Task AddAsync(T entity);
         void AddRange(ICollection<T> entities);

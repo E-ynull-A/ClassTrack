@@ -3,9 +3,7 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class StudentService : IStudentService
@@ -95,12 +93,12 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
 
 
-            ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId, includes: ["StudentClasses"]);
+            ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId);
 
             if (room is null)
                 throw new Exception("Class Room not Found");
 
-            Student? student = await _studentRepository.GetByIdAsync(studentId);
+            Student? student = await _studentRepository.GetByIdAsync(studentId,includes: ["StudentClasses"]);
 
             if (student is null)
                 throw new Exception("Student Not Found");
@@ -113,17 +111,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
 
             student.StudentClasses.Remove(studentRoom);
+            _studentRepository.Update(student);
             await _roomRepository.SaveChangeAsync();
 
         }
         public async Task PromoteAsync(long studentId, long classRoomId)
         {
-            ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId, includes: ["StudentClasses"]);
+            ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId);
 
             if (room is null)
                 throw new Exception("Class Room not Found");
 
-            Student? student = await _studentRepository.GetByIdAsync(studentId);
+            Student? student = await _studentRepository.GetByIdAsync(studentId, includes: ["StudentClasses","AppUser"]);
 
             if (student is null)
                 throw new Exception("Student Not Found");
@@ -136,8 +135,11 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
 
             student.StudentClasses.Remove(studentRoom);
+            _studentRepository.Update(student);
+            
 
-            Teacher? promotedStudent = await _teacherRepository.GetByIdAsync(studentId);
+            Teacher? promotedStudent = await _teacherRepository.GetTeacherByUserIdAsync(student.AppUserId,["TeacherClassRooms"]);
+
             if (promotedStudent is null)
             {
                 promotedStudent = new Teacher{ AppUserId = student.AppUserId };
@@ -145,9 +147,9 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
 
             promotedStudent.TeacherClassRooms.Add(new TeacherClassRoom { ClassRoomId = classRoomId });
+            _teacherRepository.Update(promotedStudent);
             await _teacherRepository.SaveChangeAsync();
         }
-
         public async Task CalculateAvgPoint(long studentId, long classRoomId, decimal point)
         {
             Student student = await _studentRepository

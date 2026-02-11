@@ -76,5 +76,14 @@ namespace ClassTrack.MVC.Controllers
 
             return RedirectToAction("Index",new {id = quizVM.PutQuiz.ClassRoomId });           
         }
+    
+        public async Task<IActionResult> Get(long classRoomId,long id)
+        {
+            if (classRoomId < 1 || id < 1)
+                return BadRequest();
+
+            return View("Exam",await _quizClient
+                            .GetQuizForStudentAsync(classRoomId,id));
+        }
     }
 }

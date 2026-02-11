@@ -18,8 +18,7 @@ namespace ClassTrack.Application.MappingProfiles
                 .ForCtorParam(nameof(GetQuizAnswerItemDTO.QuestionTitle), 
                                       opt => opt.MapFrom(qa => qa.Question.Title));
 
-            CreateMap<QuizAnswer, GetQuizAnswerDTO>();
-            CreateMap<PostQuizSubmitDTO, QuizAnswer>();
+            CreateMap<QuizAnswer, GetQuizAnswerDTO>();        
              
         }
     }

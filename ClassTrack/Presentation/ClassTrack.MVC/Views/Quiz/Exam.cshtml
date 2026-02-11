@@ -1,0 +1,144 @@
+﻿@model ExamVM
+@{
+    GetQuizVM quizVM = Model.QuizVM;
+}
+
+<link rel="stylesheet" href="~/css/exam.css">
+<div class="topbar">
+    <div class="topgrid">
+        <div class="titlebox">
+            <div class="h1" id="quizName">@quizVM.Name</div>
+            <div class="meta">
+                <span id="startInfo">Start: @quizVM.StartTime</span>
+                <span id="durationInfo">Duration: @quizVM.Duration</span>
+            </div>
+        </div>
+
+        <div class="pill" title="Qalan vaxt">
+            <span>⏳</span>
+            <span class="timer" id="timerText">--:--</span>
+            <div class="progress" aria-hidden="true">
+                <div class="bar" id="timerBar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+
+    <div class="row">
+        <div class="card section">
+            <div style="font-weight:900; font-size:15px;">Qaydalar</div>
+            <div class="note" style="padding:10px 0 0;">
+                • Single sualda 1 cavab seçirsən <br />
+                • Multiple sualda birdən çox cavab seçirsən<br />
+                • Vaxt bitəndə avtomatik submit olur.
+            </div>
+        </div>
+
+        <div class="card section">
+            <div style="font-weight:900; font-size:15px;">İmtahan statusu</div>
+            <div class="kvs" style="margin-top:10px;">
+                <div class="k">Choice</div><div class="v" id="choiceCount">@quizVM.ChoiceQuestions == null? 0:@quizVM.ChoiceQuestions.Count</div>
+                <div class="k">Open</div><div class="v" id="openCount">@quizVM.OpenQuestions == null? 0:@quizVM.OpenQuestions.Count</div>
+            </div>
+        </div>
+    </div>
+
+
+    <form id="examForm" class="card" style="margin-top:14px;" method="post" action="/Quiz/Submit">
+        <input type="hidden" asp-for="@quizVM.Id" id="quizIdInput" />
+
+        <div class="section" style="padding-bottom:8px;">
+            <div style="font-weight:900; font-size:16px;">Suallar</div>
+            <div class="note" style="padding:8px 0 0;">Choice + Open qarışıq göstərilir.</div>
+        </div>
+
+
+        @{
+            int indx = 0;
+        }
+        <div id="questionsWrap">
+
+
+            @for (int i = 0; i < (quizVM.ChoiceQuestions?.Count ?? 0); i++)
+            {
+                var q = quizVM.ChoiceQuestions[i];
+
+                <div class="q" data-kind="choice">
+                    <div class="qhead">
+                        <div style="min-width:0">
+                            <div class="qtitle">@($"{indx + 1}. {q.Title}")</div>
+                            <div class="qsub">
+                                <span class="pts"> Point: <b>@q.Point</b></span>
+                                <span class="type">Type: CHOICE @(q.IsMultiple ? "· Multiple" : "· Single")</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="ChoiceAnswers[@indx].QuestionId" value="@q.Id" />
+                    <input type="hidden" name="Answers[@indx].IsEvaluated" value="false" />
+
+                    <div class="opts">
+                        @for (int j = 0; j < (q.Options?.Count ?? 0); j++)
+                        {
+                            var opt = q.Options[j];
+
+                            <label class="opt">
+                                @if (q.IsMultiple)
+                                {
+                                    <input type="checkbox"
+                                           name="QuizAnswer.Answers[@indx].AnswerIds"
+                                           value="@opt.Id" />
+
+                                }
+                                else
+                                {
+                                    <input type="radio"
+                                           asp-for="QuizAnswer.Answers[@indx].AnswerId"
+                                           value="@opt.Id" />
+                                }
+
+                                <div><div class="v">@opt.Variant</div></div>
+                            </label>
+                        }
+                    </div>
+                </div>
+            }
+
+          
+            @for (int i = 0; i < (quizVM.OpenQuestions?.Count ?? 0); i++)
+            {
+                var q = quizVM.OpenQuestions[i];
+
+                <div class="q" data-kind="open">
+                    <div class="qhead">
+                        <div style="min-width:0">
+                            <div class="qtitle">@($"{(quizVM.ChoiceQuestions?.Count ?? 0) + i + 1}. {q.Title}")</div>
+                            <div class="qsub">
+                                <span class="pts">Point: <b>@q.Point</b></span>
+                                <span class="type">Type: OPEN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="OpenAnswers[@i].QuestionId" value="@q.Id" />
+
+                    <div style="height:12px"></div>
+                    <textarea name="OpenAnswers[@i].Text" placeholder="Cavabı yaz..."></textarea>
+                </div>
+            }
+
+        </div>
+
+        <div class="actions">
+            <button class="btn ghost" type="button" id="btnReset">Reset</button>
+            <button class="btn primary" type="submit" id="btnSubmit">Submit</button>
+        </div>
+        <div class="note" id="submitNote">Submit olanda normal form post gedəcək.</div>
+    </form>
+
+</div>
+
+<script src="~/js/exam.js"></script>

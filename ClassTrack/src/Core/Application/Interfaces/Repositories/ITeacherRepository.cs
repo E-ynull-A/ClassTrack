@@ -10,6 +10,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
 {
     public interface ITeacherRepository:IRepository<Teacher>
     {
-        Task<Teacher> GetTeacherByUserIdAsync(string userId);    
+         Task<Teacher?> GetTeacherByUserIdAsync(string userId, params string[] includes);
     }
 }

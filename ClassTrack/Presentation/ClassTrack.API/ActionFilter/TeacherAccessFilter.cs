@@ -35,10 +35,16 @@ namespace ClassTrack.API.ActionFilter
                 if (resultCache.HasValue)
                 {
                     if (resultCache.Value)
+                    {
                         await next();
+                        return;
+                    }
 
-                    context.Result = new ForbidResult();
-                    return;
+                    else
+                    {
+                        context.Result = new ForbidResult();
+                        return;
+                    }               
                 }
                     
 

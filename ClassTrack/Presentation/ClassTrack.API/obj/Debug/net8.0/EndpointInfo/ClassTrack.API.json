@@ -1294,6 +1294,36 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "studentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/TaskWorks": {
@@ -1632,7 +1662,11 @@
       "PostQuizAnswerDTO": {
         "type": "object",
         "properties": {
-          "studentQuizId": {
+          "studentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quizId": {
             "type": "integer",
             "format": "int64"
           },
@@ -1692,6 +1726,14 @@
           "answerId": {
             "type": "integer",
             "format": "int64",
+            "nullable": true
+          },
+          "answerIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
             "nullable": true
           },
           "answerText": {

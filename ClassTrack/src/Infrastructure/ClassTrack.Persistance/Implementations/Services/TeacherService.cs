@@ -30,6 +30,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             return _mapper.Map<ICollection<GetTeacherItemDTO>>(_teacherRepository.GetAll(page: page,
                                                                                          take: take,
                                                                                          includes: [nameof(Teacher.AppUser)],
+                                                                                         function:x=>x.TeacherClassRooms.Select(tc=>tc.ClassRoomId).Contains(classRoomId),
                                                                                          sort: x => x.AppUser.Name));
         }
 

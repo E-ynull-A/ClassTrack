@@ -32,5 +32,15 @@ namespace ClassTrack.MVC.Services.Implementations
 
             return new ServiceResult(true);
         }
+
+        public async Task<ServiceResult> PromoteAsync(long classRoomId, long studentId)
+        {
+            HttpResponseMessage message = await _httpClient.PutAsJsonAsync($"Students/{classRoomId}/{studentId}",string.Empty);
+
+            if (!message.IsSuccessStatusCode)
+                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
+
+            return new ServiceResult(true);
+        }
     }
 }

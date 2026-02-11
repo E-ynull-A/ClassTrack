@@ -18,24 +18,19 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IMapper _mapper;
         private readonly IClassRoomRepository _roomRepository;
         private readonly IStudentRepository _studentRepository;
-        private readonly IPermissionService _permissionService;
-        private readonly IClassRoomService _roomService;
+
 
         public QuizService(
                            IQuizRepository quizRepository,
                            IMapper mapper,
                            IClassRoomRepository roomRepository,
-                           IStudentRepository studentRepository,
-                           IPermissionService permissionService,
-                           IClassRoomService roomService)
+                           IStudentRepository studentRepository)
 
         {
             _quizRepository = quizRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
             _studentRepository = studentRepository;
-            _permissionService = permissionService;
-            _roomService = roomService;
         }
 
         public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId, int page, int take,params string[] includes)

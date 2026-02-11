@@ -11,6 +11,7 @@ namespace ClassTrack.Application.DTOs
         long Id,
         string Title,
         decimal Point,
+        bool IsMultiple,
         string QuestionType,
         ICollection<GetOptionItemInChoiceQuestionDTO>? Options = null);
    

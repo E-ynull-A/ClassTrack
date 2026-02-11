@@ -6,5 +6,6 @@ namespace ClassTrack.MVC.Services.Interfaces
     {
         Task<GetMemberItemVM> GetMembersAsync(long classRoomId);
         Task<ServiceResult> KickAsync(long classRoomId, long studentId);
+        Task<ServiceResult> PromoteAsync(long classRoomId, long studentId);
     }
 }

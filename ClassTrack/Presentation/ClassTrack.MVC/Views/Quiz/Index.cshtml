@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GetQuizItemVM>
+﻿@model GetQuizItemWithPermissionVM
 
 <link rel="stylesheet" href="~/css/quiz-list.css">
 
@@ -31,7 +31,7 @@
     <div class="line"></div>
 
     <div class="quiz-grid" id="quizGrid">
-        @foreach (GetQuizItemVM quiz in Model)
+        @foreach (GetQuizItemVM quiz in Model.ItemVM)
         {
             <div class="quiz-card">
                 <a href="quiz-detail.html">
@@ -51,11 +51,22 @@
                     </div>
                 </a>
                 <div class="qc-actions">
-                    <a class="btn ok" asp-action="Update"
-                                      asp-route-id="@quiz.Id" 
-                                      asp-route-classRoomId="@Context.GetRouteValue("id")">
-                        Edit
-                    </a>
+                    @if (Model.IsTeacherVM.IsTeacher)
+                    {
+                        <a class="btn ok" asp-action="Update"
+                           asp-route-id="@quiz.Id"
+                           asp-route-classRoomId="@Context.GetRouteValue("id")">
+                            Edit
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn ok" asp-action="Get"
+                           asp-route-id="@quiz.Id"
+                           asp-route-classRoomId="@Context.GetRouteValue("id")">
+                            Enter
+                        </a>
+                    }
                 </div>
             </div>
         }

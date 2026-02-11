@@ -770,6 +770,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ClassTrack.API.Controllers.StudentsController",
+    "Method": "Put",
+    "RelativePath": "Students/{classRoomId}/{studentId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "classRoomId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "studentId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ClassTrack.API.Controllers.TaskWorksController",
     "Method": "Get",
     "RelativePath": "TaskWorks",

@@ -2,18 +2,9 @@
 using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
-using ClassTrack.Domain;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
-using ClassTrack.Persistance.DAL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -57,8 +48,10 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO)
         {
+            StudentQuiz? sqs = await _studentQuizRepository
+                            .FirstOrDefaultAsync(sq=>sq.StudentId == answerDTO.StudentId 
+                                                  && sq.QuizId == answerDTO.QuizId, ["Quiz"]);
 
-                StudentQuiz sqs = await _studentQuizRepository.GetByIdAsync(answerDTO.StudentQuizId, includes: ["Quiz"]);
             if (sqs is null)
                 throw new Exception("This Quiz isn't Found!");
 
@@ -93,36 +86,84 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             foreach (var answer in answerDTO.Answers)
             {
-                if (answer.AnswerId is null)
-                    continue;
-
-                if (questionIds.TryGetValue(answer.QuestionId, out var result))
+                if (answer.AnswerId is not null)
                 {
-                    Option? option = result.Options.FirstOrDefault(o => o.Id == answer.AnswerId);
-                    if (option is not null)
+                    if (questionIds.TryGetValue(answer.QuestionId, out var result))
                     {
-                        if (option.IsCorrect)
+
+                        Option? option = result.Options.FirstOrDefault(o => o.Id == answer.AnswerId);
+                        if (option is not null)
                         {
-                            sqs.TotalPoint += result.Point;
+                            if (option.IsCorrect)
+                            {
+                                sqs.TotalPoint += result.Point;
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("The Option isn't Found!!");
                         }
                     }
                     else
                     {
-                        throw new Exception("The Option isn't Found!!");
+                        throw new Exception("The Question isn't Found!!");
                     }
                 }
-                else
+                else if(answer.AnswerIds is not null)
                 {
-                    throw new Exception("The Question isn't Found!!");
-                }
+                    
+                    if(questionIds.TryGetValue(answer.QuestionId,out var result))
+                    {
+                        int correctCount = 0;
+                        
+                        foreach (var optId in answer.AnswerIds)
+                        {
+                            Option? option = result.Options.FirstOrDefault(o => o.Id == optId);
+                            
+                            if (option is not null)
+                            {
+                                if (option.IsCorrect)
+                                {
+                                    correctCount++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("The Option isn't Found!!");
+                            }
+                        }
+                        if(correctCount == result.Options.Count(o => o.IsCorrect))
+                        {
+                            sqs.TotalPoint += result.Point;
+                        }                       
+                    }
+                }                                
             }
 
             sqs.QuizStatus = QuizStatus.Finished.ToString();
 
             _studentQuizRepository.Update(sqs);
 
-            ICollection<QuizAnswer> qAnswers = _mapper.Map<ICollection<QuizAnswer>>(answerDTO.Answers);
 
+            ICollection<QuizAnswer> qAnswers = answerDTO.Answers.Select(a => new QuizAnswer
+            {
+                AnswerId = a.AnswerId,
+                QuestionId = a.QuestionId,
+                AnswerIds = a.AnswerIds,
+                AnswerText = a.AnswerText,
+                IsEvaluated = a.IsEvaluated,
+            }).ToList();
+
+            foreach (var answer in qAnswers)
+            {
+                answer.StudentQuizId = sqs.Id;
+            }
+
+          
             foreach (var qAns in qAnswers)
             {
                 qAns.StudentQuizId = sqs.Id;
@@ -130,7 +171,12 @@ namespace ClassTrack.Persistance.Implementations.Services
                 if (qAns.AnswerId.HasValue)
                     qAns.IsEvaluated = true;
 
-                if (!qAns.AnswerId.HasValue && qAns.AnswerText is null)
+                if (qAns.AnswerIds.Any(a => a.HasValue))
+                    qAns.IsEvaluated = true;
+
+                if (!  qAns.AnswerId.HasValue 
+                    && qAns.AnswerText is null 
+                    && qAns.AnswerIds.All(a=>!a.HasValue))
                     qAns.IsEvaluated = true;
             }
 

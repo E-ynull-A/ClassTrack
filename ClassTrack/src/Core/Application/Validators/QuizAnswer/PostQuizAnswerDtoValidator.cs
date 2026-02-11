@@ -12,11 +12,13 @@ namespace ClassTrack.Application.Validators
     {
         public PostQuizAnswerDtoValidator()
         {
-            RuleFor(qa => qa.StudentQuizId)
+            RuleFor(qa => qa.StudentId)
                 .NotEmpty()
                 .GreaterThan(0);
 
-
+            RuleFor(qa => qa.QuizId)
+            .NotEmpty()
+            .GreaterThan(0);
 
             RuleFor(qa => qa.Answers)
                 .NotEmpty()
@@ -26,7 +28,10 @@ namespace ClassTrack.Application.Validators
                                   == a.Select(a => a.QuestionId).Count()
                                   && a.Select(a => a.AnswerId).Distinct().Count()
                                   == a.Select(a => a.AnswerId).Count())
+                //.Must(a=>a.Select(a=>a.AnswerIds))
                 .WithMessage("No Dublicate Ids!");
+
+            
 
         }
     }
