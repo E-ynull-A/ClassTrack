@@ -80,10 +80,10 @@ namespace ClassTrack.MVC.Controllers
         public async Task<IActionResult> Get(long classRoomId,long id)
         {
             if (classRoomId < 1 || id < 1)
-                return BadRequest();
+                return BadRequest();         
 
-            return View("Exam",await _quizClient
-                            .GetQuizForStudentAsync(classRoomId,id));
+            return View("../QuizAnswer/Exam",new ExamVM(await _quizClient
+                            .GetQuizForStudentAsync(classRoomId, id)));
         }
     }
 }

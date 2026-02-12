@@ -12,9 +12,6 @@ namespace ClassTrack.Application.Validators
     {
         public PostQuizAnswerDtoValidator()
         {
-            RuleFor(qa => qa.StudentId)
-                .NotEmpty()
-                .GreaterThan(0);
 
             RuleFor(qa => qa.QuizId)
             .NotEmpty()
@@ -22,17 +19,16 @@ namespace ClassTrack.Application.Validators
 
             RuleFor(qa => qa.Answers)
                 .NotEmpty()
-                .Must(a=>a.All(a=>a.QuestionId > 0))
+                .Must(a => a.All(a=>a.QuestionId > 0))
                 .Must(a => a.Select(a => a.QuestionId).Count() > 0)
                 .Must(a => a.Select(a => a.QuestionId).Distinct().Count()
                                   == a.Select(a => a.QuestionId).Count()
-                                  && a.Select(a => a.AnswerId).Distinct().Count()
-                                  == a.Select(a => a.AnswerId).Count())
-                //.Must(a=>a.Select(a=>a.AnswerIds))
+                                  && a.Where(a => a.AnswerId!=null).Select(a => a.AnswerId).Distinct().Count()
+                                  == a.Where(a => a.AnswerId != null).Select(a => a.AnswerId).Count())
+                
+                .Must(a => a.All(a=> a.AnswerIds == null || a.AnswerIds.All(aId=>aId>0)))
+                .Must(a => a.All(a=> a.AnswerIds == null || a.AnswerIds.Count() == a.AnswerIds.Distinct().Count()))
                 .WithMessage("No Dublicate Ids!");
-
-            
-
         }
     }
 }

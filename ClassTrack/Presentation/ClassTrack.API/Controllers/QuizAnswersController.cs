@@ -20,7 +20,7 @@ namespace ClassTrack.API.Controllers
             _answerService = answerService;
         }
 
-        [HttpGet("{studentId}/{classRoomId}/Student")]
+        [HttpGet("{classRoomId}/{studentId}/Student")]
         [ServiceFilter(typeof(ClassRoomAccessFilter))]
         public async Task<IActionResult> Get(long studentId,int page = 0, int take = 0)
         {
@@ -50,7 +50,6 @@ namespace ClassTrack.API.Controllers
         public async Task<IActionResult> Post(PostQuizAnswerDTO answerDTO)
         {
             await _answerService.TakeAnExamAsync(answerDTO);
-
             return Created();
         }
 
@@ -64,10 +63,6 @@ namespace ClassTrack.API.Controllers
             await _answerService.EvaluateAnswerAsync(id,answerDTO);
             return NoContent();
         }
-
-
-
-
 
 
     }

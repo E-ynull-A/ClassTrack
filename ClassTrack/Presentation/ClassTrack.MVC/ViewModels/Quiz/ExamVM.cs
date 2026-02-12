@@ -1,8 +1,11 @@
-﻿namespace ClassTrack.MVC.ViewModels
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace ClassTrack.MVC.ViewModels
 {
     public record ExamVM(
-        
-        GetQuizVM QuizVM,
-        PostQuizAnswerVM? QuizAnswer);
+
+        [ValidateNever]
+        GetQuizVM? QuizVM,
+        PostQuizAnswerVM QuizAnswer = null);
    
 }

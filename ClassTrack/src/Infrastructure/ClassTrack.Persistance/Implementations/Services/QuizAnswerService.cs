@@ -15,18 +15,21 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IQuestionRepository _questionRepository;
         private readonly IStudentQuizRepository _studentQuizRepository;
         private readonly IPermissionService _permissionService;
+        private readonly ICurrentUserService _userService;
 
         public QuizAnswerService(IQuizAnswerRepository quizAnswerRepository,
                                   IMapper mapper,
                                   IQuestionRepository questionRepository,
                                   IStudentQuizRepository studentQuizRepository,
-                                  IPermissionService permissionService)
+                                  IPermissionService permissionService,
+                                  ICurrentUserService userService)
         {
             _quizAnswerRepository = quizAnswerRepository;
             _mapper = mapper;
             _questionRepository = questionRepository;
             _studentQuizRepository = studentQuizRepository;
             _permissionService = permissionService;
+            _userService = userService;
         }
 
         public async Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take)
@@ -49,16 +52,17 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO)
         {
             StudentQuiz? sqs = await _studentQuizRepository
-                            .FirstOrDefaultAsync(sq=>sq.StudentId == answerDTO.StudentId 
-                                                  && sq.QuizId == answerDTO.QuizId, ["Quiz"]);
+                            .FirstOrDefaultAsync(sq => sq.Student.AppUserId
+                                                    == _userService.GetUserId()
+                                                    && sq.QuizId == answerDTO.QuizId, ["Quiz"]);
 
             if (sqs is null)
                 throw new Exception("This Quiz isn't Found!");
 
-            if (DateTime.UtcNow < sqs.Quiz.StartTime && DateTime.UtcNow > sqs.Quiz.StartTime.Add(sqs.Quiz.Duration))
-            {
-                throw new Exception("The Quiz doesn't begin or already finished!!");
-            }
+            //if (DateTime.UtcNow < sqs.Quiz.StartTime || DateTime.UtcNow > sqs.Quiz.StartTime.Add(sqs.Quiz.Duration))
+            //{
+            //    throw new Exception("The Quiz doesn't begin or already finished!!");
+            //}
 
             if (sqs.QuizStatus == QuizStatus.Finished.ToString())
             {
@@ -110,8 +114,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                     }
                 }
                 else if(answer.AnswerIds is not null)
-                {
-                    
+                {                    
                     if(questionIds.TryGetValue(answer.QuestionId,out var result))
                     {
                         int correctCount = 0;
@@ -144,7 +147,10 @@ namespace ClassTrack.Persistance.Implementations.Services
                 }                                
             }
 
-            sqs.QuizStatus = QuizStatus.Finished.ToString();
+            if (answerDTO.Answers.Any(a => a.AnswerText is not null))
+                sqs.QuizStatus = QuizStatus.Submitted.ToString();
+            else
+                sqs.QuizStatus = QuizStatus.Finished.ToString();
 
             _studentQuizRepository.Update(sqs);
 
@@ -153,17 +159,12 @@ namespace ClassTrack.Persistance.Implementations.Services
             {
                 AnswerId = a.AnswerId,
                 QuestionId = a.QuestionId,
-                AnswerIds = a.AnswerIds,
+                AnswerIds = a.AnswerIds?.ToList(),
                 AnswerText = a.AnswerText,
                 IsEvaluated = a.IsEvaluated,
             }).ToList();
 
-            foreach (var answer in qAnswers)
-            {
-                answer.StudentQuizId = sqs.Id;
-            }
-
-          
+                 
             foreach (var qAns in qAnswers)
             {
                 qAns.StudentQuizId = sqs.Id;
@@ -171,12 +172,12 @@ namespace ClassTrack.Persistance.Implementations.Services
                 if (qAns.AnswerId.HasValue)
                     qAns.IsEvaluated = true;
 
-                if (qAns.AnswerIds.Any(a => a.HasValue))
+                if (qAns.AnswerIds is not null)
                     qAns.IsEvaluated = true;
 
                 if (!  qAns.AnswerId.HasValue 
                     && qAns.AnswerText is null 
-                    && qAns.AnswerIds.All(a=>!a.HasValue))
+                    && qAns.AnswerIds is null)
                     qAns.IsEvaluated = true;
             }
 

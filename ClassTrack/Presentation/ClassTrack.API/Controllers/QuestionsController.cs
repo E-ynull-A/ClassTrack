@@ -62,10 +62,10 @@ namespace ClassTrack.API.Controllers
 
         [HttpPost("{classRoomId}/{quizId}/ChoiceQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
-        public async Task<IActionResult> Post([FromBody]PostChoiceQuestionDTO postChoice)
+        public async Task<IActionResult> Post(PostChoiceQuestionDTO postChoice)
         {
             if(postChoice.Options is null)
-            { return BadRequest(); }
+             {return BadRequest(); }
 
             await _service.CreateChoiceQuestionAsync(postChoice);
             return Created();
@@ -73,7 +73,7 @@ namespace ClassTrack.API.Controllers
 
         [HttpPost("{classRoomId}/{quizId}/OpenQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
-        public async Task<IActionResult> Post([FromBody]PostOpenQuestionDTO postOpen)
+        public async Task<IActionResult> Post(PostOpenQuestionDTO postOpen)
         {
             if(postOpen is null)
                 return BadRequest();

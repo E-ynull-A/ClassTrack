@@ -1,5 +1,6 @@
 ﻿using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
+using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Services.Implementations
 {
@@ -11,9 +12,14 @@ namespace ClassTrack.MVC.Services.Implementations
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
         }
 
-        public ServiceResult TakeAnExamAsync(long classRoomId)
+        public async Task<ServiceResult> TakeAnExamAsync(long classRoomId,PostQuizAnswerVM studentAnswer)
         {
+            var message = await _httpClient.PostAsJsonAsync($"QuizAnswers/{classRoomId}",studentAnswer);
 
+            if (!message.IsSuccessStatusCode)            
+                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
+
+            return new ServiceResult(true);
         }
     }
 }

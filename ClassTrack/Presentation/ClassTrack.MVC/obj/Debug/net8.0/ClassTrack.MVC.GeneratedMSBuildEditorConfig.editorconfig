@@ -60,12 +60,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25cVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxDcmVhdGUuY3NodG1s
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/QuizAnswer/Exam.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpekFuc3dlclxFeGFtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Exam.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxFeGFtLmNzaHRtbA==
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Index.cshtml]

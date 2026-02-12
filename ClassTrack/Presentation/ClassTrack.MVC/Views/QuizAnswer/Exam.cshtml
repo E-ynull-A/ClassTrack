@@ -1,7 +1,9 @@
 ﻿@model ExamVM
 @{
     GetQuizVM quizVM = Model.QuizVM;
+    Layout = null;
 }
+
 
 <link rel="stylesheet" href="~/css/exam.css">
 <div class="topbar">
@@ -39,15 +41,16 @@
         <div class="card section">
             <div style="font-weight:900; font-size:15px;">İmtahan statusu</div>
             <div class="kvs" style="margin-top:10px;">
-                <div class="k">Choice</div><div class="v" id="choiceCount">@quizVM.ChoiceQuestions == null? 0:@quizVM.ChoiceQuestions.Count</div>
-                <div class="k">Open</div><div class="v" id="openCount">@quizVM.OpenQuestions == null? 0:@quizVM.OpenQuestions.Count</div>
+                <div class="k">Choice</div><div class="v" id="choiceCount">@(quizVM.ChoiceQuestions == null? 0:@quizVM.ChoiceQuestions.Count)</div>
+                <div class="k">Open</div><div class="v" id="openCount">@(quizVM.OpenQuestions == null? 0:@quizVM.OpenQuestions.Count)</div>
             </div>
         </div>
     </div>
 
 
-    <form id="examForm" class="card" style="margin-top:14px;" method="post" action="/Quiz/Submit">
-        <input type="hidden" asp-for="@quizVM.Id" id="quizIdInput" />
+    <form id="examForm" class="card" style="margin-top:14px;" method="post" asp-action="Post" asp-controller="QuizAnswer" asp-route-classRoomId="@Context.Request.Query["classRoomId"]" 
+                                                                                              asp-route-quizId="@Context.Request.RouteValues["id"]">
+        <input type="hidden" asp-for="QuizAnswer.QuizId" value="@Context.Request.RouteValues["id"]" id="quizIdInput" />
 
         <div class="section" style="padding-bottom:8px;">
             <div style="font-weight:900; font-size:16px;">Suallar</div>
@@ -71,7 +74,7 @@
                             <div class="qtitle">@($"{indx + 1}. {q.Title}")</div>
                             <div class="qsub">
                                 <span class="pts"> Point: <b>@q.Point</b></span>
-                                <span class="type">Type: CHOICE @(q.IsMultiple ? "· Multiple" : "· Single")</span>
+                                <span class="type">Type: Choice @(q.IsMultiple ? "· Multiple" : "· Single")</span>
                             </div>
                         </div>
                     </div>
@@ -100,8 +103,11 @@
                                            value="@opt.Id" />
                                 }
 
-                                <div><div class="v">@opt.Variant</div></div>
+                                <div><div class="v">@opt.Variant</div></div>                              
                             </label>
+                        }
+                        @{
+                            indx++;
                         }
                     </div>
                 </div>
@@ -118,7 +124,7 @@
                             <div class="qtitle">@($"{(quizVM.ChoiceQuestions?.Count ?? 0) + i + 1}. {q.Title}")</div>
                             <div class="qsub">
                                 <span class="pts">Point: <b>@q.Point</b></span>
-                                <span class="type">Type: OPEN</span>
+                                <span class="type">Type: Open</span>
                             </div>
                         </div>
                     </div>
@@ -133,10 +139,8 @@
         </div>
 
         <div class="actions">
-            <button class="btn ghost" type="button" id="btnReset">Reset</button>
             <button class="btn primary" type="submit" id="btnSubmit">Submit</button>
         </div>
-        <div class="note" id="submitNote">Submit olanda normal form post gedəcək.</div>
     </form>
 
 </div>

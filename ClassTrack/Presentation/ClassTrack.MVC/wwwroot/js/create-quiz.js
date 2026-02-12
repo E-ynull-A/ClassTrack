@@ -44,7 +44,7 @@
             return;
         }
 
-        // IMPORTANT: Duration is TimeSpan string "HH:mm:ss"
+       
         quiz = {
             Name: name,
             StartTime: new Date(st).toISOString(),
@@ -60,7 +60,7 @@
         renderList();
     });
 
-    // Step2 type switch
+
     const btnTypeChoice = $("#btnTypeChoice");
     const btnTypeOpen = $("#btnTypeOpen");
     const choiceBox = $("#choiceBox");
@@ -85,7 +85,7 @@
     btnTypeChoice?.addEventListener("click", () => setType("choice"));
     btnTypeOpen?.addEventListener("click", () => setType("open"));
 
-    // Choice form
+  
     const cTitle = $("#cTitle");
     const cPoint = $("#cPoint");
     const cIsMultiple = $("#cIsMultiple");
@@ -166,7 +166,7 @@
 
         choiceQuestions.push(q);
 
-        // reset
+  
         if (cTitle) cTitle.value = "";
         if (cPoint) cPoint.value = "1";
         if (cIsMultiple) cIsMultiple.value = "false";
@@ -177,7 +177,7 @@
         renderList();
     });
 
-    // Open form
+  
     const oTitle = $("#oTitle");
     const oPoint = $("#oPoint");
     const btnSaveOpen = $("#btnSaveOpen");
@@ -198,7 +198,6 @@
         renderList();
     });
 
-    // Added list
     const addedList = $("#addedList");
 
     function renderList() {
@@ -245,7 +244,7 @@
         });
     }
 
-    // ===== REVIEW + JSON toggle =====
+
     const btnToggleJson = $("#btnToggleJson");
     btnToggleJson?.addEventListener("click", () => {
         const box = $("#jsonWrap");
@@ -317,7 +316,6 @@
         if (jsonOut) jsonOut.textContent = JSON.stringify(payload, null, 2);
     }
 
-    // ====== IMPORTANT: Variant B binder (MUST be inside IIFE) ======
     function syncHiddenFields() {
         const host = document.getElementById("bindFields");
         if (!host) { console.log("bindFields tapılmadı"); return; }
@@ -332,13 +330,13 @@
             host.appendChild(inp);
         };
 
-        // Quiz info
+       
         add("Name", quiz?.Name);
         add("ClassRoomId", quiz?.ClassRoomId);
         add("StartTime", quiz?.StartTime);
         add("Duration", quiz?.Duration);
 
-        // ChoiceQuestions
+    
         choiceQuestions.forEach((q, i) => {
             add(`ChoiceQuestions[${i}].Title`, q.Title);
             add(`ChoiceQuestions[${i}].Point`, q.Point);
@@ -350,13 +348,13 @@
             });
         });
 
-        // OpenQuestions
+    
         openQuestions.forEach((q, i) => {
             add(`OpenQuestions[${i}].Title`, q.Title);
             add(`OpenQuestions[${i}].Point`, q.Point);
         });
 
-        // Debug: check keys
+    
         const form = document.getElementById("quizForm");
         if (form) {
             const fd = new FormData(form);
@@ -365,7 +363,7 @@
         }
     }
 
-    // Step navigation
+    
     $("#btnToReview")?.addEventListener("click", () => {
         if (!quiz) { toast("First", "Əvvəl quiz info saxla."); return; }
         showStep(3);
@@ -374,7 +372,7 @@
 
     $("#btnBackToQuestions")?.addEventListener("click", () => showStep(2));
 
-    // Submit
+ 
     $("#btnSubmit")?.addEventListener("click", () => {
         if (!quiz) {
             toast("First", "Əvvəl quiz info saxla.");
@@ -387,13 +385,14 @@
         }
 
         syncHiddenFields();
-        const form = document.getElementById("quizForm")?.submit();
+        const form = document.getElementById("quizForm");
         if (!form) return;
 
+        syncHiddenFields();
         form.requestSubmit();
     });
 
-    // Reset
+  
     $("#btnReset")?.addEventListener("click", () => {
         quiz = null;
         choiceQuestions = [];
@@ -403,7 +402,6 @@
         renderList();
 
         if (quizName) quizName.value = "";
-        if (classRoomId) classRoomId.value = "";
         if (startTime) startTime.value = "";
         if (durationMin) durationMin.value = "0";
 
@@ -430,14 +428,13 @@
         showStep(1);
     });
 
-    // helpers
+
     function escapeHtml(s) {
         return (s || "").replace(/[&<>"']/g, m => ({
             "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
         }[m]));
     }
 
-    // initial
     showStep(1);
     renderList();
 })();

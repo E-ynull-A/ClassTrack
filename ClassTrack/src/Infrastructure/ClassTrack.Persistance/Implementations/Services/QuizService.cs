@@ -49,7 +49,6 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task<GetQuizItemDTO> GetByIdAsync(long id)
         {
-
             Quiz quiz = await _quizRepository.GetByIdAsync(id);
 
             if (quiz is null)
@@ -59,12 +58,14 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task<GetQuizDTO> GetByIdDetailAsync(long id)
         {
-
             Quiz quiz = await _quizRepository
                              .GetByIdAsync(id, includes: ["ChoiceQuestions.Options", "OpenQuestions"]);
 
+            if (quiz is null)
+                throw new Exception("The Quiz not Found");
+
             if (DateTime.UtcNow < quiz.StartTime
-                && DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration))
+                || DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration))
             {
                 throw new Exception("You can enter The Quiz only after the Starting Quiz " +
                                     "and Before the Quiz Ending!!");
@@ -114,9 +115,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                         })
                                         .ToList();
 
-
             _quizRepository.Add(created);
-
             await _quizRepository.SaveChangeAsync();
         }
         public async Task UpdateQuizAsync(long id, PutQuizDTO putQuiz)

@@ -322,3 +322,25 @@ textarea {
 .hidden {
     display: none !important
 }
+
+
+
+#questionsWrap {
+    max-height: calc(100vh - 300px); 
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+
+    #questionsWrap::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #questionsWrap::-webkit-scrollbar-thumb {
+        background: rgba(127,176,255,.45);
+        border-radius: 6px;
+    }
+
+    #questionsWrap::-webkit-scrollbar-track {
+        background: rgba(255,255,255,.05);
+    }

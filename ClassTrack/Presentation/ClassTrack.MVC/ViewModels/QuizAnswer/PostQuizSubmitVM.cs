@@ -8,7 +8,7 @@ namespace ClassTrack.MVC.ViewModels
         
         long QuestionId,
         long? AnswerId,
-        IList<long> AnswerIds,
+        IList<long>? AnswerIds,
         string? AnswerText,
         bool IsEvaluated);
    

@@ -1,8 +1,10 @@
 ﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.DTOs.Token;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,7 +13,7 @@ using System.Text;
 
 namespace ClassTrack.Infrastructure.Implementations.Services
 {
-    internal class TokenService: ITokenService
+    internal class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _accessor;
@@ -28,7 +30,7 @@ namespace ClassTrack.Infrastructure.Implementations.Services
             _cacheService = cacheService;
             _userManager = userManager;
         }
-        public AccessTokenDTO CreateAccessToken(AppUser user,IEnumerable<string> roles,int minutes)
+        public AccessTokenDTO CreateAccessToken(AppUser user, IEnumerable<string> roles, int minutes)
         {
             ICollection<Claim> claims = new List<Claim> {
 
@@ -44,30 +46,30 @@ namespace ClassTrack.Infrastructure.Implementations.Services
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            SymmetricSecurityKey key = new SymmetricSecurityKey 
+            SymmetricSecurityKey key = new SymmetricSecurityKey
                                                 (Encoding.ASCII
                                                     .GetBytes(_configuration["JWT:securityKey"]));
 
             SigningCredentials credentials = new SigningCredentials
-                                                    (key,SecurityAlgorithms.HmacSha256);
+                                                    (key, SecurityAlgorithms.HmacSha256);
 
 
             JwtSecurityToken token = new JwtSecurityToken(
                 issuer: _configuration["JWT:issuer"],
                 audience: _configuration["JWT:audience"],
-                claims:claims,
-                notBefore:DateTime.UtcNow,
-                expires:DateTime.UtcNow.AddMinutes(minutes),
-                signingCredentials:credentials);
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(minutes),
+                signingCredentials: credentials);
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
             return new AccessTokenDTO(user.UserName,
                                 token.ValidFrom,
-                                handler.WriteToken(token));  
+                                handler.WriteToken(token));
         }
         public RefreshTokenDTO GenerateRefreshToken()
-        {              
+        {
             return new RefreshTokenDTO(Guid.NewGuid().ToString("N")
                   + Guid.NewGuid().ToString("N"));
         }
@@ -88,17 +90,32 @@ namespace ClassTrack.Infrastructure.Implementations.Services
             if (user == null)
                 throw new Exception("User not Found!");
 
-            ICollection<string>? userRoles = await _userManager.GetRolesAsync(user);           
+            ICollection<string>? userRoles = await _userManager.GetRolesAsync(user);
 
-             await _cacheService.RemoveAsync(token);
+            await _cacheService.RemoveAsync(token);
 
             ResponseTokenDTO tokenDTO = new ResponseTokenDTO(CreateAccessToken(user, userRoles, 15),
-                                                             GenerateRefreshToken());    
+                                                             GenerateRefreshToken());
 
-            await _cacheService.SetCasheAsync(tokenDTO.RefreshToken.RefreshToken,userId,TimeSpan.FromMinutes(60 * 24 * 7));
-                
+            await _cacheService.SetCasheAsync(tokenDTO.RefreshToken.RefreshToken, userId, TimeSpan.FromMinutes(60 * 24 * 7));
 
-            return tokenDTO;         
+
+            return tokenDTO;
         }
+        public async Task GenerateResetTokenAsync(ResetTokenDTO passwordDTO)
+        {
+            string casheKey = $"reset_Password:{passwordDTO.Email}";
+
+            AppUser? user = await _userManager.FindByEmailAsync(passwordDTO.Email);
+
+            if (user == null)
+                throw new Exception("The User Not Found");
+
+            await _cacheService.SetCasheAsync(casheKey,
+                                             await _userManager.GenerateEmailConfirmationTokenAsync(user),
+                                             TimeSpan.FromMinutes(5));
+                                             
+        }
+
     }
 }

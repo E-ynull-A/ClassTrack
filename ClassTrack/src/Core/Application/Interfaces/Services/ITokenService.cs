@@ -1,4 +1,5 @@
 ﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.DTOs.Token;
 using ClassTrack.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace ClassTrack.Application.Interfaces.Services
                                          int minutes);
         RefreshTokenDTO GenerateRefreshToken();
         Task<ResponseTokenDTO> RefreshAsync();
+        Task GenerateResetTokenAsync(ResetTokenDTO passwordDTO);
     }
 }

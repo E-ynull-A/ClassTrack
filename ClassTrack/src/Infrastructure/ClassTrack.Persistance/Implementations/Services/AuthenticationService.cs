@@ -58,8 +58,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             await _manager.AddToRoleAsync(user, UserRole.User.ToString());
         }
-
-
         public async Task<ResponseTokenDTO> LoginAsync(LoginDTO loginDTO)
         {
             AppUser? user = await _manager.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.UsernameOrEmail 
@@ -96,7 +94,6 @@ namespace ClassTrack.Persistance.Implementations.Services
             return response;
 
         }
-
         public async Task LogoutAsync()
         {
             string? userId = _accessor.HttpContext
@@ -109,6 +106,10 @@ namespace ClassTrack.Persistance.Implementations.Services
            await _cacheService.RemoveAsync(userId);
 
            await _signInManager.SignOutAsync();
+        }
+        public void ResetPasswordAsync(ResetPasswordDTO passwordDTO)
+        {
+            
         }
     }
 }

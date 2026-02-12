@@ -286,7 +286,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("AnswerIds")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AnswerText")

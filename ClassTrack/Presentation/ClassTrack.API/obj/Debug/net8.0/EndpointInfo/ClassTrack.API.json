@@ -677,7 +677,7 @@
         }
       }
     },
-    "/QuizAnswers/{studentId}/{classRoomId}/Student": {
+    "/QuizAnswers/{classRoomId}/{studentId}/Student": {
       "get": {
         "tags": [
           "QuizAnswers"
@@ -1662,10 +1662,6 @@
       "PostQuizAnswerDTO": {
         "type": "object",
         "properties": {
-          "studentId": {
-            "type": "integer",
-            "format": "int64"
-          },
           "quizId": {
             "type": "integer",
             "format": "int64"

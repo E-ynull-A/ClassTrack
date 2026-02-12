@@ -8,7 +8,6 @@ namespace ClassTrack.Application.DTOs
 {
     public record PostOptionInChoiceQuestionDTO(
         string Variant,
-        bool IsCorrect
-         );
+        bool IsCorrect);
     
 }
