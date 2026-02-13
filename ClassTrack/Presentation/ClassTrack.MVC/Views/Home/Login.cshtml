@@ -15,6 +15,7 @@
             <div class="label">Şifrə</div>
             <input class="input" asp-for="Password" id="password" type="password" placeholder="••••••••" />
             <span style="margin-top:20px" asp-validation-for="Password" class="help-block text-danger"></span>
+            <span class="text-warning"><a asp-action="Forget">Forget Password?</a></span>
 
             <div class="row" style="margin-top:14px">
                 <button class="btn primary" id="btnLogin">Login</button>

@@ -18,6 +18,7 @@ namespace ClassTrack.Infrastructure
         public static IServiceCollection InfrastructureRegistration(this IServiceCollection services,IConfiguration config)
         {         
             services.AddScoped<ITokenService, TokenService>();
+         
             
             services.AddAuthentication(opt =>
             {

@@ -39,5 +39,12 @@ namespace ClassTrack.API.Controllers
            await _authenticationService.LogoutAsync();
            return NoContent();
         }
+
+        [HttpPut("Password")]
+        public async Task<IActionResult> Put(ResetPasswordDTO resetPassword)
+        {
+           await _authenticationService.ResetPasswordAsync(resetPassword);
+            return NoContent();
+        }
     }
 }

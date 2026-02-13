@@ -1,0 +1,47 @@
+﻿
+    <meta charset="UTF-8">
+    <title>Student Attendance</title>
+    <link rel="stylesheet" href="~/css/attendance.css">
+
+
+    <div class="container">
+
+        <div class="topbar">
+            <h2>Attendance Panel</h2>
+
+            <div class="date-box">
+                <label>Lesson Date</label>
+                <input type="date" id="lessonDate">
+            </div>
+        </div>
+
+        <div class="attendance-table">
+
+        @for (int i = 0; i < Model.StudentAttendances.Count; i++)
+        {
+            <div class="student-row">
+
+                <input type="hidden"
+                       asp-for="StudentAttendances[i].StudentId" />
+
+                <input type="hidden"
+                       asp-for="StudentAttendances[i].Attendance"
+                       class="att-input" />
+
+                <span>@Model.StudentAttendances[i].Student.FullName</span>
+
+                <button type="button" class="att-btn" data-value="1">Present</button>
+                <button type="button" class="att-btn" data-value="0">Absent</button>
+                <button type="button" class="att-btn" data-value="2">Late</button>
+
+            </div>
+        }
+
+        </div>
+
+        <div class="footer">
+            <button class="save-btn">Save Attendance</button>
+        </div>
+
+    </div>
+    <script src="~/js/attendance.js"></script>

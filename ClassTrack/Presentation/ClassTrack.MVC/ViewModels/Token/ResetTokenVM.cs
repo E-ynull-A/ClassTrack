@@ -1,4 +1,4 @@
-﻿namespace ClassTrack.MVC.ViewModels.Token
+﻿namespace ClassTrack.MVC.ViewModels
 {
     public record ResetTokenVM(
         

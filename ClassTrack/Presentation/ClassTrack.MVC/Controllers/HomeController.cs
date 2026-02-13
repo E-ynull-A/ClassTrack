@@ -42,5 +42,29 @@ namespace ClassTrack.MVC.Controllers
             return RedirectToAction("Dashboard", "Class"); 
         }
 
+        public async Task<IActionResult> Forget()
+        {
+            return View("Forgot_Password");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Forget(ResetTokenVM tokenVM)
+        {
+           await _clientService.ForgetPasswordAsync(tokenVM);
+           return RedirectToAction("Login");
+        }
+
+        public IActionResult Reset(string email)
+        {
+            return View("Reset_Password");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reset(ResetPasswordVM passwordVM)
+        {
+           await _clientService.ResetPasswordAsync(passwordVM);
+           return RedirectToAction("Login");
+        }
+
     }
 }

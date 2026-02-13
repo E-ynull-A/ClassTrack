@@ -27,6 +27,22 @@
   },
   {
     "ContainingType": "ClassTrack.API.Controllers.AccountsController",
+    "Method": "Put",
+    "RelativePath": "Accounts/Password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPassword",
+        "Type": "ClassTrack.Application.DTOs.ResetPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.AccountsController",
     "Method": "Register",
     "RelativePath": "Accounts/Register",
     "HttpMethod": "POST",
@@ -940,6 +956,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.TokensController",
+    "Method": "Post",
+    "RelativePath": "Tokens/Reset",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenDTO",
+        "Type": "ClassTrack.Application.DTOs.Token.ResetTokenDTO",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.DTOs
 {
-    public record ResetPasswordDTO(string NewPassword);
+    public record ResetPasswordDTO(
+        
+        string Email,
+        string NewPassword);
    
 }

@@ -5,6 +5,7 @@ wwwroot\css\create-quiz.css
 wwwroot\css\dashboard.css
 wwwroot\css\error.css
 wwwroot\css\exam.css
+wwwroot\css\forget-password.css
 wwwroot\css\index.css
 wwwroot\css\login.css
 wwwroot\css\members.css
@@ -22,6 +23,7 @@ wwwroot\js\class.js
 wwwroot\js\create-quiz.js
 wwwroot\js\dashboard.js
 wwwroot\js\exam.js
+wwwroot\js\forgot.js
 wwwroot\js\index.js
 wwwroot\js\login.js
 wwwroot\js\members.js
@@ -30,6 +32,7 @@ wwwroot\js\quiz-edit.js
 wwwroot\js\quiz-editor.js
 wwwroot\js\quiz-list.js
 wwwroot\js\quiz-take.js
+wwwroot\js\Reset.js
 wwwroot\js\student-classroom.js
 wwwroot\js\task-detail.js
 wwwroot\js\task-teacher.js

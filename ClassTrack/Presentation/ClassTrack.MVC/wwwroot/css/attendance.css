@@ -1,64 +1,96 @@
-.att-list{display:flex; flex-direction:column; gap:10px}
-
-.att-row{
-  display:grid;
-  grid-template-columns: 1fr 420px 1.2fr;
-  gap:10px;
-  align-items:center;
-  border:1px solid rgba(36,48,74,.75);
-  background:rgba(255,255,255,.03);
-  padding:12px;
-  border-radius:14px;
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
 }
 
-.name .n{font-weight:900}
-
-/* segmented */
-.seg{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-.seg-opt{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:10px 10px;
-  border-radius:14px;
-  border:1px solid rgba(36,48,74,.85);
-  background:rgba(255,255,255,.03);
-  color:var(--muted);
-  cursor:pointer;
-  user-select:none;
-  transition:.15s ease;
-}
-.seg-opt input{display:none}
-
-.seg-opt:has(input:checked){
-  transform:translateY(-1px);
-  color:var(--text);
-  border-color:rgba(110,168,255,.55);
-  background:rgba(110,168,255,.12);
+.container {
+    max-width: 900px;
+    margin: auto;
 }
 
-/* subtle meaning */
-.seg-opt.absent:has(input:checked){
-  border-color:rgba(255,107,107,.45);
-  background:rgba(255,107,107,.10);
-}
-.seg-opt.present:has(input:checked){
-  border-color:rgba(61,220,151,.45);
-  background:rgba(61,220,151,.10);
-}
-.seg-opt.late:has(input:checked){
-  border-color:rgba(255,211,106,.45);
-  background:rgba(255,211,106,.10);
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
-.note{width:100%}
+.date-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-@media (max-width:920px){
-  .att-row{grid-template-columns:1fr; align-items:stretch}
-  .seg{grid-template-columns:1fr}
+    .date-box input {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: none;
+    }
+
+.attendance-table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.student-row {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-name {
+    font-weight: bold;
+}
+
+.attendance-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.att-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.present {
+    background: #16a34a;
+}
+
+.absent {
+    background: #dc2626;
+}
+
+.late {
+    background: #f59e0b;
+}
+
+.att-btn.active {
+    outline: 3px solid #fff;
+    transform: scale(1.05);
+}
+
+.footer {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.save-btn {
+    background: #3b82f6;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }

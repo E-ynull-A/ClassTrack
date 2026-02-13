@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.Interfaces.Services;
+﻿using ClassTrack.Application.DTOs.Token;
+using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -22,5 +23,11 @@ namespace ClassTrack.API.Controllers
             return Ok(await _tokenService.RefreshAsync());
         }
 
+        [HttpPost("Reset")]
+        public async Task<IActionResult> Post(ResetTokenDTO tokenDTO)
+        {
+           await _tokenService.GenerateResetTokenAsync(tokenDTO);
+            return Created();
+        }
     }
 }

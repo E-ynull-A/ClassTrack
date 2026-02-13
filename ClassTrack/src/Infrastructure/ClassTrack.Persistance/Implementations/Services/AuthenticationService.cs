@@ -42,7 +42,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             AppUser user = _mapper.Map<AppUser>(registerDTO);
 
             IdentityResult result = await _manager.CreateAsync(user
-                                                         ,registerDTO.Password);
+                                                         , registerDTO.Password);
 
             if (!result.Succeeded)
             {
@@ -54,13 +54,13 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception(errors);
             }
 
-            
+            await _emailService.SendEmailAsync(user.Email, "Register Process", "Welcome to Our Application:)");
 
             await _manager.AddToRoleAsync(user, UserRole.User.ToString());
         }
         public async Task<ResponseTokenDTO> LoginAsync(LoginDTO loginDTO)
         {
-            AppUser? user = await _manager.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.UsernameOrEmail 
+            AppUser? user = await _manager.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.UsernameOrEmail
                                                                        || u.Email == loginDTO.UsernameOrEmail);
 
             if (user == null)
@@ -82,14 +82,13 @@ namespace ClassTrack.Persistance.Implementations.Services
             AccessTokenDTO aToken = _tokenService.CreateAccessToken(user, roles, 15);
 
 
-            ResponseTokenDTO response = new ResponseTokenDTO(aToken,rToken);
+            ResponseTokenDTO response = new ResponseTokenDTO(aToken, rToken);
 
 
             _accessor.HttpContext.Response.Cookies.Delete("RefreshToken");
             _accessor.HttpContext.Response.Cookies.Delete("AccessToken");
 
             await _cacheService.SetCasheAsync(response.RefreshToken.RefreshToken, user.Id, TimeSpan.FromDays(7));
-            await _emailService.SendEmailAsync();          
 
             return response;
 
@@ -103,13 +102,33 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("User not Found!");
 
-           await _cacheService.RemoveAsync(userId);
+            await _cacheService.RemoveAsync(userId);
 
-           await _signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
         }
-        public void ResetPasswordAsync(ResetPasswordDTO passwordDTO)
+        public async Task ResetPasswordAsync(ResetPasswordDTO passwordDTO)
         {
-            
+            AppUser? user = await _manager.FindByEmailAsync(passwordDTO.Email);
+
+            if (user == null)
+                throw new Exception("User Not Found!");
+
+            string? resetToken = await _cacheService.GetAsync<string>($"reset_Password:{passwordDTO.Email}");
+
+            if (resetToken is null)
+                throw new Exception("Please, try again");
+
+            IdentityResult result = await _manager.ResetPasswordAsync(user, resetToken, passwordDTO.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                string excepts = string.Empty;
+                foreach (IdentityError error in result.Errors)
+                {
+                    excepts = string.Concat(excepts, "\n", error.Description);
+                }
+                throw new Exception(excepts);
+            }
         }
     }
 }

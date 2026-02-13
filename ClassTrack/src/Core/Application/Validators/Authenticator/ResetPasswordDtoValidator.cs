@@ -17,6 +17,12 @@ namespace ClassTrack.Application.Validators
                 .NotEmpty()
                 .MinimumLength(8)
                 .MaximumLength(200);
+
+            RuleFor(q => q.Email)
+                .NotEmpty()
+                .MinimumLength(4)
+                .MaximumLength(256)
+                .Matches(@"^\w+([-+.']\\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
         }
     }
 }

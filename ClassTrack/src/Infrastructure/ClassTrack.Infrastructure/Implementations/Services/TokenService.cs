@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Web;
 
 namespace ClassTrack.Infrastructure.Implementations.Services
 {
@@ -19,16 +20,19 @@ namespace ClassTrack.Infrastructure.Implementations.Services
         private readonly IHttpContextAccessor _accessor;
         private readonly ICacheService _cacheService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailService _emailService;
 
         public TokenService(IConfiguration configuration,
                             IHttpContextAccessor accessor,
                             ICacheService cacheService,
-                            UserManager<AppUser> userManager)
+                            UserManager<AppUser> userManager,
+                            IEmailService emailService)
         {
             _configuration = configuration;
             _accessor = accessor;
             _cacheService = cacheService;
             _userManager = userManager;
+            _emailService = emailService;
         }
         public AccessTokenDTO CreateAccessToken(AppUser user, IEnumerable<string> roles, int minutes)
         {
@@ -111,10 +115,18 @@ namespace ClassTrack.Infrastructure.Implementations.Services
             if (user == null)
                 throw new Exception("The User Not Found");
 
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
             await _cacheService.SetCasheAsync(casheKey,
-                                             await _userManager.GenerateEmailConfirmationTokenAsync(user),
-                                             TimeSpan.FromMinutes(5));
-                                             
+                                              token,
+                                              TimeSpan.FromMinutes(10));
+
+            
+            string encodedEmail = HttpUtility.UrlEncode(passwordDTO.Email);
+
+            await _emailService.SendEmailAsync(passwordDTO.Email,
+                                               "Password Reset ClassTrack Account",
+                                               $"{_configuration["MVC:Url"]}Home/Reset?email={encodedEmail}");                               
         }
 
     }

@@ -8,7 +8,6 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IEmailService
     {
-
-        Task SendEmailAsync();
+        Task SendEmailAsync(string destination, string subject, string body);
     }
 }

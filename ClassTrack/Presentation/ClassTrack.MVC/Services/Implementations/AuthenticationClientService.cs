@@ -2,6 +2,7 @@
 
 using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
+using System.Threading.Tasks;
 
 
 namespace ClassTrack.MVC.Services.Implementations
@@ -56,12 +57,19 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             throw new NotImplementedException();
         }
-
         public async Task LogoutAsync()
         {
             await _httpClient.DeleteAsync("Accounts/Logout");
             _cookieService.RemoveCookie("AccessToken");
             _cookieService.RemoveCookie("RefreshToken");
+        }
+        public async Task ForgetPasswordAsync(ResetTokenVM resetToken)
+        {
+           await _httpClient.PostAsJsonAsync("Tokens/Reset",resetToken);
+        }
+        public async Task ResetPasswordAsync(ResetPasswordVM passwordVM)
+        {
+           await _httpClient.PutAsJsonAsync("Accounts/Password",passwordVM);
         }
 
 

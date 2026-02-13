@@ -20,7 +20,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
             _configuration = configuration;
         }
-        public async Task SendEmailAsync()
+        public async Task SendEmailAsync(string destination,string subject,string body)
         {
             SmtpClient smtpClient = new SmtpClient(_configuration["Email:Host"],
                                         Convert.ToInt32(_configuration["Email:Port"]));
@@ -29,12 +29,12 @@ namespace ClassTrack.Persistance.Implementations.Services
             smtpClient.Credentials = new NetworkCredential(_configuration["Email:LoginEmail"],
                                                            _configuration["Email:Password"]);
 
-            MailAddress from = new MailAddress(_configuration["Email:LoginEmail"],"KapitalBank");
-            MailAddress to = new MailAddress("eynullam69@gmail.com");
+            MailAddress from = new MailAddress(_configuration["Email:LoginEmail"],"ClassTrack");
+            MailAddress to = new MailAddress(destination);
 
             MailMessage message = new MailMessage(from,to);
-            message.Subject = "Your Registration";
-            message.Body = "You Registered Successfully";
+            message.Subject = subject;
+            message.Body = body;
 
             await smtpClient.SendMailAsync(message);
 
