@@ -4,11 +4,7 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
-using ClassTrack.Persistance.DAL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class ClassRoomService : IClassRoomService
@@ -82,7 +78,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 TeacherClasses = new List<TeacherClassRoom>()
             };
 
-            Teacher? teacher = await _teacherRepository.GetTeacherByUserIdAsync(userId);
+            Teacher? teacher = await _teacherRepository.GetTeacherByUserIdAsync(userId, [nameof(Teacher.TeacherClassRooms)]);
 
 
             if (teacher is null)
@@ -92,6 +88,8 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
             else
             {
+                if (teacher.TeacherClassRooms.Count() == 15)
+                    throw new Exception("Your Class Room Count exceed the Limit!");
                 newClass.TeacherClasses.Add(new TeacherClassRoom { TeacherId = teacher.Id});
             }
 

@@ -15,9 +15,9 @@ namespace ClassTrack.MVC.Services.Implementations
             _httpClient = clientFactory.CreateClient("RefreshTokenClient");
             _cookieService = cookieService;
         }
-        public async Task<ResponseTokenVM> GetTokensAsync()
+        public async Task<ResponseTokenVM> GetTokensAsync(string rToken)
         {
-           ResponseTokenVM? tokenVM = await _httpClient.GetFromJsonAsync<ResponseTokenVM>("Tokens/Refresh");
+           ResponseTokenVM? tokenVM = await _httpClient.GetFromJsonAsync<ResponseTokenVM>($"Tokens/Refresh/{rToken}");
 
             if (tokenVM is null)
                 throw new Exception("The Tokens isn't Created!");

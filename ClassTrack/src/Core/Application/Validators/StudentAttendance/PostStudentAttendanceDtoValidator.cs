@@ -34,11 +34,6 @@ namespace ClassTrack.Application.Validators
                     return false;
                 })
                 .WithMessage("There is an issue about Attendance Status!");
-
-            RuleFor(sa => sa.LessonDate)
-                .NotEmpty()
-                .Must(ld => ld <= DateTime.UtcNow)
-                .WithMessage("The Attendance of the Lesson Date couldn't created before the lesson begun!");
         }
     }
 }

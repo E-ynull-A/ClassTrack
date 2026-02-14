@@ -37,7 +37,9 @@ namespace ClassTrack.MVC.Controllers
                 return View("Exam", new ExamVM(await _quizClient.GetQuizForStudentAsync(classRoomId, quizId), examVM.QuizAnswer));
             }
 
-            return RedirectToAction("Get","Quiz",new { classRoomId,id = quizId});
+            return RedirectToAction("Index","Quiz",new {id = classRoomId});
         }
+
+
     }
 }

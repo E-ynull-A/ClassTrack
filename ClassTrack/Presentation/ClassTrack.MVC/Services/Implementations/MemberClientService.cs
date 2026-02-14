@@ -23,6 +23,13 @@ namespace ClassTrack.MVC.Services.Implementations
                   
         }
 
+        public async Task<ICollection<GetStudentItemVM>?> GetStudentListAsync(long classRoomId)
+        {
+            return await _httpClient.GetFromJsonAsync
+                                               <ICollection<GetStudentItemVM>>
+                                                        ($"Students/{classRoomId}");
+        }
+
         public async Task<ServiceResult> KickAsync(long classRoomId,long studentId)
         {
            HttpResponseMessage message = await _httpClient.DeleteAsync($"Students/{classRoomId}/{studentId}");

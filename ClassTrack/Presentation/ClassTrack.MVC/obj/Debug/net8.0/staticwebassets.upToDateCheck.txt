@@ -17,7 +17,6 @@ wwwroot\css\quiz-take.css
 wwwroot\css\student-classroom.css
 wwwroot\css\task-detail.css
 wwwroot\css\task-teacher.css
-wwwroot\js\attendance.js
 wwwroot\js\base.js
 wwwroot\js\class.js
 wwwroot\js\create-quiz.js
@@ -93,3 +92,4 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\js\attendance.js

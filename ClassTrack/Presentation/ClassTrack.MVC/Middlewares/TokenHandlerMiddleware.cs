@@ -28,29 +28,28 @@ namespace ClassTrack.MVC.Middlewares
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access);
             }
-   
+  
            HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                string? rToken = _accessor.HttpContext.Request.Cookies["RefreshToken"];
+
+                if (rToken is not null)
+                {
+                    ResponseTokenVM newToken = await _tokenService.GetTokensAsync(rToken);
+
+                    if (newToken != null)
+                    {
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", newToken.AccessToken.AccessToken);
+                        return await base.SendAsync(request, cancellationToken);
+                    }
+
+                }
+            }
             return response;
         }
     }
 }
 
 
-//if(response.StatusCode == HttpStatusCode.Unauthorized)
-//{
-//    string? rToken = _accessor.HttpContext.Request.Cookies["RefreshToken"];
-
-//    if(rToken is not null)
-//    {
-//        ResponseTokenVM newToken = await _tokenService.GetTokensAsync();
-
-//        if (newToken != null)
-//        {
-//            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", newToken.AccessToken.AccessToken);
-
-//            return await base.SendAsync(request, cancellationToken);
-//        }
-
-//    }
-//}

@@ -59,7 +59,7 @@ namespace ClassTrack.MVC.Services.Implementations
         public async Task<ServiceResult> JoinClassRoomAsync(JoinClassRoomVM joinClass)
         {
 
-            if (joinClass.ClassKey.Length != 8)
+            if (joinClass.ClassKey.Trim().Length != 8)
                 return new ServiceResult(false, nameof(JoinClassRoomVM.ClassKey), "There is no any Class Room in this Key");
             if (!joinClass.ClassKey.All(Char.IsLetterOrDigit))
                 return new ServiceResult(false, nameof(JoinClassRoomVM.ClassKey), "There is no any Class Room in this Key");

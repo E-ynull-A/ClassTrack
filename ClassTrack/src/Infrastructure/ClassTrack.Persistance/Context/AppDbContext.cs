@@ -31,6 +31,7 @@ namespace ClassTrack.Persistance.DAL
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherClassRoom> TeacherClasses { get; set; }
         public DbSet<ClassRoom> ClassRooms { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     }
 }

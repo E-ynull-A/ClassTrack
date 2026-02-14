@@ -312,6 +312,35 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.ToTable("QuizAnswers");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("ExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
                 {
                     b.Property<long>("Id")
@@ -727,6 +756,17 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("StudentQuiz");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.AppUser", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
                 {
                     b.HasOne("ClassTrack.Domain.Entities.AppUser", "AppUser")
@@ -930,6 +970,8 @@ namespace ClassTrack.Persistance.Context.Migrations
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.AppUser", b =>
                 {
+                    b.Navigation("RefreshTokens");
+
                     b.Navigation("Student")
                         .IsRequired();
 

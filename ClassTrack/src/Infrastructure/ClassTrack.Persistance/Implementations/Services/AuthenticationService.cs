@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClassTrack.Application.DTOs;
+using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
@@ -20,6 +21,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IEmailService _emailService;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IHttpContextAccessor _accessor;
+        private readonly IRefreshTokenRepository _tokenRepository;
 
         public AuthenticationService(UserManager<AppUser> manager,
                                         IMapper mapper,
@@ -27,7 +29,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                                         ICacheService cacheService,
                                         IEmailService emailService,
                                         SignInManager<AppUser> signInManager,
-                                        IHttpContextAccessor accessor)
+                                        IHttpContextAccessor accessor,
+                                        IRefreshTokenRepository tokenRepository)
         {
             _manager = manager;
             _mapper = mapper;
@@ -36,6 +39,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             _emailService = emailService;
             _signInManager = signInManager;
             _accessor = accessor;
+            _tokenRepository = tokenRepository;
         }
         public async Task RegisterAsync(RegisterDTO registerDTO)
         {
@@ -88,7 +92,15 @@ namespace ClassTrack.Persistance.Implementations.Services
             _accessor.HttpContext.Response.Cookies.Delete("RefreshToken");
             _accessor.HttpContext.Response.Cookies.Delete("AccessToken");
 
-            await _cacheService.SetCasheAsync(response.RefreshToken.RefreshToken, user.Id, TimeSpan.FromDays(7));
+            await _cacheService.SetCasheAsync(rToken.RefreshToken, user.Id, TimeSpan.FromDays(7));
+
+            _tokenRepository.Add(new RefreshToken
+            {
+                ExpiryTime = DateTime.UtcNow.AddDays(7),
+                Token = rToken.RefreshToken,
+                UserId = user.Id
+            });
+            await _tokenRepository.SaveChangeAsync();
 
             return response;
 
@@ -102,9 +114,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (string.IsNullOrEmpty(userId))
                 throw new Exception("User not Found!");
 
-            await _cacheService.RemoveAsync(userId);
+            RefreshToken? rToken = await _tokenRepository
+                                .FirstOrDefaultAsync(t => t.UserId == userId);
 
+            if(rToken is not null)
+            {
+                _tokenRepository.Delete(rToken);                
+            }
+
+            await _cacheService.RemoveAsync(userId);    
+            
             await _signInManager.SignOutAsync();
+            await _tokenRepository.SaveChangeAsync();
         }
         public async Task ResetPasswordAsync(ResetPasswordDTO passwordDTO)
         {

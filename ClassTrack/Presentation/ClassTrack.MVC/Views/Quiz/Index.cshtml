@@ -53,19 +53,39 @@
                 <div class="qc-actions">
                     @if (Model.IsTeacherVM.IsTeacher)
                     {
-                        <a class="btn ok" asp-action="Update"
-                           asp-route-id="@quiz.Id"
-                           asp-route-classRoomId="@Context.GetRouteValue("id")">
-                            Edit
-                        </a>
+                        @if (quiz.StartTime.ToUniversalTime() < DateTime.UtcNow)
+                        {
+                            <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
+                                <i class="fas fa-edit"></i> Quiz Bitib
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn ok" asp-action="Update"
+                               asp-route-id="@quiz.Id"
+                               asp-route-classRoomId="@Context.GetRouteValue("id")">
+                                Edit
+                            </a>
+                        }
+
                     }
                     else
                     {
-                        <a class="btn ok" asp-action="Get"
-                           asp-route-id="@quiz.Id"
-                           asp-route-classRoomId="@Context.GetRouteValue("id")">
-                            Enter
-                        </a>
+                        @if (quiz.StartTime.ToUniversalTime() < DateTime.UtcNow)
+                        {
+                            <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
+                                <i class="fas fa-edit"></i> Quiz Bitib
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn ok" asp-action="Get"
+                               asp-route-id="@quiz.Id"
+                               asp-route-classRoomId="@Context.GetRouteValue("id")">
+                                Enter
+                            </a>
+                        }
+
                     }
                 </div>
             </div>

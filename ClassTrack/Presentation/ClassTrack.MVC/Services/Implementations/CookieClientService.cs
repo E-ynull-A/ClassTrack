@@ -17,9 +17,10 @@ namespace ClassTrack.MVC.Services.Implementations
             var cookieOpt = new CookieOptions
             {
                 HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
+                SameSite = SameSiteMode.None,
                 Secure = true, 
-                Expires = DateTime.UtcNow.AddDays(expiration)
+                Expires = DateTime.UtcNow.AddDays(expiration),
+                Path = "/"
             };
 
             _accessor.HttpContext.Response.Cookies.Append(key, value, cookieOpt);         

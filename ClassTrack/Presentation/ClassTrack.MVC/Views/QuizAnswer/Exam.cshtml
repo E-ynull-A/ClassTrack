@@ -80,8 +80,8 @@
                     </div>
 
 
-                    <input type="hidden" name="ChoiceAnswers[@indx].QuestionId" value="@q.Id" />
-                    <input type="hidden" name="Answers[@indx].IsEvaluated" value="false" />
+                    <input type="hidden" name="QuizAnswer.Answers[@indx].QuestionId" value="@q.Id" />
+                    <input type="hidden" name="QuizAnswer.Answers[@indx].IsEvaluated" value="false" />
 
                     <div class="opts">
                         @for (int j = 0; j < (q.Options?.Count ?? 0); j++)

@@ -951,11 +951,17 @@
   {
     "ContainingType": "ClassTrack.API.Controllers.TokensController",
     "Method": "Get",
-    "RelativePath": "Tokens/Refresh",
+    "RelativePath": "Tokens/Refresh/{rToken}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "rToken",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

@@ -1580,10 +1580,20 @@
         }
       }
     },
-    "/Tokens/Refresh": {
+    "/Tokens/Refresh/{rToken}": {
       "get": {
         "tags": [
           "Tokens"
+        ],
+        "parameters": [
+          {
+            "name": "rToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {

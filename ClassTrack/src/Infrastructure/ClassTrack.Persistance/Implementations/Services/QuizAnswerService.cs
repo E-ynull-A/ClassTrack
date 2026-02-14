@@ -59,10 +59,10 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (sqs is null)
                 throw new Exception("This Quiz isn't Found!");
 
-            //if (DateTime.UtcNow < sqs.Quiz.StartTime || DateTime.UtcNow > sqs.Quiz.StartTime.Add(sqs.Quiz.Duration))
-            //{
-            //    throw new Exception("The Quiz doesn't begin or already finished!!");
-            //}
+            if (DateTime.UtcNow < sqs.Quiz.StartTime || DateTime.UtcNow > sqs.Quiz.StartTime.Add(sqs.Quiz.Duration))
+            {
+                throw new Exception("The Quiz doesn't begin or already finished!!");
+            }
 
             if (sqs.QuizStatus == QuizStatus.Finished.ToString())
             {

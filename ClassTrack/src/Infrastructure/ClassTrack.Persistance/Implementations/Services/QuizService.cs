@@ -33,12 +33,11 @@ namespace ClassTrack.Persistance.Implementations.Services
             _studentRepository = studentRepository;
         }
 
-        public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId, int page, int take,params string[] includes)
+        public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId, int page, int take)
         {
             ICollection<Quiz> quizes = await _quizRepository
                                     .GetAll(page: page,
                                             take: take,
-                                            includes: includes,
                                             function:x=>x.ClassRoomId == classRoomId,
                                             sort: x => x.CreatedAt)
                                     .ToListAsync();
@@ -64,8 +63,8 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (quiz is null)
                 throw new Exception("The Quiz not Found");
 
-            if (DateTime.UtcNow < quiz.StartTime
-                || DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration))
+            if (DateTime.UtcNow < quiz.StartTime.ToUniversalTime()
+                || DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration).ToUniversalTime())
             {
                 throw new Exception("You can enter The Quiz only after the Starting Quiz " +
                                     "and Before the Quiz Ending!!");

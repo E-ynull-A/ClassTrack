@@ -61,14 +61,18 @@
                     {
                         <div class="opt-row">
                             <div class="opt-left">
-                                <input type="hidden" asp-for="PutChoice.Options[i].IsDeleted" class="opt-deleted" />
+                                <input type="hidden"
+                                       asp-for="PutChoice.Options[i].IsDeleted"
+                                       value="@Model.PutChoice.Options[i].IsDeleted"
+                                       class="opt-deleted" />
                               
                                 <input type="hidden" asp-for="PutChoice.Options[i].Id" />
                                 <input class="input opt-variant" asp-for="PutChoice.Options[i].Variant" placeholder="Variant mətni..." />
 
                                 <label class="row mini">
                                     <input class="opt-correct"
-                                           asp-for="PutChoice.Options[i].IsCorrect" />
+                                           asp-for="PutChoice.Options[i].IsCorrect"
+                                           value="@Model.PutChoice.Options[i].IsCorrect"/>
                                     <span>Düzgün</span>
                                 </label>
                             </div>
@@ -145,4 +149,4 @@
         </form>
     }
 </section>
-<script src="~/js/question-edit.js"></script>
+<script defer src="~/js/question-edit.js"></script>

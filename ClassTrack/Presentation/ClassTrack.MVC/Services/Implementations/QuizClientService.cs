@@ -18,7 +18,6 @@ namespace ClassTrack.MVC.Services.Implementations
             return new GetQuizItemWithPermissionVM(await _httpClient.GetFromJsonAsync<IEnumerable<GetQuizItemVM>>($"Quizes/{classRoomId}"),
                                                    await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}" ));
 
-
         }
 
         public async Task<GetQuizItemVM> GetByIdAsync(long id,long classRoomId)
@@ -76,7 +75,7 @@ namespace ClassTrack.MVC.Services.Implementations
             if (quizVM.Name.Length > 85)
                 return new ServiceResult(false, nameof(PutQuizVM.Name), "The Quiz Title is too long");
 
-            if (quizVM.StartTime < DateTime.UtcNow)
+            if (quizVM.StartTime.ToUniversalTime() < DateTime.UtcNow)
                 return new ServiceResult(false, nameof(PutQuizVM.StartTime), "The Start Time of Quiz must be in the future or present");
 
             if (quizVM.Duration > 1440 || quizVM.Duration < 0)

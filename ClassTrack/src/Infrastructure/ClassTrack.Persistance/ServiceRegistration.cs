@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 
 
 namespace ClassTrack.Persistance
@@ -51,6 +50,7 @@ namespace ClassTrack.Persistance
             services.AddScoped<IOptionRepository, OptionRepository>();
             services.AddScoped<IQuizAnswerRepository, QuizAnswerRepository>();
             services.AddScoped<IStudentQuizRepository, StudentQuizRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
 
 
@@ -65,7 +65,9 @@ namespace ClassTrack.Persistance
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IQuizAnswerService, QuizAnswerService>();
             services.AddScoped<IStudentQuizService, StudentQuizService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAppDbContextInitalizer,AppDbContextInitalizer>();
+
 
             return services;
         }

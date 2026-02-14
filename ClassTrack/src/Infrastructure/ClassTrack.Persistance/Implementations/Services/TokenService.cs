@@ -1,10 +1,10 @@
 ﻿using ClassTrack.Application.DTOs;
 using ClassTrack.Application.DTOs.Token;
+using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,7 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Web;
 
-namespace ClassTrack.Infrastructure.Implementations.Services
+namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class TokenService : ITokenService
     {
@@ -21,18 +21,21 @@ namespace ClassTrack.Infrastructure.Implementations.Services
         private readonly ICacheService _cacheService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailService _emailService;
+        private readonly IRefreshTokenRepository _tokenRepository;
 
         public TokenService(IConfiguration configuration,
                             IHttpContextAccessor accessor,
                             ICacheService cacheService,
                             UserManager<AppUser> userManager,
-                            IEmailService emailService)
+                            IEmailService emailService,
+                            IRefreshTokenRepository tokenRepository)
         {
             _configuration = configuration;
             _accessor = accessor;
             _cacheService = cacheService;
             _userManager = userManager;
             _emailService = emailService;
+            _tokenRepository = tokenRepository;
         }
         public AccessTokenDTO CreateAccessToken(AppUser user, IEnumerable<string> roles, int minutes)
         {
@@ -77,18 +80,21 @@ namespace ClassTrack.Infrastructure.Implementations.Services
             return new RefreshTokenDTO(Guid.NewGuid().ToString("N")
                   + Guid.NewGuid().ToString("N"));
         }
-        public async Task<ResponseTokenDTO> RefreshAsync()
+        public async Task<ResponseTokenDTO> RefreshAsync(string rToken)
         {
-            string? token = _accessor.HttpContext.Request.Cookies["RefreshToken"];
-
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(rToken))
                 throw new Exception("You have to login!");
 
-            string? userId = await _cacheService.GetAsync<string>(token);
+            string? userId = await _cacheService.GetAsync<string>(rToken);         
 
             if (string.IsNullOrEmpty(userId))
-                throw new Exception("You have to login!");
-
+            {
+                var token = await _tokenRepository.FirstOrDefaultAsync(t => t.Token == rToken);
+                if(token is null)
+                    throw new Exception("You have to login!");
+                userId = token.UserId;
+            }
+               
             AppUser user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -96,13 +102,19 @@ namespace ClassTrack.Infrastructure.Implementations.Services
 
             ICollection<string>? userRoles = await _userManager.GetRolesAsync(user);
 
-            await _cacheService.RemoveAsync(token);
+            await _cacheService.RemoveAsync(rToken);
 
             ResponseTokenDTO tokenDTO = new ResponseTokenDTO(CreateAccessToken(user, userRoles, 15),
                                                              GenerateRefreshToken());
 
             await _cacheService.SetCasheAsync(tokenDTO.RefreshToken.RefreshToken, userId, TimeSpan.FromMinutes(60 * 24 * 7));
-
+            _tokenRepository.Add(new RefreshToken
+            {
+                ExpiryTime = DateTime.UtcNow.AddDays(7),
+                UserId = userId,
+                Token = tokenDTO.RefreshToken.RefreshToken,                
+            });
+            await _tokenRepository.SaveChangeAsync();
 
             return tokenDTO;
         }

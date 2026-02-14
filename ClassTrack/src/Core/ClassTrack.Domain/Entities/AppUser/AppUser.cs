@@ -18,6 +18,8 @@ namespace ClassTrack.Domain.Entities
         public long TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
+        public ICollection<RefreshToken> RefreshTokens { get; set; }
+
 
 
 
