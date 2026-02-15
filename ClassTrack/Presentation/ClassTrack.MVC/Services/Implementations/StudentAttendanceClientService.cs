@@ -32,5 +32,9 @@ namespace ClassTrack.MVC.Services.Implementations
 
         }
 
+        public async Task<ICollection<GetStudentAttendanceItemVM>?> GetAttendanceAsync(long classRoomId)
+        {
+          return await _httpClient.GetFromJsonAsync<ICollection<GetStudentAttendanceItemVM>>($"StudentAttendances/{classRoomId}");
+        }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model ICollection<GetStudentAttendanceItemVM>
+@{
+    IList<DateTime> dateTimes = Model.Select(sa => sa.LessonDate.Date).Distinct().ToArray();
+    IList<GetStudentAttendanceItemVM> stAttends = Model.DistinctBy(a => a.StudentId).ToArray();
+}
+
+<link rel="stylesheet" href="~/css/attendance-list.css">
+<a class="btn btn-dark" style="margin-bottom:20px" asp-action="Create" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Back</a>
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th class="student-col">Tələbə</th>
+                @foreach (DateTime date in dateTimes)
+                {
+                    <th>@date.ToString("MM/dd/yy")</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < stAttends.Count(); i++)
+            {
+                <tr>
+                    <td class="student-col">@stAttends[i].StudentName @stAttends[i].StudentSurname</td>
+                    @for (int j = 0; j < dateTimes.Count(); j++)
+                    {
+                        switch (Model.FirstOrDefault(m=>m.StudentId == stAttends[i].StudentId 
+                                                     && m.LessonDate == dateTimes[j])?.Attendance)
+                        {
+                            case 0:
+                                <td>✖</td>
+                                break;
+                            case 1:
+                                <td>✔</td>
+                                break;
+                            case 2:
+                                <td>⏰</td>
+                                break;
+                            default:
+                                <td>-0-</td>
+                                break;
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

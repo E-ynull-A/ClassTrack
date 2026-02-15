@@ -2,7 +2,7 @@
 {
     public record StudentAttendanceVM(
 
-        IList<GetStudentItemVM> StudentVMs,
+        IList<GetSimpleStudentItemVM> StudentVMs,
         IList<PostStudentAttendanceVM> AttendanceVMs = null);
     
    

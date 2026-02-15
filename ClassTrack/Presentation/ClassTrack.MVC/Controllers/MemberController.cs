@@ -1,7 +1,6 @@
 ﻿using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Controllers
 {
@@ -13,6 +12,14 @@ namespace ClassTrack.MVC.Controllers
         {
             _memberClient = memberClient;
         }
+        public async Task<IActionResult> GetStudent(long classRoomId)
+        {
+            if (classRoomId < 1)
+                return BadRequest();
+
+            return View("StudentList",await _memberClient.GetSimpleStudentAsync(classRoomId));
+        }
+
         [HttpGet("{classRoomId}")]
         public async Task<IActionResult> Members(long classRoomId)
         {
@@ -21,7 +28,6 @@ namespace ClassTrack.MVC.Controllers
 
             return View(await _memberClient.GetMembersAsync(classRoomId));
         }
-
         public async Task<IActionResult> Delete(long classRoomId,long studentId)
         {
             if (classRoomId < 1 || studentId < 1)
@@ -36,7 +42,6 @@ namespace ClassTrack.MVC.Controllers
 
             return RedirectToAction(nameof(Members), new { classRoomId });
         }
-
         public async Task<IActionResult> Put(long classRoomId, long studentId)
         {
             if (classRoomId < 1 || studentId < 1)

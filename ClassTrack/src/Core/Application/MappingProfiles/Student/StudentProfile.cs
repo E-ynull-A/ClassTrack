@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using ClassTrack.Application.DTOs;
 using ClassTrack.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ClassTrack.Application.MappingProfiles
 {
@@ -18,7 +14,10 @@ namespace ClassTrack.Application.MappingProfiles
                 .ForCtorParam(nameof(GetStudentItemDTO.Surname), opt => opt.MapFrom(s => s.AppUser.Surname))
                 .ForCtorParam(nameof(GetStudentItemDTO.JoinedAt),opt=>opt.MapFrom(s=>s.StudentClasses
                                                                          .Select(sc=>sc.JoinedAt).FirstOrDefault()));
-                
+            
+            CreateMap<Student, GetSimpleStudentItemDTO>()
+                .ForCtorParam(nameof(GetSimpleStudentItemDTO.Name), opt => opt.MapFrom(s => s.AppUser.Name))
+                .ForCtorParam(nameof(GetSimpleStudentItemDTO.Surname), opt => opt.MapFrom(s => s.AppUser.Surname));
         }
     }
 }

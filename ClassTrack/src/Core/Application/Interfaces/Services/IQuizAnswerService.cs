@@ -9,7 +9,10 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IQuizAnswerService
     {
-        Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take);
+        Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId,
+                                                                       long quizId,
+                                                                       int page,
+                                                                       int take);
         Task<GetQuizAnswerDTO> GetByIdAsync(long id);
         Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO);
         Task EvaluateAnswerAsync(long id, PutQuizAnswerDTO answerDTO);

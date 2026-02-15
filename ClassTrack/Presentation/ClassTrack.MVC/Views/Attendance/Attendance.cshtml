@@ -4,26 +4,19 @@
 <title>Student Attendance</title>
 <link rel="stylesheet" href="~/css/attendance.css">
 
-
 <div class="container">
-
-    
-
     <div class="attendance-table">
-        <form method="post" asp-action="Create" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")" >
+        <form method="post" asp-action="Create" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">
             <div class="topbar">
-                <h2>Attendance Panel</h2>
-
+                <a class="btn btn-dark" asp-action="GetAll" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">History</a>
+                <h2>Attendance Panel</h2>          
                 <div class="date-box">
                     <label>Lesson Date</label>
-                    <input type="date" required oninput="forceSyncDates(this.value) id="lessonDate">
+                    <input type="date" required id="lessonDate">
                 </div>
             </div>
             @for (int i = 0; i < Model.StudentVMs.Count; i++)
-            {
-                <input type="hidden" asp-for="AttendanceVMs[i].ClassRoomId" value="@Context.GetRouteValue("classRoomId")" />
-                <input type="hidden" class="attendance-date-hidden" asp-for="AttendanceVMs[i].LessonDate" />
-
+            {           
                 <div class="student-row">
                     <input type="hidden"
                            asp-for="AttendanceVMs[i].StudentId" value="@Model.StudentVMs[i].Id" />
@@ -34,10 +27,15 @@
 
                     <span>@Model.StudentVMs[i].Name @Model.StudentVMs[i].Surname</span>
 
-                    <button type="button" class="att-btn" data-value="1">Present</button>
-                    <button type="button" class="att-btn" data-value="0">Absent</button>
-                    <button type="button" class="att-btn" data-value="2">Late</button>
+                    <div>
+                        <button type="button" class="att-btn" style="background-color:#5C9648" data-value="1">Present</button>
+                        <button type="button" class="att-btn" style="background-color:#FCA130" data-value="0">Absent</button>
+                        <button type="button" class="att-btn" style="background-color:#49CC90" data-value="2">Late</button>
+                    </div>
+       
                 </div>
+                <input type="hidden" asp-for="AttendanceVMs[i].ClassRoomId" value="@Context.GetRouteValue("classRoomId")" />
+                <input type="hidden" class="attendance-date-hidden" asp-for="AttendanceVMs[i].LessonDate" />
             }
             <div class="footer">
                 <button class="save-btn">Save Attendance</button>
@@ -45,8 +43,5 @@
             <div asp-validation-summary="ModelOnly"></div>
         </form>
     </div>
-
-   
-
 </div>
 <script defer src="~/js/attendance.js"></script>

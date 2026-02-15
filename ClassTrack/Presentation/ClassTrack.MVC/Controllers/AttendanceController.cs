@@ -23,7 +23,7 @@ namespace ClassTrack.MVC.Controllers
         {
            
             return View(new StudentAttendanceVM(
-                             (await _memberClient.GetStudentListAsync(classRoomId)).ToList()));
+                             (await _memberClient.GetSimpleStudentAsync(classRoomId)).ToList()));
         }
 
         [HttpPost("Attendance/{classRoomId}")]
@@ -32,7 +32,7 @@ namespace ClassTrack.MVC.Controllers
             if (!ModelState.IsValid)
             {
                 return View("Attendance", new StudentAttendanceVM(
-                             (await _memberClient.GetStudentListAsync(classRoomId)).ToImmutableList(),attendanceVMs.ToList()));
+                             (await _memberClient.GetSimpleStudentAsync(classRoomId)).ToImmutableList(),attendanceVMs.ToList()));
             }
 
             ServiceResult result = await _studentClient.CreateAttendanceAsync(attendanceVMs.ToList());
@@ -41,12 +41,20 @@ namespace ClassTrack.MVC.Controllers
             {
                 ModelState.AddModelError(result.ErrorKey,result.ErrorMessage);
                 return View("Attendance", new StudentAttendanceVM(
-                             (await _memberClient.GetStudentListAsync(classRoomId)).ToImmutableList(), attendanceVMs.ToList()));
+                             (await _memberClient.GetSimpleStudentAsync(classRoomId)).ToImmutableList(), attendanceVMs.ToList()));
             }
 
             return RedirectToAction("Attendance",new {classRoomId });
         }
 
+        [HttpGet("AttendanceHistory/{classRoomId}")]            
+        public async Task<IActionResult> GetAll(long classRoomId)
+        {
+            if (classRoomId < 1)
+                return BadRequest();
+
+            return View("AttendanceTable",await _studentClient.GetAttendanceAsync(classRoomId));
+        }
 
     }
 }

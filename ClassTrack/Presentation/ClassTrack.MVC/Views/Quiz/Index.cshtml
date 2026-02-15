@@ -53,10 +53,18 @@
                 <div class="qc-actions">
                     @if (Model.IsTeacherVM.IsTeacher)
                     {
-                        @if (quiz.StartTime.ToUniversalTime() < DateTime.UtcNow)
+                        @if (quiz.StartTime.ToUniversalTime() < DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration).ToUniversalTime() > DateTime.UtcNow)
                         {
                             <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
-                                <i class="fas fa-edit"></i> Quiz Bitib
+                                <i class="fas fa-edit"></i> Quiz Begin
+                            </a>
+                        }
+                        else if (quiz.StartTime.Add(quiz.Duration).ToUniversalTime() < DateTime.UtcNow)
+                        {
+                            <a class="btn ok" asp-controller="Member" 
+                                              asp-action="GetStudent" 
+                                              asp-route-classRoomId="@Context.GetRouteValue("id")">
+                                Evaulate
                             </a>
                         }
                         else

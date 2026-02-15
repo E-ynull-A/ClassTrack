@@ -31,6 +31,16 @@ namespace ClassTrack.API.Controllers
             return Ok(await _studentService.GetAllAsync(classRoomId,page,take));
         }
 
+        [HttpGet("{classRoomId}/Simple")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> GetBriefAll(long classRoomId,int page = 0, int take = 0)
+        {
+            if(classRoomId < 0)
+                return BadRequest();
+
+            return Ok(await _studentService.GetBriefAllAsync(classRoomId,page,take));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(JoinClassRoomDTO joinClassRoomDTO)
         {

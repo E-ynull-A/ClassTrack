@@ -1,0 +1,31 @@
+﻿@model ICollection<GetQuizAnswerItemVM>
+@{
+    int index = 0;
+}
+
+<link rel="stylesheet" href="~/css/list.css">
+<div class="container">
+    <h2>Evaluated Questions</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="index">#</th>
+                <th>Title</th>
+                <th>Evaluated</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GetQuizAnswerItemVM qAnswer in Model)
+            {
+                index++;
+                <tr>
+                    <td class="index">@index</td>
+                    <td class="name">@qAnswer.QuestionTitle</td>
+                    <td class="name">@(qAnswer.IsEvaluated ? "✅" : "❌")</td>               
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

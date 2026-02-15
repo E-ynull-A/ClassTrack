@@ -1,0 +1,32 @@
+﻿@model ICollection<GetSimpleStudentItemVM>
+@{
+    int index = 0;
+}
+
+<link rel="stylesheet" href="~/css/student-list.css">
+<title>Student List</title>
+<div class="container">
+    <h2>Student List</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="index">#</th>
+                <th>Name</th>
+                <th>Surname</th>
+            </tr>
+        </thead>
+        <tbody>          
+            @foreach (GetSimpleStudentItemVM stItem in Model)
+            {        
+                index++;
+                <tr onclick="location.href='https://localhost:7169/QuizAnswer'" style="cursor:pointer">
+                    <td class="index">@index</td>
+                    <td class="student-name">@stItem.Name</td>
+                    <td>@stItem.Surname</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

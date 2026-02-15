@@ -32,11 +32,16 @@ namespace ClassTrack.Persistance.Implementations.Services
             _userService = userService;
         }
 
-        public async Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId, int page, int take)
+        public async Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId,
+                                                                                    long quizId,
+                                                                                    int page,
+                                                                                    int take)
         {
             return _mapper.Map<ICollection<GetQuizAnswerItemDTO>>(await _quizAnswerRepository
                                                                     .GetAll(take: take,
                                                                             page: page,
+                                                                            function:x=>x.StudentQuiz.StudentId == studentId 
+                                                                                  && x.StudentQuiz.QuizId == quizId,
                                                                             includes: [nameof(QuizAnswer.Question)]).ToListAsync());
         }
 
@@ -46,6 +51,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 .GetQueryable()
                              .Include(q => q.Question)
                              .ThenInclude(q => (q as ChoiceQuestion).Options)
+                             
                 .FirstOrDefaultAsync(qa => qa.Id == id));
         }
 
@@ -185,7 +191,6 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             await _quizAnswerRepository.SaveChangeAsync();
         }
-
         public async Task EvaluateAnswerAsync(long id, PutQuizAnswerDTO answerDTO)
         {
             QuizAnswer answer = await _quizAnswerRepository.GetByIdAsync(id, includes: ["Question"]);

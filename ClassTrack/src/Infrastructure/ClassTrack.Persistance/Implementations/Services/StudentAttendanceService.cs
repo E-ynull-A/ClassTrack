@@ -15,25 +15,25 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IStudentAttendanceRepository _attendanceRepository;
         private readonly IMapper _mapper;
         private readonly IClassRoomRepository _roomRepository;
-        private readonly IPermissionService _permissionService;
 
         public StudentAttendanceService(IStudentAttendanceRepository attendanceRepository,
                                         IMapper mapper,
-                                        IClassRoomRepository roomRepository,
-                                        IPermissionService permissionService)
+                                        IClassRoomRepository roomRepository)
         {
             _attendanceRepository = attendanceRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
-            _permissionService = permissionService;
         }
 
 
-        public async Task<ICollection<GetStudentAttendanceItemDTO>> GetAllAsync(int page,int take)
+        public async Task<ICollection<GetStudentAttendanceItemDTO>> GetAllAsync(int page,
+                                                                                int take,
+                                                                                long classRoomId)
         {
            return _mapper.Map<ICollection<GetStudentAttendanceItemDTO>>
                                         (await _attendanceRepository
                                                 .GetAll(page: page, take: take,
+                                                        function: x=>x.ClassRoomId == classRoomId,
                                                         includes: ["Student.AppUser"]).ToListAsync());
         }
 

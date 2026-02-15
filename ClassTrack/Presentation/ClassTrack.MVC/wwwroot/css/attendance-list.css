@@ -1,0 +1,90 @@
+﻿
+.card {
+    background: #111827;
+    border-radius: 12px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+    color: #e5e7eb;
+    font-size: 14px;
+}
+
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: #1f2933;
+    color: #9ca3af;
+    font-weight: 700;
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #374151;
+    z-index: 2;
+}
+
+
+.student-col {
+    position: sticky;
+    left: 0;
+    background: #111827;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+    min-width: 180px;
+    z-index: 3;
+}
+
+
+tbody td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #1f2933;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255,255,255,0.02);
+}
+
+/* Hover row */
+tbody tr:hover {
+    background: rgba(59,130,246,0.08);
+}
+
+/* Attendance base */
+.attendance {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+    .attendance.present {
+        color: #22c55e;
+    }
+
+    .attendance.absent {
+        color: #ef4444;
+    }
+
+    .attendance.late {
+        color: #f59e0b;
+    }
+
+
+.card::-webkit-scrollbar {
+    height: 8px;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+}
+
+.card::-webkit-scrollbar-track {
+    background: transparent;
+}

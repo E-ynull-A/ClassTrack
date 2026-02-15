@@ -4,6 +4,7 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class StudentService : IStudentService
@@ -32,6 +33,18 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
 
 
+
+        public async Task<ICollection<GetSimpleStudentItemDTO>> GetBriefAllAsync(long classRoomId,int page,int take)
+        {
+            if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
+                throw new Exception("Class Room not Found!");
+
+            return _mapper.Map<ICollection<GetSimpleStudentItemDTO>>(_studentRepository.GetAll(page: page,
+                                                                                               take: take,
+                                                                                               includes: [nameof(Student.AppUser)],
+                                                                                               function: x => x.StudentClasses.Select(sc => sc.ClassRoomId).Contains(classRoomId),
+                                                                                               sort: x => x.AppUser.Name));
+        }
         public async Task<ICollection<GetStudentItemDTO>> GetAllAsync(long classRoomId, int page, int take)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
@@ -43,10 +56,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                                                                    nameof(Student.StudentClasses)],
                                                                                          function: x => x.StudentClasses.Select(sc => sc.ClassRoomId).Contains(classRoomId),
                                                                                          sort: x => x.AppUser.Name));
-
-
-
         }
+
         public async Task JoinClassAsync(JoinClassRoomDTO classRoomDTO)
         {
             ClassRoom room = await _roomRepository.FirstOrDefaultAsync(r => r.PrivateKey == classRoomDTO.ClassKey,

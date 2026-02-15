@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.DTOs;
+﻿using ClassTrack.API.ActionFilter;
+using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,16 +20,19 @@ namespace ClassTrack.API.Controllers
             _attendanceService = attendanceService;
         }
 
-        [HttpGet]
+        [HttpGet("{classRoomId}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> Get(long classRoomId, int page = 0,int take = 0)
+        {
+            if (classRoomId < 1)
+                return BadRequest();
 
-        public async Task<IActionResult> Get(int page = 0,int take = 0)
-        {     
-            return Ok(await _attendanceService.GetAllAsync(page, take));
+            return Ok(await _attendanceService.GetAllAsync(page,take,classRoomId));
         }
 
-        [HttpPost]
-
-        public async Task<IActionResult> Post(ICollection<PostStudentAttendanceDTO> attendanceDTOs)
+        [HttpPost("{classRoomId}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> Post(ICollection<PostStudentAttendanceDTO> attendanceDTOs,long classRoomId)
         {
             await _attendanceService
                             .CreateAttendanceAsync(attendanceDTOs);

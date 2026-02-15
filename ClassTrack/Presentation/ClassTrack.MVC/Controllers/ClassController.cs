@@ -25,6 +25,7 @@ namespace ClassTrack.MVC.Controllers
 
            return RedirectToAction("Index","Home");
         }
+
         public async Task<IActionResult> ClassRoom(long id)
         {
             if (id < 1)
@@ -82,6 +83,7 @@ namespace ClassTrack.MVC.Controllers
 
         [HttpPost]
         public async Task<IActionResult> JoinClassRoom(DashboardVM dashboardVM)
+
         {
             ModelState.Remove(nameof(DashboardVM.PostClass));
 
@@ -101,8 +103,8 @@ namespace ClassTrack.MVC.Controllers
             }
 
             return RedirectToAction("Dashboard");
-        }
-            
+        }         
+
         public async Task<IActionResult> DeleteClassRoom(long id)
         {
             if (id < 1)

@@ -20,17 +20,18 @@ namespace ClassTrack.API.Controllers
             _answerService = answerService;
         }
 
-        [HttpGet("{classRoomId}/{studentId}/Student")]
+        [HttpGet("{classRoomId}/{quizId}/{studentId}/Student")]
         [ServiceFilter(typeof(ClassRoomAccessFilter))]
-        public async Task<IActionResult> Get(long studentId,int page = 0, int take = 0)
+        public async Task<IActionResult> Get(long studentId,long quizId, int page = 0, int take = 0)
         {
-            if (studentId < 1)
+            if (studentId < 1 || quizId < 1)
                 return BadRequest();
 
             return Ok(await _answerService
-                .GetAllByStudentIdAsync(page:page,
-                                       take:take,
-                                       studentId:studentId));
+                .GetAllByStudentIdAsync(page: page,
+                                        take: take,
+                                        studentId: studentId,
+                                        quizId:quizId));
         }
 
         [HttpGet("{id}/{classRoomId}")]

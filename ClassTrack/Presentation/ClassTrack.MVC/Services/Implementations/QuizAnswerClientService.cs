@@ -12,6 +12,12 @@ namespace ClassTrack.MVC.Services.Implementations
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
         }
 
+        public async Task<ICollection<GetQuizAnswerItemVM>?> GetAllAsync(long classRoomId,long quizId,long studentId)
+        {
+           return await _httpClient.GetFromJsonAsync
+                            <ICollection<GetQuizAnswerItemVM>>
+                                        ($"QuizAnswers/{classRoomId}/{quizId}/{studentId}/Student");
+        }
         public async Task<ServiceResult> TakeAnExamAsync(long classRoomId,PostQuizAnswerVM studentAnswer)
         {
             var message = await _httpClient.PostAsJsonAsync($"QuizAnswers/{classRoomId}",studentAnswer);

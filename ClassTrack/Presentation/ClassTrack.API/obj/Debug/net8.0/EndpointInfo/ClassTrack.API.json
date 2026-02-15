@@ -708,7 +708,7 @@
         }
       }
     },
-    "/QuizAnswers/{classRoomId}/{studentId}/Student": {
+    "/QuizAnswers/{classRoomId}/{quizId}/{studentId}/Student": {
       "get": {
         "tags": [
           "QuizAnswers"
@@ -716,6 +716,15 @@
         "parameters": [
           {
             "name": "studentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "quizId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1095,12 +1104,21 @@
         }
       }
     },
-    "/StudentAttendances": {
+    "/StudentAttendances/{classRoomId}": {
       "get": {
         "tags": [
           "StudentAttendances"
         ],
         "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
           {
             "name": "page",
             "in": "query",
@@ -1129,6 +1147,17 @@
       "post": {
         "tags": [
           "StudentAttendances"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -1163,7 +1192,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/StudentAttendances": {
       "put": {
         "tags": [
           "StudentAttendances"
@@ -1224,6 +1255,47 @@
       }
     },
     "/Students/{classRoomId}": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Students/{classRoomId}/Simple": {
       "get": {
         "tags": [
           "Students"

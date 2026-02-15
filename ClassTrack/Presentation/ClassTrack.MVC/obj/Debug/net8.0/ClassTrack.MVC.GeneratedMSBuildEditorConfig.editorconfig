@@ -24,6 +24,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxBdHRlbmRhbmNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Attendance/AttendanceTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxBdHRlbmRhbmNlVGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Class/Attendance.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcQXR0ZW5kYW5jZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -68,12 +72,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXE1lbWJlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Member/StudentList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXFN0dWRlbnRMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Question/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25cVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/QuizAnswer/Exam.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpekFuc3dlclxFeGFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/QuizAnswer/QuizAnswerList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpekFuc3dlclxRdWl6QW5zd2VyTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Create.cshtml]
