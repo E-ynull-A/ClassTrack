@@ -41,29 +41,26 @@
         <div class="card section">
             <div style="font-weight:900; font-size:15px;">İmtahan statusu</div>
             <div class="kvs" style="margin-top:10px;">
-                <div class="k">Choice</div><div class="v" id="choiceCount">@(quizVM.ChoiceQuestions == null? 0:@quizVM.ChoiceQuestions.Count)</div>
-                <div class="k">Open</div><div class="v" id="openCount">@(quizVM.OpenQuestions == null? 0:@quizVM.OpenQuestions.Count)</div>
+                <div class="k">Choice</div><div class="v" id="choiceCount">@(quizVM.ChoiceQuestions == null ? 0 : @quizVM.ChoiceQuestions.Count)</div>
+                <div class="k">Open</div><div class="v" id="openCount">@(quizVM.OpenQuestions == null ? 0 : @quizVM.OpenQuestions.Count)</div>
             </div>
         </div>
     </div>
 
 
-    <form id="examForm" class="card" style="margin-top:14px;" method="post" asp-action="Post" asp-controller="QuizAnswer" asp-route-classRoomId="@Context.Request.Query["classRoomId"]" 
-                                                                                              asp-route-quizId="@Context.Request.RouteValues["id"]">
+    <form id="examForm" class="card" style="margin-top:14px;" method="post" asp-action="Post" asp-controller="QuizAnswer" asp-route-classRoomId="@Context.Request.Query["classRoomId"]"
+          asp-route-quizId="@Context.Request.RouteValues["id"]">
+
         <input type="hidden" asp-for="QuizAnswer.QuizId" value="@Context.Request.RouteValues["id"]" id="quizIdInput" />
 
         <div class="section" style="padding-bottom:8px;">
             <div style="font-weight:900; font-size:16px;">Suallar</div>
             <div class="note" style="padding:8px 0 0;">Choice + Open qarışıq göstərilir.</div>
         </div>
-
-
         @{
             int indx = 0;
         }
         <div id="questionsWrap">
-
-
             @for (int i = 0; i < (quizVM.ChoiceQuestions?.Count ?? 0); i++)
             {
                 var q = quizVM.ChoiceQuestions[i];
@@ -103,7 +100,7 @@
                                            value="@opt.Id" />
                                 }
 
-                                <div><div class="v">@opt.Variant</div></div>                              
+                                <div><div class="v">@opt.Variant</div></div>
                             </label>
                         }
                         @{
@@ -112,8 +109,6 @@
                     </div>
                 </div>
             }
-
-          
             @for (int i = 0; i < (quizVM.OpenQuestions?.Count ?? 0); i++)
             {
                 var q = quizVM.OpenQuestions[i];
@@ -129,13 +124,13 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="OpenAnswers[@i].QuestionId" value="@q.Id" />
+                    <input type="hidden" name="QuizAnswer.Answers[@indx].QuestionId" value="@q.Id" />
 
                     <div style="height:12px"></div>
-                    <textarea name="OpenAnswers[@i].Text" placeholder="Cavabı yaz..."></textarea>
+                    <textarea name="QuizAnswer.Answers[@indx].AnswerText" placeholder="Cavabı yaz..."></textarea>
                 </div>
+                indx++;                
             }
-
         </div>
 
         <div class="actions">

@@ -12,6 +12,7 @@ namespace ClassTrack.Application.DTOs
         long StudentQuizId,
         GetQuestionInQuizAnswerDTO Question, 
         long? AnswerId,
+        IList<long>? AnswerIds,
         string? AnswerText,
         bool IsEvaluated);
     

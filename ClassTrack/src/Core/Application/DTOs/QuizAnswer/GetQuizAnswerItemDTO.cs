@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record GetQuizAnswerItemDTO(
-
+        
+        long Id,
         long QuestionId,
         string QuestionTitle,
         long StudentQuizId,
         bool IsEvaluated);
-  
-
 }

@@ -33,6 +33,7 @@ namespace ClassTrack.Application.Interfaces.Repositories
         Task<int> CountAsync(Expression<Func<T, bool>> expression);
         Task<decimal> AverageAsync(Expression<Func<T, decimal>> predicate,
                                    Expression<Func<T, bool>> expression);
-        public IQueryable<T> GetQueryable();
+        Task<bool> AllAsync(Expression<Func<T, bool>> function);
+        IQueryable<T> GetQueryable();
     }
 }

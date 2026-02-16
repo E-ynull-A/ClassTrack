@@ -24,10 +24,8 @@ namespace ClassTrack.MVC.Services.Implementations
 
             return response;
         }
-
         public async Task<GetClassRoomWithPermissionVM> GetByIdAsync(long classRoomId)
         {
-
             GetClassRoomWithPermissionVM roomWithPermissionVM = new GetClassRoomWithPermissionVM
                (await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}"),
                 await _httpClient.GetFromJsonAsync<GetClassRoomVM>($"ClassRooms/{classRoomId}"),
@@ -35,7 +33,6 @@ namespace ClassTrack.MVC.Services.Implementations
 
             return roomWithPermissionVM;
         }
-
         public async Task<ServiceResult> CreateClassRoomAsync(PostClassRoomVM classRoomVM)
         {
 
@@ -55,7 +52,6 @@ namespace ClassTrack.MVC.Services.Implementations
 
             return new ServiceResult(true);
         }
-
         public async Task<ServiceResult> JoinClassRoomAsync(JoinClassRoomVM joinClass)
         {
 
@@ -78,7 +74,6 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             await _httpClient.DeleteAsync($"ClassRooms/{classRoomId}");
         }
-
         public async Task UpdateClassRoomAsync(long classRoomId,PutClassRoomVM roomVM)
         {
             await _httpClient.PutAsJsonAsync($"ClassRooms/{classRoomId}", roomVM);

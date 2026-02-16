@@ -12,9 +12,10 @@ namespace ClassTrack.MVC.Controllers
         {
             _memberClient = memberClient;
         }
-        public async Task<IActionResult> GetStudent(long classRoomId)
+
+        public async Task<IActionResult> GetStudent(long classRoomId,long quizId)
         {
-            if (classRoomId < 1)
+            if (classRoomId < 1 || quizId < 1)
                 return BadRequest();
 
             return View("StudentList",await _memberClient.GetSimpleStudentAsync(classRoomId));

@@ -40,7 +40,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             return _mapper.Map<ICollection<GetQuizAnswerItemDTO>>(await _quizAnswerRepository
                                                                     .GetAll(take: take,
                                                                             page: page,
-                                                                            function:x=>x.StudentQuiz.StudentId == studentId 
+                                                                            function: x => x.StudentQuiz.StudentId == studentId
                                                                                   && x.StudentQuiz.QuizId == quizId,
                                                                             includes: [nameof(QuizAnswer.Question)]).ToListAsync());
         }
@@ -48,13 +48,11 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<GetQuizAnswerDTO> GetByIdAsync(long id)
         {
             return _mapper.Map<GetQuizAnswerDTO>(await _quizAnswerRepository
-                .GetQueryable()
-                             .Include(q => q.Question)
-                             .ThenInclude(q => (q as ChoiceQuestion).Options)
-                             
-                .FirstOrDefaultAsync(qa => qa.Id == id));
+                     .GetQueryable()
+                     .Include(q => q.Question)
+                     .ThenInclude(q => (q as ChoiceQuestion).Options)
+        .FirstOrDefaultAsync(qa => qa.Id == id));
         }
-
         public async Task TakeAnExamAsync(PostQuizAnswerDTO answerDTO)
         {
             StudentQuiz? sqs = await _studentQuizRepository
@@ -65,7 +63,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (sqs is null)
                 throw new Exception("This Quiz isn't Found!");
 
-            if (DateTime.UtcNow < sqs.Quiz.StartTime || DateTime.UtcNow > sqs.Quiz.StartTime.Add(sqs.Quiz.Duration))
+            if (DateTime.UtcNow < sqs.Quiz.StartTime.ToUniversalTime() || DateTime.UtcNow > sqs.Quiz.StartTime.Add(sqs.Quiz.Duration).ToUniversalTime())
             {
                 throw new Exception("The Quiz doesn't begin or already finished!!");
             }
@@ -119,16 +117,16 @@ namespace ClassTrack.Persistance.Implementations.Services
                         throw new Exception("The Question isn't Found!!");
                     }
                 }
-                else if(answer.AnswerIds is not null)
-                {                    
-                    if(questionIds.TryGetValue(answer.QuestionId,out var result))
+                else if (answer.AnswerIds is not null)
+                {
+                    if (questionIds.TryGetValue(answer.QuestionId, out var result))
                     {
                         int correctCount = 0;
-                        
+
                         foreach (var optId in answer.AnswerIds)
                         {
                             Option? option = result.Options.FirstOrDefault(o => o.Id == optId);
-                            
+
                             if (option is not null)
                             {
                                 if (option.IsCorrect)
@@ -145,12 +143,12 @@ namespace ClassTrack.Persistance.Implementations.Services
                                 throw new Exception("The Option isn't Found!!");
                             }
                         }
-                        if(correctCount == result.Options.Count(o => o.IsCorrect))
+                        if (correctCount == result.Options.Count(o => o.IsCorrect))
                         {
                             sqs.TotalPoint += result.Point;
-                        }                       
+                        }
                     }
-                }                                
+                }
             }
 
             if (answerDTO.Answers.Any(a => a.AnswerText is not null))
@@ -170,7 +168,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 IsEvaluated = a.IsEvaluated,
             }).ToList();
 
-                 
+
             foreach (var qAns in qAnswers)
             {
                 qAns.StudentQuizId = sqs.Id;
@@ -181,8 +179,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                 if (qAns.AnswerIds is not null)
                     qAns.IsEvaluated = true;
 
-                if (!  qAns.AnswerId.HasValue 
-                    && qAns.AnswerText is null 
+                if (!qAns.AnswerId.HasValue
+                    && qAns.AnswerText is null
                     && qAns.AnswerIds is null)
                     qAns.IsEvaluated = true;
             }
@@ -206,7 +204,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (studentQuiz is null)
                 throw new Exception("The Quiz isn't Found in this Class");
 
-            if (DateTime.UtcNow < studentQuiz.Quiz.StartTime)
+            if (DateTime.UtcNow < studentQuiz.Quiz.StartTime.ToUniversalTime())
                 throw new Exception("The Quiz doesn't begin yet!");
 
             if (answer.Question.Point < answerDTO.Point)
@@ -215,13 +213,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             answer.IsEvaluated = true;
             _quizAnswerRepository.Update(answer);
 
+
+
             studentQuiz.TotalPoint += answerDTO.Point;
+
+            if (!await _quizAnswerRepository.AllAsync(qa => qa.StudentQuizId == studentQuiz.Id && !qa.IsEvaluated))
+            {
+                studentQuiz.QuizStatus = QuizStatus.Finished.ToString();
+            }
+
             _studentQuizRepository.Update(studentQuiz);
+            await _studentQuizRepository.SaveChangeAsync();
 
-            await _quizAnswerRepository.SaveChangeAsync();
         }
-
-    
-
     }
 }

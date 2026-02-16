@@ -11,6 +11,7 @@ namespace ClassTrack.Domain.Entities
         public TaskWork TaskWork { get; set; }
 
 
+        public bool IsEvaluated { get; set; }
         public decimal? Point { get; set; }
         public string? StudentAnswer { get; set; }
     }

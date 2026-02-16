@@ -142,7 +142,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ClassRooms");
+                    b.ToTable("ClassRooms", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Option", b =>
@@ -182,7 +182,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ChoiceQuestionId");
 
-                    b.ToTable("Options");
+                    b.ToTable("Options", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Question", b =>
@@ -223,7 +223,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
 
                     b.HasDiscriminator<string>("QuestionType").HasValue("Question");
 
@@ -271,7 +271,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("Quizes");
+                    b.ToTable("Quizes", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.QuizAnswer", b =>
@@ -309,7 +309,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("StudentQuizId");
 
-                    b.ToTable("QuizAnswers");
+                    b.ToTable("QuizAnswers", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.RefreshToken", b =>
@@ -338,7 +338,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens");
+                    b.ToTable("RefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
@@ -361,7 +361,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentAttendance", b =>
@@ -395,7 +395,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentAttendances");
+                    b.ToTable("StudentAttendances", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentClassRoom", b =>
@@ -416,7 +416,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("StudentClasses");
+                    b.ToTable("StudentClasses", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentQuiz", b =>
@@ -449,7 +449,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentQuizes");
+                    b.ToTable("StudentQuizes", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTaskWork", b =>
@@ -473,7 +473,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("TaskWorkId");
 
-                    b.ToTable("StudentTaskWorks");
+                    b.ToTable("StudentTaskWorks", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
@@ -518,7 +518,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("TaskWorks");
+                    b.ToTable("TaskWorks", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
@@ -541,7 +541,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.TeacherClassRoom", b =>
@@ -556,7 +556,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("TeacherClasses");
+                    b.ToTable("TeacherClasses", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

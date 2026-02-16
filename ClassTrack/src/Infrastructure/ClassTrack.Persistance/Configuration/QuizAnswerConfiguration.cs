@@ -13,7 +13,6 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<QuizAnswer> builder)
         {
-
             builder.HasOne(x => x.Question)
                     .WithMany()
                     .HasForeignKey(x => x.QuestionId)

@@ -148,6 +148,10 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             return await query.FirstOrDefaultAsync(function);
         }
 
+        public async Task<bool> AllAsync(Expression<Func<T, bool>> function)
+        {
+            return await _dbset.AllAsync(function);
+        }
         public IQueryable<T> GetQueryable()
         {
             return _dbset.AsQueryable();

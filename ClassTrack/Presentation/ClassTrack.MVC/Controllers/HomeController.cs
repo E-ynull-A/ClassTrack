@@ -42,7 +42,7 @@ namespace ClassTrack.MVC.Controllers
             return RedirectToAction("Dashboard", "Class"); 
         }
 
-        public async Task<IActionResult> Forget()
+        public IActionResult Forget()
         {
             return View("Forgot_Password");
         }

@@ -766,7 +766,7 @@
         }
       }
     },
-    "/QuizAnswers/{id}/{classRoomId}": {
+    "/QuizAnswers/{classRoomId}/{id}": {
       "get": {
         "tags": [
           "QuizAnswers"
@@ -836,7 +836,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/QuizAnswers/{classRoomId}/{id}/Evaulate": {
       "put": {
         "tags": [
           "QuizAnswers"
@@ -844,7 +846,8 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"

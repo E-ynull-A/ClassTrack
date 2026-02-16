@@ -26,6 +26,10 @@ namespace ClassTrack.Persistance.Configuration
             builder.Property(q => q.StartTime)
                 .HasColumnType("DATETIME2")
                 .IsRequired();
+
+            builder.Property(q => q.FullPoint)
+                .HasColumnType("DECIMAL(5,2)");
+                
         }
     }
 }

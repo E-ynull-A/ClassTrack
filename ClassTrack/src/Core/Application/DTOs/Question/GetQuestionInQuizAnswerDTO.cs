@@ -11,11 +11,10 @@ namespace ClassTrack.Application.DTOs
         long Id,
         string QuestionTitle,
         decimal Point,
-        ICollection<GetOptionItemInChoiceQuestionDTO>? Options = null)
+        ICollection<GetOptionItemInQuestionDTO>? Options = null)
     {
-        public GetQuestionInQuizAnswerDTO():this(0,string.Empty,0,new List<GetOptionItemInChoiceQuestionDTO>()) { }
+        public GetQuestionInQuizAnswerDTO():this(0,string.Empty,0,new List<GetOptionItemInQuestionDTO>()) { }
        
     };
  
 }
-;

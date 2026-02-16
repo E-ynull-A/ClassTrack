@@ -3,7 +3,7 @@
     int index = 0;
 }
 
-<link rel="stylesheet" href="~/css/student-list.css">
+<link rel="stylesheet" href="~/css/list.css">
 <title>Student List</title>
 <div class="container">
     <h2>Student List</h2>
@@ -14,16 +14,23 @@
                 <th class="index">#</th>
                 <th>Name</th>
                 <th>Surname</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>          
             @foreach (GetSimpleStudentItemVM stItem in Model)
             {        
                 index++;
-                <tr onclick="location.href='https://localhost:7169/QuizAnswer'" style="cursor:pointer">
+                <tr>
                     <td class="index">@index</td>
                     <td class="student-name">@stItem.Name</td>
                     <td>@stItem.Surname</td>
+                    <td><a class="btn btn-info" asp-controller="QuizAnswer"
+                        asp-action="Index" asp-route-classRoomId="@Context.Request.Query["classRoomId"]"
+                           asp-route-quizId="@Context.Request.Query["quizId"]"
+                            asp-route-studentId="@stItem.Id">➔</a>
+                    </td>
+
                 </tr>
             }
         </tbody>

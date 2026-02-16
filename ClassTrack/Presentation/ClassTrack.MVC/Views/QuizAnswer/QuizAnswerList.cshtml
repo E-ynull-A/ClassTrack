@@ -4,7 +4,7 @@
 }
 
 <link rel="stylesheet" href="~/css/list.css">
-<div class="container">
+<div class="container" style="border:none">
     <h2>Evaluated Questions</h2>
 
     <table>
@@ -13,6 +13,7 @@
                 <th class="index">#</th>
                 <th>Title</th>
                 <th>Evaluated</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +23,12 @@
                 <tr>
                     <td class="index">@index</td>
                     <td class="name">@qAnswer.QuestionTitle</td>
-                    <td class="name">@(qAnswer.IsEvaluated ? "✅" : "❌")</td>               
+                    <td class="name">@(qAnswer.IsEvaluated ? "✅" : "❌")</td>
+                    <td class="name"><a asp-action="GetById" asp-route-classRoomId="@ViewContext.RouteData.Values["classRoomId"]"          
+                                                             asp-route-studentId="@ViewContext.RouteData.Values["studentId"]"
+                                                             asp-route-quizId="@ViewContext.RouteData.Values["quizId"]"
+                                                             asp-route-id="@qAnswer.Id">➔</a>
+                    </td>
                 </tr>
             }
         </tbody>

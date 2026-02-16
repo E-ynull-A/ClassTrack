@@ -1,0 +1,92 @@
+﻿@model EvaulateVM
+@{
+    GetQuizAnswerVM answerVM = Model.GetQuiz;
+}
+
+<link rel="stylesheet" href="~/css/quiz-answer.css" />
+<div class="container">
+    <div class="card" style="margin-bottom:20px">
+        <div class="h1">Quiz Answer</div>
+        <div class="muted">
+            StudentQuizId: <b>#@answerVM.StudentQuizId</b>
+        </div>
+        <div style="margin-top:10px">
+            <span class="badge warn" id="statusBadge">@(!answerVM.IsEvaluated ? "Not" : "") Evaluated</span>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="h2">
+            Question
+            <span class="muted">(Point: @answerVM.Question.Point)</span>
+        </div>
+        <hr />
+        <div style="font-weight:700;margin-bottom:14px;padding:2px;">
+            <span style="font-weight:600; font-size:18px; line-height:1.4;" class="text-body">@answerVM.Question.QuestionTitle</span>
+        </div>
+
+        @if (answerVM.Question.Options?.Count() > 0)
+        {
+            <div id="choiceBlock">
+                <div class="h2">Options</div>
+
+                @foreach (GetOptionItemInQuestionVM opt in answerVM.Question.Options)
+                {
+                    if (answerVM.AnswerIds.Count() > 0)
+                    {
+                        <div class="option">
+                            <input id="option" style="opacity:1; accent-color:#0d6efd;pointer-events:none;" @(answerVM.AnswerIds.Any(a => a == opt.Id) ? "checked" : "") type="checkbox" />
+                            <span id="option">@opt.Variant</span>
+                            <span>@(opt.IsCorrect && answerVM.AnswerIds.Any(a => a == opt.Id) ? "✅" : (!opt.IsCorrect && answerVM.AnswerIds.Any(a => a == opt.Id)) ? "❌" : "")</span>
+                        </div>
+                    }
+                    else if (answerVM.AnswerId is not null)
+                    {
+                        <div class="option">
+                            <input id="option" style="opacity:1; accent-color:#0d6efd;pointer-events:none;" @(answerVM.AnswerId == opt.Id ? "checked" : "") type="checkbox" />
+                            <span id="option">@opt.Variant</span>
+                            <span>@(opt.IsCorrect && answerVM.AnswerId == opt.Id ? "✅" : (!opt.IsCorrect && answerVM.AnswerId == opt.Id) ? "❌" : "")</span>
+                        </div>
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <form method="post" asp-action="Evaulate" asp-route-id="@ViewContext.RouteData.Values["id"]"
+                                                      asp-route-classRoomId="@ViewContext.RouteData.Values["classRoomId"]"
+                                                      asp-route-studentId="@ViewContext.RouteData.Values["studentId"]"
+                                                      asp-route-quizId="@ViewContext.RouteData.Values["quizId"]">
+
+                <div id="openBlock">
+                    <div class="h2">Student Answer</div>
+
+                    @if (!answerVM.IsEvaluated)
+                    {
+                        <div>
+                            <span>Enter Point: </span>
+                            <input type="number" asp-for="PutQuizVM.Point" value="0"
+                                   style="width:60px; padding:3px 0;margin-bottom:10px; font-size:14px; text-align:center;" />
+                            <span asp-validation-for="PutQuizVM.Point"></span>
+                        </div>
+                    }
+                                    
+                    <textarea disabled>
+                       @answerVM.AnswerText
+                    </textarea>
+                </div>
+
+                @if (!answerVM.IsEvaluated)
+                {
+                    <div class="actions">
+                        <button class="btn primary">Save</button>
+                    </div>
+                }          
+            </form>
+        }
+        <div asp-validation-summary="ModelOnly"></div>
+    </div>
+</div>
+
+

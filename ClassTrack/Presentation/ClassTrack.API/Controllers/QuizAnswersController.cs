@@ -34,7 +34,7 @@ namespace ClassTrack.API.Controllers
                                         quizId:quizId));
         }
 
-        [HttpGet("{id}/{classRoomId}")]
+        [HttpGet("{classRoomId}/{id}")]
         [ServiceFilter(typeof(ClassRoomAccessFilter))]
 
         public async Task<IActionResult> Get(long id)
@@ -54,9 +54,8 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpPut("{classRoomId}")]
+        [HttpPut("{classRoomId}/{id}/Evaulate")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
-
         public async Task<IActionResult> Put(long id,PutQuizAnswerDTO answerDTO)
         {
             if(id < 1) return BadRequest();
