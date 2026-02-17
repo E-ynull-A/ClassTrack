@@ -3,7 +3,9 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -12,14 +14,20 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ITaskWorkRepository _taskRepository;
         private readonly IMapper _mapper;
         private readonly IClassRoomRepository _roomRepository;
+        private readonly ICloudService _cloudService;
+        private readonly ITaskWorkAttachmentRepository _attachmentRepository;
 
         public TaskWorkService(ITaskWorkRepository taskRepository,
                                 IMapper mapper,
-                                IClassRoomRepository roomRepository)
+                                IClassRoomRepository roomRepository,
+                                ICloudService cloudService,
+                                ITaskWorkAttachmentRepository attachmentRepository)
         {
             _taskRepository = taskRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
+            _cloudService = cloudService;
+            _attachmentRepository = attachmentRepository;
         }
 
         public async Task<ICollection<GetTaskWorkItemDTO>> GetAllAsync(int page, int take)
@@ -30,17 +38,17 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task<ICollection<GetTaskWorkItemDTO>> GetAllByClassRoomIdAsync(int page, int take, long classRoomId)
         {
-           return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(page: page,
-                                         take: take,
-                                         function: x => x.ClassRoomId == classRoomId)
-                                 .ToListAsync());
+            return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(page: page,
+                                          take: take,
+                                          function: x => x.ClassRoomId == classRoomId)
+                                  .ToListAsync());
         }
 
         public async Task<GetTaskWorkDTO> GetByIdAsync(long id)
         {
-            TaskWork taskWork = await _taskRepository.GetByIdAsync(id);
+            TaskWork taskWork = await _taskRepository.GetByIdAsync(id, includes: [nameof(TaskWork.TaskWorkAttachments)]);
 
-            if(taskWork is null)
+            if (taskWork is null)
             {
                 throw new Exception("The Task isn't Found!");
             }
@@ -48,7 +56,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             return _mapper.Map<GetTaskWorkDTO>(taskWork);
         }
 
-        
+
         public async Task CreateTaskWorkAsync(PostTaskWorkDTO postTask)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == postTask.ClassRoomId))
@@ -56,11 +64,33 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new Exception("The ClassRoom isn't Found!");
             }
 
-            _taskRepository.Add(_mapper.Map<TaskWork>(postTask));
-            await _taskRepository.SaveChangeAsync();     
+            TaskWork newTask = _mapper.Map<TaskWork>(postTask);
+
+            if (postTask.AttachmentDTO is not null)
+            {
+               
+                foreach (IFormFile file in postTask.AttachmentDTO.Files)
+                {              
+                    CloudinaryResponceDTO responceDTO = await _cloudService.UploadAsync(file);
+
+                    TaskWorkAttachment attachment = new TaskWorkAttachment
+                    {
+                        FileName = file.FileName,                       
+                        FileUrl = responceDTO.Url,
+                        PublicId = responceDTO.PublicId,
+                        FileType = responceDTO.ResponceType,                        
+                    };
+                    
+                    _attachmentRepository.Add(attachment);
+                    newTask.TaskWorkAttachments.Add(attachment);
+                }
+            }
+
+            _taskRepository.Add(newTask);
+            await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task UpdateTaskWorkAsync(long id,PutTaskWorkDTO putTask)
+        public async Task UpdateTaskWorkAsync(long id, PutTaskWorkDTO putTask)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == putTask.ClassRoomId))
                 throw new Exception("The Class isn't Found!");

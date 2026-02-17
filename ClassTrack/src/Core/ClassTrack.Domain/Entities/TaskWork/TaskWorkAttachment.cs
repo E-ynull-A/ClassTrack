@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Domain.Entities
 {
-    public class TaskAttachment:BaseAccountableEntity
+    public class TaskWorkAttachment:BaseAccountableEntity
     {
         public string FileUrl { get; set; }
         public string PublicId { get; set; }
@@ -15,7 +15,7 @@ namespace ClassTrack.Domain.Entities
 
         //relations
 
-        public int TaskWorkId { get; set; }
+        public long TaskWorkId { get; set; }
         public TaskWork TaskWork { get; set; }
     }
 }

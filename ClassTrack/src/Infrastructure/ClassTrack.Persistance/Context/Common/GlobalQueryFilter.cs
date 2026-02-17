@@ -20,10 +20,9 @@ namespace ClassTrack.Persistance.Context
             builder._applyQueryFilters<QuizAnswer>();
             builder._applyQueryFilters<StudentAttendance>();
             builder._applyQueryFilters<TaskWork>();
-            builder._applyQueryFilters<StudentQuiz>();            
+            builder._applyQueryFilters<StudentQuiz>();
+            builder._applyQueryFilters<TaskWorkAttachment>();
         }
-
-       //manyToMany classlar isDeleted error can cause
 
         private static void _applyQueryFilters<T>( this ModelBuilder builder)
             where T : BaseEntity

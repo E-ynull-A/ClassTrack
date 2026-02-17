@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Configuration
 {
-    internal class TaskAttachmentConfiguration : IEntityTypeConfiguration<TaskAttachment>
+    internal class TaskAttachmentConfiguration : IEntityTypeConfiguration<TaskWorkAttachment>
     {
-        public void Configure(EntityTypeBuilder<TaskAttachment> builder)
+        public void Configure(EntityTypeBuilder<TaskWorkAttachment> builder)
         {
             builder.Property(ta => ta.FileName)
                 .IsRequired();

@@ -51,7 +51,7 @@ namespace ClassTrack.Persistance
             services.AddScoped<IQuizAnswerRepository, QuizAnswerRepository>();
             services.AddScoped<IStudentQuizRepository, StudentQuizRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-
+            services.AddScoped<ITaskWorkAttachmentRepository, TaskWorkAttachmentRepository>();
 
 
             services.AddScoped<IClassRoomService, ClassRoomService>();
@@ -67,6 +67,7 @@ namespace ClassTrack.Persistance
             services.AddScoped<IStudentQuizService, StudentQuizService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAppDbContextInitalizer,AppDbContextInitalizer>();
+            services.AddScoped<ITaskWorkAttachmentService, TaskWorkAttachmentService>();
 
 
             return services;

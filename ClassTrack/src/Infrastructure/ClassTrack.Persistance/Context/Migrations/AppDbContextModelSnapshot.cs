@@ -142,7 +142,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ClassRooms", (string)null);
+                    b.ToTable("ClassRooms");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Option", b =>
@@ -182,7 +182,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ChoiceQuestionId");
 
-                    b.ToTable("Options", (string)null);
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Question", b =>
@@ -223,7 +223,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
 
                     b.HasDiscriminator<string>("QuestionType").HasValue("Question");
 
@@ -252,7 +252,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("TIME");
 
                     b.Property<decimal>("FullPoint")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("DECIMAL(5,2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -271,7 +271,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("Quizes", (string)null);
+                    b.ToTable("Quizes");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.QuizAnswer", b =>
@@ -309,7 +309,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("StudentQuizId");
 
-                    b.ToTable("QuizAnswers", (string)null);
+                    b.ToTable("QuizAnswers");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.RefreshToken", b =>
@@ -338,7 +338,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens", (string)null);
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Student", b =>
@@ -361,7 +361,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentAttendance", b =>
@@ -395,7 +395,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentAttendances", (string)null);
+                    b.ToTable("StudentAttendances");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentClassRoom", b =>
@@ -416,7 +416,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("StudentClasses", (string)null);
+                    b.ToTable("StudentClasses");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentQuiz", b =>
@@ -449,7 +449,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentQuizes", (string)null);
+                    b.ToTable("StudentQuizes");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.StudentTaskWork", b =>
@@ -459,6 +459,9 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.Property<long>("TaskId")
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("IsEvaluated")
+                        .HasColumnType("bit");
 
                     b.Property<decimal?>("Point")
                         .HasColumnType("DECIMAL(5,2)");
@@ -473,7 +476,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("TaskWorkId");
 
-                    b.ToTable("StudentTaskWorks", (string)null);
+                    b.ToTable("StudentTaskWorks");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
@@ -518,7 +521,58 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("TaskWorks", (string)null);
+                    b.ToTable("TaskWorks");
+                });
+
+            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWorkAttachment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("TaskWorkId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PublicId")
+                        .IsUnique();
+
+                    b.HasIndex("TaskWorkId");
+
+                    b.ToTable("TaskWorkAttachments");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
@@ -541,7 +595,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.TeacherClassRoom", b =>
@@ -556,7 +610,7 @@ namespace ClassTrack.Persistance.Context.Migrations
 
                     b.HasIndex("ClassRoomId");
 
-                    b.ToTable("TeacherClasses", (string)null);
+                    b.ToTable("TeacherClasses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -865,6 +919,17 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Navigation("ClassRoom");
                 });
 
+            modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWorkAttachment", b =>
+                {
+                    b.HasOne("ClassTrack.Domain.Entities.TaskWork", "TaskWork")
+                        .WithMany("TaskWorkAttachments")
+                        .HasForeignKey("TaskWorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TaskWork");
+                });
+
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>
                 {
                     b.HasOne("ClassTrack.Domain.Entities.AppUser", "AppUser")
@@ -1015,6 +1080,8 @@ namespace ClassTrack.Persistance.Context.Migrations
             modelBuilder.Entity("ClassTrack.Domain.Entities.TaskWork", b =>
                 {
                     b.Navigation("StudentTaskWorks");
+
+                    b.Navigation("TaskWorkAttachments");
                 });
 
             modelBuilder.Entity("ClassTrack.Domain.Entities.Teacher", b =>

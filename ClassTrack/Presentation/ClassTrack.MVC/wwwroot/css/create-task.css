@@ -1,0 +1,123 @@
+﻿
+
+.task-form-card {
+    width: 60vw;
+    margin: 50px auto;
+    padding: 30px 40px;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #1e293b, #334155);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .task-form-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.7);
+    }
+
+    .task-form-card h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #60a5fa;
+        text-shadow: 1px 1px 3px #1e293b;
+    }
+
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group label {
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #93c5fd;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 15px;
+        border: 1px solid #475569;
+        border-radius: 10px;
+        background-color: #1e293b;
+        color: #e2e8f0;
+        font-size: 15px;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border: 2px solid #60a5fa;
+            box-shadow: 0 0 10px rgba(96,165,250,0.4);
+        }
+
+        .form-group input[type="file"] {
+            padding: 6px 0;
+            border: 1px solid #334155;
+        }
+
+
+.date-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+    .date-group div {
+        flex: 1;
+    }
+
+
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #3b82f6;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+    button[type="submit"]:hover {
+        background-color: #2563eb;
+        transform: scale(1.03);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+
+
+@media (max-width: 600px) {
+    .task-form-card {
+        padding: 20px;
+        margin: 30px 15px;
+    }
+
+    .date-group {
+        flex-direction: column;
+    }
+}
+
+
+.custom-file-input {
+    padding: 8px 12px;
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+    background-color: #1e293b;
+    color: #e2e8f0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+
+    .custom-file-input:hover {
+        background-color: #2563eb;
+        color: #fff;
+        transform: scale(1.01);
+        transition:1.5s
+    }

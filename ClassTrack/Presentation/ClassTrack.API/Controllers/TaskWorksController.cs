@@ -1,8 +1,10 @@
-﻿using ClassTrack.Application.DTOs;
+﻿using ClassTrack.API.ActionFilter;
+using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Threading.Tasks;
 
 namespace ClassTrack.API.Controllers
@@ -46,12 +48,12 @@ namespace ClassTrack.API.Controllers
             return Ok(await _taskService.GetByIdAsync(id));
         }
 
-        [HttpPost]
 
-        public async Task<IActionResult> Post(PostTaskWorkDTO postTask)
+        [HttpPost("{classRoomId}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> Post(PostTaskWorkDTO postTask,long classRoomId)
         {
             await _taskService.CreateTaskWorkAsync(postTask);
-
             return Created();
         }
 

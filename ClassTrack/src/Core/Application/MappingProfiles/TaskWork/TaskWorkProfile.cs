@@ -12,8 +12,12 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<TaskWork, GetTaskWorkItemDTO>();
             CreateMap<TaskWork, GetTaskWorkDTO>();
 
-            CreateMap<PostTaskWorkDTO, TaskWork>();
+            CreateMap<PostTaskWorkDTO, TaskWork>()
+                .ForMember(nameof(TaskWork.TaskWorkAttachments),opt=>opt.Ignore());
+
             CreateMap<PutTaskWorkDTO,TaskWork>();
+
+            CreateMap<TaskWorkAttachment, GetTaskWorkAttachmentDTO>();
         }
     }
 }
