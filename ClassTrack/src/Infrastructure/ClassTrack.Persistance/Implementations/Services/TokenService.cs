@@ -3,6 +3,7 @@ using ClassTrack.Application.DTOs.Token;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -83,7 +84,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<ResponseTokenDTO> RefreshAsync(string rToken)
         {
             if (string.IsNullOrEmpty(rToken))
-                throw new Exception("You have to login!");
+                throw new BadRequestException("You have to login!");
 
             string? userId = await _cacheService.GetAsync<string>(rToken);         
 
@@ -91,14 +92,14 @@ namespace ClassTrack.Persistance.Implementations.Services
             {
                 var token = await _tokenRepository.FirstOrDefaultAsync(t => t.Token == rToken);
                 if(token is null)
-                    throw new Exception("You have to login!");
+                    throw new BadRequestException("You have to login!");
                 userId = token.UserId;
             }
                
             AppUser user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
-                throw new Exception("User not Found!");
+                throw new NotFoundException("User not Found!");
 
             ICollection<string>? userRoles = await _userManager.GetRolesAsync(user);
 
@@ -125,7 +126,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             AppUser? user = await _userManager.FindByEmailAsync(passwordDTO.Email);
 
             if (user == null)
-                throw new Exception("The User Not Found");
+                throw new NotFoundException("The User Not Found");
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
 

@@ -30,7 +30,7 @@ namespace ClassTrack.MVC.Services.Implementations
                (await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}"),
                 await _httpClient.GetFromJsonAsync<GetClassRoomVM>($"ClassRooms/{classRoomId}"),
                 null);
-
+          
             return roomWithPermissionVM;
         }
         public async Task<ServiceResult> CreateClassRoomAsync(PostClassRoomVM classRoomVM)
@@ -47,7 +47,7 @@ namespace ClassTrack.MVC.Services.Implementations
             if (!message.IsSuccessStatusCode)
             {
                 var errorContent = await message.Content.ReadAsStringAsync();
-                return new ServiceResult(false, string.Empty, errorContent);
+                return new ServiceResult(false, nameof(DashboardVM.PostClass.Name), errorContent);
             }
 
             return new ServiceResult(true);
@@ -74,9 +74,18 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             await _httpClient.DeleteAsync($"ClassRooms/{classRoomId}");
         }
-        public async Task UpdateClassRoomAsync(long classRoomId,PutClassRoomVM roomVM)
+        public async Task<ServiceResult> UpdateClassRoomAsync(long classRoomId,PutClassRoomVM roomVM)
         {
-            await _httpClient.PutAsJsonAsync($"ClassRooms/{classRoomId}", roomVM);
+            HttpResponseMessage message = await _httpClient.PutAsJsonAsync($"ClassRooms/{classRoomId}", roomVM);
+
+            if (!message.IsSuccessStatusCode)
+            {
+                return new ServiceResult(false, 
+                                "PutClassRoom.Name",
+                                await message.Content.ReadAsStringAsync());
+            }
+
+            return new ServiceResult(true);
         }
     }
 }

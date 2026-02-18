@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Services.Implementations
 {
-    public class TaskWorkClientService:ITaskWorkClientService
+    public class TaskWorkClientService : ITaskWorkClientService
     {
         private readonly HttpClient _httpClient;
         public TaskWorkClientService(IHttpClientFactory clientFactory)
@@ -12,12 +12,30 @@ namespace ClassTrack.MVC.Services.Implementations
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
         }
 
-        public async Task<ServiceResult> CreateAsync(long classRoomId,PostTaskWorkVM taskWorkVM)
+        public async Task<ServiceResult> CreateAsync(long classRoomId, PostTaskWorkVM taskWorkVM)
         {
-            HttpResponseMessage message = await _httpClient.PostAsJsonAsync($"TaskWorks/{classRoomId}", taskWorkVM);
+            using var content = new MultipartFormDataContent();
+
+            content.Add(new StringContent(taskWorkVM.Title), "taskWork.Title");
+            content.Add(new StringContent(taskWorkVM.StartDate.ToString("yyyy-MM-dd")), "StartDate");
+            content.Add(new StringContent(taskWorkVM.EndDate.ToString("yyyy-MM-dd")), "EndDate");
+            content.Add(new StringContent(taskWorkVM.MainPart), "MainPart");
+            content.Add(new StringContent(taskWorkVM.ClassRoomId.ToString()), "ClassRoomId");
+
+            if (taskWorkVM.AttachmentVM is not null)
+            {
+                foreach (IFormFile file in taskWorkVM.AttachmentVM.Files)
+                {
+                    StreamContent fileContent = new StreamContent(file.OpenReadStream());
+
+                    content.Add(fileContent, "AttachmentVM.Files", file.FileName);
+                }
+            }
+
+            HttpResponseMessage message = await _httpClient.PostAsJsonAsync($"TaskWorks/{classRoomId}", content);
 
             if (!message.IsSuccessStatusCode)
-                return new ServiceResult(false, string.Empty,await message.Content.ReadAsStringAsync());
+                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
 
             return new ServiceResult(true);
         }

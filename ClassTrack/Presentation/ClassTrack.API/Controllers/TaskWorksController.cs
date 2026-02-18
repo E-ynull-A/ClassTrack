@@ -11,7 +11,7 @@ namespace ClassTrack.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TaskWorksController : ControllerBase
     {
         private readonly ITaskWorkService _taskService;
@@ -50,8 +50,8 @@ namespace ClassTrack.API.Controllers
 
 
         [HttpPost("{classRoomId}")]
-        [ServiceFilter(typeof(TeacherAccessFilter))]
-        public async Task<IActionResult> Post(PostTaskWorkDTO postTask,long classRoomId)
+        //[ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> Post([FromForm]PostTaskWorkDTO postTask,long classRoomId)
         {
             await _taskService.CreateTaskWorkAsync(postTask);
             return Created();

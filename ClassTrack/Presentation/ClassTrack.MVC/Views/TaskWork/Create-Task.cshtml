@@ -39,11 +39,15 @@
             <label for="AttachmentDTOs">Add Files</label>
             <input class="custom-file-input" type="file" id="AttachmentDTOs" style="padding:7px 10px"                
                         asp-for="AttachmentVM.Files" accept=".jpg,.jpeg,.png,.pdf,.txt" multiple>
+            
         </div>
 
         
         <div class="form-group">
             <button type="submit">Create Task</button>
+        </div>
+        <div asp-validation-summary="ModelOnly">
+
         </div>
     </form>
 </section>

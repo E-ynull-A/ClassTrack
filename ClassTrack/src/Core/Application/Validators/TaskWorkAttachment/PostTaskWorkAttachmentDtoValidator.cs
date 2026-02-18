@@ -17,11 +17,11 @@ namespace ClassTrack.Application.Validators
                 .WithMessage("The File size is invalid!");
 
             RuleFor(twa => twa.Files)
-                .Must(ct => ct.Select(ct => ct.ContentType).All(ct => ct.Equals("image/jpeg")
+                .Must(ct => ct.Select(ct => ct.ContentType).All(ct => 
+                           ct.Equals("image/jpeg")
                         || ct.Equals("image/png")
-                        || ct.Equals("application/pdf")
-                        || ct.Equals("text/plain")))
-                .WithMessage("Only JPG,PNG,PDF and TXT file types could Upload");
+                        || ct.Equals("application/pdf")))
+                .WithMessage("Only JPG,PNG,PDF file types could Upload");
 
 
             RuleFor(twa => twa.Files)

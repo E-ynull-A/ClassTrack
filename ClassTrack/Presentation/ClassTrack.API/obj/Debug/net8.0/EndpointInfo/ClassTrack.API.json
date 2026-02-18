@@ -1654,19 +1654,56 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/PostTaskWorkDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostTaskWorkDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostTaskWorkDTO"
+                "type": "object",
+                "properties": {
+                  "ClassRoomId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Title": {
+                    "type": "string"
+                  },
+                  "MainPart": {
+                    "type": "string"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AttachmentDTO.Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "ClassRoomId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "MainPart": {
+                  "style": "form"
+                },
+                "EndDate": {
+                  "style": "form"
+                },
+                "StartDate": {
+                  "style": "form"
+                },
+                "AttachmentDTO.Files": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1971,49 +2008,6 @@
           "attendance": {
             "type": "integer",
             "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PostTaskWorkAttachmentDTO": {
-        "type": "object",
-        "properties": {
-          "files": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "binary"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PostTaskWorkDTO": {
-        "type": "object",
-        "properties": {
-          "classRoomId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "mainPart": {
-            "type": "string",
-            "nullable": true
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "attachmentDTO": {
-            "$ref": "#/components/schemas/PostTaskWorkAttachmentDTO"
           }
         },
         "additionalProperties": false

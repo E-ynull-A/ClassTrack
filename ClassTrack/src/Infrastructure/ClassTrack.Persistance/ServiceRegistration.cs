@@ -64,10 +64,8 @@ namespace ClassTrack.Persistance
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IQuizAnswerService, QuizAnswerService>();
-            services.AddScoped<IStudentQuizService, StudentQuizService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAppDbContextInitalizer,AppDbContextInitalizer>();
-            services.AddScoped<ITaskWorkAttachmentService, TaskWorkAttachmentService>();
 
 
             return services;

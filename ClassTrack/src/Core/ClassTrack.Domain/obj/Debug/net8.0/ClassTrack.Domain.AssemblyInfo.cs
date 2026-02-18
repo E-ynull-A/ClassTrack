@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClassTrack.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1649e27d7c7188bd1d961eee633f754e88e9264")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfe29ae44b2bcc96cea3b03a8412ec7525b8ea53")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClassTrack.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClassTrack.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

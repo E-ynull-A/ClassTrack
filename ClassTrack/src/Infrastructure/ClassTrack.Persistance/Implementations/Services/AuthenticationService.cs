@@ -4,9 +4,12 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
+using ClassTrack.Domain.Utilities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -46,19 +49,21 @@ namespace ClassTrack.Persistance.Implementations.Services
             AppUser user = _mapper.Map<AppUser>(registerDTO);
 
             IdentityResult result = await _manager.CreateAsync(user
-                                                         , registerDTO.Password);
+                                                         ,registerDTO.Password);
 
             if (!result.Succeeded)
             {
-                string errors = string.Empty;
-                foreach (var error in result.Errors)
-                {
-                    errors += error.Description;
-                }
-                throw new Exception(errors);
+                throw new ValidationException(result.Errors
+                    .GroupBy(e => e.Code)
+                    .ToDictionary(
+                        c => c.Key,
+                        c => c.Select(d => d.Description).ToArray())
+                    );
             }
 
-            await _emailService.SendEmailAsync(user.Email, "Register Process", "Welcome to Our Application:)");
+            await _emailService
+                .SendEmailAsync(user.Email, "Register Process"
+                                    ,"Welcome to Our Application:)");
 
             await _manager.AddToRoleAsync(user, UserRole.User.ToString());
         }
@@ -69,7 +74,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (user == null)
             {
-                throw new Exception("The Username,Email or Password is invalid!");
+                throw new NotFoundException("The Username,Email or Password is Wrong!");
             }
 
             bool check = await _manager.CheckPasswordAsync(user, loginDTO.Password);
@@ -77,7 +82,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (!check)
             {
                 await _manager.AccessFailedAsync(user);
-                throw new Exception("The Username,Email or Password is invalid!");
+                throw new NotFoundException("The Username,Email or Password is Wrong!");
             }
 
             IEnumerable<string> roles = await _manager.GetRolesAsync(user);
@@ -112,7 +117,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                             .FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (string.IsNullOrEmpty(userId))
-                throw new Exception("User not Found!");
+                throw new NotFoundException("User not Found!");
 
             RefreshToken? rToken = await _tokenRepository
                                 .FirstOrDefaultAsync(t => t.UserId == userId);
@@ -132,12 +137,12 @@ namespace ClassTrack.Persistance.Implementations.Services
             AppUser? user = await _manager.FindByEmailAsync(passwordDTO.Email);
 
             if (user == null)
-                throw new Exception("User Not Found!");
+                throw new NotFoundException("User Not Found!");
 
             string? resetToken = await _cacheService.GetAsync<string>($"reset_Password:{passwordDTO.Email}");
 
             if (resetToken is null)
-                throw new Exception("Please, try again");
+                throw new NotFoundException("Please, try again");
 
             IdentityResult result = await _manager.ResetPasswordAsync(user, resetToken, passwordDTO.NewPassword);
 

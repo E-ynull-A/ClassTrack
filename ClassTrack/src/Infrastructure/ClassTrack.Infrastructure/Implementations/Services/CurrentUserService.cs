@@ -1,4 +1,5 @@
 ﻿using ClassTrack.Application.Interfaces.Services;
+using ClassTrack.Domain.Utilities;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace ClassTrack.Infrastructure.Implementations.Services
             string? roles = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
 
             if (roles is null)
-                throw new BadHttpRequestException("The User Role not Found!");
+                throw new NotFoundException("The User Role not Found!");
 
             return roles;
         }

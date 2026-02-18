@@ -8,8 +8,9 @@ namespace ClassTrack.Application.DTOs
 {
     public record CloudinaryResponceDTO(
         
+        string FileName,
         string PublicId,
-        string Url,
-        string ResponceType);
+        string FileUrl,
+        string FileType);
   
 }

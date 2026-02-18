@@ -8,7 +8,7 @@ namespace ClassTrack.MVC.Services.Interfaces
         Task<GetClassRoomWithPermissionVM> GetByIdAsync(long id);
         Task<ServiceResult> CreateClassRoomAsync(PostClassRoomVM classRoomVM);
         Task<ServiceResult> JoinClassRoomAsync(JoinClassRoomVM joinClass);
-        Task UpdateClassRoomAsync(long classRoomId, PutClassRoomVM roomVM);
+        Task<ServiceResult> UpdateClassRoomAsync(long classRoomId, PutClassRoomVM roomVM);
         Task DeleteClassRoomAsync(long id);
     }
 }

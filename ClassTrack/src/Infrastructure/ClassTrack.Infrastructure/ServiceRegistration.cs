@@ -1,4 +1,5 @@
 ﻿using ClassTrack.Application.Interfaces.Services;
+using ClassTrack.Infrastructure.Implementations;
 using ClassTrack.Infrastructure.Implementations.Services;
 using ClassTrack.Persistance.Implementations.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,7 +17,10 @@ namespace ClassTrack.Infrastructure
     public static class ServiceRegistration
     {  
         public static IServiceCollection InfrastructureRegistration(this IServiceCollection services,IConfiguration config)
-        {                 
+        {        
+            
+
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -46,8 +50,9 @@ namespace ClassTrack.Infrastructure
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<ICloudService, CloudService>();
-      
+            services.AddScoped<IFileService, FileService>();
+
+            services.Configure<CloudSettings>(config.GetSection("CloudSettings"));
 
             return services;
             

@@ -3,56 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.infrastructure\\implementations\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|solutionrelative:src\\infrastructure\\classtrack.infrastructure\\implementations\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.infrastructure\\implementations\\services\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|solutionrelative:src\\infrastructure\\classtrack.infrastructure\\implementations\\services\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\internalserverexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\internalserverexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\conflictexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\conflictexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\badrequestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\badrequestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\implementations\\taskworkclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\implementations\\taskworkclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.api\\controllers\\taskworkscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|solutionrelative:presentation\\classtrack.api\\controllers\\taskworkscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\taskworkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\taskworkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\views\\taskwork\\create-task.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\views\\taskwork\\create-task.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\taskworkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\taskworkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\validators\\taskworkattachment\\posttaskworkattachmentdtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\validators\\taskworkattachment\\posttaskworkattachmentdtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\validators\\taskwork\\posttaskworkdtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\validators\\taskwork\\posttaskworkdtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.api\\controllers\\taskworkscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|solutionrelative:presentation\\classtrack.api\\controllers\\taskworkscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\dtos\\cloud\\cloudinaryresponcedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\dtos\\cloud\\cloudinaryresponcedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\taskworkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\taskworkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\entities\\taskwork\\taskworkattachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\entities\\taskwork\\taskworkattachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\dtos\\taskwork\\posttaskworkdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\dtos\\taskwork\\posttaskworkdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.infrastructure\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|solutionrelative:src\\infrastructure\\classtrack.infrastructure\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.infrastructure\\implementations\\optionclasses\\cloudsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|solutionrelative:src\\infrastructure\\classtrack.infrastructure\\implementations\\optionclasses\\cloudsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|solutionrelative:presentation\\classtrack.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\dtos\\taskwork\\posttaskworkattachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\dtos\\taskwork\\posttaskworkattachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\mappingprofiles\\taskwork\\taskworkprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\mappingprofiles\\taskwork\\taskworkprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\interfaces\\services\\ifileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\interfaces\\services\\ifileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\quizanswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -63,20 +71,120 @@
       "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\questionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\validators\\taskworkattachment\\posttaskworkattachmentdtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\validators\\taskworkattachment\\posttaskworkattachmentdtovalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\implementations\\taskworkclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\implementations\\taskworkclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\mappingprofiles\\taskwork\\taskworkprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\mappingprofiles\\taskwork\\taskworkprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\views\\taskwork\\create-task.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\views\\taskwork\\create-task.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\dtos\\taskwork\\posttaskworkdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\dtos\\taskwork\\posttaskworkdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\taskworkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\taskworkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\dtos\\taskwork\\posttaskworkattachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\dtos\\taskwork\\posttaskworkattachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\implementations\\classroomclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\implementations\\classroomclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\views\\class\\teacherclassroom.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\views\\class\\teacherclassroom.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\middlewares\\globalexceptionhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\middlewares\\globalexceptionhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\quizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\quizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\questioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\questioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\quizanswercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\quizanswercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\interfaces\\iclassroomclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\interfaces\\iclassroomclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\views\\class\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\views\\class\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\classroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\classroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\interfaces\\services\\iquizanswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\interfaces\\services\\iquizanswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\teacherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\teacherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\studentattendanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\studentattendanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\quizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\quizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\businesslogicexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\businesslogicexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\conflictexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\conflictexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\internalserverexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\internalserverexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\utilities\\exceptions\\badrequestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\utilities\\exceptions\\badrequestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\viewmodels\\taskwork\\posttaskworkvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -89,18 +197,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\wwwroot\\css\\create-task.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\wwwroot\\css\\create-task.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\views\\class\\teacherclassroom.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\views\\class\\teacherclassroom.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.infrastructure\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38C2DF8F-35CA-4634-991F-0F93C3AC0898}|src\\Infrastructure\\ClassTrack.Infrastructure\\ClassTrack.Infrastructure.csproj|solutionrelative:src\\infrastructure\\classtrack.infrastructure\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\implementations\\classroomclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\implementations\\classroomclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\interfaces\\itaskworkclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -143,32 +239,12 @@
       "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\entities\\taskwork\\taskwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\interfaces\\services\\icloudservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\interfaces\\services\\icloudservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\taskworkattachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\taskworkattachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5FFC19C8-8836-4540-AFFD-3E7F4324F7F7}|Presentation\\ClassTrack.API\\ClassTrack.API.csproj|solutionrelative:presentation\\classtrack.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\repositories\\taskworkattachmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\repositories\\taskworkattachmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\interfaces\\repositories\\itaskworkattachmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\interfaces\\repositories\\itaskworkattachmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\interfaces\\services\\itaskworkattachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\interfaces\\services\\itaskworkattachmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\context\\common\\globalqueryfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -181,10 +257,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201222_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201222_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\views\\class\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\views\\class\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201003_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -205,14 +277,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\classtrack.domain\\entities\\student\\studenttaskwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{12793A4F-89F4-4B33-85FE-FFB7C78AD796}|src\\Core\\ClassTrack.Domain\\ClassTrack.Domain.csproj|solutionrelative:src\\core\\classtrack.domain\\entities\\student\\studenttaskwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\infrastructure\\classtrack.persistance\\implementations\\services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9CBA776A-E271-47E7-A6B7-0DDB4D782408}|src\\Infrastructure\\ClassTrack.Persistance\\ClassTrack.Persistance.csproj|solutionrelative:src\\infrastructure\\classtrack.persistance\\implementations\\services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\quizanswercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\quizanswercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\wwwroot\\css\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -323,18 +387,6 @@
       "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\viewmodels\\quizanswer\\getquizansweritemvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\quizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\quizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\questioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\questioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -347,10 +399,6 @@
       "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\implementations\\memberclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\presentation\\classtrack.mvc\\services\\implementations\\quizclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66DC2026-17B2-410B-B112-FDD0FCF44B24}|Presentation\\ClassTrack.MVC\\ClassTrack.MVC.csproj|solutionrelative:presentation\\classtrack.mvc\\services\\implementations\\quizclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -361,10 +409,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\mappingprofiles\\student\\studentprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\mappingprofiles\\student\\studentprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\interfaces\\services\\iquizanswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|solutionrelative:src\\core\\application\\interfaces\\services\\iquizanswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3019FDB4-2384-4D66-AA36-D7B69D904FDE}|src\\Core\\Application\\ClassTrack.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\finalproject\\classtrack\\src\\core\\application\\dtos\\student\\getsimplestudentitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -406,17 +450,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
               "Title": "TaskWorkService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkService.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkService.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkService.cs",
               "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkService.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAFAAAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAAAEsAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-16T23:04:37.237Z",
               "IsPinned": true,
@@ -424,13 +468,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "Create-Task.cshtml",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\TaskWork\\Create-Task.cshtml",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\TaskWork\\Create-Task.cshtml",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\TaskWork\\Create-Task.cshtml",
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Views\\TaskWork\\Create-Task.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACgAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAACkAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-02-17T13:54:10.217Z",
               "IsPinned": true,
@@ -438,13 +482,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "TaskWorkController.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\TaskWorkController.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\TaskWorkController.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\TaskWorkController.cs",
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\TaskWorkController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwB8AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-17T13:58:22.751Z",
               "IsPinned": true,
@@ -452,20 +496,533 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ValidationException.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
-              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
-              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAdAAAAAAAAAA==",
+              "DocumentIndex": 20,
+              "Title": "ClassRoomClientService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T19:06:40.582Z",
+              "WhenOpened": "2026-02-15T20:38:34.757Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ClassController.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAEQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T14:20:13.059Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TeacherClassRoom.cshtml",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAAAEEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-17T16:00:41.24Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaskWorksController.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAIA6wDkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T13:03:08.443Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TaskWorkClientService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T13:40:53.494Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PostTaskWorkDtoValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
+              "RelativeToolTip": "src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T13:14:04.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FileService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\FileService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\FileService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\FileService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\FileService.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:45:23.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PostTaskWorkDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
+              "RelativeToolTip": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAWwA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T23:18:18.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TaskWorkAttachment.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWorkAttachment.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWorkAttachment.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWorkAttachment.cs",
+              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWorkAttachment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-18T16:39:30.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ServiceRegistration.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwDYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T20:41:21.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CurrentUserService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\CurrentUserService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\CurrentUserService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\CurrentUserService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\Services\\CurrentUserService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAuwCMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:48:24.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TaskWorkProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
+              "RelativeToolTip": "src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T16:32:12.631Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "PostTaskWorkAttachmentDtoValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
+              "RelativeToolTip": "src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T13:19:14.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CloudinaryResponceDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
+              "RelativeToolTip": "src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T21:17:29.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\appsettings.json",
+              "RelativeToolTip": "Presentation\\ClassTrack.API\\appsettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-16T20:33:08.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CloudSettings.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\OptionClasses\\CloudSettings.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\OptionClasses\\CloudSettings.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\OptionClasses\\CloudSettings.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Infrastructure\\Implementations\\OptionClasses\\CloudSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-18T15:37:11.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PostTaskWorkAttachmentDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
+              "RelativeToolTip": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T23:16:00.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IFileService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IFileService.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Services\\IFileService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IFileService.cs",
+              "RelativeToolTip": "src\\Core\\Application\\Interfaces\\Services\\IFileService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T20:40:47.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "QuizAnswerService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANwAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T14:20:13.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "QuestionService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAP4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T15:57:26.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "QuizAnswerController.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAAEUAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T19:25:32.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "MemberController.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T17:13:54.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "QuestionController.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAACJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T20:38:34.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "QuizController.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T21:45:35.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "GlobalExceptionHandlerMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Middlewares\\GlobalExceptionHandlerMiddleware.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Middlewares\\GlobalExceptionHandlerMiddleware.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Middlewares\\GlobalExceptionHandlerMiddleware.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Middlewares\\GlobalExceptionHandlerMiddleware.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:50:31.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "IClassRoomClientService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IClassRoomClientService.cs",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IClassRoomClientService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IClassRoomClientService.cs",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IClassRoomClientService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-18T13:02:23.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
+              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-15T20:40:33.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TokenService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TokenService.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAkwIAAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:17:55.447Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T18:35:31.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ClassRoomService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\ClassRoomService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\ClassRoomService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\ClassRoomService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\ClassRoomService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwDQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T20:50:30.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "StudentService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAkwKQAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T14:20:13.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IQuizAnswerService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
+              "RelativeToolTip": "src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T17:28:49.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ServiceRegistration.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAQwEMAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T20:23:15.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAkwJAAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T15:57:26.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "TeacherService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TeacherService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TeacherService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TeacherService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TeacherService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:17:40.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "StudentAttendanceService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentAttendanceService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentAttendanceService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentAttendanceService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentAttendanceService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:10:23.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "QuizService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizService.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAswJcAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:08:56.24Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "PermissionService.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\PermissionService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\PermissionService.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\PermissionService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\PermissionService.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAQwCMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T21:00:57.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "BusinessLogicException.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BusinessLogicException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BusinessLogicException.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BusinessLogicException.cs",
+              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BusinessLogicException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T20:53:33.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ConflictException.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
+              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T19:00:19.782Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "ValidationException.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
+              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ValidationException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T19:06:40.582Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
               "Title": "InternalServerException.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\InternalServerException.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\InternalServerException.cs",
@@ -473,38 +1030,11 @@
               "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\InternalServerException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T19:02:32.068Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T19:02:32.068Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ConflictException.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
-              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
-              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\ConflictException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T19:00:19.782Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthenticationService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\AuthenticationService.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T15:57:26.33Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 45,
               "Title": "BadRequestException.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BadRequestException.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BadRequestException.cs",
@@ -512,155 +1042,11 @@
               "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\BadRequestException.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T18:39:15.734Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T18:39:15.734Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NotFoundException.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
-              "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
-              "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Utilities\\Exceptions\\NotFoundException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T18:35:31.1Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PostTaskWorkDtoValidator.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
-              "RelativeToolTip": "src\\Core\\Application\\Validators\\TaskWork\\PostTaskWorkDtoValidator.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwCIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:14:04.53Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TaskWorkClientService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\TaskWorkClientService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:40:53.494Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "TaskWorksController.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.API\\Controllers\\TaskWorksController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAYwDUAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:03:08.443Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "CloudinaryResponceDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
-              "RelativeToolTip": "src\\Core\\Application\\DTOs\\Cloud\\CloudinaryResponceDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T21:17:29.54Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "QuizAnswerService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuizAnswerService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOEAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T14:20:13.094Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "PostTaskWorkAttachmentDtoValidator.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
-              "RelativeToolTip": "src\\Core\\Application\\Validators\\TaskWorkAttachment\\PostTaskWorkAttachmentDtoValidator.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:19:14.951Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "TaskWorkProfile.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
-              "RelativeToolTip": "src\\Core\\Application\\MappingProfiles\\TaskWork\\TaskWorkProfile.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T16:32:12.631Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "QuestionService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\QuestionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T15:57:26.32Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "PostTaskWorkDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
-              "RelativeToolTip": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBAAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T23:18:18.977Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "PostTaskWorkAttachmentDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
-              "RelativeToolTip": "src\\Core\\Application\\DTOs\\TaskWork\\PostTaskWorkAttachmentDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T23:16:00.898Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 47,
               "Title": "PostTaskWorkAttachmentVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\PostTaskWorkAttachmentVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\PostTaskWorkAttachmentVM.cs",
@@ -668,12 +1054,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\PostTaskWorkAttachmentVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:40:08.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:40:08.943Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 46,
               "Title": "PostTaskWorkVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\PostTaskWorkVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\PostTaskWorkVM.cs",
@@ -681,25 +1066,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\PostTaskWorkVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:40:16.129Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:40:16.129Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "ServiceRegistration.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Infrastructure\\ServiceRegistration.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwDAAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T20:41:21.897Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 48,
               "Title": "create-task.css",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\wwwroot\\css\\create-task.css",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\wwwroot\\css\\create-task.css",
@@ -707,38 +1078,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\wwwroot\\css\\create-task.css",
               "ViewState": "AgIAAGEAAAAAAAAAAAAAAHkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-02-17T13:54:39.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:54:39.879Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "TeacherClassRoom.cshtml",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Views\\Class\\TeacherClassRoom.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-17T16:00:41.24Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "ClassRoomClientService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\ClassRoomClientService.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAzwBoAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T20:38:34.757Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 49,
               "Title": "ITaskWorkClientService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Interfaces\\ITaskWorkClientService.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Interfaces\\ITaskWorkClientService.cs",
@@ -746,12 +1090,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\Interfaces\\ITaskWorkClientService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:41:14.736Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:41:14.736Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 50,
               "Title": "AttendanceController.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\AttendanceController.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\AttendanceController.cs",
@@ -759,12 +1102,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\AttendanceController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T14:20:13.127Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-15T14:20:13.127Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 51,
               "Title": "StudentsController.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\Controllers\\StudentsController.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.API\\Controllers\\StudentsController.cs",
@@ -772,12 +1114,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.API\\Controllers\\StudentsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T16:58:08.682Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-15T16:58:08.682Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 52,
               "Title": "ServiceRegistration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\ServiceRegistration.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\ServiceRegistration.cs",
@@ -785,12 +1126,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Services\\ServiceRegistration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:41:18.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:41:18.5Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 54,
               "Title": "GetTaskWorkItemVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkItemVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkItemVM.cs",
@@ -798,12 +1138,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkItemVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:39:52.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:39:52.145Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 55,
               "Title": "GetTaskWorkAttachmentVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkAttachmentVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkAttachmentVM.cs",
@@ -811,12 +1150,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkAttachmentVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:39:46.132Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:39:46.132Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 53,
               "Title": "GetTaskWorkVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkVM.cs",
@@ -824,12 +1162,11 @@
               "RelativeToolTip": "Presentation\\ClassTrack.MVC\\ViewModels\\TaskWork\\GetTaskWorkVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T13:39:24.033Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T13:39:24.033Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 56,
               "Title": "GetTaskWorkDTO.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\TaskWork\\GetTaskWorkDTO.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\TaskWork\\GetTaskWorkDTO.cs",
@@ -837,12 +1174,11 @@
               "RelativeToolTip": "src\\Core\\Application\\DTOs\\TaskWork\\GetTaskWorkDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T23:07:30.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-16T23:07:30.229Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 57,
               "Title": "PostQuizAnswerDtoValidator.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Validators\\QuizAnswer\\PostQuizAnswerDtoValidator.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\Validators\\QuizAnswer\\PostQuizAnswerDtoValidator.cs",
@@ -850,12 +1186,11 @@
               "RelativeToolTip": "src\\Core\\Application\\Validators\\QuizAnswer\\PostQuizAnswerDtoValidator.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAWwB4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T21:54:06.812Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-15T21:54:06.812Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 58,
               "Title": "TaskWork.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWork.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWork.cs",
@@ -863,51 +1198,11 @@
               "RelativeToolTip": "src\\Core\\ClassTrack.Domain\\Entities\\TaskWork\\TaskWork.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T19:17:04.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-16T19:17:04.433Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "ICloudService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\ICloudService.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Services\\ICloudService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\ICloudService.cs",
-              "RelativeToolTip": "src\\Core\\Application\\Interfaces\\Services\\ICloudService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T20:40:47.797Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "TaskWorkAttachmentService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkAttachmentService.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkAttachmentService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkAttachmentService.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\TaskWorkAttachmentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T20:23:09.069Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 52,
-              "Title": "QuizAnswerController.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\QuizAnswerController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAkwEYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T19:25:32.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 75,
               "Title": "QuizAnswer.cshtml",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\QuizAnswer\\QuizAnswer.cshtml",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\QuizAnswer\\QuizAnswer.cshtml",
@@ -919,7 +1214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 70,
               "Title": "QuizAnswerList.cshtml",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\QuizAnswer\\QuizAnswerList.cshtml",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\QuizAnswer\\QuizAnswerList.cshtml",
@@ -931,7 +1226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 72,
               "Title": "QuizAnswerClientService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\QuizAnswerClientService.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\QuizAnswerClientService.cs",
@@ -943,31 +1238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\appsettings.json",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\appsettings.json",
-              "RelativeToolTip": "Presentation\\ClassTrack.API\\appsettings.json",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACQAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-16T20:33:08.26Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "ServiceRegistration.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\ServiceRegistration.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAQwDcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T20:23:15.87Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 59,
               "Title": "TaskWorkAttachmentRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Repositories\\TaskWorkAttachmentRepository.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Repositories\\TaskWorkAttachmentRepository.cs",
@@ -979,7 +1250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 60,
               "Title": "ITaskWorkAttachmentRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Repositories\\ITaskWorkAttachmentRepository.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Repositories\\ITaskWorkAttachmentRepository.cs",
@@ -991,19 +1262,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "ITaskWorkAttachmentService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\ITaskWorkAttachmentService.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Services\\ITaskWorkAttachmentService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\ITaskWorkAttachmentService.cs",
-              "RelativeToolTip": "src\\Core\\Application\\Interfaces\\Services\\ITaskWorkAttachmentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-16T20:21:17.391Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 61,
               "Title": "GlobalQueryFilter.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\Common\\GlobalQueryFilter.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Context\\Common\\GlobalQueryFilter.cs",
@@ -1015,7 +1274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 109,
               "Title": "20260216201307_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201307_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201307_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
@@ -1027,7 +1286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 63,
               "Title": "20260216201222_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201222_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201222_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
@@ -1039,7 +1298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 62,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\AppDbContext.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Context\\AppDbContext.cs",
@@ -1051,7 +1310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 64,
               "Title": "20260216201003_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201003_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Context\\Migrations\\20260216201003_AddNewTaskWorkAttachmentEntityForSomeFileProcesses.cs",
@@ -1063,19 +1322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Views\\Class\\Dashboard.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAC8AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-15T20:40:33.499Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 65,
               "Title": "TaskAttachmentConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\TaskAttachmentConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\TaskAttachmentConfiguration.cs",
@@ -1087,7 +1334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 66,
               "Title": "QuizConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\QuizConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\QuizConfiguration.cs",
@@ -1099,7 +1346,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 67,
               "Title": "OptionConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\OptionConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\OptionConfiguration.cs",
@@ -1111,7 +1358,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 68,
               "Title": "StudentTaskWork.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\ClassTrack.Domain\\Entities\\Student\\StudentTaskWork.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClassTrack.Domain\\Entities\\Student\\StudentTaskWork.cs",
@@ -1123,7 +1370,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 69,
               "Title": "index.css",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\wwwroot\\css\\index.css",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\wwwroot\\css\\index.css",
@@ -1135,7 +1382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 71,
               "Title": "list.css",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\wwwroot\\css\\list.css",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\wwwroot\\css\\list.css",
@@ -1147,7 +1394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 74,
               "Title": "EvaulateVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\EvaulateVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\EvaulateVM.cs",
@@ -1159,20 +1406,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
-              "Title": "StudentService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Services\\StudentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAACAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T14:20:13.087Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 76,
               "Title": "Repository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Repositories\\Generic\\Repository.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Implementations\\Repositories\\Generic\\Repository.cs",
@@ -1184,7 +1418,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 73,
               "Title": "quiz-answer.css",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\wwwroot\\css\\quiz-answer.css",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\wwwroot\\css\\quiz-answer.css",
@@ -1196,7 +1430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 78,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Repositories\\Generic\\IRepository.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Repositories\\Generic\\IRepository.cs",
@@ -1208,7 +1442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 77,
               "Title": "QuizAnswersController.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.API\\Controllers\\QuizAnswersController.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.API\\Controllers\\QuizAnswersController.cs",
@@ -1221,7 +1455,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 79,
               "Title": "IQuizAnswerClientService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IQuizAnswerClientService.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IQuizAnswerClientService.cs",
@@ -1233,7 +1467,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 80,
               "Title": "PutQuizAnswerVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\PutQuizAnswerVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\PutQuizAnswerVM.cs",
@@ -1245,7 +1479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 84,
               "Title": "GetQuizAnswerVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\GetQuizAnswerVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\GetQuizAnswerVM.cs",
@@ -1257,7 +1491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 82,
               "Title": "GetQuizAnswerDTO.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\QuizAnswer\\GetQuizAnswerDTO.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\QuizAnswer\\GetQuizAnswerDTO.cs",
@@ -1269,7 +1503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 83,
               "Title": "GetQuizAnswerItemDTO.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\QuizAnswer\\GetQuizAnswerItemDTO.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\QuizAnswer\\GetQuizAnswerItemDTO.cs",
@@ -1281,7 +1515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 85,
               "Title": "GetQuestionInQuizAnswerVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Question\\GetQuestionInQuizAnswerVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Question\\GetQuestionInQuizAnswerVM.cs",
@@ -1293,7 +1527,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 81,
               "Title": "QuestionProfile.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\Question\\QuestionProfile.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\MappingProfiles\\Question\\QuestionProfile.cs",
@@ -1305,7 +1539,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 86,
               "Title": "GetOptionItemInQuestionVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Option\\GetOptionItemInQuestionVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Option\\GetOptionItemInQuestionVM.cs",
@@ -1317,7 +1551,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 87,
               "Title": "GetQuestionInQuizAnswerDTO.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Question\\GetQuestionInQuizAnswerDTO.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\Question\\GetQuestionInQuizAnswerDTO.cs",
@@ -1329,7 +1563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 89,
               "Title": "GetOptionItemInQuestionDTO.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Option\\GetOptionItemInQuestionDTO.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\Option\\GetOptionItemInQuestionDTO.cs",
@@ -1341,7 +1575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 88,
               "Title": "OptionProfile.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\Question\\OptionProfile.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\MappingProfiles\\Question\\OptionProfile.cs",
@@ -1353,7 +1587,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 90,
               "Title": "QuizAnswerConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\QuizAnswerConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClassTrack.Persistance\\Configuration\\QuizAnswerConfiguration.cs",
@@ -1365,7 +1599,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 91,
               "Title": "GetOptionItemInChoiceQuestionVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Option\\GetOptionItemInChoiceQuestionVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Option\\GetOptionItemInChoiceQuestionVM.cs",
@@ -1377,7 +1611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 93,
               "Title": "GetQuizVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Quiz\\GetQuizVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Quiz\\GetQuizVM.cs",
@@ -1389,7 +1623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 92,
               "Title": "GetChoiceQuestionInQuizVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Question\\GetChoiceQuestionInQuizVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Question\\GetChoiceQuestionInQuizVM.cs",
@@ -1401,7 +1635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 94,
               "Title": "StudentList.cshtml",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Member\\StudentList.cshtml",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\Member\\StudentList.cshtml",
@@ -1413,7 +1647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 95,
               "Title": "GetQuizAnswerItemVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\GetQuizAnswerItemVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\QuizAnswer\\GetQuizAnswerItemVM.cs",
@@ -1425,32 +1659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
-              "Title": "ClassController.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\ClassController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBwAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T14:20:13.059Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 82,
-              "Title": "QuestionController.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\QuestionController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAIBJwB4AAACJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T20:38:34.789Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 96,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Program.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Program.cs",
@@ -1462,19 +1671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
-              "Title": "QuizController.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\QuizController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAjwFEAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T21:45:35.252Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 97,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\HomeController.cs",
@@ -1486,7 +1683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 98,
               "Title": "MemberClientService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\MemberClientService.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\MemberClientService.cs",
@@ -1498,19 +1695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
-              "Title": "MemberController.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
-              "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
-              "RelativeToolTip": "Presentation\\ClassTrack.MVC\\Controllers\\MemberController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAABRwBcAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T17:13:54.433Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 99,
               "Title": "QuizClientService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Implementations\\QuizClientService.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Implementations\\QuizClientService.cs",
@@ -1523,7 +1708,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 100,
               "Title": "GetSimpleStudentItemVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Student\\GetSimpleStudentItemVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Student\\GetSimpleStudentItemVM.cs",
@@ -1535,7 +1720,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 101,
               "Title": "StudentProfile.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\MappingProfiles\\Student\\StudentProfile.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\MappingProfiles\\Student\\StudentProfile.cs",
@@ -1547,19 +1732,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
-              "Title": "IQuizAnswerService.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
-              "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
-              "RelativeToolTip": "src\\Core\\Application\\Interfaces\\Services\\IQuizAnswerService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-15T17:28:49.977Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 102,
               "Title": "GetSimpleStudentItemDTO.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\DTOs\\Student\\GetSimpleStudentItemDTO.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\DTOs\\Student\\GetSimpleStudentItemDTO.cs",
@@ -1571,7 +1744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 103,
               "Title": "StudentAttendanceVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\StudentAttendance\\StudentAttendanceVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\StudentAttendance\\StudentAttendanceVM.cs",
@@ -1583,7 +1756,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 104,
               "Title": "IMemberClientService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IMemberClientService.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Services\\Interfaces\\IMemberClientService.cs",
@@ -1595,7 +1768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 105,
               "Title": "GetStudentItemVM.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\ViewModels\\Student\\GetStudentItemVM.cs",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\ViewModels\\Student\\GetStudentItemVM.cs",
@@ -1607,7 +1780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 106,
               "Title": "IStudentService.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\src\\Core\\Application\\Interfaces\\Services\\IStudentService.cs",
               "RelativeDocumentMoniker": "src\\Core\\Application\\Interfaces\\Services\\IStudentService.cs",
@@ -1619,7 +1792,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 108,
               "Title": "attendance-list.js",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\wwwroot\\js\\attendance-list.js",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\wwwroot\\js\\attendance-list.js",
@@ -1631,7 +1804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 107,
               "Title": "AttendanceTable.cshtml",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\FinalProject\\ClassTrack\\Presentation\\ClassTrack.MVC\\Views\\Attendance\\AttendanceTable.cshtml",
               "RelativeDocumentMoniker": "Presentation\\ClassTrack.MVC\\Views\\Attendance\\AttendanceTable.cshtml",

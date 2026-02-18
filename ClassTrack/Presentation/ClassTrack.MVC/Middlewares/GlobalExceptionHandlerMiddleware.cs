@@ -20,7 +20,8 @@ namespace ClassTrack.MVC.Middlewares
             }
             catch(Exception e)
             {
-                var encodeMessage = WebUtility.UrlEncode(e.Message);
+                var encodeMessage = e.Message;
+
                 context.Response.Redirect($"/Error/index?messageError={encodeMessage}");
             }   
         }

@@ -3,6 +3,7 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Utilities;
 
 
 
@@ -25,7 +26,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<ICollection<GetTeacherItemDTO>> GetAllAsync(long classRoomId, int page, int take)
         {
             if (!await _teacherRepository.AnyAsync(r => r.TeacherClassRooms.Any(tc=>tc.ClassRoomId==classRoomId)))
-                    throw new Exception("Class Room not Found!");
+                    throw new NotFoundException("Class Room not Found!");
 
             return _mapper.Map<ICollection<GetTeacherItemDTO>>(_teacherRepository.GetAll(page: page,
                                                                                          take: take,
@@ -33,8 +34,5 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                                                          function:x=>x.TeacherClassRooms.Select(tc=>tc.ClassRoomId).Contains(classRoomId),
                                                                                          sort: x => x.AppUser.Name));
         }
-
-
-
     }
 }

@@ -52,7 +52,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                 .GetByIdAsync(id, includes: [nameof(ChoiceQuestion.Options)]);
 
             if (choiceQuestion is null)
-                throw new Exception("The Question not Found!");
+                throw new NotFoundException("The Question not Found!");
 
             return _mapper.Map<GetChoiceQuestionForUpdateDTO>(choiceQuestion);                       
         }
@@ -61,7 +61,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             OpenQuestion? openQuestion = (OpenQuestion)await _questionRepository.GetByIdAsync(id);
 
             if (openQuestion is null)
-                throw new Exception("The Question not Found!");
+                throw new NotFoundException("The Question not Found!");
 
             return _mapper.Map<GetOpenQuestionForUpdateDTO>(openQuestion);                      
         }
@@ -71,7 +71,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                         .GetByIdAsync(id, includes: ["Quiz.ClassRoom", "Options"]);
 
             if (question is null)
-                throw new Exception("Question Not Found");
+                throw new NotFoundException("Question Not Found");
 
             GetQuestionDTO questionDTO = _mapper.Map<GetQuestionDTO>(question);
 
@@ -112,7 +112,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
             else
             {
-                throw new Exception("Bad Type Request!");
+                throw new BadRequestException("Bad Type Request!");
             }
 
 
@@ -131,7 +131,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
             else
             {
-                throw new Exception("Bad Type Request!");
+                throw new BadRequestException("Bad Type Request!");
             }
         }
         public async Task DeleteChoiceQuestionAsync(long id)
@@ -146,7 +146,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             }
             catch (Exception)
             {
-                throw new Exception("An error occurred while deleting the Choice question.");
+                throw new BadRequestException("An error occurred while deleting the Choice question.");
             }   
         }
         public async Task DeleteOpenQuestionAsync(long id)
@@ -156,7 +156,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 OpenQuestion deletedOpen = (OpenQuestion)await _questionRepository.GetByIdAsync(id, includes: ["Quiz"], isIgnore: true);
 
                 if (deletedOpen is null)
-                    throw new Exception("The Question isn't Found!");
+                    throw new NotFoundException("The Question isn't Found!");
 
                 deletedOpen.IsDeleted = true;
 
@@ -166,7 +166,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             catch (Exception)
             {
-                throw new Exception("An error occurred while deleting the Open question.");
+                throw new BadRequestException("An error occurred while deleting the Open question.");
             }
         }
 
@@ -194,17 +194,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                 PutOptionInChoiceQuestionDTO pq = newOptions.ElementAt(i);
 
                 if (pq.Id.HasValue)
-                {
-                    try
-                    {
+                {                  
                         if (!await _optionRepository.AnyAsync(o => o.Id == pq.Id))
-                            throw new Exception("The Option not Found!");
-                    }
-                    catch(Exception e)
-                    {
-                        throw new Exception(e.ToString());
-                    }
-                   
+                            throw new NotFoundException("The Option not Found!");                                 
                 }
                 
                 Option? dublictate = oldOptions
@@ -236,7 +228,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (!await _quizRepository.AnyAsync(q =>q.Id == quizId && q.ChoiceQuestions.Any(cq => cq.Id == id)
                                                || q.OpenQuestions.Any(oq => oq.Id == id)))
             {
-                throw new Exception("The Question Not found in this Quiz");
+                throw new NotFoundException("The Question not found in this Quiz");
             }
 
             if (questionDTO is PutChoiceQuestionDTO)            
@@ -245,10 +237,10 @@ namespace ClassTrack.Persistance.Implementations.Services
             
             else oldQuestion = await _questionRepository.GetByIdAsync(id, includes: [nameof(Question.Quiz)]) as E;
             
-            if (oldQuestion == null) throw new Exception("The Question isn't Found!");
+            if (oldQuestion == null) throw new NotFoundException("The Question not Found!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim() && q.Id != id))
-                throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
+                throw new ConflictException("The Same Question Title couldn't use again in the Same Quiz");
 
             return oldQuestion;
         }
@@ -257,10 +249,10 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz quiz = await _quizRepository.GetByIdAsync(questionDTO.QuizId.Value);
 
             if(quiz is null) 
-                throw new Exception("The Quiz isn't Found!");
+                throw new NotFoundException("The Quiz isn't Found!");
 
             if (await _questionRepository.AnyAsync(q => q.Title.Trim() == questionDTO.Title.Trim()))
-                throw new Exception("The Same Question Title couldn't use again in the Same Quiz");
+                throw new ConflictException("The Same Question Title couldn't use again in the Same Quiz");
         }
 
     }

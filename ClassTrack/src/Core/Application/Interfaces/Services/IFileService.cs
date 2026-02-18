@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.Interfaces.Services
 {
-    public interface ICloudService
+    public interface IFileService
     {
         Task<CloudinaryResponceDTO> UploadAsync(IFormFile file);
         Task<string> DeleteFileAsync(string publicId);

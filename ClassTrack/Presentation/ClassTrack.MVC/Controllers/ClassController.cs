@@ -51,7 +51,19 @@ namespace ClassTrack.MVC.Controllers
             if (id < 1)
                 return BadRequest();
 
-            await _roomService.UpdateClassRoomAsync(id, new PutClassRoomVM(classRoomVM.PutClassRoom.Name));
+            ServiceResult result = await _roomService.UpdateClassRoomAsync(id, new PutClassRoomVM(classRoomVM.PutClassRoom.Name));
+
+            if (!result.Ok)
+            {
+                ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
+
+                GetClassRoomWithPermissionVM getClassRoom = await _roomService.GetByIdAsync(id);
+
+                if (getClassRoom.IsTeacher.IsTeacher)
+                    return View("TeacherClassRoom", getClassRoom);
+
+                return View("StudentClassRoom", getClassRoom);
+            }
 
             return RedirectToAction("ClassRoom",new {id});
         }
@@ -78,7 +90,8 @@ namespace ClassTrack.MVC.Controllers
             {
                 ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
             }
-            return RedirectToAction("Dashboard");
+            return View(nameof(Dashboard), new DashboardVM(await _roomService.GetAllAsync(),
+                                                    dashboardVM.PostClass));
         }
 
         [HttpPost]

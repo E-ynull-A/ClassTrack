@@ -4,12 +4,8 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
-using ClassTrack.Persistance.DAL;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+using ClassTrack.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class QuizService : IQuizService
@@ -51,7 +47,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz quiz = await _quizRepository.GetByIdAsync(id);
 
             if (quiz is null)
-                throw new Exception("The Quiz not Found!");
+                throw new NotFoundException("The Quiz not Found!");
 
             return _mapper.Map<GetQuizItemDTO>(quiz);
         }
@@ -61,13 +57,13 @@ namespace ClassTrack.Persistance.Implementations.Services
                              .GetByIdAsync(id, includes: ["ChoiceQuestions.Options", "OpenQuestions"]);
 
             if (quiz is null)
-                throw new Exception("The Quiz not Found");
+                throw new NotFoundException("The Quiz not Found");
 
             if (DateTime.UtcNow < quiz.StartTime.ToUniversalTime()
                 || DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration).ToUniversalTime())
             {
-                throw new Exception("You can enter The Quiz only after the Starting Quiz " +
-                                    "and Before the Quiz Ending!!");
+                throw new BusinessLogicException("You can enter The Quiz only after the Starting Quiz " +
+                                                    "and Before the Quiz Ending!!");
             }
 
             return _mapper.Map<GetQuizDTO>(quiz);
@@ -77,7 +73,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (!await _roomRepository.AnyAsync(r => r.Id == postQuiz.ClassRoomId))
             {
-                throw new Exception("The ClassRoom isn't Found!");
+                throw new NotFoundException("The ClassRoom isn't Found!");
             }
 
             int totalCount = 0;
@@ -88,13 +84,13 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if (totalCount > 200)
             {
-                throw new Exception("The Count of Quiz is so high");
+                throw new BusinessLogicException("The Count of Quiz is so high");
             }
 
             if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&
                                              q.ClassRoomId != postQuiz.ClassRoomId))
             {
-                throw new Exception("Don't Create the Quiz with the same Name in this Class!");
+                throw new ConflictException("Don't Create the Quiz with the same Name in this Class!");
             }
 
             Quiz created = _mapper.Map<Quiz>(postQuiz);
@@ -122,16 +118,16 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz edited = await _quizRepository.GetByIdAsync(id);
 
             if (edited is null)
-                throw new Exception("The Quiz isn't Found!");
+                throw new NotFoundException("The Quiz isn't Found!");
 
             if (!await _roomRepository.AnyAsync(r => r.Id == putQuiz.ClassRoomId))
-                throw new Exception("The ClassRoom isn't Found!");
+                throw new NotFoundException("The ClassRoom isn't Found!");
 
             _getAllowQuizModify(edited);
 
             if (await _quizRepository.AnyAsync(q => q.Name == edited.Name &&
                                                  q.ClassRoomId != edited.ClassRoomId))          
-                throw new Exception("Don't Update the Quiz to the same Name in this Class!");
+                throw new ConflictException("Don't Update the Quiz to the same Name in this Class!");
             
             _quizRepository.Update(_mapper.Map(putQuiz, edited));
 
@@ -142,7 +138,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             Quiz? deleted = await _quizRepository.GetByIdAsync(id);
 
             if (deleted == null)
-                throw new Exception("The Quiz isn't Found!");
+                throw new NotFoundException("The Quiz isn't Found!");
 
             _quizRepository.Delete(deleted);
             await _quizRepository.SaveChangeAsync();
@@ -150,10 +146,10 @@ namespace ClassTrack.Persistance.Implementations.Services
         private void _getAllowQuizModify(Quiz quiz)
         {
             if (quiz.StartTime <= DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration) > DateTime.UtcNow)
-                throw new Exception("Couldn't Modify The Quiz during Quiz Time!");
+                throw new BusinessLogicException("Couldn't Modify The Quiz during Quiz Time!");
 
             if (quiz.StartTime.Add(quiz.Duration) < DateTime.UtcNow)
-                throw new Exception("Couldn't Modify The Quiz after the Quiz!");
+                throw new BusinessLogicException("Couldn't Modify The Quiz after the Quiz!");
         }
     }
 }

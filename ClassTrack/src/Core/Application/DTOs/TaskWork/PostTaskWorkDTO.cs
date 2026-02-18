@@ -14,7 +14,13 @@ namespace ClassTrack.Application.DTOs
         string MainPart,
         DateTime EndDate,
         DateTime StartDate,
-        PostTaskWorkAttachmentDTO AttachmentDTO);
+        PostTaskWorkAttachmentDTO AttachmentDTO)
+    {
+        public PostTaskWorkDTO():this(0,"","",default,default,null)
+        {
+            
+        }
+    };
 
    
 }

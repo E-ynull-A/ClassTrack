@@ -10,9 +10,9 @@ namespace ClassTrack.API.Controllers
     [ApiController]
     public class CloudsController : ControllerBase
     {
-        private readonly ICloudService _cloudService;
+        private readonly IFileService _cloudService;
 
-        public CloudsController(ICloudService cloudService)
+        public CloudsController(IFileService cloudService)
         {
             _cloudService = cloudService;
         }

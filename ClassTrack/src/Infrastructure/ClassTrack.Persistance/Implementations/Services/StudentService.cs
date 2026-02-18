@@ -3,6 +3,7 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
@@ -37,7 +38,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<ICollection<GetSimpleStudentItemDTO>> GetBriefAllAsync(long classRoomId,int page,int take)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
-                throw new Exception("Class Room not Found!");
+                throw new NotFoundException("Class Room not Found!");
 
             return _mapper.Map<ICollection<GetSimpleStudentItemDTO>>(_studentRepository.GetAll(page: page,
                                                                                                take: take,
@@ -48,7 +49,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task<ICollection<GetStudentItemDTO>> GetAllAsync(long classRoomId, int page, int take)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
-                throw new Exception("Class Room not Found!");
+                throw new NotFoundException("Class Room not Found!");
 
             return _mapper.Map<ICollection<GetStudentItemDTO>>(_studentRepository.GetAll(page: page,
                                                                                          take: take,
@@ -60,11 +61,11 @@ namespace ClassTrack.Persistance.Implementations.Services
 
         public async Task JoinClassAsync(JoinClassRoomDTO classRoomDTO)
         {
-            ClassRoom room = await _roomRepository.FirstOrDefaultAsync(r => r.PrivateKey == classRoomDTO.ClassKey,
+            ClassRoom? room = await _roomRepository.FirstOrDefaultAsync(r => r.PrivateKey == classRoomDTO.ClassKey,
                                                                             includes: ["StudentClasses.Student"]);
 
             if (room is null)
-                throw new Exception("The Room isn't Found!!");
+                throw new NotFoundException("The Room isn't Found!!");
 
             string userId = _currentUser.GetUserId();
 
@@ -72,11 +73,11 @@ namespace ClassTrack.Persistance.Implementations.Services
                && (r.StudentClasses.Any(sc => sc.Student.AppUserId == userId)
                   || r.TeacherClasses.Any(tc => tc.Teacher.AppUserId == userId))))
             {
-                throw new Exception("You already member of this Class");
+                throw new ConflictException("You already member of this Class");
             }
 
             if (userId is null)
-                throw new Exception("There is an issue about Login!");
+                throw new BadRequestException("There is an issue about Login!");
 
             if (!room.StudentClasses.Any(sc => sc.Student.AppUserId == userId))
             {
@@ -107,18 +108,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId);
 
             if (room is null)
-                throw new Exception("Class Room not Found");
+                throw new NotFoundException("Class Room not Found");
 
             Student? student = await _studentRepository.GetByIdAsync(studentId,includes: ["StudentClasses"]);
 
             if (student is null)
-                throw new Exception("Student Not Found");
+                throw new NotFoundException("Student Not Found");
 
             StudentClassRoom? studentRoom = student.StudentClasses.FirstOrDefault(sc => sc.ClassRoomId == classRoomId);
 
             if (studentRoom is null)
             {
-                throw new Exception("The Student not Found in this Class Room");
+                throw new NotFoundException("The Student not Found in this Class Room");
             }
 
             student.StudentClasses.Remove(studentRoom);
@@ -131,18 +132,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId);
 
             if (room is null)
-                throw new Exception("Class Room not Found");
+                throw new NotFoundException("Class Room not Found");
 
             Student? student = await _studentRepository.GetByIdAsync(studentId, includes: ["StudentClasses","AppUser"]);
 
             if (student is null)
-                throw new Exception("Student Not Found");
+                throw new NotFoundException("Student Not Found");
 
             StudentClassRoom? studentRoom = student.StudentClasses.FirstOrDefault(sc => sc.ClassRoomId == classRoomId);
 
             if (studentRoom is null)
             {
-                throw new Exception("The Student not Found in this Class Room");
+                throw new NotFoundException("The Student not Found in this Class Room");
             }
 
             student.StudentClasses.Remove(studentRoom);
@@ -168,18 +169,16 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                    nameof(Student.StudentClasses)]);
 
             if (student is null)
-                throw new Exception("Student not Found!");
+                throw new NotFoundException("Student not Found!");
 
             StudentClassRoom? studentClass = student.StudentClasses.FirstOrDefault(sc => sc.ClassRoomId == classRoomId);
 
             if (studentClass is null)
-                throw new Exception("You are not the member of this class");
-
+                throw new NotFoundException("You are not the member of this class");
 
             decimal fullQuizPoint = await _studentQuiz.AverageAsync(x => (x.TotalPoint / x.Quiz.FullPoint) * 1.5m,
                                                                     x => x.Quiz.ClassRoomId == classRoomId &&
                                                                     x.StudentId == studentId);
-
             studentClass.AvgPoint += fullQuizPoint;
 
             _studentRepository.Update(student);

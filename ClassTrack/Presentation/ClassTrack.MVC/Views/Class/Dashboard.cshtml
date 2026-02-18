@@ -11,15 +11,6 @@
             <input class="input" asp-for="@Model.PostClass.Name" id="className" placeholder="Məs: Network 101" />
             <span asp-validation-for="@Model.PostClass.Name"></span>
             <button type="submit" class="btn primary" id="btnCreate" style="margin-top:12px">Create</button>
-            <div class="mini-panel" id="createPanel" style="display:none; margin-top:12px;">
-                <div class="muted" id="createPanelText">Class hazırdır. İndi create edə bilərsən.</div>
-
-                <div class="row" style="margin-top:10px; gap:10px; align-items:center;">
-                    <span class="badge" id="createdCode" style="display:none;">CODE: A7K2Q9</span>
-                    <button class="btn" id="btnCopyCreated" type="button" style="display:none;">Copy code</button>
-                    <a class="btn primary" id="btnGoClass" href="#" style="display:none;">Go to class</a>
-                </div>
-            </div>
         </div>
     </form>
     <form class="card col" asp-action="JoinClassRoom" method="post">
@@ -67,8 +58,9 @@
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
+        <div asp-validation-summary="ModelOnly"></div>
     </div>
-    <div asp-validation-summary="ModelOnly"></div>
+   
 </div>
 
 <div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>

@@ -4,6 +4,7 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
+using ClassTrack.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -25,20 +26,13 @@ namespace ClassTrack.Persistance.Implementations.Services
             _currentUser = currentUser;
         }
 
-        public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page,
-                                                                        int take)
+        public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page,int take)
         {
             string userId = _currentUser.GetUserId();
             string userRole = string.Empty;
-            try
-            {
-                userRole = _currentUser.GetUserRole();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
+          
+            userRole = _currentUser.GetUserRole();
+                   
             var getClasses = _roomRepository.GetAll(page: page, take: take,sort:x=>x.Name);
 
             if (userId is not null && userRole != UserRole.Admin.ToString())
@@ -52,14 +46,11 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task<GetClassRoomDTO> GetByIdAsync(long id)
         {
-
             ClassRoom classRoom = await _roomRepository.GetByIdAsync(id,
                                                                     includes: [nameof(ClassRoom.StudentClasses)]);
 
             if (classRoom is null)
-                throw new Exception("The Class Room isn't Found!");
-
-
+                throw new NotFoundException("The Class Room not Found!");
 
             return _mapper.Map<GetClassRoomDTO>(classRoom);
         }
@@ -69,7 +60,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             string userId = _currentUser.GetUserId();
 
             if (await _roomRepository.AnyAsync(r => r.Name == postClass.Name))
-                throw new Exception("The Name has already used");
+                throw new ConflictException("The Name has already used");
 
             ClassRoom newClass = new ClassRoom
             {
@@ -89,7 +80,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             else
             {
                 if (teacher.TeacherClassRooms.Count() == 15)
-                    throw new Exception("Your Class Room Count exceed the Limit!");
+                    throw new BusinessLogicException("Your Class Room Count exceed the Limit!");
                 newClass.TeacherClasses.Add(new TeacherClassRoom { TeacherId = teacher.Id});
             }
 
@@ -101,12 +92,12 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
 
             if (await _roomRepository.AnyAsync(r => r.Name == putClass.Name))
-                throw new Exception("The Name has already used");
+                throw new ConflictException("The Name has already used");
 
             ClassRoom edited = await _roomRepository.GetByIdAsync(id);
 
             if (edited is null)
-                throw new Exception("The ClassRoom isn't Found!");
+                throw new NotFoundException("The ClassRoom isn't Found!");
 
             edited.Name = putClass.Name;
 
@@ -118,7 +109,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             ClassRoom deleted = await _roomRepository.GetByIdAsync(id);
 
             if (deleted is null)
-                throw new Exception("The ClassRoom isn't Found!");
+                throw new NotFoundException("The ClassRoom isn't Found!");
 
             _roomRepository.Delete(deleted);
             await _roomRepository.SaveChangeAsync();

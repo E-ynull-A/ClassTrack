@@ -2,6 +2,7 @@
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Utilities;
 using ClassTrack.Persistance.DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
 
             if (string.IsNullOrEmpty(userId) || classRoomId < 1)
-                throw new Exception("Invalid User and ClassRoom IDs!!");
+                throw new BadRequestException("Invalid User and ClassRoom IDs!!");
 
             string cacheKey = $"Is_Teacher_{userId}_{classRoomId}";
 
