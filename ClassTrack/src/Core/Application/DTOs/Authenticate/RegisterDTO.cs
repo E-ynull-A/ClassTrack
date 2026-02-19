@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 namespace ClassTrack.Application.DTOs
 {
     public record RegisterDTO
-        (string Name,
+       (string Name,
         string Surname,
         string UserName,
         string Email,
         string Password,
-        string ConfirmPassword,
-        byte Age,DateOnly BirthDate,
-        UserRole UserRole);
+        byte Age);
 }  
                                
                               

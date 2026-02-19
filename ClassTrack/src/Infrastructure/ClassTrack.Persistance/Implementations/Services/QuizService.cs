@@ -87,8 +87,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new BusinessLogicException("The Count of Quiz is so high");
             }
 
-            if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&
-                                             q.ClassRoomId != postQuiz.ClassRoomId))
+            if (await _quizRepository.AnyAsync(q => q.Name == postQuiz.Name &&                       
+                                             q.ClassRoomId == postQuiz.ClassRoomId))
             {
                 throw new ConflictException("Don't Create the Quiz with the same Name in this Class!");
             }
@@ -125,8 +125,8 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             _getAllowQuizModify(edited);
 
-            if (await _quizRepository.AnyAsync(q => q.Name == edited.Name &&
-                                                 q.ClassRoomId != edited.ClassRoomId))          
+            if (await _quizRepository.AnyAsync(q => q.Name == edited.Name && q.Id != edited.Id &&
+                                                 q.ClassRoomId == edited.ClassRoomId))          
                 throw new ConflictException("Don't Update the Quiz to the same Name in this Class!");
             
             _quizRepository.Update(_mapper.Map(putQuiz, edited));

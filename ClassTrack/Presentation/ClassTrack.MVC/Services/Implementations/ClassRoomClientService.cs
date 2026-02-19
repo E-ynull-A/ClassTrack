@@ -1,5 +1,6 @@
 ﻿using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
+using Microsoft.AspNetCore.Diagnostics;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -46,8 +47,8 @@ namespace ClassTrack.MVC.Services.Implementations
 
             if (!message.IsSuccessStatusCode)
             {
-                var errorContent = await message.Content.ReadAsStringAsync();
-                return new ServiceResult(false, nameof(DashboardVM.PostClass.Name), errorContent);
+                var errorContent = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, "PostClass.Name" ,errorContent.Message);
             }
 
             return new ServiceResult(true);
@@ -56,16 +57,16 @@ namespace ClassTrack.MVC.Services.Implementations
         {
 
             if (joinClass.ClassKey.Trim().Length != 8)
-                return new ServiceResult(false, nameof(JoinClassRoomVM.ClassKey), "There is no any Class Room in this Key");
+                return new ServiceResult(false, "JoinClass.ClassKey", "There is no any Class Room in this Key");
             if (!joinClass.ClassKey.All(Char.IsLetterOrDigit))
-                return new ServiceResult(false, nameof(JoinClassRoomVM.ClassKey), "There is no any Class Room in this Key");
+                return new ServiceResult(false, "JoinClass.ClassKey", "There is no any Class Room in this Key");
 
              var message = await _httpClient.PostAsJsonAsync("Students", joinClass);
 
             if (!message.IsSuccessStatusCode)
             {
-                var errorContent = await message.Content.ReadAsStringAsync();
-                return new ServiceResult(false, nameof(JoinClassRoomVM.ClassKey), errorContent);
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, "JoinClass.ClassKey", error.Message);
             }
 
             return new ServiceResult(true);
@@ -80,9 +81,11 @@ namespace ClassTrack.MVC.Services.Implementations
 
             if (!message.IsSuccessStatusCode)
             {
+                var result = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+
                 return new ServiceResult(false, 
                                 "PutClassRoom.Name",
-                                await message.Content.ReadAsStringAsync());
+                                result.Message);
             }
 
             return new ServiceResult(true);

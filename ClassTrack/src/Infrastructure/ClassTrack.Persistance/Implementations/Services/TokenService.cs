@@ -81,7 +81,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             return new RefreshTokenDTO(Guid.NewGuid().ToString("N")
                   + Guid.NewGuid().ToString("N"));
         }
-        public async Task<ResponseTokenDTO> RefreshAsync(string rToken)
+        public async Task<ResponseTokenDTO> RefreshAsync(string rToken,int acMinutes)
         {
             if (string.IsNullOrEmpty(rToken))
                 throw new BadRequestException("You have to login!");
@@ -94,6 +94,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 if(token is null)
                     throw new BadRequestException("You have to login!");
                 userId = token.UserId;
+                _tokenRepository.Delete(token);
             }
                
             AppUser user = await _userManager.FindByIdAsync(userId);
@@ -105,13 +106,14 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             await _cacheService.RemoveAsync(rToken);
 
-            ResponseTokenDTO tokenDTO = new ResponseTokenDTO(CreateAccessToken(user, userRoles, 15),
+
+            ResponseTokenDTO tokenDTO = new ResponseTokenDTO(CreateAccessToken(user, userRoles, acMinutes),
                                                              GenerateRefreshToken());
 
-            await _cacheService.SetCasheAsync(tokenDTO.RefreshToken.RefreshToken, userId, TimeSpan.FromMinutes(60 * 24 * 7));
+            await _cacheService.SetCasheAsync(tokenDTO.RefreshToken.RefreshToken, userId, TimeSpan.FromMinutes(acMinutes*4));
             _tokenRepository.Add(new RefreshToken
             {
-                ExpiryTime = DateTime.UtcNow.AddDays(7),
+                ExpiryTime = DateTime.UtcNow.AddMinutes(acMinutes*4),
                 UserId = userId,
                 Token = tokenDTO.RefreshToken.RefreshToken,                
             });

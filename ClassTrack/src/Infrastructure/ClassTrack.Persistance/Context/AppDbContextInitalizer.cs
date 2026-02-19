@@ -57,8 +57,7 @@ namespace ClassTrack.Persistance.Context
                     Name = "Eynulla",
                     Surname = "Mahmudov",
                     UserName = _config["AdminData:Username"],
-                    Age = 19,
-                    BirthDate = DateOnly.Parse("2006-10-10"),                   
+                    Age = 19,                   
                     Email = _config["AdminData:Email"],
                     EmailConfirmed = true
                 };

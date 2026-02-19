@@ -15,7 +15,7 @@ namespace ClassTrack.Application.Interfaces.Services
                                          IEnumerable<string> roles,
                                          int minutes);
         RefreshTokenDTO GenerateRefreshToken();
-        Task<ResponseTokenDTO> RefreshAsync(string refreshT);
+        Task<ResponseTokenDTO> RefreshAsync(string rToken, int acMinutes);
         Task GenerateResetTokenAsync(ResetTokenDTO passwordDTO);
     }
 }

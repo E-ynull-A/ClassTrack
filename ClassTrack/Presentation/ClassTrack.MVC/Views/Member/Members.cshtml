@@ -2,21 +2,18 @@
 
 <link rel="stylesheet" href="~/css/members.css">
 <div class="topbar">
-    <div>
-        <div class="h1">Members</div>
-        <div class="muted">Teacher only • promote/demote/kick</div>
-    </div>
-    <div class="nav">
-        <button class="btn primary" id="btnInvite">Invite Link (copy code)</button>
-    </div>
+
+
+    <a class="btn btn-dark" asp-action="ClassRoom" asp-controller="Class"
+                            asp-route-id="@Context.GetRouteValue("classRoomId")">Back</a>
+    <div class="h1">Members</div>
 </div>
 
-<div class="card">
+<div class="card" style="width:600px">
     <div class="h2">Teachers</div>
     <div class="line"></div>
 
-    <div class="m-list">
-       
+    <div class="m-list">     
         @foreach (GetTeacherItemVM teacherVM in Model.Teachers)
         {
             <div class="m-row">

@@ -15,15 +15,22 @@
             <div class="label">Şifrə</div>
             <input class="input" asp-for="Password" id="password" type="password" placeholder="••••••••" />
             <span style="margin-top:20px" asp-validation-for="Password" class="help-block text-danger"></span>
-            <span class="text-warning"><a asp-action="Forget">Forget Password?</a></span>
+           
+            <div style="margin-top:8px">
+                <span class="text-warning">
+                    <a asp-action="Forget">Forget Password?</a>
+                </span>
+            </div>
+          
 
             <div class="row" style="margin-top:14px">
                 <button class="btn primary" id="btnLogin">Login</button>
             </div>
-            <div style="margin-top:10px" asp-validation-summary="ModelOnly"  class="help-block text-danger"></div>
         </div>
+
+        <div style="margin:10px" asp-validation-summary="ModelOnly" class="help-block text-danger"></div>
     </form>
-    
+
 </div>
 
 <div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>

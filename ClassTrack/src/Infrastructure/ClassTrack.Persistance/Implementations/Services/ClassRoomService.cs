@@ -91,7 +91,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         public async Task UpdateClassRoomAsync(long id, PutClassRoomDTO putClass)
         {
 
-            if (await _roomRepository.AnyAsync(r => r.Name == putClass.Name))
+            if (await _roomRepository.AnyAsync(r => r.Name.Trim() == putClass.Name.Trim() && r.Id != id))
                 throw new ConflictException("The Name has already used");
 
             ClassRoom edited = await _roomRepository.GetByIdAsync(id);

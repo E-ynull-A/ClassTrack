@@ -8,7 +8,6 @@ namespace ClassTrack.Domain.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public byte Age { get; set; }
-        public DateOnly BirthDate { get; set; }
 
         //Relations
 

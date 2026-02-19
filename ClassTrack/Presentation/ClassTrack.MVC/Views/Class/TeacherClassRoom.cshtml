@@ -57,20 +57,19 @@
         </a>
         
         <a class="btn danger" id="btnCreateTask"
-           asp-action="DeleteClassRoom" asp-route-id="@Context.GetRouteValue("id")" type="button">
+           asp-action="DeleteClassRoom" 
+           asp-route-id="@Context.GetRouteValue("id")"
+           onclick="return confirm('Bu sinfi silməyə əminsiniz?')"
+           type="button">
             Delete Class
         </a>
     </div>
    
 
-    <div class="card" @* id="renameBox" *@
+    <div class="card"
          style="margin-top:12px; max-width:520px;">
 
         <div class="h2">Quick rename</div>
-        <div class="muted" style="margin-top:4px">
-            Sadəcə adı dəyiş və save elə.
-        </div>
-
         <div class="line" style="margin:12px 0"></div>
 
         <form class="row-inline" asp-action="Update" 
@@ -82,9 +81,8 @@
                 <div class="label">Class name</div>
                 <input class="input"
                        asp-for="PutClassRoom.Name"
-                       placeholder="Yeni ad..."
                        required />
-                <span asp-validation-for="PutClassRoom.Name"></span>
+                <div style="margin:9px 3px"><span asp-validation-for="PutClassRoom.Name"></span></div>
             </div>
 
             <button class="btn ok" >Save</button>
@@ -93,19 +91,3 @@
 </div>
 
 <script defer src="~/js/class.js"></script>
-<script>
-    const btn = document.getElementById("btnToggleRename");
-    const box = document.getElementById("renameBox");
-    const input = box.querySelector('input[name="Name"]');
-
-    btn.addEventListener("click", () => {
-      const opened = box.style.display === "block";
-
-      box.style.display = opened ? "none" : "block";
-      btn.textContent = opened ? "Edit name" : "Cancel";
-
-      if (!opened) {
-        setTimeout(() => input.focus(), 50);
-      }
-    });
-</script>

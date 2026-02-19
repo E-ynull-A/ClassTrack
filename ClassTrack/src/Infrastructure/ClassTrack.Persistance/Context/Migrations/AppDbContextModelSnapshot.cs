@@ -33,9 +33,6 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<byte>("Age")
                         .HasColumnType("TINYINT");
 
-                    b.Property<DateOnly>("BirthDate")
-                        .HasColumnType("DATE");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");

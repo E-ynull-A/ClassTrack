@@ -30,8 +30,11 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             var message = await _httpClient.PostAsJsonAsync($"QuizAnswers/{classRoomId}",studentAnswer);
 
-            if (!message.IsSuccessStatusCode)            
-                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
+            if (!message.IsSuccessStatusCode)
+            {
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, string.Empty, error.Message);
+            }
 
             return new ServiceResult(true);
         }
@@ -43,7 +46,10 @@ namespace ClassTrack.MVC.Services.Implementations
             HttpResponseMessage message = await _httpClient.PutAsJsonAsync($"QuizAnswers/{classRoomId}/{id}/Evaulate",answerVM);
 
             if (!message.IsSuccessStatusCode)
-                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
+            {
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, string.Empty, error.Message);
+            }
 
             return new ServiceResult(true);
         }

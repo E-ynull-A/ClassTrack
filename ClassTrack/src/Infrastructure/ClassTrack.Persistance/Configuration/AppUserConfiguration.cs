@@ -26,10 +26,6 @@ namespace ClassTrack.Persistance.Configuration
             builder.Property(p => p.Age)
                 .HasColumnType("TINYINT")
                 .IsRequired();
-
-            builder.Property(p => p.BirthDate)
-                .HasColumnType("DATE")
-                .IsRequired();
                 
             builder.Property(p => p.PhoneNumber)
                 .HasColumnType("NVARCHAR(25)");

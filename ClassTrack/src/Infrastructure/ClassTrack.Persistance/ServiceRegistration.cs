@@ -32,7 +32,7 @@ namespace ClassTrack.Persistance
                         opt.Password.RequireNonAlphanumeric = false;
 
                         opt.Lockout.MaxFailedAccessAttempts = 5;
-                        opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+                        opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                     }
 
                 )

@@ -8,8 +8,8 @@
         <div>
             <div class="h2">Create Class</div>
             <div class="label">Class name</div>
-            <input class="input" asp-for="@Model.PostClass.Name" id="className" placeholder="Məs: Network 101" />
-            <span asp-validation-for="@Model.PostClass.Name"></span>
+            <input class="input" asp-for="PostClass.Name" id="className" placeholder="Məs: Network 101" />
+            <div style="margin:8px"><span asp-validation-for="PostClass.Name"></span></div>
             <button type="submit" class="btn primary" id="btnCreate" style="margin-top:12px">Create</button>
         </div>
     </form>
@@ -18,11 +18,10 @@
             <div class="h2">Join Class (Student)</div>
             <div class="label">Class code</div>
             <input class="input" id="classCode" asp-for="@Model.JoinClass.ClassKey" placeholder="Məs: A7K2Q9" />
-            <button class="btn ok" id="btnJoin" style="margin-top:12px">Join</button>
-            <br />
             <div style="margin-top:10px">
-                <span asp-validation-for="@Model.JoinClass.ClassKey"></span>
+                <span asp-validation-for="JoinClass.ClassKey"></span>
             </div>
+            <button class="btn ok" id="btnJoin" style="margin-top:12px">Join</button>          
         </div>
     </form>
 

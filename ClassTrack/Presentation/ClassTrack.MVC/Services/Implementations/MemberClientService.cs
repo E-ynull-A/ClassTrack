@@ -42,7 +42,10 @@ namespace ClassTrack.MVC.Services.Implementations
            HttpResponseMessage message = await _httpClient.DeleteAsync($"Students/{classRoomId}/{studentId}");
 
             if (!message.IsSuccessStatusCode)
-                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
+            {
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, string.Empty, error.Message);
+            }
 
             return new ServiceResult(true);
         }
@@ -51,8 +54,12 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             HttpResponseMessage message = await _httpClient.PutAsJsonAsync($"Students/{classRoomId}/{studentId}",string.Empty);
 
+
             if (!message.IsSuccessStatusCode)
-                return new ServiceResult(false, string.Empty, await message.Content.ReadAsStringAsync());
+            {
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, string.Empty, error.Message);
+            }
 
             return new ServiceResult(true);
         }

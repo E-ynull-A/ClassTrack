@@ -8,7 +8,11 @@
     <div class="attendance-table">
         <form method="post" asp-action="Create" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">
             <div class="topbar">
-                <a class="btn btn-dark" asp-action="GetAll" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">History</a>
+                <div>
+                    <a class="btn btn-dark" asp-action="GetAll" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">History</a>
+                    <a class="btn btn-dark" asp-action="ClassRoom" asp-controller="Class" asp-route-id="@Context.GetRouteValue("classRoomId")">Back</a>
+                </div>
+
                 <h2>Attendance Panel</h2>          
                 <div class="date-box">
                     <label>Lesson Date</label>
@@ -16,8 +20,8 @@
                 </div>
             </div>
             @for (int i = 0; i < Model.StudentVMs.Count; i++)
-            {           
-                <div class="student-row">
+            {
+                <div class="student-row" style="padding: 8px 15px;">
                     <input type="hidden"
                            asp-for="AttendanceVMs[i].StudentId" value="@Model.StudentVMs[i].Id" />
 

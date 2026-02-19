@@ -9,7 +9,7 @@
             <div class="muted">Quiz → suallar → yekunda submit.</div>
         </div>
         <div class="nav">
-            <a class="btn">← Class</a>
+            <a class="btn" asp-controller="Class" asp-action="ClassRoom" asp-route-id="@ViewContext.RouteData.Values["id"]">← Class</a>
             <button class="btn" id="btnReset" type="button">Reset</button>
         </div>
     </div>
@@ -205,7 +205,7 @@
     </section>
     <div id="bindFields"></div>
 </form>
-<div asp-validation-summary="ModelOnly" ></div>
+<div asp-validation-summary="ModelOnly"></div>
 
 
 <script src="~/js/create-quiz.js"></script>

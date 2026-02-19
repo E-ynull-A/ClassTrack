@@ -19,7 +19,6 @@ namespace ClassTrack.MVC.Services.Implementations
                                                    await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}" ));
 
         }
-
         public async Task<GetQuizItemVM> GetByIdAsync(long id,long classRoomId)
         {    
             return await _httpClient.GetFromJsonAsync<GetQuizItemVM>($"Quizes/{classRoomId}/{id}");
@@ -61,31 +60,31 @@ namespace ClassTrack.MVC.Services.Implementations
              var message = await _httpClient.PostAsJsonAsync($"Quizes/{quizVM.ClassRoomId}", quizVM);
             if (!message.IsSuccessStatusCode)
             {
-                var error = await message.Content.ReadAsStringAsync();
-                return new ServiceResult(false,string.Empty,error);
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false,string.Empty,error.Message);
             }
                
             return new ServiceResult(true);
         }
         public async Task<ServiceResult> UpdateQuizAsync(PutQuizVM quizVM, long id)
         {
-            if (quizVM.ClassRoomId < 1)
-                return new ServiceResult(false, string.Empty, "Invalid Class Room Request!");
+            //if (quizVM.ClassRoomId < 1)
+            //    return new ServiceResult(false, string.Empty, "Invalid Class Room Request!");
 
-            if (quizVM.Name.Length > 85)
-                return new ServiceResult(false, nameof(PutQuizVM.Name), "The Quiz Title is too long");
+            //if (quizVM.Name.Length > 85)
+            //    return new ServiceResult(false, "PutQuiz.Name", "The Quiz Title is too long");
 
-            if (quizVM.StartTime.ToUniversalTime() < DateTime.UtcNow)
-                return new ServiceResult(false, nameof(PutQuizVM.StartTime), "The Start Time of Quiz must be in the future or present");
+            //if (quizVM.StartTime.ToUniversalTime() < DateTime.UtcNow)
+            //    return new ServiceResult(false, "PutQuiz.StartTime", "The Start Time of Quiz must be in the future or present");
 
-            if (quizVM.Duration > 1440 || quizVM.Duration < 0)
-                return new ServiceResult(false, nameof(PutQuizVM.Duration), "The Quiz Duration is too high or too small");
+            //if (quizVM.Duration > 1440 || quizVM.Duration < 0)
+            //    return new ServiceResult(false, "PutQuiz.Duration", "The Quiz Duration is Incorrect");
 
             var message = await _httpClient.PutAsJsonAsync($"Quizes/{quizVM.ClassRoomId}/{id}",quizVM);
             if (!message.IsSuccessStatusCode)
             {
-                var error = await message.Content.ReadAsStringAsync();
-                return new ServiceResult(false, string.Empty, error);
+                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
+                return new ServiceResult(false, string.Empty, error.Message);
             }
 
             return new ServiceResult(true);

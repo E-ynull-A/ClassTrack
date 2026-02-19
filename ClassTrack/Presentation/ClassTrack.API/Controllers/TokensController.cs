@@ -20,7 +20,7 @@ namespace ClassTrack.API.Controllers
         [HttpGet("Refresh/{rToken}")]
         public async Task<IActionResult> Get(string rToken)
         {
-            return Ok(await _tokenService.RefreshAsync(rToken));
+            return Ok(await _tokenService.RefreshAsync(rToken,15));
         }
 
         [HttpPost("Reset")]

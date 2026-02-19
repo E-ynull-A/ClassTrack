@@ -63,8 +63,9 @@ namespace ClassTrack.MVC.Controllers
         public async Task<IActionResult> Update(long id,UpdateQuizVM quizVM)
         {         
 
-            if (!ModelState.IsValid)           
-                return View(quizVM);
+            if (!ModelState.IsValid)
+                return View(new UpdateQuizVM(quizVM.PutQuiz,
+                            await _questionClient.GetAllAsync(quizVM.PutQuiz.ClassRoomId, id)));
 
             ServiceResult serviceResult = await _quizClient.UpdateQuizAsync(quizVM.PutQuiz, id);
             if (!serviceResult.Ok)

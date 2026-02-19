@@ -6,12 +6,9 @@ using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
 using ClassTrack.Domain.Utilities;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Immutable;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -48,18 +45,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
             AppUser user = _mapper.Map<AppUser>(registerDTO);
 
-            IdentityResult result = await _manager.CreateAsync(user
-                                                         ,registerDTO.Password);
-
-            if (!result.Succeeded)
-            {
-                throw new ValidationException(result.Errors
-                    .GroupBy(e => e.Code)
-                    .ToDictionary(
-                        c => c.Key,
-                        c => c.Select(d => d.Description).ToArray())
-                    );
-            }
+            IdentityResult result = await _manager.CreateAsync(user,registerDTO.Password);
 
             await _emailService
                 .SendEmailAsync(user.Email, "Register Process"
@@ -76,8 +62,15 @@ namespace ClassTrack.Persistance.Implementations.Services
             {
                 throw new NotFoundException("The Username,Email or Password is Wrong!");
             }
+        
+            if(await _manager.IsLockedOutAsync(user))
+            {
+                var minutes = Math.Ceiling((user.LockoutEnd.Value - DateTime.UtcNow).TotalMinutes);
 
-            bool check = await _manager.CheckPasswordAsync(user, loginDTO.Password);
+                throw new ConflictException($"Try again {minutes} minutes later...");
+            }
+
+            bool check = await _manager.CheckPasswordAsync(user, loginDTO.Password);     
 
             if (!check)
             {
@@ -97,11 +90,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             _accessor.HttpContext.Response.Cookies.Delete("RefreshToken");
             _accessor.HttpContext.Response.Cookies.Delete("AccessToken");
 
-            await _cacheService.SetCasheAsync(rToken.RefreshToken, user.Id, TimeSpan.FromDays(7));
+            RefreshToken? oldToken = await _tokenRepository.FirstOrDefaultAsync(t => t.UserId == user.Id);
+
+            if(oldToken != null)
+            {
+                _tokenRepository.Delete(oldToken);
+            }
+
+            await _cacheService.SetCasheAsync(rToken.RefreshToken, user.Id, TimeSpan.FromMinutes(15*4));
 
             _tokenRepository.Add(new RefreshToken
             {
-                ExpiryTime = DateTime.UtcNow.AddDays(7),
+                ExpiryTime = DateTime.UtcNow.AddMinutes(60),
                 Token = rToken.RefreshToken,
                 UserId = user.Id
             });

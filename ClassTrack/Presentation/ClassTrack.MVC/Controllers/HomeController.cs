@@ -42,6 +42,30 @@ namespace ClassTrack.MVC.Controllers
             return RedirectToAction("Dashboard", "Class"); 
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(registerVM);
+            }
+
+            ServiceResult result = await _clientService.RegisterAsync(registerVM);
+
+            if(!result.Ok)
+            {
+                ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
+                return View(registerVM);
+            }
+
+            return RedirectToAction("Login");
+        }
+
         public IActionResult Forget()
         {
             return View("Forgot_Password");

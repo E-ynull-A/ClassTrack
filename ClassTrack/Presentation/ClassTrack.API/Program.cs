@@ -1,4 +1,5 @@
 using ClassTrack.API.ActionFilter;
+using ClassTrack.API.Middlewares;
 using ClassTrack.Application;
 using ClassTrack.Infrastructure;
 using ClassTrack.Persistance;
@@ -40,6 +41,10 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+
 builder.Services.AddServicePersistance(builder.Configuration);
 builder.Services.AddServiceApplication();
 builder.Services.InfrastructureRegistration(builder.Configuration);
@@ -77,4 +82,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseExceptionHandler();
 app.Run();

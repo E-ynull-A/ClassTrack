@@ -90,6 +90,7 @@ namespace ClassTrack.MVC.Controllers
             {
                 ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
             }
+
             return View(nameof(Dashboard), new DashboardVM(await _roomService.GetAllAsync(),
                                                     dashboardVM.PostClass));
         }
