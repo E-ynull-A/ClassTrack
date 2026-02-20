@@ -32,8 +32,7 @@ namespace ClassTrack.MVC.Services.Implementations
 
             if (!message.IsSuccessStatusCode)
             {
-                var error = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
-                return new ServiceResult(false, string.Empty, error.Message);
+                throw new Exception((await message.Content.ReadFromJsonAsync<ErrorResponseVM>()).Message);
             }
 
             return new ServiceResult(true);

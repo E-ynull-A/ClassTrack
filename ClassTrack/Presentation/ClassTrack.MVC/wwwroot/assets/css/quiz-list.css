@@ -71,7 +71,24 @@
 }
 
 
+.pg-btn {
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
 
+.pg-active {
+    background-color: #007bff;
+    color: white !important;
+    border-color: #007bff;
+}
+
+.pg-btn:hover:not(.pg-active) {
+    background-color: #eee;
+}
 
 
 .qc-actions {
@@ -85,9 +102,6 @@
     color: var(--muted);
 }
 
-
-
-/* normalda geniş ola bilər, amma 1 item olanda limitlə */
 .quiz-grid.single {
     justify-items: start;
 }

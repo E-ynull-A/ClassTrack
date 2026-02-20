@@ -691,6 +691,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ClassTrack.API.Controllers.StatisticsController",
+    "Method": "Get",
+    "RelativePath": "Statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ClassTrack.API.Controllers.StatisticsController",
+    "Method": "Get",
+    "RelativePath": "Statistics/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ClassTrack.API.Controllers.StudentAttendancesController",
     "Method": "Put",
     "RelativePath": "StudentAttendances",

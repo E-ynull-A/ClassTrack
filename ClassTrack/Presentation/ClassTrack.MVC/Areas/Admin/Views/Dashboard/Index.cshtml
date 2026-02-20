@@ -1,0 +1,80 @@
+﻿@model AdminDashboardVM
+
+
+<link href="~/admin/assets/css/index.css" rel="stylesheet" />
+<div class="card-grid">
+    <div class="stat-card blue">
+        <div class="stat-info">
+            <div class="label" style="color: var(--primary-color)">Total Students</div>
+            <div class="value">@Model.GetStatistics.TotalStudents</div>
+        </div>
+        <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+    </div>
+
+    <div class="stat-card green">
+        <div class="stat-info">
+            <div class="label" style="color: var(--success-color)">Teachers</div>
+            <div class="value">@Model.GetStatistics.TotalTeachers</div>
+        </div>
+        <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+    </div>
+
+    <div class="stat-card info">
+        <div class="stat-info">
+            <div class="label" style="color: var(--info-color)">Quizzes</div>
+            <div class="value">@Model.GetStatistics.TotalQuizzes</div>
+        </div>
+        <div class="stat-icon"><i class="fas fa-list-check"></i></div>
+    </div>
+
+    <div class="stat-card orange">
+        <div class="stat-info">
+            <div class="label" style="color: #f6c23e">Task Works</div>
+            <div class="value">@Model.GetStatistics.TotalTasks</div>
+        </div>
+        <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+    </div>
+</div>
+
+<div class="recent-section">
+    <h2>Recently Created Classes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Class Room Name</th>
+                <th>Teachers</th>
+                <th style="text-align:start">Student Count</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GetClassRoomItemVM itemVM in Model.GetClassRooms)
+            {
+                <tr>
+                    <td><strong>@itemVM.Name</strong></td>
+                    <td>
+                        @if (itemVM.TeacherFullNames != null && itemVM.TeacherFullNames.Any())
+                        {
+                            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                @foreach (var teacher in itemVM.TeacherFullNames)
+                                {
+                                    <span class="teacher-badge">
+                                        <i class="fas fa-user-tie" style="font-size: 10px; margin-right: 4px;"></i>@teacher
+                                    </span>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <span class="text-muted" style="font-size: 12px; font-style: italic;">No Teacher</span>
+                        }
+                    </td>
+                    <td style="text-align: start;"><span class="status active">@itemVM.StudentCount</span></td>
+                    <td><span class="status active">@itemVM.CreatedAt.ToString("dd.MM.yyyy")</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

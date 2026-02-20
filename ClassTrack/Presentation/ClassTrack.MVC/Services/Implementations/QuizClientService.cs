@@ -12,11 +12,11 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
         }
-        public async Task<GetQuizItemWithPermissionVM> GetAllAsync(long classRoomId)
+        public async Task<GetQuizItemWithPermissionVM> GetAllAsync(long classRoomId, int page, int take)
         {
 
-            return new GetQuizItemWithPermissionVM(await _httpClient.GetFromJsonAsync<IEnumerable<GetQuizItemVM>>($"Quizes/{classRoomId}"),
-                                                   await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}" ));
+            return new GetQuizItemWithPermissionVM(await _httpClient.GetFromJsonAsync<GetQuizItemPagedVM>($"Quizes/{classRoomId}?page={page}&take={take}"),
+                                                   await _httpClient.GetFromJsonAsync<IsTeacherVM>($"Permissions/{classRoomId}"));
 
         }
         public async Task<GetQuizItemVM> GetByIdAsync(long id,long classRoomId)
@@ -25,7 +25,14 @@ namespace ClassTrack.MVC.Services.Implementations
         }
         public async Task<GetQuizVM?> GetQuizForStudentAsync(long classRoomId,long quizId)
         {
-            return await _httpClient.GetFromJsonAsync<GetQuizVM>($"Quizes/{classRoomId}/{quizId}/Detail");
+           var responce = await _httpClient.GetAsync($"Quizes/{classRoomId}/{quizId}/Detail");
+
+            if (!responce.IsSuccessStatusCode)
+            {
+                throw new Exception((await responce.Content.ReadFromJsonAsync<ErrorResponseVM>()).Message);
+            }
+
+            return await responce.Content.ReadFromJsonAsync<GetQuizVM>();
         }
         public async Task<ServiceResult> CreateQuizAsync(PostQuizVM quizVM)
         {
@@ -68,17 +75,17 @@ namespace ClassTrack.MVC.Services.Implementations
         }
         public async Task<ServiceResult> UpdateQuizAsync(PutQuizVM quizVM, long id)
         {
-            //if (quizVM.ClassRoomId < 1)
-            //    return new ServiceResult(false, string.Empty, "Invalid Class Room Request!");
+            if (quizVM.ClassRoomId < 1)
+                return new ServiceResult(false, string.Empty, "Invalid Class Room Request!");
 
-            //if (quizVM.Name.Length > 85)
-            //    return new ServiceResult(false, "PutQuiz.Name", "The Quiz Title is too long");
+            if (quizVM.Name.Length > 85)
+                return new ServiceResult(false, "PutQuiz.Name", "The Quiz Title is too long");
 
-            //if (quizVM.StartTime.ToUniversalTime() < DateTime.UtcNow)
-            //    return new ServiceResult(false, "PutQuiz.StartTime", "The Start Time of Quiz must be in the future or present");
+            if (quizVM.StartTime.ToUniversalTime() < DateTime.UtcNow)
+                return new ServiceResult(false, "PutQuiz.StartTime", "The Start Time of Quiz must be in the future or present");
 
-            //if (quizVM.Duration > 1440 || quizVM.Duration < 0)
-            //    return new ServiceResult(false, "PutQuiz.Duration", "The Quiz Duration is Incorrect");
+            if (quizVM.Duration > 1440 || quizVM.Duration < 0)
+                return new ServiceResult(false, "PutQuiz.Duration", "The Quiz Duration is Incorrect");
 
             var message = await _httpClient.PutAsJsonAsync($"Quizes/{quizVM.ClassRoomId}/{id}",quizVM);
             if (!message.IsSuccessStatusCode)

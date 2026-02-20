@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using ClassTrack.Application.DTOs;
 using ClassTrack.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassTrack.Application.MappingProfiles
 {
@@ -14,8 +9,11 @@ namespace ClassTrack.Application.MappingProfiles
         public ClassRoomProfile()
         {
             CreateMap<ClassRoom, GetClassRoomItemDTO>()
-                .ForCtorParam(nameof(GetClassRoomItemDTO.MemberCount),
-                              opt => opt.MapFrom(c => c.StudentClasses.Count));
+                .ForCtorParam(nameof(GetClassRoomItemDTO.StudentCount),
+                              opt => opt.MapFrom(c => c.StudentClasses.Count))
+                .ForCtorParam(nameof(GetClassRoomItemDTO.TeacherFullNames),
+                              opt=>opt.MapFrom(tn=>tn.TeacherClasses
+                                        .Select(tc=>tc.Teacher.AppUser.Name + tc.Teacher.AppUser.Surname)));
        
 
             CreateMap<ClassRoom, GetClassRoomDTO>()

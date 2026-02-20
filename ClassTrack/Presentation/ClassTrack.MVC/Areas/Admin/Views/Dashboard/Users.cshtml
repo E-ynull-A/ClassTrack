@@ -1,0 +1,109 @@
+﻿@model UsersVM
+
+
+
+<link href="~/admin/assets/css/users.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="main-wrapper">
+    <div class="user-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th style="text-align: right;">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GetUserItemVM userItem in Model.UserVM.UserItems)
+                {
+                    <tr>
+                        <td>
+                            <div class="user-info">
+                                <div class="av-circle">@userItem.UserFullName[0]@userItem.UserFullName[userItem.UserFullName.IndexOf(" ")+1]</div>
+                                <b>@userItem.UserFullName</b>
+                            </div>
+                        </td>
+                        <td>@userItem.Email</td>
+                        <td>
+                            @if(userItem.Roles.Count != 0)
+                            {
+                                foreach (string role in userItem.Roles)
+                                {
+                                    <span class="role-badge badge-teacher">@role</span>
+                                }
+                            }
+                            else
+                            {
+                                <span class="role-badge badge-teacher">~</span>
+                            }
+
+                        </td>
+                        <td style="text-align: right;">
+                            <button class="btn-act btn-promote" @(userItem.Roles.Count > 0 ? "disabled" : "") title="Admin Et"><i class="fas fa-shield-alt"></i></button>
+                            <button class="btn-act btn-delete" onclick="openBan('@userItem.UserId')" title="Sil"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if ((int)Math.Ceiling(Model.UserVM.TotalCount / (double)ViewBag.PageSize) > 1)
+        {
+            <div class="pagination-container" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
+
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <a href="?page=@(ViewBag.CurrentPage - 1)" class="pg-btn">Geri</a>
+                }
+
+                @for (int i = 1; i <= (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize); i++)
+                {
+                    <a href="?page=@i" class="pg-btn @(i == ViewBag.CurrentPage ? "pg-active" : "")">@i</a>
+                }
+
+                @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize))
+                {
+                    <a href="?page=@(ViewBag.CurrentPage + 1)" class="pg-btn">İrəli</a>
+                }
+            </div>
+        }
+    </div>
+</div>
+<div id="banModal" class="ban-modal">
+    <div class="ban-content">
+        <form asp-action="BanUser" asp-controller="Users" method="post">
+            <h4 style="margin-bottom: 15px;">Ban User</h4>
+
+            <input type="hidden" asp-for="PostBan.UserId" id="targetUserId">
+
+            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                <div style="flex: 2;">
+                    <label style="display:block; font-size:12px; color:#666;">Duration:</label>
+                    <input type="number" asp-for="PostBan.Duration" value="1" required min="1"
+                           style="width:100%; padding:8px; border:1px solid #ddd; border-radius:5px;">
+                </div>
+                <div style="flex: 2;">
+                    <label style="display:block; font-size:12px; color:#666;">Unit:</label>
+                    <select asp-for="PostBan.Unit" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:5px; background:white;">
+                        <option value="hour">Hour</option>
+                        <option value="day">Day</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="text-align: right; display: flex; justify-content: flex-end; gap: 8px;">
+                <button type="button" onclick="document.getElementById('banModal').style.display='none'"
+                        style="padding: 6px 12px; cursor: pointer; border:1px solid #ccc; border-radius:4px; background:white;">
+                    Cansel
+                </button>
+                <button type="submit"
+                        style="padding: 6px 12px; cursor: pointer; border:none; border-radius:4px; background: #e74a3b; color: white;">
+                    Accept
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script defer src="~/admin/assets/js/users.js"></script>

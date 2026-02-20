@@ -30,7 +30,7 @@ namespace ClassTrack.Application.Interfaces.Repositories
         void DeleteRange(ICollection<T> removeds);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
-        Task<int> CountAsync(Expression<Func<T, bool>> expression);
+        Task<int> CountAsync(Expression<Func<T, bool>> expression = null);
         Task<decimal> AverageAsync(Expression<Func<T, decimal>> predicate,
                                    Expression<Func<T, bool>> expression);
         Task<bool> AllAsync(Expression<Func<T, bool>> function);

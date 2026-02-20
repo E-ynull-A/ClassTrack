@@ -13,6 +13,7 @@ namespace ClassTrack.Application.Interfaces.Services
         Task RegisterAsync(RegisterDTO registerDTO);
         Task<ResponseTokenDTO> LoginAsync(LoginDTO loginDTO);
         Task LogoutAsync();
+        Task BanUserAsync(PostBanUserDTO postBan);
         Task ResetPasswordAsync(ResetPasswordDTO passwordDTO);
     }
 }

@@ -1,0 +1,128 @@
+﻿/* Dashboard Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-card.blue {
+        border-left-color: var(--primary-color);
+    }
+
+    .stat-card.green {
+        border-left-color: var(--success-color);
+    }
+
+    .stat-card.info {
+        border-left-color: var(--info-color);
+    }
+
+    .stat-card.orange {
+        border-left-color: #f6c23e;
+    }
+
+.stat-info .label {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.stat-info .value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: #dddfeb;
+}
+
+/* Recent Activity Table Style */
+.recent-section {
+    margin-top: 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+    .recent-section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #eee;
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+    .status.active {
+        background: #e1f7ef;
+        color: var(--success-color);
+    }
+
+
+.teacher-badge {
+    background-color: #f0f2f5;
+    color: #4e73df;
+    border: 1px solid #d1d3e2;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.status.active {
+    background-color: #e1f7ef;
+    color: #1cc88a;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+table td {
+    vertical-align: middle;
+}

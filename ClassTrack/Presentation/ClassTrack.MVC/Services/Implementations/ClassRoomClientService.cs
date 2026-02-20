@@ -17,7 +17,6 @@ namespace ClassTrack.MVC.Services.Implementations
         {
             _httpClient = httpClient.CreateClient("ClassTrackClient");
         }
-
         public async Task<IEnumerable<GetClassRoomItemVM>> GetAllAsync()
         {
             IEnumerable<GetClassRoomItemVM>? response = await _httpClient

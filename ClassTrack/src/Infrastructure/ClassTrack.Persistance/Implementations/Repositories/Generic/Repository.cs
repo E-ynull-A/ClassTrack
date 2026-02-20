@@ -126,8 +126,10 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             return await _dbset.AnyAsync(expression);          
         }
 
-        public async Task<int> CountAsync(Expression<Func<T, bool>> expression)
+        public async Task<int> CountAsync(Expression<Func<T, bool>>? expression)
         {
+            if (expression is null)
+                return await _dbset.CountAsync();
            return await _dbset.CountAsync(expression);
         }
 
@@ -156,5 +158,6 @@ namespace ClassTrack.Persistance.Implementations.Repositories
         {
             return _dbset.AsQueryable();
         }
+
     }
 }

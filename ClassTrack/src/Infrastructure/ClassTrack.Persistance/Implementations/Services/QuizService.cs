@@ -16,8 +16,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IStudentRepository _studentRepository;
 
 
-        public QuizService(
-                           IQuizRepository quizRepository,
+        public QuizService(IQuizRepository quizRepository,
                            IMapper mapper,
                            IClassRoomRepository roomRepository,
                            IStudentRepository studentRepository)
@@ -29,7 +28,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             _studentRepository = studentRepository;
         }
 
-        public async Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId, int page, int take)
+        public async Task<GetQuizItemPagedDTO> GetAllAsync(long classRoomId, int page, int take)
         {
             ICollection<Quiz> quizes = await _quizRepository
                                     .GetAll(page: page,
@@ -38,9 +37,10 @@ namespace ClassTrack.Persistance.Implementations.Services
                                             sort: x => x.CreatedAt)
                                     .ToListAsync();
             if (quizes.Count == 0)
-                return  new List<GetQuizItemDTO>();
+                return new GetQuizItemPagedDTO(new List<GetQuizItemDTO>(),0);
 
-            return _mapper.Map<ICollection<GetQuizItemDTO>>(quizes);
+            return new GetQuizItemPagedDTO(_mapper.Map<ICollection<GetQuizItemDTO>>(quizes),
+                                     await _quizRepository.CountAsync(q=>q.ClassRoomId == classRoomId));
         }
         public async Task<GetQuizItemDTO> GetByIdAsync(long id)
         {

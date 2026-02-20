@@ -55,6 +55,10 @@ namespace ClassTrack.MVC
 
             app.MapControllerRoute(
                 name: "default",
+                pattern: "{area:exists}/{controller=home}/{action=index}/{id?}");
+
+            app.MapControllerRoute(
+                name: "area",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();

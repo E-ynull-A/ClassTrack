@@ -1,7 +1,7 @@
 ﻿@model DashboardVM
 
 
-<link rel="stylesheet" href="~/css/dashboard.css">
+<link rel="stylesheet" href="~/assets/css/dashboard.css">
 
 <div class="row" style="display:flex">
     <form method="post" asp-action="CreateClassRoom" class="card col">
@@ -33,23 +33,37 @@
     <div class="line"></div>
 
     <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper" >
             @foreach (GetClassRoomItemVM classRoom in Model.Classes)
             {
-                <div class="swiper-slide">
+                <div class="swiper-slide" >
                     <div class="class-card">
+                        <div>Created At: @classRoom.CreatedAt.ToShortDateString()</div>
                         <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
-                            <div class="card-content" style="margin-top:30px">
+                            <div class="card-content" style="margin-top:10px">                            
                                 <div class="title">@classRoom.Name</div>
+
+                                <div style="margin-top:6px;display:flex">
+                                    @foreach (string teacherN in classRoom.TeacherFullNames)
+                                    {
+                                        <div style="margin:0 3px">
+                                            <span class="badge-custom">
+                                                <i class="fas fa-users"></i> @teacherN
+                                            </span>
+                                        </div>
+                                    }
+                                </div>
                                 <div class="meta">
                                     <span class="badge-custom">
-                                        <i class="fas fa-users"></i> @classRoom.MemberCount Member
+                                        <i class="fas fa-users"></i> @classRoom.StudentCount Member
                                     </span>
                                     <span class="point-muted">
                                         <i class="fas fa-chart-line"></i> @classRoom.AvgPoint %
                                     </span>
                                 </div>
+                             
                             </div>
+                          
                         </a>
                     </div>
                 </div>
@@ -65,4 +79,4 @@
 <div class="toast" id="toast"><div class="t"></div><div class="d"></div></div>
 
 
-<script src="~/js/dashboard.js"></script>
+<script src="~/assets/js/dashboard.js"></script>

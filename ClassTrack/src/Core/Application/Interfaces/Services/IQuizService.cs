@@ -4,7 +4,7 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IQuizService
     {
-        Task<ICollection<GetQuizItemDTO>> GetAllAsync(long classRoomId,int page, int take);
+        Task<GetQuizItemPagedDTO> GetAllAsync(long classRoomId, int page, int take);
         Task<GetQuizDTO> GetByIdDetailAsync(long id);
         Task<GetQuizItemDTO> GetByIdAsync(long id);
 

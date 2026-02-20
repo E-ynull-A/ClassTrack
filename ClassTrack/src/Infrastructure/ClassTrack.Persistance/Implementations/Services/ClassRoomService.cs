@@ -40,6 +40,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                 .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId) 
                                                          || c.TeacherClasses.Any(tc=> tc.Teacher.AppUserId == userId))
                                                 .Include(c=>c.StudentClasses)
+                                                .Include(c=>c.TeacherClasses)
+                                                .ThenInclude(tc=>tc.Teacher.AppUser)
+
                                                 .ToListAsync());
 
             return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses.ToListAsync());

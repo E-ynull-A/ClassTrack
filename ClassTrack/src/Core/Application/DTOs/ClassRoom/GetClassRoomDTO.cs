@@ -12,6 +12,5 @@ namespace ClassTrack.Application.DTOs
         string Name,
         string PrivateKey,
         decimal AvgPoint,
-        int MemberCount);
-    
+        int MemberCount);    
 }

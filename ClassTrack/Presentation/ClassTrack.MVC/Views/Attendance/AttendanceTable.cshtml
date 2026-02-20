@@ -4,7 +4,7 @@
     IList<GetStudentAttendanceItemVM> stAttends = Model.DistinctBy(a => a.StudentId).ToArray();
 }
 
-<link rel="stylesheet" href="~/css/attendance-list.css">
+<link rel="stylesheet" href="~/assets/css/attendance-list.css">
 <a class="btn btn-dark" style="margin-bottom:20px" asp-action="Create" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Back</a>
 <div class="card">
     <table>

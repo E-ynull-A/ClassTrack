@@ -2,7 +2,7 @@
 {
     public record GetQuizItemWithPermissionVM(
         
-        IEnumerable<GetQuizItemVM> ItemVM,
+        GetQuizItemPagedVM ItemVM,
         IsTeacherVM IsTeacherVM);
     
 }

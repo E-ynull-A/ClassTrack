@@ -1,6 +1,6 @@
 ﻿@model GetQuizItemWithPermissionVM
 
-<link rel="stylesheet" href="~/css/quiz-list.css">
+<link rel="stylesheet" href="~/assets/css/quiz-list.css">
 
 <div class="topbar">
 
@@ -13,25 +13,15 @@
             <span class="muted">Search</span>
             <input class="input" id="qSearch" placeholder="Məs: TCP Basics" />
         </div>
-
-        <div class="field-inline">
-            <span class="muted">Sort</span>
-            <select class="input" id="qSort">
-                <option value="start_asc">Start time ↑</option>
-                <option value="start_desc">Start time ↓</option>
-                <option value="name_asc">Name A→Z</option>
-                <option value="name_desc">Name Z→A</option>
-            </select>
-        </div>
     </div>
 </div>
 
-<div class="card" style="margin-top:16px">
+<div class="card" style="margin-top:16px;width:800px">
     <div class="h2">Quiz list</div>
     <div class="line"></div>
 
     <div class="quiz-grid" id="quizGrid">
-        @foreach (GetQuizItemVM quiz in Model.ItemVM)
+        @foreach (GetQuizItemVM quiz in Model.ItemVM.QuizItems)
         {
             <div class="quiz-card">
                 <a href="quiz-detail.html">
@@ -99,12 +89,33 @@
                 </div>
             </div>
         }
+           
     </div>
+    @if ((int)Math.Ceiling(Model.ItemVM.TotalCount/(double)ViewBag.PageSize) > 1)
+    {
+        <div class="pagination-container" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
+
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="?page=@(ViewBag.CurrentPage - 1)" class="pg-btn">Geri</a>
+            }
+
+            @for (int i = 1; i <= (int)Math.Ceiling(Model.ItemVM.TotalCount / (double)ViewBag.PageSize); i++)
+            {
+                <a href="?page=@i" class="pg-btn @(i == ViewBag.CurrentPage ? "pg-active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.ItemVM.TotalCount / (double)ViewBag.PageSize))
+            {
+                <a href="?page=@(ViewBag.CurrentPage + 1)" class="pg-btn">İrəli</a>
+            }
+        </div>
+    }
 
     <div class="empty" id="qEmpty" style="display:none;">
         Heç bir quiz tapılmadı.
     </div>
 </div>
-<script src="~/js/quiz-list.js"></script>
+<script src="~/assets/js/quiz-list.js"></script>
 
 

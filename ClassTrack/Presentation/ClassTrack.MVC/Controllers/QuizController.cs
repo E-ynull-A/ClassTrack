@@ -17,9 +17,15 @@ namespace ClassTrack.MVC.Controllers
             _quizClient = quizClient;
             _questionClient = questionClient;
         }
-        public async Task<IActionResult> Index(long id)
-        {         
-            return View(await _quizClient.GetAllAsync(id));
+        public async Task<IActionResult> Index(long id,int page = 1)
+        {
+            if (page < 0 || id < 1)
+                return BadRequest();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = 4;
+
+            return View(await _quizClient.GetAllAsync(id,page,4));
         }
 
         public IActionResult Create()

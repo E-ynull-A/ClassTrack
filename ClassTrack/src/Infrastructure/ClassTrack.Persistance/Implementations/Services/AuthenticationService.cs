@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Services
 {
@@ -20,7 +21,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ICacheService _cacheService;
         private readonly IEmailService _emailService;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IHttpContextAccessor _accessor;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IRefreshTokenRepository _tokenRepository;
 
         public AuthenticationService(UserManager<AppUser> manager,
@@ -29,7 +30,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                                         ICacheService cacheService,
                                         IEmailService emailService,
                                         SignInManager<AppUser> signInManager,
-                                        IHttpContextAccessor accessor,
+                                        ICurrentUserService currentUserService,
                                         IRefreshTokenRepository tokenRepository)
         {
             _manager = manager;
@@ -38,7 +39,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             _cacheService = cacheService;
             _emailService = emailService;
             _signInManager = signInManager;
-            _accessor = accessor;
+            _currentUserService = currentUserService;
             _tokenRepository = tokenRepository;
         }
         public async Task RegisterAsync(RegisterDTO registerDTO)
@@ -112,9 +113,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
         public async Task LogoutAsync()
         {
-            string? userId = _accessor.HttpContext
-                                            .User
-                                            .FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userId = _currentUserService.GetUserId();
 
             if (string.IsNullOrEmpty(userId))
                 throw new NotFoundException("User not Found!");
@@ -155,6 +154,20 @@ namespace ClassTrack.Persistance.Implementations.Services
                 }
                 throw new Exception(excepts);
             }
+        }
+        public async Task BanUserAsync(PostBanUserDTO postBan)
+        {
+            AppUser? user = await _manager.FindByIdAsync(postBan.UserId);
+
+            if (user is null)
+                throw new NotFoundException("User not Found!");
+
+            DateTimeOffset date = postBan.Unit == "Day" ? DateTimeOffset.UtcNow.AddDays(postBan.Duration) :
+                                   postBan.Unit == "Hour" ? DateTimeOffset.UtcNow.AddHours(postBan.Duration) :
+                                   throw new BadRequestException();
+
+            await _manager.SetLockoutEnabledAsync(user,true);
+            await _manager.UpdateSecurityStampAsync(user);      
         }
     }
 }
