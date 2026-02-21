@@ -6,6 +6,6 @@ namespace ClassTrack.MVC.ViewModels
 
         [ValidateNever]
         GetUserPagedItemVM UserVM,
-        PostBanUserVM PostBan);
+        PostBanUserVM PostBan = null);
   
 }

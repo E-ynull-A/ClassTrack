@@ -8,7 +8,6 @@ namespace ClassTrack.Application.DTOs
 {
     public record PutTaskWorkDTO(
 
-        long ClassRoomId,
         string Title,
         string MainPart,
         DateTime EndDate,

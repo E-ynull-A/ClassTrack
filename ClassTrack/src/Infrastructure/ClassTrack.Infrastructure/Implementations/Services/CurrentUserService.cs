@@ -37,5 +37,19 @@ namespace ClassTrack.Infrastructure.Implementations.Services
 
             return roles;
         }
+
+        public void DeleteCookie(string key)
+        {
+            _accessor.HttpContext.Response.Cookies.Delete(key);
+        }
+
+        public string GetUserEmail()
+        {
+            string? email = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            if(email is null)
+                throw new NotFoundException("The User Eamil not Found!");
+
+            return email;
+        }
     }
 }

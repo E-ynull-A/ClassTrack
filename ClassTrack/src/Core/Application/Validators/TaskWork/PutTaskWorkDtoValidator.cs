@@ -12,9 +12,6 @@ namespace ClassTrack.Application.Validators
     {
         public PutTaskWorkDtoValidator()
         {
-            RuleFor(tw => tw.ClassRoomId)
-                .NotEmpty()
-                .GreaterThan(0);
 
             RuleFor(tw => tw.Title)
                 .NotEmpty()
@@ -28,9 +25,7 @@ namespace ClassTrack.Application.Validators
             RuleFor(tw => tw)
                 .NotEmpty()
                 .Must(tw => tw.EndDate > tw.StartDate)
-                .WithMessage("The Task must ended after the Start Time")
-                .Must(tw=>tw.MainPart.Trim() != tw.Title.Trim())
-                .WithMessage("The Title and The Main part is Different things");
+                .WithMessage("The Task must ended after the Start Time");
            
             RuleFor(tw => tw.MainPart)
                 .NotEmpty();

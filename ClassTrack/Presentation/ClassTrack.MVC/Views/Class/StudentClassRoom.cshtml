@@ -1,118 +1,71 @@
 ﻿@model GetClassRoomWithPermissionVM
-
 <link rel="stylesheet" href="~/assets/css/student-classroom.css">
 
-<div class="topbar">
+<div class="topbar glass">
     <div class="topbar-left">
-        <div class="h1" id="classTitle">@Model.ClassRoom.Name</div>
-        <div class="muted">
-            Role: <span class="badge student" id="roleBadge">Student</span>
+        <h1 class="title">@Model.ClassRoom.Name</h1>
+        <div class="role-line">
+            Role:
+            <span class="badge badge-student">Student</span>
         </div>
     </div>
 
     <div class="topbar-right">
-        <!-- Account dropdown -->
         <div class="account">
-            <button class="btn account-btn" type="button" id="btnAccount">
-                <span class="dot"></span>
-                <span class="acc-text">Account</span>
-                <span class="chev">▾</span>
-            </button>
+            <form asp-controller="Class"
+                  asp-action="LeaveToken"
+                  asp-route-classRoomId="@Model.ClassRoom.Id"
+                  method="post"
+                  onsubmit="return confirm('Are you sure to exit this Class Room?\nConfirm this action with your Email');">
 
-            <div class="account-menu" id="accountMenu" aria-hidden="true">
-                <div class="account-head">
-                    <div class="acc-title">Signed in</div>
-                    <div class="acc-sub muted">@User.Identity?.Name</div>
-                </div>
-                <div class="account-links">
-                    <a class="menu-item" asp-controller="Account" asp-action="Profile">Profile</a>
-                    <a class="menu-item" asp-controller="Account" asp-action="Settings">Settings</a>
-                    <div class="menu-sep"></div>
-                    <form asp-controller="Account" asp-action="Logout" method="post">
-                        <button class="menu-item danger" type="submit">Logout</button>
-                    </form>
-                </div>
+                <button type="submit" class="btn danger full">
+                    ⇦ Leave Class
+                </button>
+            </form>
             </div>
         </div>
     </div>
 </div>
 
+<div class="grid">
+    <div class="card info">
+        <h2>Class Info</h2>
 
-<div class="row">
-    <div class="card col2">
-        <div class="h2">Class Info</div>
-        <div class="kv">
-            <div class="k">Class Code</div>
-            <div class="v"><span id="classCode">@Model.ClassRoom.PrivateKey</span></div>
+        <div class="info-row">
+            <span>Class Code</span>
+            <code>@Model.ClassRoom.PrivateKey</code>
+        </div>
 
-            <div class="k">Members</div>
-            <div class="v"><span id="memberCount">@Model.ClassRoom.MemberCount</span></div>
+        <div class="info-row">
+            <span>Members</span>
+            <strong>@Model.ClassRoom.MemberCount</strong>
         </div>
     </div>
 
-    <div class="card col1">
-        <div class="h2">Quick actions</div>
-
-        <div class="nav-actions student-actions">
-            <!-- Quiz -->
+    <div class="card actions">
+        <h2>Quick Actions</h2>
+      
+        <div class="action-grid">
             <a class="btn primary"
                asp-controller="Quiz" asp-action="Index" asp-route-id="@Model.ClassRoom.Id">
-                Quizzes
+                📘 Quizzes
             </a>
 
             <a class="btn ok"
                asp-controller="Quiz" asp-action="MyResults" asp-route-classRoomId="@Model.ClassRoom.Id">
-                My Quiz Results
+                📊 My Quiz Results
             </a>
 
-            <!-- Tasks -->
             <a class="btn"
                asp-controller="Task" asp-action="Index" asp-route-classRoomId="@Model.ClassRoom.Id">
-                Tasks
+                📝 Tasks
             </a>
 
             <a class="btn"
                asp-controller="Task" asp-action="MySubmissions" asp-route-classRoomId="@Model.ClassRoom.Id">
-                My Task Results
+                📂 My Task Results
             </a>
         </div>
     </div>
 </div>
-
-
-<div class="card" style="margin-top:16px;">
-    <div class="h2">Tabs</div>
-    <div class="tabs">
-        <!-- burada teacher-dəki kimi create yox, student fokus -->
-        <a class="tab active"
-           asp-controller="Quiz" asp-action="Index" asp-route-id="@Model.ClassRoom.Id"
-           data-tab="quizzes">
-            Quizzes
-        </a>
-
-        <a class="tab"
-           asp-controller="Task" asp-action="Index" asp-route-classRoomId="@Model.ClassRoom.Id"
-           data-tab="tasks">
-            Tasks
-        </a>
-
-        <a class="tab"
-           asp-controller="Quiz" asp-action="MyResults" asp-route-classRoomId="@Model.ClassRoom.Id"
-           data-tab="results">
-            Results
-        </a>
-
-        <a class="tab"
-           asp-controller="ClassRoom" asp-action="Members" asp-route-id="@Model.ClassRoom.Id"
-           data-tab="members">
-            Members
-        </a>
-    </div>
-
-    <div class="muted" style="margin-top:10px">
-        Quiz vermək üçün Quizzes-ə gir → uyğun quizin içində “Start/Take” düyməsi olacaq.
-        Task üçün Tasks bölməsinə gir → “Submit” ilə göndər.
-    </div>
-</div>
-
 <script defer src="~/assets/js/student-classroom.js"></script>

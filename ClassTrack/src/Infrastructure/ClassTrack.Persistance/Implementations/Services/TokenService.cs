@@ -4,8 +4,8 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Utilities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,25 +18,25 @@ namespace ClassTrack.Persistance.Implementations.Services
     internal class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _accessor;
         private readonly ICacheService _cacheService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailService _emailService;
         private readonly IRefreshTokenRepository _tokenRepository;
+        private readonly ICurrentUserService _currentUser;
 
         public TokenService(IConfiguration configuration,
-                            IHttpContextAccessor accessor,
                             ICacheService cacheService,
                             UserManager<AppUser> userManager,
                             IEmailService emailService,
-                            IRefreshTokenRepository tokenRepository)
+                            IRefreshTokenRepository tokenRepository,
+                            ICurrentUserService currentUser)
         {
             _configuration = configuration;
-            _accessor = accessor;
             _cacheService = cacheService;
             _userManager = userManager;
             _emailService = emailService;
             _tokenRepository = tokenRepository;
+            _currentUser = currentUser;
         }
         public AccessTokenDTO CreateAccessToken(AppUser user, IEnumerable<string> roles, int minutes)
         {
@@ -121,7 +121,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             return tokenDTO;
         }
-        public async Task GenerateResetTokenAsync(ResetTokenDTO passwordDTO)
+        public async Task GenerateResetTokenAsync(GetEmailForTokenDTO passwordDTO)
         {
             string casheKey = $"reset_Password:{passwordDTO.Email}";
 
@@ -142,6 +142,22 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _emailService.SendEmailAsync(passwordDTO.Email,
                                                "Password Reset ClassTrack Account",
                                                $"{_configuration["MVC:Url"]}Home/Reset?email={encodedEmail}");                               
+        }
+        public async Task GenerateLeaveTokenAsync(LeaveClassRoomDTO leaveDTO)
+        {
+            AppUser? user = await _userManager.FindByEmailAsync(_currentUser.GetUserEmail());
+
+            if (user == null)
+                throw new NotFoundException("User not Found!");
+
+            string token = Guid.NewGuid().ToString();
+            await _cacheService.SetCasheAsync(token, $"{user.Id}:{leaveDTO.ClassRoomId}", TimeSpan.FromMinutes(5));
+
+            await _emailService.SendEmailAsync(user.Email,
+                                                "Confirm Leaving ClassRoom",
+                                                "Warning! The Whole datas is deleted which belong you in this Class!" +
+                                                "If you accept,click the link"+
+                                                $" {_configuration["MVC:Url"]}Class/LeaveRoom?token={token}");    
         }
 
     }

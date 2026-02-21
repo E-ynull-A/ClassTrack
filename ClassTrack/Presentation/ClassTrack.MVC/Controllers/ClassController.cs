@@ -127,7 +127,25 @@ namespace ClassTrack.MVC.Controllers
             await _roomService.DeleteClassRoomAsync(id);
             return RedirectToAction("Dashboard");
         }
-   
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveToken(long classRoomId)
+        {
+            if (classRoomId < 1)
+                return BadRequest();
+
+            await _clientService.LeaveRoomAsync(classRoomId);
+            return RedirectToAction("Dashboard");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LeaveRoom(string token)
+        {
+            await _clientService.ConfirmLeaveAsync(new LeaveTokenVM(token));
+
+            return RedirectToAction("Dashboard");
+        }
+
         public IActionResult QuizEditor()
         {
             return View();

@@ -12,7 +12,7 @@ namespace ClassTrack.MVC.ViewModels
         string MainPart,
         DateTime EndDate,
         DateTime StartDate,
-        PostTaskWorkAttachmentVM AttachmentVM);
+        PostTaskWorkAttachmentVM? AttachmentVM);
 
    
 }

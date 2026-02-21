@@ -1,4 +1,10 @@
-﻿namespace ClassTrack.MVC.ViewModels
+﻿
+
+
+
+
+
+namespace ClassTrack.MVC.ViewModels
 {
     public record GetQuizItemWithPermissionVM(
         

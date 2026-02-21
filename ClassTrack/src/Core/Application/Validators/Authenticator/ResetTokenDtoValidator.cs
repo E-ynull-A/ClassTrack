@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.Validators
 {
-    public class ResetTokenDtoValidator : AbstractValidator<ResetTokenDTO>
+    public class ResetTokenDtoValidator : AbstractValidator<GetEmailForTokenDTO>
     {
         public ResetTokenDtoValidator()
         {

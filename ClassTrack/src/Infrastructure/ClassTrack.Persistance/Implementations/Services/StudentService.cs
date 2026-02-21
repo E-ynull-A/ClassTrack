@@ -15,6 +15,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ICurrentUserService _currentUser;
         private readonly IStudentQuizRepository _studentQuiz;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly ICacheService _cacheService;
         private readonly IMapper _mapper;
 
         public StudentService(IClassRoomRepository roomRepository,
@@ -22,6 +23,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                               ICurrentUserService currentUser,
                               IStudentQuizRepository studentQuiz,
                               ITeacherRepository teacherRepository,
+                              ICacheService cacheService,
                               IMapper mapper)
 
         {
@@ -30,12 +32,13 @@ namespace ClassTrack.Persistance.Implementations.Services
             _currentUser = currentUser;
             _studentQuiz = studentQuiz;
             _teacherRepository = teacherRepository;
+            _cacheService = cacheService;
             _mapper = mapper;
         }
 
 
 
-        public async Task<ICollection<GetSimpleStudentItemDTO>> GetBriefAllAsync(long classRoomId,int page,int take)
+        public async Task<ICollection<GetSimpleStudentItemDTO>> GetBriefAllAsync(long classRoomId, int page, int take)
         {
             if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
                 throw new NotFoundException("Class Room not Found!");
@@ -110,7 +113,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (room is null)
                 throw new NotFoundException("Class Room not Found");
 
-            Student? student = await _studentRepository.GetByIdAsync(studentId,includes: ["StudentClasses"]);
+            Student? student = await _studentRepository.GetByIdAsync(studentId, includes: ["StudentClasses"]);
 
             if (student is null)
                 throw new NotFoundException("Student Not Found");
@@ -127,6 +130,22 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _roomRepository.SaveChangeAsync();
 
         }
+        public async Task RequestLeaveAsync(LeaveTokenDTO tokenDTO)
+        {
+            string? value = await _cacheService.GetAsync<string>(tokenDTO.Token);
+
+            if (value is null)
+                throw new BadRequestException("Invalid Token Response");
+
+            string[] strs = value.Split(":");
+
+            string userId = strs[0];
+            int classRoomId = int.Parse(strs[1]);
+
+            await _roomRepository.BreakStudentClassRoomAsync(classRoomId,userId);
+            await _roomRepository.SaveChangeAsync();
+            await _cacheService.RemoveAsync(tokenDTO.Token);
+        }
         public async Task PromoteAsync(long studentId, long classRoomId)
         {
             ClassRoom? room = await _roomRepository.GetByIdAsync(classRoomId);
@@ -134,7 +153,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (room is null)
                 throw new NotFoundException("Class Room not Found");
 
-            Student? student = await _studentRepository.GetByIdAsync(studentId, includes: ["StudentClasses","AppUser"]);
+            Student? student = await _studentRepository.GetByIdAsync(studentId, includes: ["StudentClasses", "AppUser"]);
 
             if (student is null)
                 throw new NotFoundException("Student Not Found");
@@ -148,13 +167,13 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             student.StudentClasses.Remove(studentRoom);
             _studentRepository.Update(student);
-            
 
-            Teacher? promotedStudent = await _teacherRepository.GetTeacherByUserIdAsync(student.AppUserId,["TeacherClassRooms"]);
+
+            Teacher? promotedStudent = await _teacherRepository.GetTeacherByUserIdAsync(student.AppUserId, ["TeacherClassRooms"]);
 
             if (promotedStudent is null)
             {
-                promotedStudent = new Teacher{ AppUserId = student.AppUserId };
+                promotedStudent = new Teacher { AppUserId = student.AppUserId };
                 _teacherRepository.Add(promotedStudent);
             }
 

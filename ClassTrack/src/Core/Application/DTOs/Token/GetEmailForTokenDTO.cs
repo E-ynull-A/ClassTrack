@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Application.DTOs.Token
 {
-    public record ResetTokenDTO(
+    public record GetEmailForTokenDTO(
        
         string Email);
   

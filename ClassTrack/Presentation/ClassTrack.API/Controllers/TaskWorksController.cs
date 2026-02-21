@@ -1,11 +1,7 @@
 ﻿using ClassTrack.API.ActionFilter;
 using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System.Threading.Tasks;
 
 namespace ClassTrack.API.Controllers
 {
@@ -17,12 +13,11 @@ namespace ClassTrack.API.Controllers
         private readonly ITaskWorkService _taskService;
 
         public TaskWorksController(ITaskWorkService taskService)
-        {
-            _taskService = taskService;
+        {            
+                _taskService = taskService;             
         }
 
         [HttpGet]
-
         public async Task<IActionResult> Get(int page,int take)
         {
            return Ok(await _taskService.GetAllAsync(page:page,take:take));
@@ -30,7 +25,7 @@ namespace ClassTrack.API.Controllers
 
         [HttpGet("{classRoomId}/ClassRoom")]
 
-        public async Task<IActionResult> Get(long classRoomId,int take = 0,int page = 0)
+        public async Task<IActionResult> Get(long classRoomId,int page = 0,int take = 0)
         {
             if (classRoomId < 1)
                 return BadRequest();
@@ -50,21 +45,24 @@ namespace ClassTrack.API.Controllers
 
 
         [HttpPost("{classRoomId}")]
-        //[ServiceFilter(typeof(TeacherAccessFilter))]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Post([FromForm]PostTaskWorkDTO postTask,long classRoomId)
         {
+            if(classRoomId < 1)
+                return BadRequest();
+
             await _taskService.CreateTaskWorkAsync(postTask);
             return Created();
         }
 
-        [HttpPut]
+        [HttpPut("{classRoomId}/{id}")]
 
-        public async Task<IActionResult> Put(long id,PutTaskWorkDTO putTask)
+        public async Task<IActionResult> Put(long id,long classRoomId, PutTaskWorkDTO putTask)
         {
-            if(id < 1)
+            if(id < 1 || classRoomId < 1)
                 return BadRequest();
 
-            await _taskService.UpdateTaskWorkAsync(id, putTask);
+            await _taskService.UpdateTaskWorkAsync(id,classRoomId, putTask);
             return NoContent();
         }
 

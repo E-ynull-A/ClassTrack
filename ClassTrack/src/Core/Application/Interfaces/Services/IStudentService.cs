@@ -15,5 +15,6 @@ namespace ClassTrack.Application.Interfaces.Services
         Task<ICollection<GetStudentItemDTO>> GetAllAsync(long classRoomId, int page, int take);
         Task KickAsync(long studentId, long classRoomId);
         Task PromoteAsync(long studentId, long classRoomId);
+        Task RequestLeaveAsync(LeaveTokenDTO tokenDTO);
     }
 }

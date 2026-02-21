@@ -71,7 +71,12 @@ namespace ClassTrack.API.Controllers
             return NoContent();
         }
 
-
+        [HttpPut]
+        public async Task<IActionResult> Put(LeaveTokenDTO leaveToken)
+        {
+            await _studentService.RequestLeaveAsync(leaveToken);
+            return NoContent();
+        }
 
     }
 }

@@ -66,7 +66,13 @@ namespace ClassTrack.Persistance.Implementations.Services
         
             if(await _manager.IsLockedOutAsync(user))
             {
-                var minutes = Math.Ceiling((user.LockoutEnd.Value - DateTime.UtcNow).TotalMinutes);
+                TimeSpan minutes = TimeSpan.FromMinutes(Math.Ceiling((user.LockoutEnd.Value - DateTime.UtcNow).TotalMinutes));
+                if(minutes.TotalMinutes > 10)
+                {
+                    throw new ConflictException($"You Banned and can enter {((int)minutes.TotalDays >= 1?$"{(int)minutes.TotalDays} Day later"
+                                                                                           : ((int)minutes.TotalHours >= 1)? $"{(int)minutes.TotalHours} Hour later" 
+                                                                                           : $"{(int)minutes.TotalMinutes} Minutes later")}");
+                }
 
                 throw new ConflictException($"Try again {minutes} minutes later...");
             }
@@ -88,8 +94,8 @@ namespace ClassTrack.Persistance.Implementations.Services
             ResponseTokenDTO response = new ResponseTokenDTO(aToken, rToken);
 
 
-            _accessor.HttpContext.Response.Cookies.Delete("RefreshToken");
-            _accessor.HttpContext.Response.Cookies.Delete("AccessToken");
+            _currentUserService.DeleteCookie("RefreshToken");
+            _currentUserService.DeleteCookie("AccessToken");
 
             RefreshToken? oldToken = await _tokenRepository.FirstOrDefaultAsync(t => t.UserId == user.Id);
 
@@ -166,7 +172,13 @@ namespace ClassTrack.Persistance.Implementations.Services
                                    postBan.Unit == "Hour" ? DateTimeOffset.UtcNow.AddHours(postBan.Duration) :
                                    throw new BadRequestException();
 
+            Console.WriteLine($"Server UTC Vaxtı: {DateTimeOffset.UtcNow}");
+            Console.WriteLine($"Təyin olunan Ban Vaxtı: {date}");
+
             await _manager.SetLockoutEnabledAsync(user,true);
+            await _manager.SetLockoutEndDateAsync(user,date);
+
+
             await _manager.UpdateSecurityStampAsync(user);      
         }
     }

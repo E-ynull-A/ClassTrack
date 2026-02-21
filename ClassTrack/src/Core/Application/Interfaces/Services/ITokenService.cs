@@ -16,6 +16,7 @@ namespace ClassTrack.Application.Interfaces.Services
                                          int minutes);
         RefreshTokenDTO GenerateRefreshToken();
         Task<ResponseTokenDTO> RefreshAsync(string rToken, int acMinutes);
-        Task GenerateResetTokenAsync(ResetTokenDTO passwordDTO);
+        Task GenerateResetTokenAsync(GetEmailForTokenDTO passwordDTO);
+        Task GenerateLeaveTokenAsync(LeaveClassRoomDTO leaveClass);
     }
 }

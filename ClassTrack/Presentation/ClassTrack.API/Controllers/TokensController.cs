@@ -1,4 +1,5 @@
-﻿using ClassTrack.Application.DTOs.Token;
+﻿using ClassTrack.Application.DTOs;
+using ClassTrack.Application.DTOs.Token;
 using ClassTrack.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,20 @@ namespace ClassTrack.API.Controllers
         [HttpGet("Refresh/{rToken}")]
         public async Task<IActionResult> Get(string rToken)
         {
-            return Ok(await _tokenService.RefreshAsync(rToken,15));
+            return Ok(await _tokenService.RefreshAsync(rToken, 15));
         }
 
         [HttpPost("Reset")]
-        public async Task<IActionResult> Post(ResetTokenDTO tokenDTO)
+        public async Task<IActionResult> Post(GetEmailForTokenDTO tokenDTO)
         {
-           await _tokenService.GenerateResetTokenAsync(tokenDTO);
+            await _tokenService.GenerateResetTokenAsync(tokenDTO);
+            return Created();
+        }
+
+        [HttpPost("Leave")]
+        public async Task<IActionResult> Post(LeaveClassRoomDTO leaveClassRoom)
+        {
+            await _tokenService.GenerateLeaveTokenAsync(leaveClassRoom);
             return Created();
         }
     }

@@ -40,9 +40,18 @@
                                 <span class="role-badge badge-teacher">~</span>
                             }
 
+                            
                         </td>
                         <td style="text-align: right;">
-                            <button class="btn-act btn-promote" @(userItem.Roles.Count > 0 ? "disabled" : "") title="Admin Et"><i class="fas fa-shield-alt"></i></button>
+                            @if (userItem.Roles.Count > 0)
+                            {
+                                <button class="btn-act btn-promote" title="Admin Et"><i class="fa-solid fa-ban"></i></button>
+                            }
+                            else
+                            {
+                                <button class="btn-act btn-promote" title="Admin Et"><i class="fas fa-shield-alt"></i></button>
+                            }
+                        
                             <button class="btn-act btn-delete" onclick="openBan('@userItem.UserId')" title="Sil"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -58,12 +67,12 @@
                     <a href="?page=@(ViewBag.CurrentPage - 1)" class="pg-btn">Geri</a>
                 }
 
-                @for (int i = 1; i <= (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize); i++)
+                @for (int i = 1; i <= (int)Math.Ceiling(Model.UserVM.TotalCount / (double)ViewBag.PageSize); i++)
                 {
                     <a href="?page=@i" class="pg-btn @(i == ViewBag.CurrentPage ? "pg-active" : "")">@i</a>
                 }
 
-                @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize))
+                @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.UserVM.TotalCount / (double)ViewBag.PageSize))
                 {
                     <a href="?page=@(ViewBag.CurrentPage + 1)" class="pg-btn">İrəli</a>
                 }
@@ -73,7 +82,7 @@
 </div>
 <div id="banModal" class="ban-modal">
     <div class="ban-content">
-        <form asp-action="BanUser" asp-controller="Users" method="post">
+        <form asp-action="BanUser" asp-controller="Dashboard" method="post">
             <h4 style="margin-bottom: 15px;">Ban User</h4>
 
             <input type="hidden" asp-for="PostBan.UserId" id="targetUserId">
@@ -87,8 +96,8 @@
                 <div style="flex: 2;">
                     <label style="display:block; font-size:12px; color:#666;">Unit:</label>
                     <select asp-for="PostBan.Unit" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:5px; background:white;">
-                        <option value="hour">Hour</option>
-                        <option value="day">Day</option>
+                        <option value="Hour">Hour</option>
+                        <option value="Day">Day</option>
                     </select>
                 </div>
             </div>

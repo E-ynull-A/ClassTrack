@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClassTrack.Persistance")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af2697769136150469e990d399373b7d9040929c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b71dbc49c95162abcecd152c5d08335ed2b2a1c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClassTrack.Persistance")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClassTrack.Persistance")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

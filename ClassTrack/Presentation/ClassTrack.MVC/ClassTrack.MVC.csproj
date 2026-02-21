@@ -10,4 +10,10 @@
     <Folder Include="Areas\Admin\ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Services\Implementations\TaskWorkClientService.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>

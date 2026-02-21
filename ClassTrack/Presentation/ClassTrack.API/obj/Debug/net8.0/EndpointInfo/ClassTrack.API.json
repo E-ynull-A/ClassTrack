@@ -1168,6 +1168,35 @@
             "description": "OK"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Statistics"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostBanUserDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostBanUserDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostBanUserDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/Statistics/Users": {
@@ -1463,6 +1492,35 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveTokenDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveTokenDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveTokenDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/Students/{classRoomId}/{studentId}": {
@@ -1556,45 +1614,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "TaskWorks"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutTaskWorkDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutTaskWorkDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutTaskWorkDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "TaskWorks"
@@ -1632,7 +1651,7 @@
             }
           },
           {
-            "name": "take",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1641,7 +1660,7 @@
             }
           },
           {
-            "name": "page",
+            "name": "take",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1759,6 +1778,57 @@
         }
       }
     },
+    "/TaskWorks/{classRoomId}/{id}": {
+      "put": {
+        "tags": [
+          "TaskWorks"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutTaskWorkDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutTaskWorkDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutTaskWorkDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Teachers/{classRoomId}": {
       "get": {
         "tags": [
@@ -1831,17 +1901,48 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResetTokenDTO"
+                "$ref": "#/components/schemas/GetEmailForTokenDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResetTokenDTO"
+                "$ref": "#/components/schemas/GetEmailForTokenDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ResetTokenDTO"
+                "$ref": "#/components/schemas/GetEmailForTokenDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Tokens/Leave": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveClassRoomDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveClassRoomDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveClassRoomDTO"
               }
             }
           }
@@ -1856,10 +1957,44 @@
   },
   "components": {
     "schemas": {
+      "GetEmailForTokenDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "JoinClassRoomDTO": {
         "type": "object",
         "properties": {
           "classKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaveClassRoomDTO": {
+        "type": "object",
+        "properties": {
+          "classRoomId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userEmail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaveTokenDTO": {
+        "type": "object",
+        "properties": {
+          "token": {
             "type": "string",
             "nullable": true
           }
@@ -1874,6 +2009,24 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostBanUserDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unit": {
             "type": "string",
             "nullable": true
           }
@@ -2186,10 +2339,6 @@
       "PutTaskWorkDTO": {
         "type": "object",
         "properties": {
-          "classRoomId": {
-            "type": "integer",
-            "format": "int64"
-          },
           "title": {
             "type": "string",
             "nullable": true
@@ -2247,16 +2396,6 @@
             "nullable": true
           },
           "newPassword": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResetTokenDTO": {
-        "type": "object",
-        "properties": {
-          "email": {
             "type": "string",
             "nullable": true
           }

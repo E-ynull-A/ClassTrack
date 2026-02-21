@@ -8,7 +8,9 @@ namespace ClassTrack.MVC.Services.Interfaces
         Task<ServiceResult> RegisterAsync(RegisterVM registerVM);
         Task<ServiceResult> LoginAsync(LoginVM loginVM);
         Task LogoutAsync();
-        Task ForgetPasswordAsync(ResetTokenVM resetToken);
+        Task ForgetPasswordAsync(GetEmailForTokenVM resetToken);
         Task ResetPasswordAsync(ResetPasswordVM passwordVM);
+        Task<ServiceResult> ConfirmLeaveAsync(LeaveTokenVM tokenVM);
+        Task LeaveRoomAsync(long classRoomId);
     }
 }

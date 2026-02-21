@@ -72,7 +72,7 @@ namespace ClassTrack.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Forget(ResetTokenVM tokenVM)
+        public async Task<IActionResult> Forget(GetEmailForTokenVM tokenVM)
         {
            await _clientService.ForgetPasswordAsync(tokenVM);
            return RedirectToAction("Login");

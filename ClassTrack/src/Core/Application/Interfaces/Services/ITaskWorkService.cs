@@ -10,10 +10,10 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface ITaskWorkService
     {
         Task<ICollection<GetTaskWorkItemDTO>> GetAllAsync(int page, int take);
-        Task<ICollection<GetTaskWorkItemDTO>> GetAllByClassRoomIdAsync(int page, int take, long classRoomId);
+        Task<GetTaskWorkItemPagedDTO> GetAllByClassRoomIdAsync(int page, int take, long classRoomId);
         Task<GetTaskWorkDTO> GetByIdAsync(long id);
         Task CreateTaskWorkAsync(PostTaskWorkDTO postTask);
-        Task UpdateTaskWorkAsync(long id, PutTaskWorkDTO putTask);
+        Task UpdateTaskWorkAsync(long id, long classRoomId, PutTaskWorkDTO putTask);
         Task DeleteTaskWorkAsync(long id);
     }
 }

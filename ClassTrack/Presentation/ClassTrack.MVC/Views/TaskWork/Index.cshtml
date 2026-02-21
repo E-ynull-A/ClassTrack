@@ -1,0 +1,126 @@
+﻿
+@model GetTaskWorkItemWithPermissionVM 
+<link rel="stylesheet" href="~/assets/css/quiz-list.css">
+
+<div class="topbar">
+
+    <div class="nav quiz-toolbar">
+        <div>
+            <a class="btn"
+               asp-controller="Class"
+               asp-action="ClassRoom"
+               asp-route-id="@Context.GetRouteValue("classRoomId")">
+                --> Class
+            </a>
+        </div>
+
+        <div class="field-inline">
+            <span class="muted">Search</span>
+            <input class="input" id="qSearch" placeholder="e.g. Homework 1" />
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:16px;width:800px">
+    <div class="h2">Task list</div>
+    <div class="line"></div>
+
+    <div class="quiz-grid" id="quizGrid">
+        @foreach (var task in Model.GetTaskWork.TaskWorkItem)
+        {
+            <div class="quiz-card">
+                <a href="#">
+                    <div class="qc-top">
+                        <div class="qc-name">@task.Title</div>
+                    </div>
+
+                    <div class="qc-meta">
+                        <div class="qc-row">
+                            <span class="muted">Start</span>
+                            <strong class="qc-start" data-start="@task.StartDate">
+                                @task.StartDate
+                            </strong>
+                        </div>
+                        <div class="qc-row">
+                            <span class="muted">Deadline</span>
+                            <strong class="qc-duration" data-min="@task.EndDate">
+                                @task.EndDate
+                            </strong>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="qc-actions">
+                    @if (Model.IsTeacher.IsTeacher)
+                    {
+                        if (task.StartDate.ToUniversalTime() < DateTime.UtcNow &&
+                            task.EndDate.ToUniversalTime() > DateTime.UtcNow)
+                        {
+                            <a class="btn danger text-muted"
+                               style="pointer-events:none;cursor:default;">
+                                Task Ongoing
+                            </a>
+                        }
+                        else if (task.EndDate.ToUniversalTime() < DateTime.UtcNow)
+                        {
+                            <a class="btn ok">
+                                Evaluate
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn ok" asp-action="Update" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")" asp-route-id="@task.Id">
+                                Edit
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        if (task.EndDate.ToUniversalTime() < DateTime.UtcNow)
+                        {
+                            <a class="btn danger text-muted"
+                               style="pointer-events:none;cursor:default;">
+                                Deadline Passed
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn ok">
+                                Submit
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    @if ((int)Math.Ceiling(Model.GetTaskWork.TotalCount / (double)ViewBag.PageSize) > 1)
+    {
+        <div class="pagination-container" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
+
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="?page=@(ViewBag.CurrentPage - 1)" class="pg-btn">Geri</a>
+            }
+
+            @for (int i = 1; i <= (int)Math.Ceiling(Model.GetTaskWork.TotalCount / (double)ViewBag.PageSize); i++)
+            {
+                <a href="?page=@i" class="pg-btn @(i == ViewBag.CurrentPage ? "pg-active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.GetTaskWork.TotalCount / (double)ViewBag.PageSize))
+            {
+                <a href="?page=@(ViewBag.CurrentPage + 1)" class="pg-btn">İrəli</a>
+            }
+        </div>
+    }
+
+    <div class="empty" id="qEmpty" style="display:none;">
+        No tasks found.
+    </div>
+</div>
+
+<script src="~/assets/js/quiz-list.js"></script>
+
+<script src="~/assets/js/quiz-list.js"></script>

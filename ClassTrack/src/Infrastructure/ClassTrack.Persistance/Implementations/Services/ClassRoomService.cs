@@ -31,18 +31,17 @@ namespace ClassTrack.Persistance.Implementations.Services
             string userId = _currentUser.GetUserId();
             string userRole = string.Empty;
           
-            userRole = _currentUser.GetUserRole();
-                   
-            var getClasses = _roomRepository.GetAll(page: page, take: take,sort:x=>x.Name);
+            userRole = _currentUser.GetUserRole();                  
+
+            var getClasses = _roomRepository.GetAll(page: page,
+                                                    take: take,
+                                                    sort:x=>x.Name,
+                                                    includes: ["StudentClasses","TeacherClasses.Teacher.AppUser"]);
 
             if (userId is not null && userRole != UserRole.Admin.ToString())
                 return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses
                                                 .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId) 
                                                          || c.TeacherClasses.Any(tc=> tc.Teacher.AppUserId == userId))
-                                                .Include(c=>c.StudentClasses)
-                                                .Include(c=>c.TeacherClasses)
-                                                .ThenInclude(tc=>tc.Teacher.AppUser)
-
                                                 .ToListAsync());
 
             return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses.ToListAsync());

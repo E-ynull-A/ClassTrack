@@ -43,9 +43,9 @@
         <div class="h2">Tabs</div>
         <div class="tabs">
             <a class="tab active" asp-controller="Quiz" asp-action="Index" asp-route-id="@Model.ClassRoom.Id" data-tab="quizzes">Quizzes</a>
-            <a class="tab" data-tab="tasks">Tasks</a>
-            <a class="tab active" data-tab="attendance" asp-controller="Attendance" asp-action="Attendance" asp-route-classRoomId="@Model.ClassRoom.Id">Attendance</a>
-            <a class="tab active" asp-controller="Member" asp-action="Members" asp-route-classRoomId="@Model.ClassRoom.Id">Members</a>
+            <a class="tab active" asp-controller="TaskWork" asp-action="Get" asp-route-classRoomId="@Model.ClassRoom.Id" data-tab="tasks">Tasks</a>
+            <a class="tab active" asp-controller="Attendance" asp-action="Attendance" asp-route-classRoomId="@Model.ClassRoom.Id" data-tab="attendance">Attendance</a>
+            <a class="tab active" asp-controller="Member" asp-action="Members" asp-route-classRoomId="@Model.ClassRoom.Id" data-tab="member">Members</a>
         </div>
     </div>
 </div>

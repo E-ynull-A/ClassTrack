@@ -32,3 +32,4 @@ C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTra
 C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.MVC\obj\Debug\net8.0\ClassTrack.MVC.pdb
 C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.MVC\obj\Debug\net8.0\ClassTrack.MVC.genruntimeconfig.cache
 C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.MVC\obj\Debug\net8.0\ref\ClassTrack.MVC.dll
+C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.MVC\bin\Debug\net8.0\Services\Implementations\TaskWorkClientService.cs

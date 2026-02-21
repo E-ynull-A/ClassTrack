@@ -45,15 +45,18 @@ namespace ClassTrack.Persistance.Implementations.Repositories
         {
             _dbset.Remove(removed);
         }
-
         public void DeleteRange(ICollection<T> removeds)
         {
+
             foreach (T removed in removeds)
             {
                 Delete(removed);
             }
         }
-
+        public async Task DeleteRangeExpression(Expression<Func<T,bool>> expression)
+        {
+           await _dbset.Where(expression).ExecuteDeleteAsync();
+        }
         public IQueryable<T> GetAll(Expression<Func<T,
                                     bool>>? function = null,
                                     Expression<Func<T, object>>? sort = null,

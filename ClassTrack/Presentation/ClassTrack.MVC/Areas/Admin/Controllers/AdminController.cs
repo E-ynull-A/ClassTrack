@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace ClassTrack.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class DashboardController : Controller
+    public class AdminController : Controller
     {
-        private readonly IDashboardClientService _dashboardClient;
+        private readonly IAdminClientService _adminClient;
 
-        public DashboardController(IDashboardClientService dashboardClient)
+        public AdminController(IAdminClientService adminClient)
         {
-            _dashboardClient = dashboardClient;
+            _adminClient = adminClient;
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _dashboardClient.GetDasboardAsync());
+            return View(await _adminClient.GetDasboardAsync());
         }
 
         public async Task<IActionResult> Users(int page = 1)
@@ -28,18 +28,18 @@ namespace ClassTrack.MVC.Areas.Admin.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = 15;
 
-            return View(await _dashboardClient.GetUserAllAsync(page));
+            return View(new UsersVM(await _adminClient.GetUserAllAsync(page)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> BanUser(PostBanUserVM postBan)
+        public async Task<IActionResult> BanUser(UsersVM usersVM)
         {
             if (!ModelState.IsValid)
             {
                return RedirectToAction("Users");
             }
 
-            ServiceResult result = await _dashboardClient.BanUserAsync(postBan);
+            ServiceResult result = await _adminClient.BanUserAsync(usersVM.PostBan);
 
             if (!result.Ok)
             {
@@ -48,5 +48,6 @@ namespace ClassTrack.MVC.Areas.Admin.Controllers
 
             return RedirectToAction("Users");
         }
+
     }
 }

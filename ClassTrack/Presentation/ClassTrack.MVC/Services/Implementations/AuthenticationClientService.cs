@@ -2,6 +2,7 @@
 
 using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -11,12 +12,15 @@ namespace ClassTrack.MVC.Services.Implementations
     {
         private readonly HttpClient _httpClient;
         private readonly ICookieClientService _cookieService;
+        private readonly IHttpContextAccessor _httpContext;
 
         public AuthenticationClientService(IHttpClientFactory clientFactory,
-                                            ICookieClientService cookieService)
+                                            ICookieClientService cookieService,
+                                            IHttpContextAccessor httpContext)
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
             _cookieService = cookieService;
+            _httpContext = httpContext;
         }
 
         public async Task<ServiceResult> LoginAsync(LoginVM loginVM)
@@ -28,13 +32,13 @@ namespace ClassTrack.MVC.Services.Implementations
             if (loginVM.UsernameOrEmail.Length > 256 ||
                     loginVM.UsernameOrEmail.Length < 4)
             {
-                 return new ServiceResult(false,string.Empty,string.Empty);
+                 return new ServiceResult(false,string.Empty, "The Email length is Invalid");
             }
 
             if (loginVM.Password.Length > 200 ||
                 loginVM.Password.Length < 8)
             {
-                return new ServiceResult(false,string.Empty,"");
+                return new ServiceResult(false,string.Empty,"The Password Lengt is Invalid");
             }
 
             var message = await _httpClient.PostAsJsonAsync("Accounts/Login", loginVM);
@@ -55,51 +59,46 @@ namespace ClassTrack.MVC.Services.Implementations
         }
         public async Task<ServiceResult> RegisterAsync(RegisterVM registerVM)
         {
-            //if(registerVM.Name.Length < 3 || registerVM.Name.Length > 60)
-            //{
-            //    return new ServiceResult(false, nameof(RegisterVM.Name), "The length of name is Invalid");
-            //}
 
-            //RuleFor(q => q.Name)
-            //    .NotEmpty()
-            //    .MinimumLength(3)
-            //    .MaximumLength(60)
-            //    .Matches(@"^[A-Za-z]*$");
+            if (registerVM.Name.Length < 3 || registerVM.Name.Length > 60)
+            {
+                return new ServiceResult(false, nameof(RegisterVM.Name), "The length of name is Invalid");
+            }
 
-            //RuleFor(q => q.Surname)
-            //    .NotEmpty()
-            //    .MinimumLength(3)
-            //    .MaximumLength(60)
-            //    .Matches(@"^[A-Za-z]*$");
+            if (registerVM.Name.Any(n => !char.IsLetterOrDigit(n)))
+            {
+                return new ServiceResult(false, nameof(RegisterVM.Name), "The Name is Invalid");
+            }
 
-            //RuleFor(q => q.Email)
-            //    .NotEmpty()
-            //    .MinimumLength(4)
-            //    .MaximumLength(256)
-            //    .Matches(@"^\w+([-+.']\\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");
 
-            //RuleFor(q => q.UserName)
-            //    .NotEmpty()
-            //    .MinimumLength(4)
-            //    .MaximumLength(256)
-            //    .Matches(@"^[A-Za-z0-9-._+]*$");
+            if (registerVM.Surname.Length < 3 || registerVM.Surname.Length > 60)
+            {
+                return new ServiceResult(false, nameof(RegisterVM.Name), "The length of Surname is Invalid");
+            }
 
-            //RuleFor(q => q.Password)
-            //    .NotEmpty()
-            //    .MinimumLength(8)
-            //    .MaximumLength(200);
+            if (registerVM.Surname.Any(n => !char.IsLetterOrDigit(n)))
+            {
+                return new ServiceResult(false, nameof(RegisterVM.Surname), "The Surname is Invalid");
+            }
 
-            //RuleFor(q => q)
-            //    .Must(q => q.Password == q.ConfirmPassword)
-            //    .Must(q => DateOnly.FromDateTime(DateTime.UtcNow) >= q.BirthDate.AddYears(q.Age) &&
-            //            DateOnly.FromDateTime(DateTime.UtcNow) < q.BirthDate.AddYears(q.Age + 1))
-            //    .WithMessage("Enter correctly your Birthday or Age");
-
+            if (registerVM.Email.Length > 256 || 
+                   registerVM.Email.Length < 4)
+            {
+                return new ServiceResult(false, string.Empty, "The Email length is Invalid");
+            }
+            if (registerVM.UserName.Length > 256 ||
+                 registerVM.UserName.Length < 4)
+            {
+                return new ServiceResult(false, string.Empty, "The Username length is Invalid");
+            }
+            if (registerVM.Password.Length > 200 ||
+                        registerVM.Password.Length < 8)
+            {
+                return new ServiceResult(false, string.Empty, "The Password Length is Invalid");
+            }
 
             HttpResponseMessage message = await _httpClient
-                                .PostAsJsonAsync("Accounts/Register", registerVM);
-
-         
+                                .PostAsJsonAsync("Accounts/Register", registerVM);         
 
             if (!message.IsSuccessStatusCode)
             {
@@ -115,15 +114,27 @@ namespace ClassTrack.MVC.Services.Implementations
             _cookieService.RemoveCookie("AccessToken");
             _cookieService.RemoveCookie("RefreshToken");
         }
-        public async Task ForgetPasswordAsync(ResetTokenVM resetToken)
+        public async Task ForgetPasswordAsync(GetEmailForTokenVM emailVM)
         {
-           await _httpClient.PostAsJsonAsync("Tokens/Reset",resetToken);
+           await _httpClient.PostAsJsonAsync("Tokens/Reset", emailVM);
         }
         public async Task ResetPasswordAsync(ResetPasswordVM passwordVM)
         {
            await _httpClient.PutAsJsonAsync("Accounts/Password",passwordVM);
         }
+        public async Task LeaveRoomAsync(long classRoomId)
+        {
+            await _httpClient.PostAsJsonAsync("Tokens/Leave", new LeaveClassRoomVM(classRoomId, "eynullam69@gmail.com"));
+        }
+        public async Task<ServiceResult> ConfirmLeaveAsync(LeaveTokenVM tokenVM)
+        {
+            HttpResponseMessage message = await _httpClient.PutAsJsonAsync("Students", tokenVM);
 
-
+            if (!message.IsSuccessStatusCode)
+            {
+                return new ServiceResult(false, string.Empty, (await message.Content.ReadFromJsonAsync<ErrorResponseVM>())?.Message);
+            }
+            return new ServiceResult(true);
+        }
     }
 }

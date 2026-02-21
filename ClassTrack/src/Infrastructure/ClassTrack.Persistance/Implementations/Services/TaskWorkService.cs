@@ -38,12 +38,13 @@ namespace ClassTrack.Persistance.Implementations.Services
         }
 
 
-        public async Task<ICollection<GetTaskWorkItemDTO>> GetAllByClassRoomIdAsync(int page, int take, long classRoomId)
+        public async Task<GetTaskWorkItemPagedDTO> GetAllByClassRoomIdAsync(int page, int take, long classRoomId)
         {
-            return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(page: page,
-                                          take: take,
-                                          function: x => x.ClassRoomId == classRoomId)
-                                  .ToListAsync());
+            return new GetTaskWorkItemPagedDTO(_mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(
+                                                  page: page,
+                                                  take: take,
+                                                  function: x => x.ClassRoomId == classRoomId)
+                                                    .ToListAsync()),await _taskRepository.CountAsync());
         }
 
         public async Task<GetTaskWorkDTO> GetByIdAsync(long id)
@@ -86,9 +87,9 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task UpdateTaskWorkAsync(long id, PutTaskWorkDTO putTask)
+        public async Task UpdateTaskWorkAsync(long id,long classRoomId, PutTaskWorkDTO putTask)
         {
-            if (!await _roomRepository.AnyAsync(r => r.Id == putTask.ClassRoomId))
+            if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId))
                 throw new NotFoundException("The Class isn't Found!");
 
             TaskWork edited = await _taskRepository.GetByIdAsync(id);

@@ -9,6 +9,8 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface ICurrentUserService
     {
         string GetUserId();
+        void DeleteCookie(string key);
         string GetUserRole();
+        string GetUserEmail();
     }
 }

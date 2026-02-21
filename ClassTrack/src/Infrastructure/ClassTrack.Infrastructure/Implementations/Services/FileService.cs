@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Collections.ObjectModel;
+using System.Net.Mime;
 
 namespace ClassTrack.Infrastructure.Implementations.Services
 {
@@ -33,18 +34,43 @@ namespace ClassTrack.Infrastructure.Implementations.Services
             {
                 using (var stream = file.OpenReadStream())
                 {
-                    var uploadParams = new AutoUploadParams
+                    
+
+                    if (file.ContentType.StartsWith("image/"))
                     {
-                        File = new FileDescription(file.FileName, stream),
-                        Folder = "TaskWorks",
-                        UniqueFilename = true
-                    };
+                        var uploadParams = new ImageUploadParams
+                        {
+                            File = new FileDescription(file.FileName, stream),
+                            Folder = "TaskWorks",
+                            UniqueFilename = true
+                        };
 
-                    RawUploadResult responce = await _cloudinary
-                                                    .UploadAsync(uploadParams,"auto");
+                        RawUploadResult imgResult = await _cloudinary
+                                                        .UploadAsync(uploadParams,"image");
 
-                    return new CloudinaryResponceDTO(file.FileName, responce.PublicId,
-                                                        responce.SecureUrl.ToString(), responce.ResourceType);
+                        return new CloudinaryResponceDTO(file.FileName,
+                                                imgResult.PublicId,
+                                                imgResult.SecureUrl.ToString(),
+                                                imgResult.ResourceType);
+                    }
+                    else
+                    {
+                        var uploadParams = new RawUploadParams
+                        {
+                            File = new FileDescription(file.FileName, stream),
+                            Folder = "TaskWorks",
+                            UniqueFilename = true
+                        };
+
+                        RawUploadResult responce = await _cloudinary
+                                                       .UploadAsync(uploadParams,"raw");
+
+
+                        return new CloudinaryResponceDTO(file.FileName,
+                                                         responce.PublicId,
+                                                         responce.SecureUrl.ToString(),
+                                                         responce.ResourceType);
+                    }
                 };
             }
             catch (Exception)

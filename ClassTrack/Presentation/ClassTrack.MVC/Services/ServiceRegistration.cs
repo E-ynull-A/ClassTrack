@@ -18,7 +18,7 @@ namespace ClassTrack.MVC.Services
             services.AddScoped<IQuizAnswerClientService, QuizAnswerClientService>();
             services.AddScoped<IStudentAttendanceClientService, StudentAttendanceClientService>();
             services.AddScoped<ITaskWorkClientService, TaskWorkClientService>();
-            services.AddScoped<IDashboardClientService, DashboardClientService>();
+            services.AddScoped<IAdminClientService, AdminClientService>();
 
 
             services.AddHttpContextAccessor();

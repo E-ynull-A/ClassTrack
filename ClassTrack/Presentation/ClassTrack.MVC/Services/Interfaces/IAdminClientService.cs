@@ -2,10 +2,11 @@
 
 namespace ClassTrack.MVC.Services.Interfaces
 {
-    public interface IDashboardClientService
+    public interface IAdminClientService
     {
         Task<AdminDashboardVM> GetDasboardAsync();
         Task<GetUserPagedItemVM> GetUserAllAsync(int page);
         Task<ServiceResult> BanUserAsync(PostBanUserVM postBan);
+        
     }
 }

@@ -1,15 +1,20 @@
 ﻿using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Services.Implementations
 {
-    public class DashboardClientService:IDashboardClientService
+    public class AdminClientService:IAdminClientService
     {
         private readonly HttpClient _httpClient;
-        public DashboardClientService(IHttpClientFactory clientFactory)
+        private readonly IHttpContextAccessor _httpContext;
+
+        public AdminClientService(IHttpClientFactory clientFactory,
+                                   IHttpContextAccessor httpContext)
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
+            _httpContext = httpContext;
         }
 
         public async Task<AdminDashboardVM> GetDasboardAsync()
@@ -17,12 +22,10 @@ namespace ClassTrack.MVC.Services.Implementations
             return new AdminDashboardVM(await _httpClient.GetFromJsonAsync<GetStatisticsVM>("Statistics"),
                                         await _httpClient.GetFromJsonAsync<ICollection<GetClassRoomItemVM>>("ClassRooms"));
         }
-
         public async Task<GetUserPagedItemVM> GetUserAllAsync(int page)
         {
            return await _httpClient.GetFromJsonAsync<GetUserPagedItemVM>($"Statistics/Users?page={page}");
         }
-
         public async Task<ServiceResult> BanUserAsync(PostBanUserVM postBan)
         {            
             if (postBan.Duration < 0)
@@ -40,5 +43,6 @@ namespace ClassTrack.MVC.Services.Implementations
 
             return new ServiceResult(true);
         }
+
     }
 }

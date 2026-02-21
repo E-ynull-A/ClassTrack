@@ -26,6 +26,7 @@ wwwroot\assets\css\register.css
 wwwroot\assets\css\student-classroom.css
 wwwroot\assets\css\task-detail.css
 wwwroot\assets\css\task-teacher.css
+wwwroot\assets\css\task-update.css
 wwwroot\assets\js\attendance-list.js
 wwwroot\assets\js\attendance.js
 wwwroot\assets\js\base.js
