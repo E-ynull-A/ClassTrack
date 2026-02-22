@@ -13,15 +13,18 @@ namespace ClassTrack.Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<StudentTaskWork> builder)
         {
-            builder.HasKey(st => new { st.StudentId, st.TaskId });
+            builder.HasKey(st => new { st.StudentId, st.TaskWorkId });
 
             builder.Property(st=>st.Point)                
                 .HasColumnType("DECIMAL(5,2)");
 
-            builder.Property(st => st.StudentAnswer)
+            builder.Property(st => st.StudentAnswerText)
                 .IsRequired(false)
                 .HasColumnType("NVARCHAR(MAX)");
 
+            builder.Property(st => st.StudentAnswerLink)
+                .IsRequired(false)
+                .HasColumnType("NVARCHAR(MAX)");
         }
     }
 }

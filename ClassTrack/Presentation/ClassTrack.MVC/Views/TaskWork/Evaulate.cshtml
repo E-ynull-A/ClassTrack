@@ -1,0 +1,71 @@
+﻿@model TaskEvaulateVM
+@{
+    GetTaskWorkVM taskWorkVM = @Model.GetTaskWork;
+}
+
+
+<link href="~/assets/css/evaulate.css" rel="stylesheet" />
+<div class="task-dark">
+    <div class="task-page">
+
+   
+        <div class="task-header">
+            <h1 class="task-title">@taskWorkVM.Title</h1>
+            <div class="task-dates">
+                <span><b>Start:</b> @taskWorkVM.StartDate</span>
+                <span><b>End:</b> @taskWorkVM.EndDate</span>
+            </div>
+        </div>
+
+       
+        <div class="task-body">
+            @taskWorkVM.MainPart
+        </div>
+
+    
+        <div class="task-attachments">
+            <h3>📎 Attachments</h3>
+            <ul>
+                @if (taskWorkVM?.TaskWorkAttachments is not null)
+                {
+                    foreach (GetTaskWorkAttachmentVM attachmentVM in taskWorkVM.TaskWorkAttachments)
+                    {
+                        <li class="task-attachment-item">
+                            <a href="@attachmentVM.FileUrl">📄 @attachmentVM.FileName </a>
+                        </li>
+                    }
+                }               
+            </ul>
+        </div>
+
+    
+        <div class="student-answer">
+            <h3>🧑‍🎓 Student Answer</h3>
+
+            <div class="answer-box">
+                 @Model.StudentAnswer.StudentAnswerText
+            </div>
+
+            <div class="answer-link">
+                🔗 <a href="@Model.StudentAnswer.StudentAnswerLink" target="_blank">
+                    @Model.StudentAnswer.StudentAnswerLink
+                </a>
+            </div>
+        </div>
+
+      
+        <div class="teacher-evaluate">
+            <form method="post" asp-action="Evaulate" asp-route-classRoomId="@Context.Request.Query["classRoomId"]"
+                                                      asp-route-taskWorkId="@Context.Request.Query["taskWorkId"]">
+                <h3>📝 Give Point</h3>
+
+                <div class="point-input-wrap">
+                    <input type="number" asp-for="PutPointInTask.Point" min="0" max="100" placeholder="Score" />
+                    <span class="point-max">/ 100</span>
+                </div>
+
+                <button class="btn-ok">Save Point</button>
+            </form>       
+        </div>
+    </div>
+</div>

@@ -454,22 +454,22 @@ namespace ClassTrack.Persistance.Context.Migrations
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("TaskId")
+                    b.Property<long>("TaskWorkId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsEvaluated")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("Point")
+                    b.Property<decimal>("Point")
                         .HasColumnType("DECIMAL(5,2)");
 
-                    b.Property<string>("StudentAnswer")
+                    b.Property<string>("StudentAnswerLink")
                         .HasColumnType("NVARCHAR(MAX)");
 
-                    b.Property<long>("TaskWorkId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("StudentAnswerText")
+                        .HasColumnType("NVARCHAR(MAX)");
 
-                    b.HasKey("StudentId", "TaskId");
+                    b.HasKey("StudentId", "TaskWorkId");
 
                     b.HasIndex("TaskWorkId");
 

@@ -83,3 +83,68 @@
     background-color: #1e2b52;
     color: #e0e0e0;
 }
+
+.task-attachment-list {
+    margin-top: 10px;
+}
+
+.task-attachment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e2b52;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+}
+
+.task-file-name {
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+.task-btn-view {
+    background-color: #3b82f6;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+    .task-btn-view:hover {
+        background-color: #1d4ed8;
+    }
+
+.task-btn-delete {
+    background-color: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .task-btn-delete:hover {
+        background-color: #b91c1c;
+    }
+
+.task-divider {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 20px 0;
+}
+
+.task-attachment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.task-attachment-actions {
+    display: flex;
+    gap: 8px; 
+}

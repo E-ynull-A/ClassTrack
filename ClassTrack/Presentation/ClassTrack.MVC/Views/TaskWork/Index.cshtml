@@ -63,7 +63,8 @@
                         }
                         else if (task.EndDate.ToUniversalTime() < DateTime.UtcNow)
                         {
-                            <a class="btn ok">
+                            <a class="btn ok" asp-action="Evaulate" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")"
+                                                                    asp-route-taskWorkId="@task.Id">
                                 Evaluate
                             </a>
                         }
@@ -83,10 +84,19 @@
                                 Deadline Passed
                             </a>
                         }
+                        else if (task.StartDate.ToUniversalTime() < DateTime.UtcNow && task.EndDate.ToUniversalTime() > DateTime.UtcNow)
+                        {
+                            <a class="btn ok" asp-action="Submit" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")"
+                                                                  asp-route-taskWorkId="@task.Id">
+                                Submit
+                            </a>
+                        }
                         else
                         {
-                            <a class="btn ok">
-                                Submit
+                            var diff = task.StartDate.ToUniversalTime().Date - DateTime.UtcNow.Date;
+                            <a class="btn danger text-muted"
+                               style="pointer-events:none;cursor:default;">
+                                Left: @(diff.Days < 1 ? $"{diff.Hours} Hour" : $"{diff.Days} Day")
                             </a>
                         }
                     }

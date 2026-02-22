@@ -10,6 +10,7 @@ namespace ClassTrack.Application.MappingProfiles
         public TaskWorkProfile()
         {
             CreateMap<TaskWork, GetTaskWorkItemDTO>();
+
             CreateMap<TaskWork, GetTaskWorkDTO>();
 
             CreateMap<PostTaskWorkDTO, TaskWork>()
@@ -20,6 +21,8 @@ namespace ClassTrack.Application.MappingProfiles
             CreateMap<TaskWorkAttachment, GetTaskWorkAttachmentDTO>();
 
             CreateMap<CloudinaryResponceDTO, TaskWorkAttachment>();
+
+            CreateMap<StudentTaskWork, GetStudentTaskWorkDTO>();
         }
     }
 }

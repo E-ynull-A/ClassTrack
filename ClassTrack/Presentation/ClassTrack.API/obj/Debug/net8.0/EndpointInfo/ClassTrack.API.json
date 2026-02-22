@@ -1585,6 +1585,116 @@
         }
       }
     },
+    "/StudentTaskWorks/{classRoomId}/{taskWorkId}/Evaulate": {
+      "get": {
+        "tags": [
+          "StudentTaskWorks"
+        ],
+        "parameters": [
+          {
+            "name": "taskWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StudentTaskWorks"
+        ],
+        "parameters": [
+          {
+            "name": "taskWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutPointInTaskWorkDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutPointInTaskWorkDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutPointInTaskWorkDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskWorkAttachments/{classWorkId},{taskWorkId}": {
+      "get": {
+        "tags": [
+          "TaskWorkAttachments"
+        ],
+        "parameters": [
+          {
+            "name": "taskWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/TaskWorks": {
       "get": {
         "tags": [
@@ -1676,7 +1786,7 @@
         }
       }
     },
-    "/TaskWorks/{id}": {
+    "/TaskWorks/{classRoomId}/{id}/Detail": {
       "get": {
         "tags": [
           "TaskWorks"
@@ -1689,6 +1799,14 @@
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1778,7 +1896,7 @@
         }
       }
     },
-    "/TaskWorks/{classRoomId}/{id}": {
+    "/TaskWorks/{classRoomId}/{id}/Edit": {
       "put": {
         "tags": [
           "TaskWorks"
@@ -1805,19 +1923,109 @@
         ],
         "requestBody": {
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "MainPart": {
+                    "type": "string"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AttachmentDTO.Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "RemovedFileIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Title": {
+                  "style": "form"
+                },
+                "MainPart": {
+                  "style": "form"
+                },
+                "EndDate": {
+                  "style": "form"
+                },
+                "StartDate": {
+                  "style": "form"
+                },
+                "AttachmentDTO.Files": {
+                  "style": "form"
+                },
+                "RemovedFileIds": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskWorks/{classRoomId}/{taskWorkId}/Submit": {
+      "put": {
+        "tags": [
+          "TaskWorks"
+        ],
+        "parameters": [
+          {
+            "name": "taskWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PutTaskWorkDTO"
+                "$ref": "#/components/schemas/PutStudentTaskWorkDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PutTaskWorkDTO"
+                "$ref": "#/components/schemas/PutStudentTaskWorkDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PutTaskWorkDTO"
+                "$ref": "#/components/schemas/PutStudentTaskWorkDTO"
               }
             }
           }
@@ -2278,6 +2486,16 @@
         },
         "additionalProperties": false
       },
+      "PutPointInTaskWorkDTO": {
+        "type": "object",
+        "properties": {
+          "point": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "PutQuizAnswerDTO": {
         "type": "object",
         "properties": {
@@ -2336,24 +2554,16 @@
         },
         "additionalProperties": false
       },
-      "PutTaskWorkDTO": {
+      "PutStudentTaskWorkDTO": {
         "type": "object",
         "properties": {
-          "title": {
+          "studentAnswerText": {
             "type": "string",
             "nullable": true
           },
-          "mainPart": {
+          "studentAnswerLink": {
             "type": "string",
             "nullable": true
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false

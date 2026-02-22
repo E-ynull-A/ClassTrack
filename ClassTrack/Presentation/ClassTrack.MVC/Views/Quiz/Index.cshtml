@@ -6,7 +6,7 @@
 
     <div class="nav quiz-toolbar">
         <div>
-            <a class="btn" asp-controller="Class" asp-action="ClassRoom" asp-route-id="@Context.GetRouteValue("id")" >-->Class</a>
+            <a class="btn" asp-controller="Class" asp-action="ClassRoom" asp-route-id="@Context.GetRouteValue("id")">-->Class</a>
         </div>
 
         <div class="field-inline">
@@ -51,10 +51,10 @@
                         }
                         else if (quiz.StartTime.Add(quiz.Duration).ToUniversalTime() < DateTime.UtcNow)
                         {
-                            <a class="btn ok" asp-controller="Member" 
-                                              asp-action="GetStudent" 
-                                              asp-route-classRoomId="@Context.GetRouteValue("id")"
-                                              asp-route-quizId="@quiz.Id">
+                            <a class="btn ok" asp-controller="Member"
+                               asp-action="GetStudent"
+                               asp-route-classRoomId="@Context.GetRouteValue("id")"
+                               asp-route-quizId="@quiz.Id">
                                 Evaulate
                             </a>
                         }
@@ -73,10 +73,11 @@
                         @if (quiz.StartTime.Add(quiz.Duration).ToUniversalTime() < DateTime.UtcNow)
                         {
                             <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
-                                <i class="fas fa-edit"></i> Quiz Bitib
+                                <i class="fas fa-edit"></i> Quiz is Over
                             </a>
                         }
-                        else
+
+                        else if (quiz.StartTime.ToUniversalTime() < DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration).ToUniversalTime() > DateTime.UtcNow)
                         {
                             <a class="btn ok" asp-action="Get"
                                asp-route-id="@quiz.Id"
@@ -84,14 +85,21 @@
                                 Enter
                             </a>
                         }
-
+                        else
+                        {
+                            var diff = quiz.StartTime.ToUniversalTime().Date - DateTime.UtcNow.Date;
+                          
+                            <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
+                                <i class="fas fa-edit"></i> Left: @(diff.Days < 1 ? $"{diff.Hours} Hour" : $"{diff.Days} Day")
+                            </a>
+                        }
                     }
                 </div>
             </div>
         }
-           
+
     </div>
-    @if ((int)Math.Ceiling(Model.ItemVM.TotalCount/(double)ViewBag.PageSize) > 1)
+    @if ((int)Math.Ceiling(Model.ItemVM.TotalCount / (double)ViewBag.PageSize) > 1)
     {
         <div class="pagination-container" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
 

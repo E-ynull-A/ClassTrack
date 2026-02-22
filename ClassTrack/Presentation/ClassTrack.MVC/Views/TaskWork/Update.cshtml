@@ -1,32 +1,81 @@
-﻿@model PutTaskWorkVM
+﻿@model UpdateVM
 
 <link href="~/assets/css/task-update.css" rel="stylesheet" />
 
 <div class="task-container">
     <h1 class="task-title">Edit Task</h1>
-    <form id="putTaskForm" class="task-form" method="post"
+    <form id="putTaskForm" class="task-form" method="post" enctype="multipart/form-data"
           asp-action="Update"
-          asp-route-classRoomId="@Context.GetRouteValue("classRoomId")"
+          asp-route-classRoomId="@Context.Request.Query["classRoomId"]"
           asp-route-id="@Context.GetRouteValue("id")">
 
         <div class="task-field">
             <label class="task-label" for="title">Title</label>
-            <input class="task-input" asp-for="Title" placeholder="Enter task title" />
+            <input class="task-input" asp-for="PutTaskWorkVM.Title" placeholder="Enter task title" />
         </div>
 
         <div class="task-field">
             <label class="task-label" for="mainPart">Description</label>
-            <textarea class="task-textarea" asp-for="MainPart" placeholder="Enter task details"></textarea>
+            <textarea class="task-textarea" asp-for="PutTaskWorkVM.MainPart" placeholder="Enter task details"></textarea>
         </div>
 
         <div class="task-field">
             <label class="task-label" for="startDate">Start Date</label>
-            <input class="task-datetime" asp-for="StartDate" type="datetime-local" />
+            <input class="task-datetime" asp-for="PutTaskWorkVM.StartDate" type="datetime-local" />
         </div>
 
         <div class="task-field">
             <label class="task-label" for="endDate">End Date</label>
-            <input class="task-datetime" asp-for="EndDate" type="datetime-local" />
+            <input class="task-datetime" asp-for="PutTaskWorkVM.EndDate" type="datetime-local" />
+        </div>
+
+
+
+
+        <div class="task-field">
+            <label class="task-label">Existing Attachments</label>
+
+            <div id="existing-attachments" class="task-attachment-list">
+                @foreach (var file in Model.WorkAttachmentVMs)
+                {
+                    string type = string.Concat(char.ToUpper(file.FileType[0]).ToString(),file.FileType.Substring(1)); 
+
+                    <div class="task-attachment-item" id="file-container-@file.Id">
+                        <span class="task-file-name">
+                           @file.FileName/@type
+                        </span>
+
+                        <div class="task-attachment-actions">
+                            <a href="@file.FileUrl"
+                               target="_blank"
+                               class="task-btn-view">
+                                View
+                            </a>
+
+                            <button type="button"
+                                    class="task-btn-delete"
+                                    onclick="markForDeletion(@file.Id)">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div id="deleted-ids-container"></div>
+
+            <hr class="task-divider" />
+
+            <label class="task-label" for="attachments">Attachments</label>
+            <input class="task-input"
+                   type="file"
+                   accept=".pdf,image/*"
+                   asp-for="PutTaskWorkVM.AttachmentVM.Files"
+                   multiple />
+
+            <small class="muted-text">
+                You can upload multiple files (PDF, Images)
+            </small>
         </div>
 
         <div class="task-button-container">
@@ -34,3 +83,19 @@
         </div>
     </form>
 </div>
+
+<script id="kfd39e">
+    function markForDeletion(id) {
+        const el = document.getElementById(`file-container-${id}`);
+        if (el) el.style.display = 'none';
+
+        const container = document.getElementById('deleted-ids-container');
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'PutTaskWorkVM.RemovedFileIds';
+        input.value = id;
+
+        container.appendChild(input);
+    }
+</script>

@@ -9,6 +9,8 @@ namespace ClassTrack.MVC.ViewModels
         string Title,
         string MainPart,
         DateTime EndDate,
-        DateTime StartDate);
+        DateTime StartDate,
+        TaskWorkAttachmentVM? AttachmentVM = null,
+        ICollection<long>? RemovedFileIds = null);
     
 }

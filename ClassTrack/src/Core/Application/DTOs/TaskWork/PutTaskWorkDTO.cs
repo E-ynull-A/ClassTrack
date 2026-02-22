@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace ClassTrack.Application.DTOs
         string Title,
         string MainPart,
         DateTime EndDate,
-        DateTime StartDate);
+        DateTime StartDate,
+        PostTaskWorkAttachmentDTO? AttachmentDTO,
+        ICollection<long>? RemovedFileIds);
     
 }

@@ -1,0 +1,76 @@
+﻿@model SubmitVM
+@{
+    GetTaskWorkVM? getTaskWork = Model.TaskWorkVM;
+}
+<link href="~/assets/css/student-submit.css" rel="stylesheet" />
+<div class="task-dark">
+    <div class="task-page">
+
+        <div class="task-header">
+            <h1 class="task-title">@getTaskWork?.Title</h1>
+            <div class="task-dates">
+                <span><b>Start:</b> @getTaskWork?.StartDate</span>
+                <span><b>End:</b> @getTaskWork?.EndDate</span>
+            </div>
+        </div>
+
+        <div class="task-body">
+            <p>
+                @getTaskWork?.MainPart
+            </p>
+        </div>
+
+        <div class="task-attachments">
+            <div class="attachments-header">
+                <h3>📎 Attachments</h3>
+
+                <button type="button"
+                        class="attachments-toggle"
+                        onclick="toggleAttachments(this)">
+                    Show more
+                </button>
+            </div>
+            <ul class="attachments-list collapsed">
+                @if (getTaskWork?.TaskWorkAttachments is not null)
+                {
+                    foreach (GetTaskWorkAttachmentVM attachmentVM in getTaskWork.TaskWorkAttachments)
+                    {
+                        <li class="task-attachment-item">
+                            <a href="@attachmentVM.FileUrl">📄 @attachmentVM.FileName </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <form method="post" asp-action="Submit" asp-route-classRoomId="@Context.Request.Query["classRoomId"]"
+              asp-route-taskWorkId="@Context.Request.Query["taskWorkId"]">
+            <div class="task-answer">
+                <h3>✍️ Your Answer</h3>
+                <textarea asp-for="PutStudentTask.StudentAnswerText"></textarea>           
+            </div>
+            <div class="task-link-input">
+                <label for="referenceLink">🔗 Reference / External Link</label>
+
+                <input type="url"
+                       asp-for="PutStudentTask.StudentAnswerLink"
+                       class="reference-input" />
+            </div>
+            <button class="btn ok">Submit Answer</button>
+        </form>
+      
+    </div>
+</div>
+<script>
+    function toggleAttachments(btn) {
+      const list = btn.closest('.task-attachments')
+                      .querySelector('.attachments-list');
+
+      const isCollapsed = list.classList.contains('collapsed');
+
+      list.classList.toggle('collapsed', !isCollapsed);
+      list.classList.toggle('expanded', isCollapsed);
+
+      btn.textContent = isCollapsed ? 'Show less' : 'Show more';
+    }
+</script>

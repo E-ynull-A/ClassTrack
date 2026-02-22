@@ -8,6 +8,7 @@ namespace ClassTrack.Application.DTOs
 {
     public record GetTaskWorkAttachmentDTO(
         long Id,
+        string FileName,
         string FileUrl,
         string FileType);
    
