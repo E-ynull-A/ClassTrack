@@ -49,7 +49,8 @@ namespace ClassTrack.Persistance.Context
                             entity.Entity.UpdatedAt = DateTime.UtcNow;
                         }
                         break;
-                    case EntityState.Added:                        
+                    case EntityState.Added:
+                        entity.Entity.CreatedBy = "User";
                         entity.Entity.CreatedAt = DateTime.UtcNow;
                         break;
                 }
