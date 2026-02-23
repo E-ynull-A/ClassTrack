@@ -37,7 +37,7 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             if(await _attendanceRepository.AnyAsync(a => attendanceDTOs.Select(aDto => aDto.LessonDate).Contains(a.LessonDate)))
             {
-                throw new BadRequestException("Invalid Operation Error");
+                throw new BadRequestException("There already have an Attendance in that Time");
             }
 
             if(attendanceDTOs.DistinctBy(aDto=>aDto.LessonDate).Count() != 1)

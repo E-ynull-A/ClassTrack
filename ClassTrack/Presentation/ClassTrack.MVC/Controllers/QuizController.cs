@@ -17,7 +17,7 @@ namespace ClassTrack.MVC.Controllers
             _quizClient = quizClient;
             _questionClient = questionClient;
         }
-        public async Task<IActionResult> Index(long id,int page = 1)
+        public async Task<IActionResult> Index(long id, int page = 1)
         {
             if (page < 0 || id < 1)
                 return BadRequest();
@@ -25,7 +25,7 @@ namespace ClassTrack.MVC.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = 4;
 
-            return View(await _quizClient.GetAllAsync(id,page,4));
+            return View(await _quizClient.GetAllAsync(id, page, 4));
         }
 
         public IActionResult Create()
@@ -36,7 +36,7 @@ namespace ClassTrack.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PostQuizVM postQuiz)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(postQuiz);
 
             ServiceResult result = await _quizClient.CreateQuizAsync(postQuiz);
@@ -47,16 +47,16 @@ namespace ClassTrack.MVC.Controllers
                 return View(postQuiz);
             }
 
-            return RedirectToAction("ClassRoom", "Class",new {id = postQuiz.ClassRoomId });
+            return RedirectToAction("ClassRoom", "Class", new { id = postQuiz.ClassRoomId });
         }
 
 
-        public async Task<IActionResult> Update(long id,long classRoomId)
+        public async Task<IActionResult> Update(long id, long classRoomId)
         {
             if (id < 1)
                 return BadRequest();
 
-            GetQuizItemVM getQuizItem = await _quizClient.GetByIdAsync(id,classRoomId);
+            GetQuizItemVM getQuizItem = await _quizClient.GetByIdAsync(id, classRoomId);
 
             return View(new UpdateQuizVM(
                         new PutQuizVM(getQuizItem.Name, getQuizItem.StartTime,
@@ -66,8 +66,8 @@ namespace ClassTrack.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(long id,UpdateQuizVM quizVM)
-        {         
+        public async Task<IActionResult> Update(long id, UpdateQuizVM quizVM)
+        {
 
             if (!ModelState.IsValid)
                 return View(new UpdateQuizVM(quizVM.PutQuiz,
@@ -75,22 +75,39 @@ namespace ClassTrack.MVC.Controllers
 
             ServiceResult serviceResult = await _quizClient.UpdateQuizAsync(quizVM.PutQuiz, id);
             if (!serviceResult.Ok)
-            {               
-                ModelState.AddModelError(serviceResult.ErrorKey,serviceResult.ErrorMessage);
+            {
+                ModelState.AddModelError(serviceResult.ErrorKey, serviceResult.ErrorMessage);
                 return View(new UpdateQuizVM(quizVM.PutQuiz,
                             await _questionClient.GetAllAsync(quizVM.PutQuiz.ClassRoomId, id)));
             }
 
-            return RedirectToAction("Index",new {id = quizVM.PutQuiz.ClassRoomId });           
+            return RedirectToAction("Index", new { id = quizVM.PutQuiz.ClassRoomId });
         }
-    
-        public async Task<IActionResult> Get(long classRoomId,long id)
+
+        public async Task<IActionResult> Get(long classRoomId, long id)
         {
             if (classRoomId < 1 || id < 1)
-                return BadRequest();         
+                return BadRequest();
 
-            return View("../QuizAnswer/Exam",new ExamVM(await _quizClient
-                            .GetQuizForStudentAsync(classRoomId, id)));
+            return View("../QuizAnswer/Exam", new ExamVM(await _quizClient
+                            .GetQuizInDetailAsync(classRoomId, id)));
+        }
+
+        public async Task<ActionResult> SoftDelete(long classRoomId, long id)
+        {
+            if (classRoomId < 1 || id < 1)
+                return BadRequest();
+
+            await _quizClient.SoftDeleteQuizAsync(classRoomId, id);
+            return RedirectToAction("Index", new { id = classRoomId });
+        }
+        
+        public async Task<IActionResult> StudentResult(long classRoomId)
+        {
+            if(classRoomId < 1)
+                return BadRequest();
+
+            return View("QuizResult",await _quizClient.GetResultAsync(classRoomId));
         }
     }
 }

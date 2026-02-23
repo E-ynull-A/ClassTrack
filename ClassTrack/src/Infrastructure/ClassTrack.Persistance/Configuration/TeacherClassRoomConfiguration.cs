@@ -9,6 +9,7 @@ namespace ClassTrack.Persistance.Configuration
         public void Configure(EntityTypeBuilder<TeacherClassRoom> builder)
         {
             builder.HasKey(tc => new { tc.TeacherId, tc.ClassRoomId });
+            builder.HasQueryFilter(tc => tc.ClassRoom != null && !tc.ClassRoom.IsDeleted);
         }
     }
 }

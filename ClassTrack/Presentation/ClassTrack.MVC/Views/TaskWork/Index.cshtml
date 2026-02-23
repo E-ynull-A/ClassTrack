@@ -1,5 +1,4 @@
-﻿
-@model GetTaskWorkItemWithPermissionVM 
+﻿@model GetTaskWorkItemWithPermissionVM
 <link rel="stylesheet" href="~/assets/css/quiz-list.css">
 
 <div class="topbar">
@@ -29,32 +28,35 @@
         @foreach (var task in Model.GetTaskWork.TaskWorkItem)
         {
             <div class="quiz-card">
-                <a href="#">
-                    <div class="qc-top">
-                        <div class="qc-name">@task.Title</div>
-                    </div>
 
-                    <div class="qc-meta">
-                        <div class="qc-row">
-                            <span class="muted">Start</span>
-                            <strong class="qc-start" data-start="@task.StartDate">
-                                @task.StartDate
-                            </strong>
-                        </div>
-                        <div class="qc-row">
-                            <span class="muted">Deadline</span>
-                            <strong class="qc-duration" data-min="@task.EndDate">
-                                @task.EndDate
-                            </strong>
-                        </div>
+                <div class="qc-top">
+                    <div class="qc-name">@task.Title</div>
+                </div>
+
+                <div class="qc-meta">
+                    <div class="qc-row">
+                        <span class="muted">Start</span>
+                        <strong class="qc-start" data-start="@task.StartDate">
+                            @task.StartDate
+                        </strong>
                     </div>
-                </a>
+                    <div class="qc-row">
+                        <span class="muted">Deadline</span>
+                        <strong class="qc-duration" data-min="@task.EndDate">
+                            @task.EndDate
+                        </strong>
+                    </div>
+                </div>
 
                 <div class="qc-actions">
                     @if (Model.IsTeacher.IsTeacher)
                     {
+                        <a asp-action="SoftDelete" asp-route-id="@task.Id" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")" class="btn danger text-muted"
+                           style="margin-right:5px">
+                            Delete
+                        </a>
                         if (task.StartDate.ToUniversalTime() < DateTime.UtcNow &&
-                            task.EndDate.ToUniversalTime() > DateTime.UtcNow)
+                        task.EndDate.ToUniversalTime() > DateTime.UtcNow)
                         {
                             <a class="btn danger text-muted"
                                style="pointer-events:none;cursor:default;">
@@ -63,8 +65,8 @@
                         }
                         else if (task.EndDate.ToUniversalTime() < DateTime.UtcNow)
                         {
-                            <a class="btn ok" asp-action="Evaulate" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")"
-                                                                    asp-route-taskWorkId="@task.Id">
+                            <a class="btn ok" asp-controller="Member" asp-action="GetStudent" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")"
+                               asp-route-taskWorkId="@task.Id">
                                 Evaluate
                             </a>
                         }
@@ -87,7 +89,7 @@
                         else if (task.StartDate.ToUniversalTime() < DateTime.UtcNow && task.EndDate.ToUniversalTime() > DateTime.UtcNow)
                         {
                             <a class="btn ok" asp-action="Submit" asp-route-classRoomId="@Context.GetRouteValue("classRoomId")"
-                                                                  asp-route-taskWorkId="@task.Id">
+                               asp-route-taskWorkId="@task.Id">
                                 Submit
                             </a>
                         }

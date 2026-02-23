@@ -9,8 +9,9 @@ namespace ClassTrack.Application.Interfaces.Services
 {
     public interface IStudentService
     {
+        Task<ICollection<GetStudentQuizResultDTO>> GetStudentResultAsync(long classRoomId);
         Task JoinClassAsync(JoinClassRoomDTO classRoomDTO);
-        Task CalculateAvgPoint(long studentId, long classRoomId, decimal point);
+        Task CalculateAvgPoint(long studentId, long classRoomId);
         Task<ICollection<GetSimpleStudentItemDTO>> GetBriefAllAsync(long classRoomId, int page, int take);
         Task<ICollection<GetStudentItemDTO>> GetAllAsync(long classRoomId, int page, int take);
         Task KickAsync(long studentId, long classRoomId);

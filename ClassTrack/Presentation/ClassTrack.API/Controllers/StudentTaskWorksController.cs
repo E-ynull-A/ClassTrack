@@ -20,22 +20,22 @@ namespace ClassTrack.API.Controllers
 
 
 
-        [HttpGet("{classRoomId}/{taskWorkId}/Evaulate")]
-        public async Task<IActionResult> Get(long taskWorkId)
+        [HttpGet("{classRoomId}/{taskWorkId}/{studentId}")]
+        public async Task<IActionResult> Get(long taskWorkId,long studentId)
         {
-            if (taskWorkId < 1)
+            if (taskWorkId < 1 || studentId < 1)
                 return BadRequest();
 
-            return Ok(await _taskWorkService.GetStudentTaskWorkAsync(taskWorkId));
+            return Ok(await _taskWorkService.GetStudentTaskWorkAsync(taskWorkId,studentId));
         }
 
-        [HttpPut("{classRoomId}/{taskWorkId}/Evaulate")]
-        public async Task<IActionResult> Put(PutPointInTaskWorkDTO putPoint, long taskWorkId)
+        [HttpPut("{classRoomId}/{taskWorkId}/{studentId}")]
+        public async Task<IActionResult> Put(PutPointInTaskWorkDTO putPoint, long taskWorkId, long studentId)
         {
-            if (taskWorkId < 1)
+            if (taskWorkId < 1 || studentId < 1)
                 return BadRequest();
 
-            await _taskWorkService.EvaulateTaskAsync(putPoint, taskWorkId);
+            await _taskWorkService.EvaulateTaskAsync(putPoint, taskWorkId,studentId);
             return NoContent();
         }
     }

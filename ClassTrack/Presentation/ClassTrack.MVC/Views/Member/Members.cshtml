@@ -5,7 +5,7 @@
 
 
     <a class="btn btn-dark" asp-action="ClassRoom" asp-controller="Class"
-                            asp-route-id="@Context.GetRouteValue("classRoomId")">Back</a>
+                            asp-route-id="@Context.Request.Query["classRoomId"]">Back</a>
     <div class="h1">Members</div>
 </div>
 
@@ -40,11 +40,12 @@
                     <div class="name">@studentVM.Name @studentVM.Surname</div>
                     <div class="muted">Joined: @studentVM.JoinedAt.ToShortDateString()</div>
                 </div>
+                <div class="muted">Avg: @studentVM.AvgPoint %</div>
                 <div class="actions">
                     <a class="btn ok" asp-action="Put" asp-route-studentId="@studentVM.Id"
                        asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Promote</a>
                     <a class="btn danger" asp-action="Delete" asp-route-studentId="@studentVM.Id"
-                       asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Kick</a>
+                       asp-route-classRoomId="@Context.Request.Query["classRoomId"]">Kick</a>
                 </div>
             </div>
         }

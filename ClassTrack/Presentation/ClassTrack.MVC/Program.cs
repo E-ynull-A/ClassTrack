@@ -54,12 +54,12 @@ namespace ClassTrack.MVC
             app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{area:exists}/{controller=home}/{action=index}/{id?}");
+                name: "area",
+                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
-                name: "area",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+               name: "default",
+               pattern: "{controller=Home}/{action=Index}/{id?}");          
 
             app.Run();
         }

@@ -20,7 +20,7 @@ namespace ClassTrack.MVC.Services.Implementations
         }
         public async Task<GetTaskWorkVM?> GetByIdAsync(long classRoomId,long id)
         {
-           return await _httpClient.GetFromJsonAsync<GetTaskWorkVM>($"TaskWorks/{classRoomId}/{id}");
+           return await _httpClient.GetFromJsonAsync<GetTaskWorkVM>($"TaskWorks/{classRoomId}/{id}/Detail");
         }
         public async Task<ServiceResult> CreateAsync(long classRoomId, PostTaskWorkVM taskWorkVM)
         {
@@ -112,19 +112,26 @@ namespace ClassTrack.MVC.Services.Implementations
             if (!message.IsSuccessStatusCode)
                 throw new Exception((await message.Content.ReadFromJsonAsync<ErrorResponseVM>())?.Message);             
         }
-        public async Task<GetStudentTaskWorkVM?> GetStudentAnswerAsync(long taskWorkId,long classRoomId)
+        public async Task<GetStudentTaskWorkVM?> GetStudentAnswerAsync(long taskWorkId,long classRoomId,long studentId)
         {
           return await _httpClient
                     .GetFromJsonAsync
-                    <GetStudentTaskWorkVM>($"TaskWorks/{classRoomId}/{taskWorkId}");
+                    <GetStudentTaskWorkVM>($"StudentTaskWorks/{classRoomId}/{taskWorkId}/{studentId}");
         }
-        public async Task EvaulateAsync(long classRoomId,long taskWorkId,PutPointInTaskWorkVM putPointVM)
+        public async Task EvaulateAsync(long classRoomId,long taskWorkId,long studentId,PutPointInTaskWorkVM putPointVM)
         {
+            if (putPointVM.Point < 0 || putPointVM.Point > 100)
+                throw new Exception("Invalid Point Input");
+
            var message = await _httpClient
-                .PutAsJsonAsync($"StudentTaskWorks/{classRoomId}/{taskWorkId}",putPointVM);
+                .PutAsJsonAsync($"StudentTaskWorks/{classRoomId}/{taskWorkId}/{studentId}",putPointVM);
 
             if (!message.IsSuccessStatusCode)
                 throw new Exception((await message.Content.ReadFromJsonAsync<ErrorResponseVM>())?.Message);
+        }
+        public async Task SoftDeleteAsync(long id, long classRoomId)
+        {
+           await _httpClient.DeleteAsync($"TaskWorks/{classRoomId}/{id}/Restore");
         }
     }
 }

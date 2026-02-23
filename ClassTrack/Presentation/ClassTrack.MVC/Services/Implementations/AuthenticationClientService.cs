@@ -48,7 +48,7 @@ namespace ClassTrack.MVC.Services.Implementations
                 var result = await message.Content.ReadFromJsonAsync<ErrorResponseVM>();
 
                 return new ServiceResult(false,string.Empty,result.Message);
-            }
+            }    
 
             var tokens = await message.Content.ReadFromJsonAsync<ResponseTokenVM>();
 
@@ -135,6 +135,10 @@ namespace ClassTrack.MVC.Services.Implementations
                 return new ServiceResult(false, string.Empty, (await message.Content.ReadFromJsonAsync<ErrorResponseVM>())?.Message);
             }
             return new ServiceResult(true);
+        }
+        public async Task<bool> IsAdminAsync(string emailOrUserName)
+        {
+            return await _httpClient.GetFromJsonAsync<bool>($"Permissions/{emailOrUserName}/Admin");
         }
     }
 }

@@ -1,13 +1,10 @@
 ﻿using ClassTrack.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using D = ClassTrack.Domain.Entities;
 
 
 namespace ClassTrack.Application.Interfaces.Repositories
 {
-    public interface IRepository<T> where T:D.BaseEntity
+    public interface IRepository<T> where T:BaseEntity
     {
         IQueryable<T> GetAll(
             Expression<Func<T, bool>>? function = null,
@@ -32,8 +29,12 @@ namespace ClassTrack.Application.Interfaces.Repositories
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
         Task<int> CountAsync(Expression<Func<T, bool>> expression = null);
-        Task<decimal> AverageAsync(Expression<Func<T, decimal>> predicate,
+        Task<decimal> AverageDetailAsync(Expression<Func<T, decimal>> predicate,
                                    Expression<Func<T, bool>> expression);
+        Task<decimal> AverageAsync(Expression<Func<T, decimal>> expression);
+
+
+
         Task<bool> AllAsync(Expression<Func<T, bool>> function);
         IQueryable<T> GetQueryable();
     }

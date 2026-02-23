@@ -42,17 +42,8 @@
 
                             
                         </td>
-                        <td style="text-align: right;">
-                            @if (userItem.Roles.Count > 0)
-                            {
-                                <button class="btn-act btn-promote" title="Admin Et"><i class="fa-solid fa-ban"></i></button>
-                            }
-                            else
-                            {
-                                <button class="btn-act btn-promote" title="Admin Et"><i class="fas fa-shield-alt"></i></button>
-                            }
-                        
-                            <button class="btn-act btn-delete" onclick="openBan('@userItem.UserId')" title="Sil"><i class="fas fa-trash"></i></button>
+                        <td style="text-align: right;">                       
+                            <button class="btn-act btn-delete" onclick="openBan('@userItem.UserId')" title="Ban"><i class="fa-solid fa-ban"></i></button>
                         </td>
                     </tr>
                 }
@@ -105,7 +96,7 @@
             <div style="text-align: right; display: flex; justify-content: flex-end; gap: 8px;">
                 <button type="button" onclick="document.getElementById('banModal').style.display='none'"
                         style="padding: 6px 12px; cursor: pointer; border:1px solid #ccc; border-radius:4px; background:white;">
-                    Cansel
+                    Cancel
                 </button>
                 <button type="submit"
                         style="padding: 6px 12px; cursor: pointer; border:none; border-radius:4px; background: #e74a3b; color: white;">

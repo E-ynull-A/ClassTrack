@@ -25,6 +25,8 @@ namespace ClassTrack.Persistance.Configuration
             builder.Property(st => st.StudentAnswerLink)
                 .IsRequired(false)
                 .HasColumnType("NVARCHAR(MAX)");
+
+            builder.HasQueryFilter(st =>st.Student != null && !st.Student.IsDeleted);
         }
     }
 }

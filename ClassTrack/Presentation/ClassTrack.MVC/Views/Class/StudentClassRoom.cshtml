@@ -22,7 +22,6 @@
                     ⇦ Leave Class
                 </button>
             </form>
-            </div>
         </div>
     </div>
 </div>
@@ -35,6 +34,10 @@
             <span>Class Code</span>
             <code>@Model.ClassRoom.PrivateKey</code>
         </div>
+        <div class="info-row">
+            <span>AvgPoint</span>
+            <strong>@Model.ClassRoom.AvgPoint</strong>
+        </div>
 
         <div class="info-row">
             <span>Members</span>
@@ -44,7 +47,7 @@
 
     <div class="card actions">
         <h2>Quick Actions</h2>
-      
+
         <div class="action-grid">
             <a class="btn primary"
                asp-controller="Quiz" asp-action="Index" asp-route-id="@Model.ClassRoom.Id">
@@ -52,18 +55,13 @@
             </a>
 
             <a class="btn ok"
-               asp-controller="Quiz" asp-action="MyResults" asp-route-classRoomId="@Model.ClassRoom.Id">
+               asp-controller="Quiz" asp-action="StudentResult" asp-route-classRoomId="@Model.ClassRoom.Id">
                 📊 My Quiz Results
             </a>
 
             <a class="btn info"
                asp-controller="TaskWork" asp-action="Get" asp-route-classRoomId="@Model.ClassRoom.Id">
                 📝 Tasks
-            </a>
-
-            <a class="btn"
-               asp-controller="Task" asp-action="MySubmissions" asp-route-classRoomId="@Model.ClassRoom.Id">
-                📂 My Task Results
             </a>
         </div>
     </div>

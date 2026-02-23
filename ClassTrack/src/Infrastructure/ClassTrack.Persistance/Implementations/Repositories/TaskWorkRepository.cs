@@ -19,11 +19,18 @@ namespace ClassTrack.Persistance.Implementations.Repositories
             _context = context;
         }
 
-        public async Task<StudentTaskWork?> GetStudentTaskWorkAsync(long taskWorkId,string userId)
+        public async Task<StudentTaskWork?> GetStudentTaskWorkAsync(long taskWorkId,long studentId)
         {
           return await _context.StudentTaskWorks
                 .FirstOrDefaultAsync(st => st.TaskWorkId == taskWorkId 
-                                        && st.Student.AppUserId == userId);
+                                        && st.StudentId == studentId);
+        }
+
+        public async Task<decimal> GetStudentTaskPointAvgAsync(long classRoomId,long studentId)
+        {
+            return await _context.StudentTaskWorks
+                .Where(st=>st.TaskWork.ClassRoomId == classRoomId && st.StudentId == studentId)
+                    .AverageAsync(st => st.Point);
         }
     }
 }

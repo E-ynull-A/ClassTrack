@@ -1,0 +1,25 @@
+﻿@model ICollection<GetStudentQuizResultVM>
+
+<link rel="stylesheet" href="~/assets/css/quiz-result.css">
+
+<div class="quiz-result-container">
+    <h2 class="quiz-result-title">Quiz Results</h2>
+
+    <table class="quiz-result-table">
+        <thead>
+            <tr class="quiz-result-head-row">
+                <th class="quiz-result-th">Quiz Name</th>
+                <th class="quiz-result-th">Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model)
+            {
+                <tr class="quiz-result-row">
+                    <td class="quiz-result-td">@result.Name</td>
+                    <td class="quiz-result-td">@result.Point</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

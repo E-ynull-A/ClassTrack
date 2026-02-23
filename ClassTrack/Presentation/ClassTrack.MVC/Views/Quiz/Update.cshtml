@@ -74,7 +74,6 @@
 
                 <div class="tools">
                     <input class="input search" id="qSearch" placeholder="Search question..." />
-                    <button class="btn ghost" id="btnAddQuestion">+ Add</button>
                 </div>
             </div>         
             <div class="list" id="questionList">
@@ -88,7 +87,7 @@
                         <div class="qtitle" >@questionItemVM.Title</div>
                     </div>
 
-                    <div class="qactions">
+             @*        <div class="qactions">
                         <a class="btn ghost"
                            asp-controller="Question"
                            asp-action="Update"
@@ -98,7 +97,7 @@
                            asp-route-questionType="@questionItemVM.QuestionType">
                             Edit
                         </a>
-                    </div>
+                    </div> *@
                 </div>
                 }
             </div>

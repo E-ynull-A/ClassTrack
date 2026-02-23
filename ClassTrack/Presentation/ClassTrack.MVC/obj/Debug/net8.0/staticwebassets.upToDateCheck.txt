@@ -1,5 +1,8 @@
+wwwroot\admin\assets\css\admin-quiz.css
 wwwroot\admin\assets\css\base-admin.css
 wwwroot\admin\assets\css\index.css
+wwwroot\admin\assets\css\quiz-detail.css
+wwwroot\admin\assets\css\taskWorks.css
 wwwroot\admin\assets\css\users.css
 wwwroot\admin\assets\js\users.js
 wwwroot\assets\css\attendance-list.css
@@ -22,6 +25,7 @@ wwwroot\assets\css\quiz-answer.css
 wwwroot\assets\css\quiz-edit.css
 wwwroot\assets\css\quiz-editor.css
 wwwroot\assets\css\quiz-list.css
+wwwroot\assets\css\quiz-result.css
 wwwroot\assets\css\quiz-take.css
 wwwroot\assets\css\register.css
 wwwroot\assets\css\student-classroom.css
@@ -29,7 +33,6 @@ wwwroot\assets\css\student-submit.css
 wwwroot\assets\css\task-detail.css
 wwwroot\assets\css\task-teacher.css
 wwwroot\assets\css\task-update.css
-wwwroot\assets\js\attendance-list.js
 wwwroot\assets\js\attendance.js
 wwwroot\assets\js\base.js
 wwwroot\assets\js\class.js

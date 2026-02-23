@@ -43,6 +43,15 @@
                 <div class="qc-actions">
                     @if (Model.IsTeacherVM.IsTeacher)
                     {
+                        <div style="margin-right:5px;">
+                            <a asp-action="SoftDelete" style="text-align:center" asp-route-id="@quiz.Id" asp-route-classRoomId="@Context.GetRouteValue("id")"
+                               class="btn danger text-muted"
+                               onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+                                <i class="fas fa-times"></i>
+                                Delete
+                            </a>
+                        </div>
+                       
                         @if (quiz.StartTime.ToUniversalTime() < DateTime.UtcNow && quiz.StartTime.Add(quiz.Duration).ToUniversalTime() > DateTime.UtcNow)
                         {
                             <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
@@ -88,7 +97,7 @@
                         else
                         {
                             var diff = quiz.StartTime.ToUniversalTime().Date - DateTime.UtcNow.Date;
-                          
+
                             <a class="btn danger text-muted" style="text-align:center;pointer-events: none; cursor: default;">
                                 <i class="fas fa-edit"></i> Left: @(diff.Days < 1 ? $"{diff.Hours} Hour" : $"{diff.Days} Day")
                             </a>
@@ -97,7 +106,6 @@
                 </div>
             </div>
         }
-
     </div>
     @if ((int)Math.Ceiling(Model.ItemVM.TotalCount / (double)ViewBag.PageSize) > 1)
     {

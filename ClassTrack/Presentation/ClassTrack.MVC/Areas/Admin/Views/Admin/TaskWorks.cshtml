@@ -1,0 +1,70 @@
+﻿@model GetTaskWorkItemPagedVM
+
+
+
+<link href="~/admin/assets/css/taskWorks.css" rel="stylesheet" />
+
+<div class="cards-container">
+    @foreach (var task in Model.TaskWorkItem)
+    {
+        <div class="task-card">
+            <div class="task-header">
+                <span class="task-id">ID: #@task.Id</span>
+                <h3 class="task-title">@task.Title</h3>
+            </div>
+
+            <div class="task-body">
+                <div class="task-row">
+                    <span class="task-label">Start:</span>
+                    <span>@task.StartDate.ToString("dd.MM.yyyy HH:mm")</span>
+                </div>
+                <div class="task-row">
+                    <span class="task-label">End:</span>
+                    <span>@task.EndDate.ToString("dd.MM.yyyy HH:mm")</span>
+                </div>
+            </div>
+
+            <div class="task-actions">
+                <a class="btn-delete delete-btn" asp-action="DeleteTaskWork" asp-route-id="@task.Id">
+                    <i class="fa fa-trash"></i> Delete
+                </a>
+            </div>
+        </div>
+    }
+    
+</div>
+<script defer>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function (e) {
+            if (!confirm("Are you sure to delete this Quiz Permanently")) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
+
+
+<div class="pagination-wrapper">
+    @if ((int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize) > 1)
+    {
+        <div class="pagination-container" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
+
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="?page=@(ViewBag.CurrentPage - 1)" class="pg-btn">Geri</a>
+            }
+
+            @for (int i = 1; i <= (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize); i++)
+            {
+                <a href="?page=@i" class="pg-btn @(i == ViewBag.CurrentPage ? "pg-active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize))
+            {
+                <a href="?page=@(ViewBag.CurrentPage + 1)" class="pg-btn">İrəli</a>
+            }
+        </div>
+    }
+</div>
+

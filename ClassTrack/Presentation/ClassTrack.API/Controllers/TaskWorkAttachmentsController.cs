@@ -15,7 +15,7 @@ namespace ClassTrack.API.Controllers
             _taskWorkService = taskWorkService;
         }
 
-        [HttpGet("{classWorkId},{taskWorkId}")]
+        [HttpGet("{classWorkId}/{taskWorkId}")]
         public IActionResult Get(long taskWorkId)
         {
             if (taskWorkId < 1)

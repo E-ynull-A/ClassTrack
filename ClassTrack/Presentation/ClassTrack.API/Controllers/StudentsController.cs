@@ -41,6 +41,16 @@ namespace ClassTrack.API.Controllers
             return Ok(await _studentService.GetBriefAllAsync(classRoomId,page,take));
         }
 
+        [HttpGet("{classRoomId}/Result")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
+        public async Task<IActionResult> GetResult(long classRoomId)
+        {
+            if(classRoomId < 1)
+                return BadRequest();
+
+           return Ok(await _studentService.GetStudentResultAsync(classRoomId));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(JoinClassRoomDTO joinClassRoomDTO)
         {
@@ -49,7 +59,7 @@ namespace ClassTrack.API.Controllers
             return Created();
         }
 
-        [HttpDelete("{classRoomId}/{studentId}")]
+        [HttpDelete("{classRoomId}/{studentId}/Kick")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> Delete(long classRoomId,long studentId)
         {

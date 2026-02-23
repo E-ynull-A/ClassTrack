@@ -1,6 +1,7 @@
 ﻿using ClassTrack.API.ActionFilter;
 using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Services;
+using ClassTrack.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +57,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpDelete("{classRoomId}")]
-        [ServiceFilter(typeof(TeacherAccessFilter))]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long classRoomId)
         {
             if (classRoomId < 1)
@@ -65,6 +66,16 @@ namespace ClassTrack.API.Controllers
             await _roomService.DeleteClassRoomAsync(classRoomId);
             return NoContent();
         }
+
+        [HttpDelete("{classRoomId}/Restore")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> SoftDelete(long classRoomId)
+        {
+            await _roomService.SoftDeleteClassRoomAsync(classRoomId);
+            return NoContent();
+        }
+
+
 
     }
 }

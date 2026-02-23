@@ -4,6 +4,7 @@ using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Utilities;
+using ClassTrack.Persistance.Implementations.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
@@ -20,6 +21,7 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ITaskWorkAttachmentRepository _attachmentRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly ICurrentUserService _currentUser;
+        private readonly IStudentService _studentService;
 
         public TaskWorkService(ITaskWorkRepository taskRepository,
                                 IMapper mapper,
@@ -27,7 +29,8 @@ namespace ClassTrack.Persistance.Implementations.Services
                                 IFileService cloudService,
                                 ITaskWorkAttachmentRepository attachmentRepository,
                                 IStudentRepository studentRepository,
-                                ICurrentUserService currentUser)
+                                ICurrentUserService currentUser,
+                                IStudentService studentService)
         {
             _taskRepository = taskRepository;
             _mapper = mapper;
@@ -36,11 +39,13 @@ namespace ClassTrack.Persistance.Implementations.Services
             _attachmentRepository = attachmentRepository;
             _studentRepository = studentRepository;
             _currentUser = currentUser;
+            _studentService = studentService;
         }
 
-        public async Task<ICollection<GetTaskWorkItemDTO>> GetAllAsync(int page, int take)
+        public async Task<GetTaskWorkItemPagedDTO> GetAllAsync(int page, int take)
         {
-            return _mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository.GetAll(page: page, take: take).ToListAsync());
+            return new GetTaskWorkItemPagedDTO(_mapper.Map<ICollection<GetTaskWorkItemDTO>>(await _taskRepository
+                                            .GetAll(page: page, take: take).ToListAsync()),await _taskRepository.CountAsync());
         }
 
         public async Task<GetTaskWorkItemPagedDTO> GetAllByClassRoomIdAsync(int page, int take, long classRoomId)
@@ -52,14 +57,10 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                     .ToListAsync()), await _taskRepository.CountAsync(t=>t.ClassRoomId == classRoomId));
         }
 
-        public async Task<GetStudentTaskWorkDTO> GetStudentTaskWorkAsync(long taskWorkId)
+        public async Task<GetStudentTaskWorkDTO> GetStudentTaskWorkAsync(long taskWorkId,long studentId)
         {
-            string userId = _currentUser.GetUserId();
 
-            if (userId is null)
-                throw new NotFoundException("User not Found!");
-
-            StudentTaskWork? studentTask = await _taskRepository.GetStudentTaskWorkAsync(taskWorkId,userId);
+            StudentTaskWork? studentTask = await _taskRepository.GetStudentTaskWorkAsync(taskWorkId,studentId);
 
             if (studentTask is null)
                 throw new NotFoundException("The Task Work not Found!");
@@ -192,17 +193,17 @@ namespace ClassTrack.Persistance.Implementations.Services
             await _taskRepository.SaveChangeAsync();
         }
 
-        public async Task EvaulateTaskAsync(PutPointInTaskWorkDTO putPoint,long taskWorkId)
+        public async Task EvaulateTaskAsync(PutPointInTaskWorkDTO putPoint,long taskWorkId,long studentId)
         {
-            string userId = _currentUser.GetUserId();
+
+            if (putPoint.Point < 0 || putPoint.Point > 100)
+                throw new BadRequestException("Invalid Point Request");
 
             TaskWork? evaultedTask = await _taskRepository.FirstOrDefaultAsync(t => t.Id == taskWorkId
                                                                            &&
-                                                                       t.StudentTaskWorks.Select(st => st.Student.AppUserId).Contains(userId),
+                                                                       t.StudentTaskWorks.Select(st => st.StudentId).Contains(studentId),
                                                                        includes: ["StudentTaskWorks"]);
 
-            if (evaultedTask is null)
-                throw new NotFoundException("The Task Not Found");
 
             if (evaultedTask.EndDate.ToUniversalTime() > DateTime.UtcNow)
                 throw new BadRequestException("The Quiz does not over!");
@@ -213,6 +214,20 @@ namespace ClassTrack.Persistance.Implementations.Services
             taskWork.IsEvaluated = true;
 
             _taskRepository.Update(evaultedTask);
+            await _taskRepository.SaveChangeAsync();
+
+            await _studentService.CalculateAvgPoint(studentId, evaultedTask.ClassRoomId);
+        }
+
+        public async Task SoftQuizDeleteAsync(long id)
+        {
+            TaskWork? deleted = await _taskRepository.GetByIdAsync(id);
+
+            if (deleted == null)
+                throw new NotFoundException("The TaskWork isn't Found!");
+
+            deleted.IsDeleted = true;
+            _taskRepository.Update(deleted);
             await _taskRepository.SaveChangeAsync();
         }
 

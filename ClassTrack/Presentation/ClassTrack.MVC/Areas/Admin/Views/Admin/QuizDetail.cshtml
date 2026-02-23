@@ -1,0 +1,61 @@
+﻿@model GetQuizVM
+
+
+<link href="~/admin/assets/css/quiz-detail.css" rel="stylesheet" />
+<div class="quiz-detail-wrapper">
+
+    <div class="quiz-card">
+        <div class="quiz-card-header">
+            <h2>@Model.Name</h2>
+            <div class="quiz-meta">
+                <span><i class="far fa-calendar-alt"></i> Start: @Model.StartTime.ToString("dd.MM.yyyy HH:mm")</span>
+                <span><i class="far fa-clock"></i> Duration: @Model.Duration.TotalMinutes min</span>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="quiz-questions">
+            @if (Model.ChoiceQuestions?.Any() == true)
+            {
+                <div class="question-section">
+                    <h3>Choice Questions</h3>
+                    @foreach (var cq in Model.ChoiceQuestions)
+                    {
+                        <div class="question-item">
+                            <div class="question-header">
+                                <strong>@cq.Title</strong> - <span>@cq.Point pts</span>
+                            </div>
+                            <div class="question-type">Type: @cq.QuestionType | Multiple: @(cq.IsMultiple ? "Yes" : "No")</div>
+                            @if (cq.Options?.Any() == true)
+                            {
+                                <ul class="options-list">
+                                    @foreach (var opt in cq.Options)
+                                    {
+                                        <li>@opt.Variant</li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (Model.OpenQuestions?.Any() == true)
+            {
+                <div class="question-section">
+                    <h3>Open Questions</h3>
+                    @foreach (var oq in Model.OpenQuestions)
+                    {
+                        <div class="question-item">
+                            <div class="question-header">
+                                <strong>@oq.Title</strong> - <span>@oq.Point pts</span>
+                            </div>
+                            <div class="question-type">Type: @oq.QuestionType</div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

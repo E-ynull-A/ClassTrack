@@ -10,5 +10,6 @@ namespace ClassTrack.Application.Interfaces.Repositories
     public interface IClassRoomRepository:IRepository<ClassRoom>
     {
         Task BreakStudentClassRoomAsync(long classRoomId, string userId);
+        Task<decimal> CalculateClassRoomAvgAsync(long classRoomId);
     }
 }

@@ -6,6 +6,7 @@ using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
 using ClassTrack.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class QuizService : IQuizService
@@ -14,33 +15,51 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IMapper _mapper;
         private readonly IClassRoomRepository _roomRepository;
         private readonly IStudentRepository _studentRepository;
-
+        private readonly ICurrentUserService _currentUser;
+        private readonly IPermissionService _permissionService;
 
         public QuizService(IQuizRepository quizRepository,
                            IMapper mapper,
                            IClassRoomRepository roomRepository,
-                           IStudentRepository studentRepository)
+                           IStudentRepository studentRepository,
+                           ICurrentUserService currentUser,
+                           IPermissionService permissionService)
 
         {
             _quizRepository = quizRepository;
             _mapper = mapper;
             _roomRepository = roomRepository;
             _studentRepository = studentRepository;
+            _currentUser = currentUser;
+            _permissionService = permissionService;
         }
 
         public async Task<GetQuizItemPagedDTO> GetAllAsync(long classRoomId, int page, int take)
         {
+            string userRole = _currentUser.GetUserRole();
+            string userId = _currentUser.GetUserId();
+
+            if(classRoomId != 0)
+            {
+                if (!await _roomRepository.AnyAsync(r => r.Id == classRoomId
+                 && (r.StudentClasses.Any(sc => sc.Student.AppUserId == userId) 
+                 || r.TeacherClasses.Any(tc=>tc.Teacher.AppUserId == userId))))
+                {
+                    throw new BadRequestException("Forbidden action!");
+                }
+            }
+           
             ICollection<Quiz> quizes = await _quizRepository
                                     .GetAll(page: page,
                                             take: take,
-                                            function:x=>x.ClassRoomId == classRoomId,
+                                            function:(userRole == UserRole.Admin.ToString()? null: x => x.ClassRoomId == classRoomId),
                                             sort: x => x.CreatedAt)
                                     .ToListAsync();
             if (quizes.Count == 0)
                 return new GetQuizItemPagedDTO(new List<GetQuizItemDTO>(),0);
 
             return new GetQuizItemPagedDTO(_mapper.Map<ICollection<GetQuizItemDTO>>(quizes),
-                                     await _quizRepository.CountAsync(q=>q.ClassRoomId == classRoomId));
+                                     await _quizRepository.CountAsync(userRole == UserRole.Admin.ToString() ? null : x => x.ClassRoomId == classRoomId));
         }
         public async Task<GetQuizItemDTO> GetByIdAsync(long id)
         {
@@ -59,13 +78,17 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (quiz is null)
                 throw new NotFoundException("The Quiz not Found");
 
-            if (DateTime.UtcNow < quiz.StartTime.ToUniversalTime()
-                || DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration).ToUniversalTime())
+            
+            if(!await _permissionService.IsAdminAsync(_currentUser.GetUserEmail()))
             {
-                throw new BusinessLogicException("You can enter The Quiz only after the Starting Quiz " +
-                                                    "and Before the Quiz Ending!!");
+                if (DateTime.UtcNow < quiz.StartTime.ToUniversalTime()
+               || DateTime.UtcNow > quiz.StartTime.Add(quiz.Duration).ToUniversalTime())
+                {
+                    throw new BusinessLogicException("You can enter The Quiz only after the Starting Quiz " +
+                                                        "and Before the Quiz Ending!!");
+                }
             }
-
+           
             return _mapper.Map<GetQuizDTO>(quiz);
         }
         public async Task CreateQuizAsync(PostQuizDTO postQuiz)
@@ -141,6 +164,17 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new NotFoundException("The Quiz isn't Found!");
 
             _quizRepository.Delete(deleted);
+            await _quizRepository.SaveChangeAsync();
+        }
+        public async Task SoftQuizDeleteAsync(long id)
+        {
+            Quiz? deleted = await _quizRepository.GetByIdAsync(id);
+
+            if (deleted == null)
+                throw new NotFoundException("The Quiz isn't Found!");
+
+            deleted.IsDeleted = true;
+            _quizRepository.Update(deleted);
             await _quizRepository.SaveChangeAsync();
         }
         private void _getAllowQuizModify(Quiz quiz)

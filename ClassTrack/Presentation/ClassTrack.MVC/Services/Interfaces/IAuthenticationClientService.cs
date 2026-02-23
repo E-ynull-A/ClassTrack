@@ -12,5 +12,6 @@ namespace ClassTrack.MVC.Services.Interfaces
         Task ResetPasswordAsync(ResetPasswordVM passwordVM);
         Task<ServiceResult> ConfirmLeaveAsync(LeaveTokenVM tokenVM);
         Task LeaveRoomAsync(long classRoomId);
+        Task<bool> IsAdminAsync(string userNameOrEmail = null);
     }
 }

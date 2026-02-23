@@ -2,6 +2,7 @@
 using ClassTrack.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Controllers
@@ -68,9 +69,9 @@ namespace ClassTrack.MVC.Controllers
             return RedirectToAction("ClassRoom",new {id});
         }
 
-        public async Task<IActionResult> Dashboard()
-        {            
-            return View(new DashboardVM(await _roomService.GetAllAsync()));
+        public async Task<IActionResult> Dashboard(string userEmail)
+        {
+           return View(new DashboardVM(await _roomService.GetAllAsync()));
         }
 
         [HttpPost]

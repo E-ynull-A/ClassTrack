@@ -13,15 +13,13 @@ namespace ClassTrack.MVC.Controllers
             _memberClient = memberClient;
         }
 
-        public async Task<IActionResult> GetStudent(long classRoomId,long quizId)
+        public async Task<IActionResult> GetStudent(long classRoomId, long? quizId, long? taskWorkId)
         {
-            if (classRoomId < 1 || quizId < 1)
+            if (classRoomId < 1 || quizId.GetValueOrDefault() < 0 || taskWorkId.GetValueOrDefault() < 0)
                 return BadRequest();
 
             return View("StudentList",await _memberClient.GetSimpleStudentAsync(classRoomId));
         }
-
-        [HttpGet("{classRoomId}")]
         public async Task<IActionResult> Members(long classRoomId)
         {
             if (classRoomId < 1)

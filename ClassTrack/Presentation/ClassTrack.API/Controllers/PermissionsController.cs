@@ -8,7 +8,6 @@ namespace ClassTrack.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class PermissionsController : ControllerBase
     {
         private readonly IPermissionService _permissionService;
@@ -22,6 +21,13 @@ namespace ClassTrack.API.Controllers
         public async Task<IActionResult> Get(long classRoomId)
         {
            return Ok(await _permissionService.IsTeacherAsync(classRoomId));
+        }
+
+
+        [HttpGet("{emailOrUserName}/Admin")]
+        public async Task<IActionResult> Get(string emailOrUserName)
+        {
+            return Ok(await _permissionService.IsAdminAsync(emailOrUserName));
         }
     }
 }

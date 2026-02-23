@@ -2,11 +2,14 @@
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Enums;
 using ClassTrack.Domain.Utilities;
 using ClassTrack.Persistance.DAL;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 
 
@@ -18,14 +21,17 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ICacheService _casheService;
         private readonly ITeacherRepository _teacherRepository;
         private readonly ICurrentUserService _currentUser;
+        private readonly UserManager<AppUser> _userManager;
 
         public PermissionService(ICacheService casheService,
                                  ITeacherRepository teacherRepository,
-                                 ICurrentUserService currentUser)
+                                 ICurrentUserService currentUser,
+                                 UserManager<AppUser> userManager)
         {
             _casheService = casheService;
             _teacherRepository = teacherRepository;
             _currentUser = currentUser;
+            _userManager = userManager;
         }
         public async Task<IsTeacherDTO> IsTeacherAsync(long classRoomId)
         {
@@ -50,5 +56,16 @@ namespace ClassTrack.Persistance.Implementations.Services
 
             return tDTO;
         }      
+
+        public async Task<bool> IsAdminAsync(string emailOrUserName)
+        {
+            AppUser? user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == emailOrUserName
+                                                                         || u.Email == emailOrUserName);
+
+            if (user == null)
+                throw new NotFoundException("User not Found");
+
+            return await _userManager.IsInRoleAsync(user, UserRole.Admin.ToString());
+        }
     }
 }

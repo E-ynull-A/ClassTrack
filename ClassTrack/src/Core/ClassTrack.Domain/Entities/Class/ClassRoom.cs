@@ -10,7 +10,6 @@ namespace ClassTrack.Domain.Entities
 
         //Relations
         public ICollection<StudentAttendance>? StudentAttendance { get; set; }
-
         public ICollection<StudentClassRoom> StudentClasses { get; set; }
         public ICollection<TeacherClassRoom> TeacherClasses { get; set; }
         public ICollection<TaskWork> TaskWorks { get; set; }

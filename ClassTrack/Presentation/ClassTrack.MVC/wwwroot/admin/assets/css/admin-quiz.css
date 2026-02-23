@@ -1,0 +1,137 @@
+﻿/* ===== Quiz Cards ===== */
+*{
+    text-decoration:none;
+}
+
+.quiz-card {
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(78,115,223,0.08), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+    .quiz-card::before {
+        pointer-events: none;
+    }
+
+.quiz-card:hover::before {
+    opacity: 1;
+}
+
+.quiz-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+}
+
+.quiz-card .card-body {
+    padding: 1.25rem;
+}
+
+.quiz-card .h5 {
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+/* Left border accent */
+.border-left-primary {
+    border-left: 4px solid #4e73df !important;
+}
+
+/* Icons */
+.quiz-card i.fa-clipboard-list {
+    opacity: 0.35;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.quiz-card:hover i.fa-clipboard-list {
+    transform: scale(1.15);
+    opacity: 0.6;
+}
+
+/* ===== Card Footer Buttons ===== */
+.card-footer {
+    padding: 0.75rem 1rem;
+}
+
+.card-footer .btn {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    transition: all 0.25s ease;
+}
+
+.card-footer .btn-outline-info:hover {
+    background-color: #36b9cc;
+    color: #fff;
+}
+
+.card-footer .btn-outline-danger:hover {
+    background-color: #e74a3b;
+    color: #fff;
+}
+
+.pagination-container {
+    margin-top: 30px;
+}
+
+.container-fluid,
+.row {
+    overflow: visible !important;
+}
+
+.pagination-container {
+    position: relative;
+    z-index: 10;
+}
+
+.pg-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #d1d3e2;
+    text-decoration: none;
+    color: #4e73df;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.pg-btn:hover {
+    background-color: #4e73df;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(78, 115, 223, 0.35);
+}
+
+.pg-active {
+    background-color: #4e73df;
+    color: #fff;
+    border-color: #4e73df;
+}
+
+/* ===== Header Button ===== */
+.btn-primary {
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(78, 115, 223, 0.4);
+}
+
+/* ===== Small Text Tweaks ===== */
+.text-xs {
+    letter-spacing: 0.05em;
+}
+
+.small i {
+    color: #858796;
+}

@@ -3,11 +3,6 @@ using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Utilities;
 using ClassTrack.Persistance.DAL;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Implementations.Repositories
 {
@@ -32,6 +27,15 @@ namespace ClassTrack.Persistance.Implementations.Repositories
 
             _context.StudentClasses.Remove(studentClass);
                 
+        }
+        public async Task<decimal> CalculateClassRoomAvgAsync(long classRoomId)
+        {
+            ICollection<StudentClassRoom> classRooms = await _context.StudentClasses.Where(sc => sc.ClassRoomId == classRoomId).ToListAsync();
+               
+            if(classRooms.Any())
+                return classRooms.Average(sc => sc.AvgPoint);
+
+            return 0;
         }
     }
 }

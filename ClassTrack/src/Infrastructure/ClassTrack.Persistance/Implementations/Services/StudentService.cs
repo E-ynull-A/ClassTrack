@@ -3,6 +3,7 @@ using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
 using ClassTrack.Domain.Entities;
+using ClassTrack.Domain.Enums;
 using ClassTrack.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -15,7 +16,9 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly ICurrentUserService _currentUser;
         private readonly IStudentQuizRepository _studentQuiz;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly ITaskWorkRepository _taskRepository;
         private readonly ICacheService _cacheService;
+        private readonly IQuizRepository _quizRepository;
         private readonly IMapper _mapper;
 
         public StudentService(IClassRoomRepository roomRepository,
@@ -23,7 +26,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                               ICurrentUserService currentUser,
                               IStudentQuizRepository studentQuiz,
                               ITeacherRepository teacherRepository,
+                              ITaskWorkRepository taskRepository,
                               ICacheService cacheService,
+                              IQuizRepository quizRepository,
                               IMapper mapper)
 
         {
@@ -32,7 +37,9 @@ namespace ClassTrack.Persistance.Implementations.Services
             _currentUser = currentUser;
             _studentQuiz = studentQuiz;
             _teacherRepository = teacherRepository;
+            _taskRepository = taskRepository;
             _cacheService = cacheService;
+            _quizRepository = quizRepository;
             _mapper = mapper;
         }
 
@@ -58,10 +65,22 @@ namespace ClassTrack.Persistance.Implementations.Services
                                                                                          take: take,
                                                                                          includes: [nameof(Student.AppUser),
                                                                                                    nameof(Student.StudentClasses)],
-                                                                                         function: x => x.StudentClasses.Select(sc => sc.ClassRoomId).Contains(classRoomId),
+                                                                                         function: x => x.StudentClasses.Select(sc => sc.ClassRoomId)
+                                                                                                                        .Contains(classRoomId),
                                                                                          sort: x => x.AppUser.Name));
         }
+        public async Task<ICollection<GetStudentQuizResultDTO>> GetStudentResultAsync(long classRoomId)
+        {
+            string userId = _currentUser.GetUserId();
 
+            if (userId is null)
+                throw new NotFoundException("User not Found!");
+
+            return _mapper.Map<ICollection<GetStudentQuizResultDTO>>(await _quizRepository.GetAll(includes: ["StudentQuizes"],
+                                                                   function:q=>q.ClassRoomId == classRoomId 
+                                                                   && q.StudentQuizes.Select(sq=>sq.Student.AppUserId)
+                                                                   .Contains(userId) && q.StudentQuizes.Select(sq=>sq.QuizStatus).Contains("Finished")).ToListAsync());
+        }
         public async Task JoinClassAsync(JoinClassRoomDTO classRoomDTO)
         {
             ClassRoom? room = await _roomRepository.FirstOrDefaultAsync(r => r.PrivateKey == classRoomDTO.ClassKey,
@@ -71,6 +90,9 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new NotFoundException("The Room isn't Found!!");
 
             string userId = _currentUser.GetUserId();
+            string userRole = _currentUser.GetUserRole();
+            if (userRole == UserRole.Admin.ToString())
+                throw new BadRequestException("Admin can not create Class Room");
 
             if (await _roomRepository.AnyAsync(r => (r.PrivateKey == classRoomDTO.ClassKey)
                && (r.StudentClasses.Any(sc => sc.Student.AppUserId == userId)
@@ -181,7 +203,7 @@ namespace ClassTrack.Persistance.Implementations.Services
             _teacherRepository.Update(promotedStudent);
             await _teacherRepository.SaveChangeAsync();
         }
-        public async Task CalculateAvgPoint(long studentId, long classRoomId, decimal point)
+        public async Task CalculateAvgPoint(long studentId, long classRoomId)
         {
             Student student = await _studentRepository
                 .GetByIdAsync(studentId, includes: [nameof(Student.StudentQuizes),
@@ -195,10 +217,13 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (studentClass is null)
                 throw new NotFoundException("You are not the member of this class");
 
-            decimal fullQuizPoint = await _studentQuiz.AverageAsync(x => (x.TotalPoint / x.Quiz.FullPoint) * 1.5m,
+            decimal fullQuizPoint = await _studentQuiz.AverageDetailAsync(x => (x.TotalPoint / x.Quiz.FullPoint) * 0.6m,
                                                                     x => x.Quiz.ClassRoomId == classRoomId &&
                                                                     x.StudentId == studentId);
-            studentClass.AvgPoint += fullQuizPoint;
+
+            decimal avgTaskPoint = await _taskRepository.GetStudentTaskPointAvgAsync(classRoomId,studentId)*0.4m;
+
+            studentClass.AvgPoint = avgTaskPoint + fullQuizPoint;
 
             _studentRepository.Update(student);
             await _studentRepository.SaveChangeAsync();

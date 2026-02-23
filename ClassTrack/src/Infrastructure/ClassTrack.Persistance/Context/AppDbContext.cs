@@ -17,6 +17,11 @@ namespace ClassTrack.Persistance.DAL
             base.OnModelCreating(builder);   
         }
 
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            ChangeTracker.SaveChangeInterseptor();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }

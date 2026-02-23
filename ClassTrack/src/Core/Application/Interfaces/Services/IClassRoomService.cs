@@ -6,6 +6,7 @@ namespace ClassTrack.Application.Interfaces.Services
     {
         Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page,
                                                            int take);
+        Task SoftDeleteClassRoomAsync(long id);
         Task<GetClassRoomDTO> GetByIdAsync(long id);
         Task CreateClassRoomAsync(PostClassRoomDTO postClass);
         Task UpdateClassRoomAsync(long id, PutClassRoomDTO putClass);

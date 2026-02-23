@@ -9,7 +9,7 @@ namespace ClassTrack.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class StatisticsController : ControllerBase
     {
         private readonly IStatisticsService _statisticsService;

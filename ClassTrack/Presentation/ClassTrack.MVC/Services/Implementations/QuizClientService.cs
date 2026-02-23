@@ -23,7 +23,7 @@ namespace ClassTrack.MVC.Services.Implementations
         {    
             return await _httpClient.GetFromJsonAsync<GetQuizItemVM>($"Quizes/{classRoomId}/{id}");
         }
-        public async Task<GetQuizVM?> GetQuizForStudentAsync(long classRoomId,long quizId)
+        public async Task<GetQuizVM?> GetQuizInDetailAsync(long quizId,long classRoomId=0)
         {
            var responce = await _httpClient.GetAsync($"Quizes/{classRoomId}/{quizId}/Detail");
 
@@ -96,5 +96,15 @@ namespace ClassTrack.MVC.Services.Implementations
 
             return new ServiceResult(true);
         }
+        public async Task SoftDeleteQuizAsync(long classRoomId,long id)
+        {
+           await _httpClient.DeleteAsync($"Quizes/{classRoomId}/{id}/Restore");
+        }
+       
+        public async Task<ICollection<GetStudentQuizResultVM>> GetResultAsync(long classRoomId)
+        {
+            return await _httpClient.GetFromJsonAsync<ICollection<GetStudentQuizResultVM>>($"Students/{classRoomId}/Result");
+        } 
     }
+
 }

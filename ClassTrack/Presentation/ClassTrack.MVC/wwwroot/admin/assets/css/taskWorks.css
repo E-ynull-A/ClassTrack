@@ -1,0 +1,198 @@
+﻿body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.cards-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.task-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+    .task-card:hover {
+        transform: translateY(-3px);
+    }
+
+.task-header {
+    margin-bottom: 12px;
+}
+
+.task-id {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.task-title {
+    margin: 4px 0;
+    font-size: 18px;
+    color: #111827;
+}
+
+.task-body .task-row {
+    display: flex;
+    gap: 8px;
+    margin: 6px 0;
+}
+
+.task-label {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.task-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+}
+
+    .task-actions a {
+        text-decoration: none;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+.btn-delete {
+    color: #3b82f6;
+}
+
+.btn-details {
+    color: #6b21a8;
+}
+
+.pagination-wrapper {
+    margin: 30px auto;
+    text-align: center;
+}
+
+Qaqa, pagination dizaynı çox vaxt səhifənin "ucuz" və ya "bahalı" görünməsini təyin edən detaldır. Sənin bu funksional kodun üçün Apple və Dribbble tərzində, yumşaq keçidləri olan premium bir CSS hazırladım.
+
+Bu dizaynda düymələr sadəcə kvadrat yox, aktiv olanda parıldayan modern elementlərə çevriləcək.
+
+1. Pagination CSS (Modern & Clean)
+Bunu layihənin CSS faylına və ya səhifənin altındakı <style > blokuna əlavə elə:
+
+CSS
+<style >
+.pagination-container {
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Ümumi Düymə Stili */
+.pg-btn {
+    min-width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: #4e73df;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none !important;
+    border: 1px solid #e3e6f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+ 
+    .pg-btn:hover {
+        background-color: #f8faff;
+        border-color: #4e73df;
+        color: #2e59d9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(78, 115, 223, 0.15);
+    }
+
+
+.pg-active {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(78, 115, 223, 0.35) !important;
+    transform: scale(1.05);
+}
+
+
+.pg-btn:first-child, .pg-btn:last-child {
+    background-color: #f8f9fc;
+    color: #858796;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+    .pg-btn:first-child:hover, .pg-btn:last-child:hover {
+        background-color: #4e73df;
+        color: white;
+    }
+
+
+@media (max-width: 576px) {
+    .pg-btn {
+        min-width: 35px;
+        height: 35px;
+        padding: 0 10px;
+        font-size: 12px;
+        border-radius: 8px;
+    }
+
+    .pagination-container {
+        gap: 5px;
+    }
+}
+.pagination-container {
+    margin-top: 30px;
+}
+
+.container-fluid,
+.row {
+    overflow: visible !important;
+}
+
+.pagination-container {
+    position: relative;
+    z-index: 10;
+}
+
+.page-item {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #111827;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+}
+
+    .page-link:hover {
+        background-color: #f3f4f6;
+    }

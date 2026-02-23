@@ -31,6 +31,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [ServiceFilter(typeof(ClassRoomAccessFilter))]
         public async Task<IActionResult> Get(long id)
         {
             if (id < 1)
@@ -40,6 +41,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet("Choice/{classRoomId}/{quizId}/{id}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
         public async Task<IActionResult> GetInUpdateChoice(long id)
         {
            if(id < 1)
@@ -49,6 +51,7 @@ namespace ClassTrack.API.Controllers
         }
 
         [HttpGet("Open/{classRoomId}/{quizId}/{id}")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
 
         public async Task<IActionResult> GetInUpdateOpen(long id)
         {
@@ -117,7 +120,6 @@ namespace ClassTrack.API.Controllers
 
         [HttpDelete("{id}/{classRoomId}/OpenQuestion")]
         [ServiceFilter(typeof(TeacherAccessFilter))]
-
         public async Task<IActionResult> DeleteOpen(long id)
         {
             if (id < 1)

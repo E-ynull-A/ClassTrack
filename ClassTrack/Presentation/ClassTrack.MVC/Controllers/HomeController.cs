@@ -2,6 +2,7 @@ using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ClassTrack.MVC.Controllers
@@ -38,6 +39,9 @@ namespace ClassTrack.MVC.Controllers
                                          serviceResult.ErrorMessage);
                 return View(loginVM);
             }
+
+            if (await _clientService.IsAdminAsync(loginVM.UsernameOrEmail))
+                return RedirectToAction("Index", "Admin", new {area = "Admin"});
 
             return RedirectToAction("Dashboard", "Class"); 
         }

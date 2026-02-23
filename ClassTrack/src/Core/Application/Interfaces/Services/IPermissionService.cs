@@ -10,5 +10,6 @@ namespace ClassTrack.Application.Interfaces.Services
     public interface IPermissionService
     {
         Task<IsTeacherDTO> IsTeacherAsync(long classRoomId);
+        Task<bool> IsAdminAsync(string emailOrUserName);
     }
 }

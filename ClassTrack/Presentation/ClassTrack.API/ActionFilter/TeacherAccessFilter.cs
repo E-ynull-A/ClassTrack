@@ -1,6 +1,7 @@
 ﻿using ClassTrack.Application.DTOs;
 using ClassTrack.Application.Interfaces.Repositories;
 using ClassTrack.Application.Interfaces.Services;
+using ClassTrack.Domain.Enums;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -22,6 +23,20 @@ namespace ClassTrack.API.ActionFilter
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             string? userId = context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userRole = context.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+
+            if (userRole is null)
+            {
+                context.Result = new ForbidResult();
+                return;
+            }
+
+            if(userRole == UserRole.Admin.ToString())
+            {
+                await next();
+                return;
+            }
+
 
             context.RouteData.Values.TryGetValue("classRoomId",out object roomId);
             long classRoomId = Convert.ToInt64(roomId);

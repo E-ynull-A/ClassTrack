@@ -10,7 +10,8 @@ namespace ClassTrack.MVC.Services.Interfaces
         Task<ServiceResult> UpdateAsync(long id, long classRoomId, PutTaskWorkVM putTaskWork);
         Task<ICollection<GetTaskWorkAttachmentVM>?> GetAllTaskAttachmentAsync(long classRoomId, long taskWorkId);
         Task StudentSubmitAsync(long classRoomId, long taskWorkId, PutStudentTaskWorkVM studentTask);
-        Task<GetStudentTaskWorkVM?> GetStudentAnswerAsync(long taskWorkId, long classRoomId);
-        Task EvaulateAsync(long classRoomId, long taskWorkId, PutPointInTaskWorkVM putPointVM);
+        Task<GetStudentTaskWorkVM?> GetStudentAnswerAsync(long taskWorkId, long classRoomId, long studentId);
+        Task EvaulateAsync(long classRoomId, long taskWorkId, long studentId, PutPointInTaskWorkVM putPointVM);
+        Task SoftDeleteAsync(long id, long classRoomId);
     }
 }

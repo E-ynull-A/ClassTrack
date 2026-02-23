@@ -10,6 +10,7 @@ namespace ClassTrack.Application.Interfaces.Services
 
         Task CreateQuizAsync(PostQuizDTO postQuiz);
         Task UpdateQuizAsync(long id, PutQuizDTO putQuiz);
+        Task SoftQuizDeleteAsync(long id);
         Task DeleteQuizAsync(long id);
       
     }

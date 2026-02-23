@@ -1,0 +1,91 @@
+﻿/* Wrapper */
+.quiz-detail-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    background-color: #f3f4f6; 
+}
+
+
+/* Card */
+.quiz-card {
+    background-color: #ffffff;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    padding: 30px;
+    box-sizing: border-box;
+  
+  
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+
+
+.quiz-card-header h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #1f2937;
+}
+
+.quiz-meta span {
+    margin-right: 15px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Sections */
+.question-section {
+    margin-top: 25px;
+}
+
+    .question-section h3 {
+        font-size: 20px;
+        color: #111827;
+        border-bottom: 2px solid #3b82f6;
+        display: inline-block;
+        padding-bottom: 4px;
+        margin-bottom: 15px;
+    }
+
+/* Individual question */
+.question-item {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .question-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+/* Question header */
+.question-header {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 16px;
+}
+
+/* Question type */
+.question-type {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+/* Choice options */
+.options-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+    .options-list li {
+        margin-bottom: 4px;
+    }

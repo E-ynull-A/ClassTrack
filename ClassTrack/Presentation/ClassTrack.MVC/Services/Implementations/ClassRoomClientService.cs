@@ -72,7 +72,7 @@ namespace ClassTrack.MVC.Services.Implementations
         }
         public async Task DeleteClassRoomAsync(long classRoomId)
         {
-            await _httpClient.DeleteAsync($"ClassRooms/{classRoomId}");
+            await _httpClient.DeleteAsync($"ClassRooms/{classRoomId}/Restore");
         }
         public async Task<ServiceResult> UpdateClassRoomAsync(long classRoomId,PutClassRoomVM roomVM)
         {

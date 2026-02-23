@@ -1,0 +1,86 @@
+﻿@model GetQuizItemPagedVM
+
+
+
+<link href="~/admin/assets/css/admin-quiz.css" rel="stylesheet" />
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h4 mb-0 text-gray-800">Quizzes Overview</h2>
+    </div>
+
+    <div class="row">
+        @foreach (var quiz in Model.QuizItems)
+        {
+            <div class="col-xl-3 col-md-6 mb-4" style="margin:20px">
+                <div class="card border-left-primary shadow h-100 py-2 quiz-card">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    ID: #@quiz.Id
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@quiz.Name</div>
+                                <hr />
+                                <div class="mt-2 small">
+                                    <i class="far fa-calendar-alt mr-1"></i>
+                                    <strong>Start:</strong> @quiz.StartTime.ToString("dd.MM.yyyy HH:mm")
+                                </div>
+                                <div class="mt-1 small">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <strong>Duration:</strong> @quiz.Duration.TotalMinutes min
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                        <a class="btn btn-outline-info btn-sm d-flex align-items-center gap-1 delete-btn"
+                           asp-action="DeleteQuiz"
+                           asp-route-id="@quiz.Id">
+                            <i class="fas fa-trash-alt"></i>
+                            Delete
+                        </a>
+
+                        <a class="btn btn-outline-info btn-sm d-flex align-items-center gap-1"
+                           asp-action="QuizDetail"
+                           asp-route-id="@quiz.Id">
+                            <i class="fas fa-eye"></i>
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if ((int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize) > 1)
+    {
+        <div class="pagination-container" style="margin: 20px 0; display: flex; justify-content: center; gap: 8px;">
+
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a href="?page=@(ViewBag.CurrentPage - 1)" class="pg-btn">Geri</a>
+            }
+
+            @for (int i = 1; i <= (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize); i++)
+            {
+                <a href="?page=@i" class="pg-btn @(i == ViewBag.CurrentPage ? "pg-active" : "")">@i</a>
+            }
+
+            @if (ViewBag.CurrentPage < (int)Math.Ceiling(Model.TotalCount / (double)ViewBag.PageSize))
+            {
+                <a href="?page=@(ViewBag.CurrentPage + 1)" class="pg-btn">İrəli</a>
+            }
+        </div>
+    }
+</div>
+<script defer>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function (e) {
+            if (!confirm("Are you sure to delete this Quiz Permanently")) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>

@@ -255,6 +255,29 @@
         }
       }
     },
+    "/ClassRooms/{classRoomId}/Restore": {
+      "delete": {
+        "tags": [
+          "ClassRooms"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Clouds": {
       "post": {
         "tags": [
@@ -319,6 +342,28 @@
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Permissions/{emailOrUserName}/Admin": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "parameters": [
+          {
+            "name": "emailOrUserName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -789,7 +834,7 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 0
+              "default": 1
             }
           },
           {
@@ -798,7 +843,7 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 0
+              "default": 5
             }
           },
           {
@@ -951,7 +996,8 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "default": 0
             }
           },
           {
@@ -1096,8 +1142,10 @@
             "description": "OK"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/Quizes/{classRoomId}/{id}/Detail": {
+      "get": {
         "tags": [
           "Quizes"
         ],
@@ -1127,8 +1175,31 @@
         }
       }
     },
-    "/Quizes/{classRoomId}/{id}/Detail": {
-      "get": {
+    "/Quizes/{id}": {
+      "delete": {
+        "tags": [
+          "Quizes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Quizes/{classRoomId}/{id}/Restore": {
+      "delete": {
         "tags": [
           "Quizes"
         ],
@@ -1463,6 +1534,29 @@
         }
       }
     },
+    "/Students/{classRoomId}/Result": {
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "parameters": [
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Students": {
       "post": {
         "tags": [
@@ -1523,7 +1617,7 @@
         }
       }
     },
-    "/Students/{classRoomId}/{studentId}": {
+    "/Students/{classRoomId}/{studentId}/Kick": {
       "delete": {
         "tags": [
           "Students"
@@ -1553,7 +1647,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/Students/{classRoomId}/{studentId}": {
       "put": {
         "tags": [
           "Students"
@@ -1585,7 +1681,7 @@
         }
       }
     },
-    "/StudentTaskWorks/{classRoomId}/{taskWorkId}/Evaulate": {
+    "/StudentTaskWorks/{classRoomId}/{taskWorkId}/{studentId}": {
       "get": {
         "tags": [
           "StudentTaskWorks"
@@ -1593,6 +1689,15 @@
         "parameters": [
           {
             "name": "taskWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "studentId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1622,6 +1727,15 @@
         "parameters": [
           {
             "name": "taskWorkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "studentId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1664,7 +1778,7 @@
         }
       }
     },
-    "/TaskWorkAttachments/{classWorkId},{taskWorkId}": {
+    "/TaskWorkAttachments/{classWorkId}/{taskWorkId}": {
       "get": {
         "tags": [
           "TaskWorkAttachments"
@@ -1715,26 +1829,6 @@
             "schema": {
               "type": "integer",
               "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "TaskWorks"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
             }
           }
         ],
@@ -2030,6 +2124,61 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskWorks/{id}": {
+      "delete": {
+        "tags": [
+          "TaskWorks"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskWorks/{classRoomId}/{id}/Restore": {
+      "delete": {
+        "tags": [
+          "TaskWorks"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classRoomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

@@ -22,7 +22,7 @@ namespace ClassTrack.API.Controllers
 
         [HttpGet("{classRoomId}/{quizId}/{studentId}/Student")]
         [ServiceFilter(typeof(ClassRoomAccessFilter))]
-        public async Task<IActionResult> Get(long studentId,long quizId, int page = 0, int take = 0)
+        public async Task<IActionResult> Get(long studentId,long quizId, int page = 1, int take = 5)
         {
             if (studentId < 1 || quizId < 1)
                 return BadRequest();
@@ -36,7 +36,6 @@ namespace ClassTrack.API.Controllers
 
         [HttpGet("{classRoomId}/{id}")]
         [ServiceFilter(typeof(ClassRoomAccessFilter))]
-
         public async Task<IActionResult> Get(long id)
         {
             if(id < 1)

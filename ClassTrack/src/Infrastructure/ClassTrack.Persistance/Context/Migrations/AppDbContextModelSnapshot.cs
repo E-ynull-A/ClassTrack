@@ -381,7 +381,7 @@ namespace ClassTrack.Persistance.Context.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LessonDate")
-                        .HasColumnType("DATE");
+                        .HasColumnType("DATETIME2");
 
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");

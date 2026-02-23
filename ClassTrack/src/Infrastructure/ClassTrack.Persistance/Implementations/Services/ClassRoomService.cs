@@ -6,6 +6,8 @@ using ClassTrack.Domain.Entities;
 using ClassTrack.Domain.Enums;
 using ClassTrack.Domain.Utilities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
+using System.Threading.Tasks;
 namespace ClassTrack.Persistance.Implementations.Services
 {
     internal class ClassRoomService : IClassRoomService
@@ -26,25 +28,33 @@ namespace ClassTrack.Persistance.Implementations.Services
             _currentUser = currentUser;
         }
 
-        public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page,int take)
+        public async Task<ICollection<GetClassRoomItemDTO>> GetAllAsync(int page, int take)
         {
-            string userId = _currentUser.GetUserId();
-            string userRole = string.Empty;
-          
-            userRole = _currentUser.GetUserRole();                  
+           string userId = _currentUser.GetUserId();
 
-            var getClasses = _roomRepository.GetAll(page: page,
+           string userRole = _currentUser.GetUserRole();
+
+            IQueryable<ClassRoom> getClasses = _roomRepository.GetAll(page: page,
                                                     take: take,
-                                                    sort:x=>x.Name,
-                                                    includes: ["StudentClasses","TeacherClasses.Teacher.AppUser"]);
+                                                    sort: x => x.Name,
+                                                    includes: ["StudentClasses", "TeacherClasses.Teacher.AppUser"]);
+
+
+            foreach (ClassRoom room in getClasses.ToList())
+            {             
+                    room.AvgPoint = Math.Round(await _roomRepository.CalculateClassRoomAvgAsync(room.Id), 2);                    
+            }
+            await _roomRepository.SaveChangeAsync();
 
             if (userId is not null && userRole != UserRole.Admin.ToString())
+            {        
                 return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses
-                                                .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId) 
-                                                         || c.TeacherClasses.Any(tc=> tc.Teacher.AppUserId == userId))
+                                                .Where(c => c.StudentClasses.Any(sc => sc.Student.AppUserId == userId)
+                                                         || c.TeacherClasses.Any(tc => tc.Teacher.AppUserId == userId))
                                                 .ToListAsync());
-
-            return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses.ToListAsync());
+            }
+                
+            return _mapper.Map<ICollection<GetClassRoomItemDTO>>(await getClasses.IgnoreQueryFilters().ToListAsync());
         }
         public async Task<GetClassRoomDTO> GetByIdAsync(long id)
         {
@@ -60,6 +70,11 @@ namespace ClassTrack.Persistance.Implementations.Services
         {
 
             string userId = _currentUser.GetUserId();
+            string userRole = _currentUser.GetUserRole();
+
+            if(userRole == UserRole.Admin.ToString())            
+                throw new BadRequestException("Admin can not create Class Room");
+            
 
             if (await _roomRepository.AnyAsync(r => r.Name == postClass.Name))
                 throw new ConflictException("The Name has already used");
@@ -77,17 +92,17 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (teacher is null)
             {
                 teacher = new Teacher { AppUserId = userId };
-                newClass.TeacherClasses.Add(new TeacherClassRoom { Teacher = teacher});         
+                newClass.TeacherClasses.Add(new TeacherClassRoom { Teacher = teacher });
             }
             else
             {
                 if (teacher.TeacherClassRooms.Count() == 15)
                     throw new BusinessLogicException("Your Class Room Count exceed the Limit!");
-                newClass.TeacherClasses.Add(new TeacherClassRoom { TeacherId = teacher.Id});
+                newClass.TeacherClasses.Add(new TeacherClassRoom { TeacherId = teacher.Id });
             }
 
             _roomRepository.Add(newClass);
-            
+
             await _roomRepository.SaveChangeAsync();
         }
         public async Task UpdateClassRoomAsync(long id, PutClassRoomDTO putClass)
@@ -104,6 +119,18 @@ namespace ClassTrack.Persistance.Implementations.Services
             edited.Name = putClass.Name;
 
             _roomRepository.Update(edited);
+            await _roomRepository.SaveChangeAsync();
+        }
+
+        public async Task SoftDeleteClassRoomAsync(long id)
+        {
+            ClassRoom deleted = await _roomRepository.GetByIdAsync(id);
+
+            if (deleted is null)
+                throw new NotFoundException("The ClassRoom isn't Found!");
+
+            deleted.IsDeleted = true;
+            _roomRepository.Update(deleted);
             await _roomRepository.SaveChangeAsync();
         }
         public async Task DeleteClassRoomAsync(long id)
@@ -134,6 +161,6 @@ namespace ClassTrack.Persistance.Implementations.Services
             return code;
         }
 
-   
+
     }
 }

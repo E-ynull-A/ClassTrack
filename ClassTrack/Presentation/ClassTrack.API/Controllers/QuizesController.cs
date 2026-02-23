@@ -23,14 +23,14 @@ namespace ClassTrack.API.Controllers
             _quizService = quizService;
         }
 
-        [HttpGet("{classRoomId}")]
+        [HttpGet("{classRoomId?}")]
         [ServiceFilter(typeof(ClassRoomAccessFilter))]
-        public async Task<IActionResult> Get(long classRoomId, int page = 0, int take = 0)
+        public async Task<IActionResult> Get(long classRoomId = 0, int page = 0, int take = 0)
         {
             return Ok(await _quizService.GetAllAsync(classRoomId, page, take));
         }
 
-        [HttpGet("{classRoomId}/{id}")]     
+        [HttpGet("{classRoomId?}/{id}")]     
         public async Task<IActionResult> Get(long id)
         {
             if (id < 1)
@@ -70,8 +70,8 @@ namespace ClassTrack.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{classRoomId}/{id}")]
-        [ServiceFilter(typeof(TeacherAccessFilter))]
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long id)
         {
             if (id < 1)
@@ -80,5 +80,17 @@ namespace ClassTrack.API.Controllers
             await _quizService.DeleteQuizAsync(id);
             return NoContent();
         }
+
+        [HttpDelete("{classRoomId}/{id}/Restore")]
+        [ServiceFilter(typeof(TeacherAccessFilter))]
+        public async Task<IActionResult> SoftDelete(long id)
+        {
+            if(id < 1)
+                return BadRequest();
+
+            await _quizService.SoftQuizDeleteAsync(id);
+            return NoContent();
+        }
+
     }
 }

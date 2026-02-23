@@ -40,7 +40,7 @@ namespace ClassTrack.MVC.Controllers
             if (!ModelState.IsValid)
             {
                 return View("Exam",new ExamVM(await _quizClient
-                            .GetQuizForStudentAsync(classRoomId, quizId),examVM.QuizAnswer));
+                            .GetQuizInDetailAsync(classRoomId, quizId),examVM.QuizAnswer));
             }
 
             ServiceResult result = await _quizAnswer.TakeAnExamAsync(classRoomId,examVM.QuizAnswer);
@@ -48,7 +48,7 @@ namespace ClassTrack.MVC.Controllers
             if (!result.Ok)
             {
                 ModelState.AddModelError(result.ErrorKey, result.ErrorMessage);
-                return View("Exam", new ExamVM(await _quizClient.GetQuizForStudentAsync(classRoomId, quizId), examVM.QuizAnswer));
+                return View("Exam", new ExamVM(await _quizClient.GetQuizInDetailAsync(classRoomId, quizId), examVM.QuizAnswer));
             }
 
             return RedirectToAction("Index","Quiz",new {id = classRoomId});

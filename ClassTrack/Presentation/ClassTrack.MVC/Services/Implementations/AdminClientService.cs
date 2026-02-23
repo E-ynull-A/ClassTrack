@@ -1,5 +1,6 @@
 ﻿using ClassTrack.MVC.Services.Interfaces;
 using ClassTrack.MVC.ViewModels;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -8,15 +9,17 @@ namespace ClassTrack.MVC.Services.Implementations
     public class AdminClientService:IAdminClientService
     {
         private readonly HttpClient _httpClient;
-        private readonly IHttpContextAccessor _httpContext;
 
-        public AdminClientService(IHttpClientFactory clientFactory,
-                                   IHttpContextAccessor httpContext)
+        public AdminClientService(IHttpClientFactory clientFactory)
         {
             _httpClient = clientFactory.CreateClient("ClassTrackClient");
-            _httpContext = httpContext;
         }
 
+        public async Task<GetQuizItemPagedVM?> GetAllAsync(int page, int take)
+        {
+            return await _httpClient.GetFromJsonAsync<GetQuizItemPagedVM>
+                                    ($"Quizes?page={page}&take={take}");
+        }
         public async Task<AdminDashboardVM> GetDasboardAsync()
         {
             return new AdminDashboardVM(await _httpClient.GetFromJsonAsync<GetStatisticsVM>("Statistics"),
@@ -25,6 +28,10 @@ namespace ClassTrack.MVC.Services.Implementations
         public async Task<GetUserPagedItemVM> GetUserAllAsync(int page)
         {
            return await _httpClient.GetFromJsonAsync<GetUserPagedItemVM>($"Statistics/Users?page={page}");
+        }
+        public async Task<GetTaskWorkItemPagedVM?> GetTaskWorkAllAsync(int page = 1,int take = 5)
+        {
+           return await _httpClient.GetFromJsonAsync<GetTaskWorkItemPagedVM>($"TaskWorks?page={page}&take={take}");
         }
         public async Task<ServiceResult> BanUserAsync(PostBanUserVM postBan)
         {            
@@ -42,6 +49,14 @@ namespace ClassTrack.MVC.Services.Implementations
             }
 
             return new ServiceResult(true);
+        }
+        public async Task DeleteQuizAsync(long id)
+        {
+           await _httpClient.DeleteAsync($"Quizes/{id}");
+        }
+        public async Task DeleteTaskAsync(long id)
+        {
+            await _httpClient.DeleteAsync($"TaskWorks/{id}");
         }
 
     }

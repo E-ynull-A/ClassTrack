@@ -1,4 +1,5 @@
 ﻿using ClassTrack.Application.Interfaces.Repositories;
+using ClassTrack.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Security.Claims;
@@ -17,12 +18,22 @@ namespace ClassTrack.API.ActionFilter
         {
             string? userId = context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            string? userRole = context.HttpContext.User.FindFirstValue(ClaimTypes.Role);
 
+            if (userRole is null)
+            {
+                context.Result = new ForbidResult();
+                return;
+            }
+
+            if (userRole == UserRole.Admin.ToString())
+            {
+                await next();
+                return;
+            }
 
             context.RouteData.Values.TryGetValue("classRoomId", out object roomId);
             long classRoomId = Convert.ToInt64(roomId);
-
-
 
             if (!string.IsNullOrEmpty(userId) && classRoomId > 0)
             {

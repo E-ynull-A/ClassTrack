@@ -7,6 +7,7 @@ namespace ClassTrack.MVC.ViewModels
         long Id,
         string Name,
         string Surname,
+        decimal AvgPoint,
         DateTime JoinedAt);
    
 }

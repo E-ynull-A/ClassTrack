@@ -120,19 +120,18 @@ namespace ClassTrack.MVC.Controllers
             return RedirectToAction(nameof(Get), new { classRoomId});
         }
 
-        public async Task<IActionResult> Evaulate(long classRoomId,long taskWorkId)
+        public async Task<IActionResult> Evaulate(long classRoomId, long studentId, long taskWorkId)
         {
-            if(classRoomId < 1 && taskWorkId < 1)
+            if(classRoomId < 1 && taskWorkId < 1 && studentId < 1)
                 return BadRequest();
 
             return View(new TaskEvaulateVM(               
                await _taskWorkClient.GetByIdAsync(classRoomId,taskWorkId),
-               await _taskWorkClient.GetStudentAnswerAsync(taskWorkId,classRoomId)));
+               await _taskWorkClient.GetStudentAnswerAsync(taskWorkId,classRoomId,studentId)));
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Evaulate(long classRoomId,long taskWorkId,PutPointInTaskWorkVM putPointVM)
+        public async Task<IActionResult> Evaulate(long classRoomId,long taskWorkId,long studentId,TaskEvaulateVM evaulateVM)
         {
             if (classRoomId < 1 && taskWorkId < 1)
                 return BadRequest();
@@ -140,13 +139,17 @@ namespace ClassTrack.MVC.Controllers
             if(!ModelState.IsValid)
                 return View(new TaskEvaulateVM(
                await _taskWorkClient.GetByIdAsync(classRoomId, taskWorkId),
-               await _taskWorkClient.GetStudentAnswerAsync(taskWorkId, classRoomId)));
+               await _taskWorkClient.GetStudentAnswerAsync(taskWorkId, classRoomId, studentId)));
 
-            await _taskWorkClient.EvaulateAsync(classRoomId, taskWorkId, putPointVM);
+            await _taskWorkClient.EvaulateAsync(classRoomId, taskWorkId,studentId ,evaulateVM.PutPointInTask);
 
             return RedirectToAction("Get", new { classRoomId });
         }
 
- 
+        public async Task<IActionResult> SoftDelete(long id,long classRoomId)
+        {
+            await _taskWorkClient.SoftDeleteAsync(id, classRoomId);
+            return RedirectToAction("Get", new {classRoomId});
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace ClassTrack.Persistance.Configuration
                 .HasColumnType("DECIMAL(5,2)");
 
             builder.HasKey(sc => new { sc.StudentId, sc.ClassRoomId });
+
+            builder.HasQueryFilter(sc => sc.ClassRoom != null && !sc.ClassRoom.IsDeleted);
         }
     }
 }

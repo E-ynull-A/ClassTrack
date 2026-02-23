@@ -15,7 +15,7 @@ namespace ClassTrack.Persistance.Configuration
         public void Configure(EntityTypeBuilder<StudentAttendance> builder)
         {
             builder.Property(sa => sa.LessonDate)
-                .HasColumnType("DATE")
+                .HasColumnType("DATETIME2")
                 .IsRequired();         
 
             builder.Property(sa => sa.Attendance)

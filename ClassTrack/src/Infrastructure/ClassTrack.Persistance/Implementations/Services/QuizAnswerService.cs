@@ -16,18 +16,21 @@ namespace ClassTrack.Persistance.Implementations.Services
         private readonly IQuestionRepository _questionRepository;
         private readonly IStudentQuizRepository _studentQuizRepository;
         private readonly ICurrentUserService _userService;
+        private readonly IStudentService _studentService;
 
         public QuizAnswerService(IQuizAnswerRepository quizAnswerRepository,
                                   IMapper mapper,
                                   IQuestionRepository questionRepository,
                                   IStudentQuizRepository studentQuizRepository,
-                                  ICurrentUserService userService)
+                                  ICurrentUserService userService,
+                                  IStudentService studentService)
         {
             _quizAnswerRepository = quizAnswerRepository;
             _mapper = mapper;
             _questionRepository = questionRepository;
             _studentQuizRepository = studentQuizRepository;
             _userService = userService;
+            _studentService = studentService;
         }
 
         public async Task<ICollection<GetQuizAnswerItemDTO>> GetAllByStudentIdAsync(long studentId,
@@ -215,10 +218,12 @@ namespace ClassTrack.Persistance.Implementations.Services
             if (!await _quizAnswerRepository.AllAsync(qa => qa.StudentQuizId == studentQuiz.Id && !qa.IsEvaluated))
             {
                 studentQuiz.QuizStatus = QuizStatus.Finished.ToString();
-            }
+            }            
 
             _studentQuizRepository.Update(studentQuiz);
             await _studentQuizRepository.SaveChangeAsync();
+
+            await _studentService.CalculateAvgPoint(studentQuiz.StudentId, studentQuiz.Quiz.ClassRoomId);
         }
     }
 }
