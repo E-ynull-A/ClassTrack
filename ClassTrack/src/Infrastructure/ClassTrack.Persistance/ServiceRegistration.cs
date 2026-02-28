@@ -78,7 +78,7 @@ namespace ClassTrack.Persistance
             {
                 var initalizer = scope.ServiceProvider.GetRequiredService<IAppDbContextInitalizer>();
 
-                await initalizer.InitalizeDbContext();
+                //await initalizer.InitalizeDbContext();
                 await initalizer.CreateRoleInitalizerAsync();
                 await initalizer.CreateAdminInitalizer();
             };

@@ -3,35 +3,42 @@
     int index = 0;
 }
 
-<link rel="stylesheet" href="~/assets/css/list.css">
-<div class="container" style="border:none">
-    <h2>Evaluated Questions</h2>
+<link rel="stylesheet" href="~/assets/css/quiz-answer-list.css">
 
-    <table>
-        <thead>
-            <tr>
-                <th class="index">#</th>
-                <th>Title</th>
-                <th>Evaluated</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (GetQuizAnswerItemVM qAnswer in Model)
-            {
-                index++;
+<div class="quiz-eval-wrapper">
+    <div class="quiz-eval-card">
+        <h2 class="quiz-eval-title">Evaluated Questions</h2>
+
+        <table class="quiz-eval-table">
+            <thead>
                 <tr>
-                    <td class="index">@index</td>
-                    <td class="name">@qAnswer.QuestionTitle</td>
-                    <td class="name">@(qAnswer.IsEvaluated ? "✅" : "❌")</td>
-                    <td class="name"><a asp-action="GetById" asp-route-classRoomId="@ViewContext.RouteData.Values["classRoomId"]"          
-                                                             asp-route-studentId="@ViewContext.RouteData.Values["studentId"]"
-                                                             asp-route-quizId="@ViewContext.RouteData.Values["quizId"]"
-                                                             asp-route-id="@qAnswer.Id">➔</a>
-                    </td>
+                    <th class="quiz-eval-index">#</th>
+                    <th>Title</th>
+                    <th>Evaluated</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (GetQuizAnswerItemVM qAnswer in Model)
+                {
+                    index++;
+                    <tr>
+                        <td class="quiz-eval-index">@index</td>
+                        <td class="quiz-eval-name">@qAnswer.QuestionTitle</td>
+                        <td class="quiz-eval-status">
+                            @(qAnswer.IsEvaluated ? "✅" : "❌")
+                        </td>
+                        <td>
+                            <a class="quiz-eval-action"
+                               asp-action="GetById"
+                               asp-route-classRoomId="@ViewContext.RouteData.Values["classRoomId"]"
+                               asp-route-studentId="@ViewContext.RouteData.Values["studentId"]"
+                               asp-route-quizId="@ViewContext.RouteData.Values["quizId"]"
+                               asp-route-id="@qAnswer.Id">➔</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-

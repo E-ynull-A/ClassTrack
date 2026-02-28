@@ -2,10 +2,12 @@
 @{
     int index = 0;
     string targetController = Context.Request.Query.ContainsKey("quizId") ? "QuizAnswer" : "TaskWork";
+    string targetAction = Context.Request.Query.ContainsKey("quizId") ? "Index" : "Evaulate";
 }
 
-<link rel="stylesheet" href="~/assets/css/list.css">
+
 <title>Student List</title>
+<link rel="stylesheet" asp-append-version="true" href="~/assets/css/list.css" />
 <div class="student-list-wrapper"> 
     <div class="container student-list">
         <h2>Student List</h2>
@@ -31,7 +33,7 @@
                             <a class="btn-info"
                                
                                asp-controller="@targetController"
-                               asp-action="Evaulate"
+                               asp-action="@targetAction"
                                asp-route-classRoomId="@Context.Request.Query["classRoomId"]"
                                asp-route-studentId="@stItem.Id"
                                asp-route-quizId="@Context.Request.Query["quizId"]"

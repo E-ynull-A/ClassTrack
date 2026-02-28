@@ -21,6 +21,7 @@ wwwroot\assets\css\list.css
 wwwroot\assets\css\login.css
 wwwroot\assets\css\members.css
 wwwroot\assets\css\question-edit.css
+wwwroot\assets\css\quiz-answer-list.css
 wwwroot\assets\css\quiz-answer.css
 wwwroot\assets\css\quiz-edit.css
 wwwroot\assets\css\quiz-editor.css

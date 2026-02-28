@@ -11,7 +11,7 @@
         </div>
 
         <div class="right">
-            <button class="btn ghost" id="btnBack">← Back</button>
+            <a class="btn ghost" asp-action="Index" asp-route-id="@Context.Request.Query["classRoomId"]" id="btnBack">← Back</a>
             <button class="btn primary" id="btnSaveQuiz">Save Changes</button>
         </div>
     </div>

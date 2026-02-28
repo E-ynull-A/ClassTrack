@@ -13,7 +13,6 @@ namespace ClassTrack.Application.Validators
         public PutQuizAnswerDtoValidator()
         {
             RuleFor(qa => qa.Point)
-                 .NotEmpty()
                  .InclusiveBetween(0,100);
 
         }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ClassTrack.Persistance.Context
 {
-    internal class AppDbContextInitalizer:IAppDbContextInitalizer
+    internal class AppDbContextInitalizer : IAppDbContextInitalizer
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -33,31 +33,31 @@ namespace ClassTrack.Persistance.Context
 
         public async Task InitalizeDbContext()
         {
-            if(await _context.Database.EnsureCreatedAsync())
-                    await _context.Database.MigrateAsync();
+            if (await _context.Database.EnsureCreatedAsync())
+                await _context.Database.MigrateAsync();
         }
 
         public async Task CreateRoleInitalizerAsync()
         {
-            foreach(UserRole role in Enum.GetValues(typeof(UserRole)))
+            foreach (UserRole role in Enum.GetValues(typeof(UserRole)))
             {
-                if(!await _roleManager.RoleExistsAsync(role.ToString()))
+                if (!await _roleManager.RoleExistsAsync(role.ToString()))
                 {
-                   await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString()});
+                    await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
                 }
             }
         }
 
         public async Task CreateAdminInitalizer()
         {
-            if(!await _userManager.Users.AnyAsync(u=>u.UserName == _config["AdminData:Username"] || u.Email == _config["AdminData:Email"]))
+            if (!await _userManager.Users.AnyAsync(u => u.UserName == _config["AdminData:Username"] || u.Email == _config["AdminData:Email"]))
             {
                 AppUser appUser = new AppUser
                 {
                     Name = "Eynulla",
                     Surname = "Mahmudov",
                     UserName = _config["AdminData:Username"],
-                    Age = 19,                   
+                    Age = 19,
                     Email = _config["AdminData:Email"],
                     EmailConfirmed = true
                 };

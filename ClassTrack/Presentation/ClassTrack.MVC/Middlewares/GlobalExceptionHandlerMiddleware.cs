@@ -21,7 +21,6 @@ namespace ClassTrack.MVC.Middlewares
             catch(Exception e)
             {
                 var encodeMessage = e.Message;
-
                 context.Response.Redirect($"/Error/index?messageError={encodeMessage}");
             }   
         }

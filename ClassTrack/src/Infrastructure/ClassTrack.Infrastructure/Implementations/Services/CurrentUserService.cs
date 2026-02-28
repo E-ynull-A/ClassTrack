@@ -45,9 +45,9 @@ namespace ClassTrack.Infrastructure.Implementations.Services
 
         public string GetUserEmail()
         {
-            string? email = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            string? email = _accessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
             if(email is null)
-                throw new NotFoundException("The User Eamil not Found!");
+                throw new NotFoundException("The User Email not Found!");
 
             return email;
         }

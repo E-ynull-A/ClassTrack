@@ -4,7 +4,7 @@
 }
 
 
-<link href="~/assets/css/evaulate.css" rel="stylesheet" />
+<link rel="stylesheet" asp-append-version="true" href="~/assets/css/evaulate.css" />
 <div class="task-dark">
     <div class="task-page">
 
@@ -31,7 +31,7 @@
                     foreach (GetTaskWorkAttachmentVM attachmentVM in taskWorkVM.TaskWorkAttachments)
                     {
                         <li class="task-attachment-item">
-                            <a href="@attachmentVM.FileUrl">📄 @attachmentVM.FileName </a>
+                            <a href="@attachmentVM.FileUrl" target="_blank">📄 @attachmentVM.FileName </a>
                         </li>
                     }
                 }               

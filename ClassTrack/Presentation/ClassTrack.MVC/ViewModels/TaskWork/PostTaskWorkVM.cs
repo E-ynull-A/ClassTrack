@@ -9,7 +9,7 @@ namespace ClassTrack.MVC.ViewModels
 
         long ClassRoomId,
         string Title,
-        string MainPart,
+        string? MainPart,
         DateTime EndDate,
         DateTime StartDate,
         TaskWorkAttachmentVM? AttachmentVM);

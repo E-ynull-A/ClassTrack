@@ -29,8 +29,6 @@ namespace ClassTrack.MVC.Controllers
                                 (classRoomId,quizId,studentId));
         }
 
-       
-
         [HttpPost]
         public async Task<IActionResult> Post(ExamVM examVM,long classRoomId,long quizId)
         {

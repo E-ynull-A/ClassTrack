@@ -36,7 +36,7 @@
                     foreach (GetTaskWorkAttachmentVM attachmentVM in getTaskWork.TaskWorkAttachments)
                     {
                         <li class="task-attachment-item">
-                            <a href="@attachmentVM.FileUrl">📄 @attachmentVM.FileName </a>
+                            <a href="@attachmentVM.FileUrl" target="_blank">📄 @attachmentVM.FileName </a>
                         </li>
                     }
                 }

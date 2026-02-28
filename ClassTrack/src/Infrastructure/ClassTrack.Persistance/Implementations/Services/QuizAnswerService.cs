@@ -69,7 +69,7 @@ namespace ClassTrack.Persistance.Implementations.Services
                 throw new BusinessLogicException("The Quiz doesn't begin or already finished!!");
             }
 
-            if (sqs.QuizStatus == QuizStatus.Finished.ToString())
+            if (sqs.QuizStatus == QuizStatus.Submitted.ToString())
             {
                 throw new BusinessLogicException("You already submitted!");
             }

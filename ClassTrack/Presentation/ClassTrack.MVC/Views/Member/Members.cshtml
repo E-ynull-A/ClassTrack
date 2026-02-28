@@ -43,7 +43,7 @@
                 <div class="muted">Avg: @studentVM.AvgPoint %</div>
                 <div class="actions">
                     <a class="btn ok" asp-action="Put" asp-route-studentId="@studentVM.Id"
-                       asp-route-classRoomId="@Context.GetRouteValue("classRoomId")">Promote</a>
+                       asp-route-classRoomId="@Context.Request.Query["classRoomId"]">Promote</a>
                     <a class="btn danger" asp-action="Delete" asp-route-studentId="@studentVM.Id"
                        asp-route-classRoomId="@Context.Request.Query["classRoomId"]">Kick</a>
                 </div>

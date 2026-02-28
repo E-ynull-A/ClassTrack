@@ -13,7 +13,7 @@ namespace ClassTrack.Application.MappingProfiles
                               opt => opt.MapFrom(c => c.StudentClasses.Count))
                 .ForCtorParam(nameof(GetClassRoomItemDTO.TeacherFullNames),
                               opt=>opt.MapFrom(tn=>tn.TeacherClasses
-                                        .Select(tc=>tc.Teacher.AppUser.Name + tc.Teacher.AppUser.Surname)));
+                                        .Select(tc=>tc.Teacher.AppUser.Name + " " + tc.Teacher.AppUser.Surname)));
        
 
             CreateMap<ClassRoom, GetClassRoomDTO>()

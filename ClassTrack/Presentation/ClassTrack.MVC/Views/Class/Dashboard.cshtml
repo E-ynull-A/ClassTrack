@@ -37,13 +37,13 @@
             @foreach (GetClassRoomItemVM classRoom in Model.Classes)
             {
                 <div class="swiper-slide" >
-                    <div class="class-card">
-                        <div>Created At: @classRoom.CreatedAt.ToShortDateString()</div>
+                    <div class="class-card">                       
                         <a asp-action="ClassRoom" asp-route-id="@classRoom.Id" class="card-link">
                             <div class="card-content" style="margin-top:10px">                            
                                 <div class="title">@classRoom.Name</div>
 
                                 <div style="margin-top:6px;display:flex">
+                                    Teachers: 
                                     @foreach (string teacherN in classRoom.TeacherFullNames)
                                     {
                                         <div style="margin:0 3px">
@@ -52,17 +52,21 @@
                                             </span>
                                         </div>
                                     }
-                                </div>
-                                <div class="meta">
-                                    <span class="badge-custom">
-                                        <i class="fas fa-users"></i> @classRoom.StudentCount Member
-                                    </span>
+                                </div>                                
+                                <div class="meta" style="margin:13px 0">
+                                    <div>
+                                        Member Count:
+                                        <span class="badge-custom">
+                                            <i class="fas fa-users"></i> @classRoom.StudentCount
+                                        </span>
+                                    </div>
+                                  
                                     <span class="point-muted">
-                                        <i class="fas fa-chart-line"></i> @classRoom.AvgPoint.ToString("0.##") %
+                                        <i class="fas fa-chart-line"></i> @((classRoom.AvgPoint*100).ToString("0.##")) %
                                     </span>
-                                </div>
-                             
+                                </div>                             
                             </div>
+                            <div>Created At: @classRoom.CreatedAt.ToShortDateString()</div>
                           
                         </a>
                     </div>

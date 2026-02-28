@@ -1,104 +1,86 @@
-﻿
+﻿<link rel="stylesheet" href="~/assets/css/index.css">
+<div class="container">
 
+    <section class="hero">
+        <div class="hero-left">
+            <h1>ClassTrack</h1>
+            <p>
+                One simple place to manage your classes, students, quizzes, tasks, and attendance.
+            </p>
+        </div>
 
-    <link rel="stylesheet" href="~/assets/css/index.css">
-    <div class="container">
+        <div class="hero-card">
+            <h3>Get Started Easily</h3>
+            <div class="info-row">
+                <span>Teacher</span>
+                <strong>Create classes • Control everything</strong>
+            </div>
+            <div class="info-row">
+                <span>Student</span>
+                <strong>Join with a code • Learn & submit work</strong>
+            </div>
+            <div class="info-row">
+                <span>Features</span>
+                <strong>Quizzes • Tasks • Attendance</strong>
+            </div>
+        </div>
+    </section>
 
-        <section class="hero">
-            <div class="hero-left">
-                <h1>ClassTrack</h1>
+    <section class="content">
+        <h2>Why choose ClassTrack?</h2>
+        <div class="grid">
+
+            <div class="card">
+                <h3>No Confusion with Roles</h3>
                 <p>
-                    Sinif yarat, kodla qoşul, quiz-lər, task-lar və attendance idarə et.
-                    Teacher/Student rolu sinifə görə avtomatik təyin olunur.
+                    If you create a class, you are the <b>Teacher</b>.
+                    If you join with a code, you are a <b>Student</b>.
+                    Everything is set automatically.
                 </p>
-
-                <div class="hero-actions">
-
-                    <button class="btn btn-primary" id="btnCreateClass">Create Class</button>
-
-                    <button class="btn btn-ghost" id="btnJoinToggle">Join Class</button>
-                </div>
-
-                <div class="join-panel" id="joinPanel">
-                    <div class="join-row">
-                        <input class="input" id="classCodeInput" placeholder="Class code (məs: A7K2Q9)" />
-                        <button class="btn btn-primary" id="btnJoinGo">Join</button>
-                    </div>
-                    <div class="hint">
-                        MVC-də bunu <b>POST /Classes/Join</b> kimi bağlayacaqsan.
-                    </div>
-                </div>
             </div>
 
-
-            <div class="hero-card">
-                <h3>Quick Info</h3>
-                <div class="info-row">
-                    <span>Teacher</span>
-                    <strong>Create class • Manage members</strong>
-                </div>
-                <div class="info-row">
-                    <span>Student</span>
-                    <strong>Join by code • Take quizzes</strong>
-                </div>
-                <div class="info-row">
-                    <span>Modules</span>
-                    <strong>Quiz • Task • Attendance</strong>
-                </div>
+            <div class="card">
+                <h3>Easy Quizzes</h3>
+                <p>
+                    Teachers can create quizzes with multiple choice or written questions.
+                    Students can take quizzes and see their results easily.
+                </p>
             </div>
-        </section>
 
-
-        <section class="content">
-            <h2>Why ClassTrack?</h2>
-            <div class="grid">
-
-                <div class="card">
-                    <h3>Role logic (Auto)</h3>
-                    <p>
-                        Sinif yaradan user avtomatik <b>Teacher</b> olur.
-                        Koda görə qoşulan user avtomatik <b>Student</b>.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>Quiz & Questions</h3>
-                    <p>
-                        Multiple choice + open questions. StudentQuiz və QuizAnswer modeli ilə nəticə və attempt izlənir.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>TaskWork</h3>
-                    <p>
-                        Task ver, deadline qoy. StudentTaskWork ilə submit və teacher feedback/grade prosesini idarə et.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>Attendance</h3>
-                    <p>
-                        Attendance status: <b>Absent / Present / Late</b>. Teacher mark edir, student baxır.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>Secure & Clean</h3>
-                    <p>
-                        JWT auth ilə API user-ı tanıyır. Teacher/Student icazələri class membership-dən yoxlanır.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>MVC friendly</h3>
-                    <p>
-                        API-dən data HttpClient ilə gəlir, ViewModel-lərə map edib view-lərə verirsən. UI sadədir, rahat integrate olur.
-                    </p>
-                </div>
-
+            <div class="card">
+                <h3>Assignments & Deadlines</h3>
+                <p>
+                    Share tasks with deadlines.
+                    Students submit their work online and teachers can review and grade it.
+                </p>
             </div>
-        </section>
 
-    </div>
-    <script src="~/assets/js/index.js"></script>
+            <div class="card">
+                <h3>Attendance Tracking</h3>
+                <p>
+                    Teachers can mark students as <b>Present, Late, or Absent</b>.
+                    Students can always check their attendance status.
+                </p>
+            </div>
 
+            <div class="card">
+                <h3>Safe & Reliable</h3>
+                <p>
+                    Your data is protected.
+                    Only teachers and students of the class can access its content.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Simple & Clean Design</h3>
+                <p>
+                    A clean interface that works smoothly on any device,
+                    making class management easy and stress-free.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+<script src="~/assets/js/index.js"></script>

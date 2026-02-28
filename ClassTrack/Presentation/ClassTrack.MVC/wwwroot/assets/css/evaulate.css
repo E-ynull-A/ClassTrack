@@ -1,154 +1,192 @@
-﻿
+﻿/* ===== Page Background Wrapper ===== */
 .task-dark {
-    background: linear-gradient(135deg, #0b132b, #1c2541);
-    padding: 40px 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #1f2937, #0f172a);
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
 }
 
-.task-dark .task-page {
+/* ===== Main Card ===== */
+.task-page {
+    width: 100%;
     max-width: 900px;
-    margin: 0 auto;
-    background: #1b263b;
-    padding: 24px;
-    border-radius: 12px;
-    color: #eaeaea;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    background: #111827;
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+    color: #e5e7eb;
 }
 
-
-.task-dark .task-header {
-    border-bottom: 1px solid #2e3a59;
-    padding-bottom: 16px;
+/* ===== Header ===== */
+.task-header {
+    margin-bottom: 28px;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 20px;
 }
 
-.task-dark .task-title {
-    margin: 0;
-    font-size: 24px;
+.task-title {
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #f9fafb;
 }
 
-.task-dark .task-dates {
-    margin-top: 8px;
+.task-dates {
     display: flex;
     gap: 20px;
-    color: #9fb3c8;
+    font-size: 0.9rem;
+    color: #9ca3af;
 }
 
-
-.task-dark .task-body {
-    margin-top: 20px;
+/* ===== Task Body ===== */
+.task-body {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 28px;
     line-height: 1.7;
-    color: #dbe4ee;
+    color: #e5e7eb;
 }
 
-
-.task-dark .task-attachments {
-    margin-top: 30px;
+/* ===== Attachments ===== */
+.task-attachments {
+    margin-bottom: 30px;
 }
 
-    .task-dark .task-attachments h3 {
+    .task-attachments h3 {
         margin-bottom: 12px;
-        color: #c7d2fe;
+        font-size: 1.1rem;
+        color: #e5e7eb;
     }
 
-    .task-dark .task-attachments ul {
+    .task-attachments ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
-.task-dark .task-attachment-item {
-    background: #243357;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.task-attachment-item {
+    margin-bottom: 8px;
 }
 
-
-.task-dark .student-answer {
-    margin-top: 35px;
-}
-
-    .task-dark .student-answer h3 {
-        margin-bottom: 10px;
+    .task-attachment-item a {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: #1f2937;
         color: #c7d2fe;
-    }
-
-.task-dark .answer-box {
-    background: #0f172a;
-    border: 1px solid #2e3a59;
-    border-radius: 10px;
-    padding: 14px;
-    line-height: 1.6;
-}
-
-.task-dark .answer-link {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-    .task-dark .answer-link a {
-        color: #7dd3fc;
         text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.25s ease;
     }
 
-        .task-dark .answer-link a:hover {
+        .task-attachment-item a:hover {
+            background: #334155;
+            color: #ffffff;
+        }
+
+/* ===== Student Answer ===== */
+.student-answer {
+    margin-bottom: 32px;
+}
+
+    .student-answer h3 {
+        margin-bottom: 12px;
+    }
+
+.answer-box {
+    background: #020617;
+    border: 1px solid #1f2937;
+    padding: 16px;
+    border-radius: 12px;
+    min-height: 80px;
+    margin-bottom: 10px;
+    color: #e5e7eb;
+}
+
+.answer-link {
+    font-size: 0.9rem;
+}
+
+    .answer-link a {
+        color: #60a5fa;
+        text-decoration: none;
+        word-break: break-all;
+    }
+
+        .answer-link a:hover {
             text-decoration: underline;
         }
 
-
-.task-dark .teacher-evaluate {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px dashed #2e3a59;
+/* ===== Teacher Evaluate ===== */
+.teacher-evaluate {
+    border-top: 1px solid #1f2937;
+    padding-top: 24px;
 }
 
-    .task-dark .teacher-evaluate h3 {
-        margin-bottom: 12px;
-        color: #c7d2fe;
+    .teacher-evaluate h3 {
+        margin-bottom: 14px;
     }
 
-.task-dark .point-input-wrap {
+/* ===== Point Input ===== */
+.point-input-wrap {
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 200px;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
-    .task-dark .point-input-wrap input {
-        flex: 1;
-        background: #0f172a;
-        border: 1px solid #3b4a6b;
-        border-radius: 8px;
-        padding: 10px;
-        color: #eaeaea;
-        font-size: 14px;
+    .point-input-wrap input {
+        width: 100px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #1f2937;
+        background: #020617;
+        color: #f9fafb;
+        font-size: 1rem;
     }
 
-        .task-dark .point-input-wrap input:focus {
+        .point-input-wrap input:focus {
             outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 2px rgba(56,189,248,0.3);
+            border-color: #6366f1;
         }
 
-.task-dark .point-max {
-    color: #94a3b8;
-    font-size: 14px;
+.point-max {
+    color: #9ca3af;
+    font-size: 0.9rem;
 }
 
-
-.task-dark .btn-ok {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: #fff;
+/* ===== Save Button ===== */
+.btn-ok {
+    background: linear-gradient(135deg, #6366f1, #818cf8);
     border: none;
-    border-radius: 8px;
-    padding: 11px 22px;
-    cursor: pointer;
+    border-radius: 12px;
+    padding: 12px 26px;
+    font-size: 0.95rem;
     font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(99,102,241,0.45);
+    transition: all 0.3s ease;
 }
 
-    .task-dark .btn-ok:hover {
-        background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    .btn-ok:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 40px rgba(99,102,241,0.6);
     }
 
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .task-page {
+        padding: 24px 20px;
+    }
+
+    .task-title {
+        font-size: 1.5rem;
+    }
+
+    .task-dates {
+        flex-direction: column;
+        gap: 6px;
+    }
+}

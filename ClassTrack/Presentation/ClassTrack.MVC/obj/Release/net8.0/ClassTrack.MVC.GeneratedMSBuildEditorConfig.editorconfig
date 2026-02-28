@@ -1,0 +1,173 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ClassTrack.MVC
+build_property.RootNamespace = ClassTrack.MVC
+build_property.ProjectDir = C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.MVC\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Eynotto\Desktop\Code Work\FinalProject\ClassTrack\Presentation\ClassTrack.MVC
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/Admin/QuizDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cUXVpekRldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/Admin/Quizzes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cUXVpenplcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/Admin/TaskWorks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cVGFza1dvcmtzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/Admin/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Areas/Admin/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Attendance/Attendance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxBdHRlbmRhbmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Attendance/AttendanceTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXR0ZW5kYW5jZVxBdHRlbmRhbmNlVGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Class/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Class/StudentClassRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcU3R1ZGVudENsYXNzUm9vbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Class/TeacherClassRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcVGVhY2hlckNsYXNzUm9vbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Error/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Home/Forgot_Password.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb3Jnb3RfUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Home/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Home/Reset_Password.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXNldF9QYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Member/Members.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXE1lbWJlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Member/StudentList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXFN0dWRlbnRMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Question/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25cVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/QuizAnswer/Exam.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpekFuc3dlclxFeGFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/QuizAnswer/QuizAnswer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpekFuc3dlclxRdWl6QW5zd2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/QuizAnswer/QuizAnswerList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpekFuc3dlclxRdWl6QW5zd2VyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/QuizResult.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxRdWl6UmVzdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Quiz/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/TaskWork/Create-Task.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1dvcmtcQ3JlYXRlLVRhc2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/TaskWork/Evaulate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1dvcmtcRXZhdWxhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/TaskWork/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1dvcmtcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/TaskWork/Submit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1dvcmtcU3VibWl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/TaskWork/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1dvcmtcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eynotto/Desktop/Code Work/FinalProject/ClassTrack/Presentation/ClassTrack.MVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-1zrnt79n7f
